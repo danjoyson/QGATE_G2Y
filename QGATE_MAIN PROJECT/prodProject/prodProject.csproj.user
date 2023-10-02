@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="AddOperadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddPiezaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AdminLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DeleteOperadorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DeletePiezaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form4_Blocker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SimplePrinterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
