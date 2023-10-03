@@ -46,10 +46,12 @@
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
             label6 = new Label();
+            pictureBox3 = new PictureBox();
             GB1.SuspendLayout();
             GB2.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // GB1
@@ -263,6 +265,17 @@
             label6.TextAlign = ContentAlignment.MiddleCenter;
             label6.Click += label6_Click;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(1118, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(185, 43);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -270,6 +283,7 @@
             AutoScroll = true;
             ClientSize = new Size(1315, 663);
             ControlBox = false;
+            Controls.Add(pictureBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(BtnReturn);
@@ -288,6 +302,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
         }
 
@@ -310,5 +325,6 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private Label label6;
+        private PictureBox pictureBox3;
     }
 }

@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminLogin));
             label1 = new Label();
             label2 = new Label();
             userTxtBox = new TextBox();
             passwordTxtBox = new TextBox();
             BtnLogin = new Button();
             BtnReturn = new Button();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -109,12 +112,24 @@
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(409, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(172, 66);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
+            // 
             // AdminLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(593, 521);
             ControlBox = false;
+            Controls.Add(pictureBox3);
             Controls.Add(BtnReturn);
             Controls.Add(BtnLogin);
             Controls.Add(passwordTxtBox);
@@ -126,6 +141,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login de configuración";
             Load += AdminLogin_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,5 +154,6 @@
         private TextBox passwordTxtBox;
         private Button BtnLogin;
         private Button BtnReturn;
+        private PictureBox pictureBox3;
     }
 }

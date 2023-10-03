@@ -51,8 +51,17 @@ namespace prodProject
                 if (GetID())
                 {
                     InsertPieceIntoDB();
+                    ClearTxtBox();
                 }
             }
+        }
+
+        private void ClearTxtBox()
+        {
+            ClaveTxtBox.Clear();
+            DescrTxtBox.Clear();
+            txtPasos.Clear();
+            txtReescaneo.Clear();
         }
 
         /*

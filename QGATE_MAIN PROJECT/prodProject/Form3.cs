@@ -15,7 +15,7 @@ namespace prodProject
         private EmailWarner emailW; //objeto de la clase que se encarga de enviar los emails
         public string currentProcess;
         private string textEtiqueta;
-        private string mobisysProcessName = "MobisysMSBClient_PC(32 bit)";
+        private string mobisysProcessName = "MobisysMSBClient_PC(32 bit)"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Timers.Timer buttonsTimer = new(3000); //timer de bloqueo de botón OK (duración inicial, luego cambia)
         private System.Timers.Timer NOKTimer = new(60000); //timer para el Punto 10. Si pasan 60 segundos, se presionará NOK automáticamente.
         private bool timerP9Flag = false;                   //En realidad funciona para el P10.
@@ -313,7 +313,7 @@ namespace prodProject
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
                 MessageBox.Show("Se cumplieron todos los pasos con exito");
-                addToMobisys(text);
+                AddToMobisys(text);
             }
             ReturnToHome();
         }
@@ -745,7 +745,7 @@ namespace prodProject
             
         }
 
-        public void copyToClipboard(String text)
+        public void CopyToClipboard(String text)
         {
             try
             {
@@ -756,7 +756,7 @@ namespace prodProject
             }
         }
 
-        public void pasteFromClipboard()
+        public void PasteFromClipboard()
         {
             try
             {
@@ -766,7 +766,7 @@ namespace prodProject
                 MessageBox.Show(ex.Message,"No se puede pegar el texto");
             }
         }
-        private void superposeProgram(string procName)
+        private void SuperposeProgram(string procName)
         {
             string processName = procName;
             string mainProcess = "";
@@ -798,7 +798,7 @@ namespace prodProject
             }
         }
 
-        private void getCurrentProcessName()
+        private void GetCurrentProcessName()
         {
             Process procesoActual = Process.GetCurrentProcess();
             // Obtener el nombre del proceso
@@ -808,17 +808,17 @@ namespace prodProject
 
         }
 
-        private void addToMobisys(string text)
+        private void AddToMobisys(string text)
         {
             try
             {
-                getCurrentProcessName();
-                copyToClipboard(text);
-                superposeProgram(mobisysProcessName);
+                GetCurrentProcessName();
+                CopyToClipboard(text);
+                SuperposeProgram(mobisysProcessName);
                 System.Threading.Thread.Sleep(1000);
-                pasteFromClipboard();
+                PasteFromClipboard();
                 System.Threading.Thread.Sleep(200);
-                superposeProgram(currentProcess);
+                SuperposeProgram(currentProcess);
             }
             catch(Exception ex) 
             {

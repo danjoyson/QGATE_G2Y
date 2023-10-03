@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj": {}
+    "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj": {
+    "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
+        "projectUniqueName": "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
         "projectName": "prodProject",
-        "projectPath": "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
+        "projectPath": "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
         "packagesPath": "C:\\Users\\vazquezd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\obj\\",
+        "outputPath": "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vazquezd\\AppData\\Roaming\\NuGet\\NuGet.Config",

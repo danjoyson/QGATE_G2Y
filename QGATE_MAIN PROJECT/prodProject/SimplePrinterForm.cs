@@ -24,7 +24,7 @@ namespace prodProject
             this.prevForm = prevForm;
             this.FormClosing += new FormClosingEventHandler(SimplePrinter_FormClosing);
             InitializeComponent();
-            
+
         }
 
         /*

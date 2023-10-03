@@ -144,7 +144,7 @@ namespace prodProject
         private bool getEmailSettings()
         {
             string startup = Application.StartupPath;
-            string path = startup + @"\csvFiles\EmailSettings.csv";
+            string path = startup + @"\csvfilestest\EmailSettings.csv";
             StreamReader sr;
             try
             {

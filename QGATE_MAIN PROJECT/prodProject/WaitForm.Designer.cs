@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitForm));
             label1 = new Label();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -41,18 +44,31 @@
             label1.TabIndex = 0;
             label1.Text = "Espera unos segundos...";
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(232, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(59, 21);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
+            // 
             // WaitForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(303, 126);
             ControlBox = false;
+            Controls.Add(pictureBox3);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "WaitForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "WaitForm";
             Load += WaitForm_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -60,5 +76,6 @@
         #endregion
 
         private Label label1;
+        private PictureBox pictureBox3;
     }
 }

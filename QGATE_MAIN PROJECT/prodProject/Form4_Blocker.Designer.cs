@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form4_Blocker));
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -35,6 +36,8 @@
             BtnUnblock = new Button();
             BtnReSend = new Button();
             messageLabel = new Label();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -124,6 +127,17 @@
             messageLabel.Size = new Size(0, 32);
             messageLabel.TabIndex = 6;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(988, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(215, 84);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
+            // 
             // Form4_Blocker
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -132,6 +146,7 @@
             BackColor = SystemColors.ScrollBar;
             ClientSize = new Size(1236, 751);
             ControlBox = false;
+            Controls.Add(pictureBox3);
             Controls.Add(messageLabel);
             Controls.Add(BtnReSend);
             Controls.Add(BtnUnblock);
@@ -145,6 +160,7 @@
             Text = "Aplicación Bloqueada";
             WindowState = FormWindowState.Maximized;
             Load += Form4_Blocker_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,5 +174,6 @@
         private Button BtnUnblock;
         private Button BtnReSend;
         private Label messageLabel;
+        private PictureBox pictureBox3;
     }
 }

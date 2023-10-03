@@ -369,7 +369,6 @@ namespace prodProject
                     opText = int.Parse(opeTxtBox.Text);
                     etiqueta = piezaTxtBox.Text;
                     piezaText = piezaTxtBox.Text.Substring(2, 7);
-                    MessageBox.Show(piezaText);
                     return true;
                 }
             }

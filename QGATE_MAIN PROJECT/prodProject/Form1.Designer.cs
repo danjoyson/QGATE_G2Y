@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             opeTxtBox = new TextBox();
             label1 = new Label();
             btn1 = new Button();
@@ -36,6 +37,8 @@
             BtnOpChange = new Button();
             BtnSettings = new Button();
             messageLabel = new Label();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // opeTxtBox
@@ -138,12 +141,23 @@
             messageLabel.TabIndex = 7;
             messageLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(814, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(249, 97);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
             ClientSize = new Size(1097, 654);
+            Controls.Add(pictureBox3);
             Controls.Add(messageLabel);
             Controls.Add(BtnSettings);
             Controls.Add(BtnOpChange);
@@ -153,12 +167,14 @@
             Controls.Add(label1);
             Controls.Add(opeTxtBox);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Inicio";
+            Text = "  Inicio";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -173,5 +189,6 @@
         private Button BtnOpChange;
         private Button BtnSettings;
         private Label messageLabel;
+        private PictureBox pictureBox3;
     }
 }

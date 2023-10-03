@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lX3CWiKsnC+hOkK+y0SwWPus71baFNNWAkMMFdpTOYmWZ3/C8Z9/9WfiFrUenRxny0Jq1G6qafzx+SPGrrDFtg==",
+  "dgSpecHash": "Jg/4R/ayJvtrVWEMIqoD3MVi6mofCO2r2WsoMDBgN6CEZZWbRb+ULaM1ZC2f6MnIkjqoZjA9qQA6RUSZqTwqCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vazquezd\\source\\repos\\QGateApp\\Codigo fuente QGATE Digital System\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
+  "projectFilePath": "C:\\Users\\vazquezd\\source\\repos\\QGATE_G2Y\\QGATE_MAIN PROJECT\\prodProject\\prodProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vazquezd\\.nuget\\packages\\csv\\1.0.31\\csv.1.0.31.nupkg.sha512",
     "C:\\Users\\vazquezd\\.nuget\\packages\\fluentftp\\19.2.2\\fluentftp.19.2.2.nupkg.sha512",

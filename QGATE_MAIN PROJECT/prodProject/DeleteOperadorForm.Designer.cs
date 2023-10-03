@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeleteOperadorForm));
             BtnReturn = new Button();
             label1 = new Label();
             numOpTxtBox = new TextBox();
             BtnDelete = new Button();
             pictureBox1 = new PictureBox();
+            pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // BtnReturn
@@ -91,11 +94,22 @@
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox1.BackgroundImage = Properties.Resources.OpIcon;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(721, 12);
+            pictureBox1.Location = new Point(548, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(110, 119);
+            pictureBox1.Size = new Size(105, 113);
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
+            pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Location = new Point(659, 31);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(172, 66);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 20;
+            pictureBox3.TabStop = false;
             // 
             // DeleteOperadorForm
             // 
@@ -103,6 +117,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(843, 466);
             ControlBox = false;
+            Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
             Controls.Add(BtnDelete);
             Controls.Add(numOpTxtBox);
@@ -114,6 +129,7 @@
             Text = "Borrar operador";
             Load += DeleteOperadorForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -125,5 +141,6 @@
         private TextBox numOpTxtBox;
         private Button BtnDelete;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox3;
     }
 }
