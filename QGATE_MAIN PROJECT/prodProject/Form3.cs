@@ -15,7 +15,7 @@ namespace prodProject
         private EmailWarner emailW; //objeto de la clase que se encarga de enviar los emails
         public string currentProcess;
         private string textEtiqueta;
-        private string mobisysProcessName = "MobisysMSBClient_PC(32 bit)"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
+        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Timers.Timer buttonsTimer = new(3000); //timer de bloqueo de botón OK (duración inicial, luego cambia)
         private System.Timers.Timer NOKTimer = new(60000); //timer para el Punto 10. Si pasan 60 segundos, se presionará NOK automáticamente.
         private bool timerP9Flag = false;                   //En realidad funciona para el P10.
@@ -24,6 +24,12 @@ namespace prodProject
         //Driver necesario para acceder a los procesos del sistema
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
+        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+        [DllImport("user32.dll")]
+        private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
         /* 
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario 3 (Con botones OK/NOK)
@@ -234,6 +240,7 @@ namespace prodProject
             {
                 if (Form1.formSlideCont == Form1.pasoRescaneo && Form1.formSlideCont==Form1.numPasos )
                 {
+                    
                     if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
                     {
                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
@@ -312,8 +319,8 @@ namespace prodProject
             {
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
-                MessageBox.Show("Se cumplieron todos los pasos con exito");
                 AddToMobisys(text);
+                MessageBox.Show("Se cumplieron todos los pasos con exito");
             }
             ReturnToHome();
         }
@@ -648,7 +655,7 @@ namespace prodProject
             {
                 Form1.conn.Open();
                 //MessageBox.Show("Connection Granted");
-                MessageBox.Show(queryString);
+                //MessageBox.Show(queryString);
                 SqlCommand cmd = new(queryString, Form1.conn);
                 cmd.Parameters.AddWithValue("@numEtiqueta", Form1.etiqueta);
                 cmd.Parameters.AddWithValue("@serial", this.serial);
@@ -812,17 +819,85 @@ namespace prodProject
         {
             try
             {
+                //EL código del if comentado será implementado para la siguiete modificación
+                //Si el if se cumple debe mandar a la pantalla llamada menu Mobisys, sino se cumple continua con el código que esta despues del if 
+                //ese código estaría en un else y ahí debe incrementarse el contador de piezas en 1
+                //if(Form1.conatadorPiezas==Form1.estandar)
                 GetCurrentProcessName();
                 CopyToClipboard(text);
-                SuperposeProgram(mobisysProcessName);
+                SuperposePid(mobisysProcessName);
                 System.Threading.Thread.Sleep(1000);
                 PasteFromClipboard();
-                System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(1000);
                 SuperposeProgram(currentProcess);
+                
             }
             catch(Exception ex) 
             {
                 MessageBox.Show(ex.Message,"Error tratando de añadir a mobisys");
+            }
+        }
+
+
+        public static int GetProcessID(string processName)
+        {
+            int processID = -1; // Valor predeterminado en caso de que no se encuentre el proceso
+
+            Process[] processes = Process.GetProcessesByName(processName);
+
+            if (processes.Length > 0)
+            {
+                // Obtiene el PID del primer proceso con el nombre especificado
+                processID = processes[0].Id;
+            }
+            else
+            {
+                Console.WriteLine($"No se encontró el proceso con nombre '{processName}'.");
+            }
+
+            return processID;
+        }
+
+        public static void BringWindowToFrontByPID(int targetPID)
+        {
+            IntPtr targetWindowHandle = IntPtr.Zero;
+
+            EnumWindows((hWnd, lParam) =>
+            {
+                int windowPID;
+                GetWindowThreadProcessId(hWnd, out windowPID);
+
+                if (windowPID == targetPID)
+                {
+                    targetWindowHandle = hWnd;
+                    return false; // Detener la enumeración
+                }
+
+                return true; // Continuar enumerando
+            }, IntPtr.Zero);
+
+            if (targetWindowHandle != IntPtr.Zero)
+            {
+                SetForegroundWindow(targetWindowHandle);
+            }
+            else
+            {
+                MessageBox.Show($"No se encontró ninguna ventana para el proceso con PID {targetPID}.");
+            }
+        }
+
+        private void SuperposePid(string procName)
+        {
+            int targetProcessPID = -1;
+            targetProcessPID = GetProcessID(mobisysProcessName);
+            if (targetProcessPID != -1)
+            {
+
+                BringWindowToFrontByPID(targetProcessPID);
+            }
+            else
+            {
+                MessageBox.Show("The app cant get the PID");
             }
         }
 
