@@ -39,10 +39,11 @@ namespace prodProject
          * 3. Forma la cadena de conexión con la base de datos.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-        public static bool SetConnectionString()
+        public static string SetConnectionString()
         {
             string path = Application.StartupPath + @"\csvfilestest\DatabaseSettings.csv";
             StreamReader sr;
+            string connectData="";
             try
             {
                 sr = new StreamReader(path);
@@ -63,14 +64,14 @@ namespace prodProject
                 info[3] = Decryptor.Desencriptado(info[3]); // Desencriptado de User ID de la Base de Datos
                 info[4] = Decryptor.Desencriptado(info[4]); // Desencriptado de la contraseña de la BD
 
-                Form1.connectionString = "Data Source=" + info[0] + "," + info[1] + ";Initial Catalog=" + info[2] + "; encrypt = true; trustServerCertificate = true; User ID=" + info[3] + ";Password=" + info[4];
+                connectData = "Data Source=" + info[0] + "," + info[1] + ";Initial Catalog=" + info[2] + "; encrypt = true; trustServerCertificate = true; User ID=" + info[3] + ";Password=" + info[4];
                 sr.Close();
-                return true;
+                return connectData;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Ocurrió un error al cargar los datos del archivo DatabaseSettings.csv.\n" + e.Message);
-                return false;
+                return connectData;
             }
         }
 

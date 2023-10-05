@@ -37,12 +37,13 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
-            textBox1 = new TextBox();
+            containerIdTxt = new TextBox();
             label7 = new Label();
             textBox2 = new TextBox();
             dataGridView1 = new DataGridView();
             V1 = new DataGridViewTextBoxColumn();
             label8 = new Label();
+            containerIdMessage = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             button3.ForeColor = SystemColors.Control;
             button3.Location = new Point(141, -1);
             button3.Name = "button3";
-            button3.Size = new Size(505, 45);
+            button3.Size = new Size(506, 45);
             button3.TabIndex = 2;
             button3.Text = "AMBIENTE";
             button3.UseVisualStyleBackColor = false;
@@ -137,19 +138,20 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(343, 229);
+            label6.Location = new Point(322, 224);
             label6.Name = "label6";
             label6.Size = new Size(71, 20);
             label6.TabIndex = 8;
             label6.Text = "Cantidad";
             label6.Click += label6_Click;
             // 
-            // textBox1
+            // containerIdTxt
             // 
-            textBox1.Location = new Point(150, 114);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(229, 23);
-            textBox1.TabIndex = 9;
+            containerIdTxt.Location = new Point(150, 114);
+            containerIdTxt.Name = "containerIdTxt";
+            containerIdTxt.Size = new Size(229, 23);
+            containerIdTxt.TabIndex = 9;
+            containerIdTxt.TextChanged += containerIdTxt_TextChanged;
             // 
             // label7
             // 
@@ -193,17 +195,26 @@
             label8.TabIndex = 13;
             label8.Text = "Scan box";
             // 
+            // containerIdMessage
+            // 
+            containerIdMessage.AutoSize = true;
+            containerIdMessage.Location = new Point(232, 140);
+            containerIdMessage.Name = "containerIdMessage";
+            containerIdMessage.Size = new Size(0, 15);
+            containerIdMessage.TabIndex = 14;
+            // 
             // menuMobisys
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(800, 602);
+            Controls.Add(containerIdMessage);
             Controls.Add(label8);
             Controls.Add(dataGridView1);
             Controls.Add(textBox2);
             Controls.Add(label7);
-            Controls.Add(textBox1);
+            Controls.Add(containerIdTxt);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -216,6 +227,7 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "menuMobisys";
             Text = "menuMobisys";
+            Load += menuMobisys_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -232,11 +244,12 @@
         private Label label4;
         private Label label5;
         private Label label6;
-        private TextBox textBox1;
+        private TextBox containerIdTxt;
         private Label label7;
         private TextBox textBox2;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn V1;
         private Label label8;
+        private Label containerIdMessage;
     }
 }

@@ -1,11 +1,12 @@
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
-
+using System.IO.Ports;
 namespace prodProject
 {
     public partial class Form1 : Form
     {
+        menuMobisys menuMobi;
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
         public static string piezaText; //Comparador de clave de pieza (10 caracteres)
@@ -32,7 +33,9 @@ namespace prodProject
         public static SqlConnection conn;
 
 
-
+        //Variable para conteo de piezas del container
+        public static int estandar = 0;
+        public static int conatadorPiezas = 0;
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -45,16 +48,18 @@ namespace prodProject
          * --------------------------------------------------------------------------------------------------------------------------------
          */
 
-        public Form1()
+        public Form1(menuMobisys firstMenu)
         {
+            this.menuMobi = firstMenu;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
-
-            if (CsvReader.SetConnectionString() && printerIP != string.Empty)
+            connectionString = CsvReader.SetConnectionString();
+            if (connectionString!=string.Empty && printerIP != string.Empty)
             {
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
+                this.Show();
                 ConfigTimer();
                 dpi = 203;
             }
@@ -64,6 +69,8 @@ namespace prodProject
                     MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
                 Process.GetCurrentProcess().Kill();
             }
+
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -466,7 +473,6 @@ namespace prodProject
          */
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-
             AdminLogin LoginForm = new();
             this.Hide();
             LoginForm.Show();
