@@ -19,7 +19,7 @@ namespace prodProject
     {
         private bool cambioFormularioRealizado = false;
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        public static String connectionString="";
+        public static String connectionString = "";
         public static SqlConnection conn;
         public int Estandar;
         public int piezasContainer;
@@ -31,7 +31,7 @@ namespace prodProject
             timer.Tick += Timer_Tick;
             connectionString = CsvReader.SetConnectionString();
             piezasContainer = 0;
-            if (connectionString!=string.Empty)
+            if (connectionString != string.Empty)
             {
                 conn = new SqlConnection(connectionString);
             }
@@ -41,7 +41,7 @@ namespace prodProject
             }
 
             containerIdTxt.TextChanged += containerIdTxt_TextChanged;
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace prodProject
             Form1 f1 = new(this);
             this.Hide();
             f1.StartForeignTimer();
-            
+
         }
 
         private void containerIdTxt_TextChanged(object sender, EventArgs e)
@@ -97,6 +97,7 @@ namespace prodProject
                 {
                     StartForms();
                     cambioFormularioRealizado = true;
+                    containerIdTxt.Text= String.Empty;
                 }
                 else
                 {
@@ -125,16 +126,16 @@ namespace prodProject
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())
                 {
-                    this.numParte = record.GetString(0);
+                    this.numParte = record.GetString(1);
                     conn.Close();
                     return true;
                 }
                 else
                 {
                     return false;
-                    conn.Close() ;
+                    conn.Close();
                 }
-                
+
             }
             catch (SqlNullValueException)
             {
@@ -153,6 +154,12 @@ namespace prodProject
                 conn.Close();
             }
             return true;
+        }
+
+        //Método para obtener el estandar de piezas por lote correspondiente al numero de pieza
+        private int GetEstandar(string claveComp)
+        {
+            return 0;
         }
     }
 }

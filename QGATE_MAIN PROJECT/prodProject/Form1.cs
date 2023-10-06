@@ -18,6 +18,7 @@ namespace prodProject
         public static string descripcion; //Nombre de pieza en la base de datos
         public static int numPasos;
         public static int pasoRescaneo;
+        public static string claveComp="";
         public static int formSlideCont = 1; //Contador que maneja qué imagen del formulario se mostrará
         public static string printerIP;
         public static int dpi; //dpi de la impresora
@@ -109,6 +110,11 @@ namespace prodProject
                     getPiezaPartSteps();
                     if (CheckNotSerialZero())
                     {
+                        if (estandar == 0) 
+                        {
+                            estandar = GetStandard(claveComp);
+                        }
+                        MessageBox.Show(estandar.ToString());
                         StartForms();
                     }
                 }
@@ -219,7 +225,7 @@ namespace prodProject
         //Función para obtener los pasos de verificación de la pieza desde la tabla Pieza y el numero de paso para reescaneo
         private bool getPiezaPartSteps()
         {
-            String queryString = "SELECT pasos,puntoReescaneo FROM Pieza WHERE claveComp = @value";
+            String queryString = "SELECT claveComp,pasos,puntoReescaneo FROM Pieza WHERE claveComp = @value";
             try
             {
                 conn.Open();
@@ -228,8 +234,9 @@ namespace prodProject
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())
                 {
-                    numPasos = record.GetInt16(0);
-                    pasoRescaneo = record.GetInt16(1);
+                    claveComp=record.GetString(0);
+                    numPasos = record.GetInt16(1);
+                    pasoRescaneo = record.GetInt16(2);
                 }
                 conn.Close();
                 return true;
@@ -510,7 +517,32 @@ namespace prodProject
 
         }
 
+        private int GetStandard(string clave)
+        {
+            int estandarValue = 0;
+           String  queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new(queryString, conn);
+                cmd.Parameters.Add(new SqlParameter("@value", clave));  //Prevención de SQL Injection, mediante consultas parametrizadas 
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    estandarValue = record.GetInt32(0);
+                }
 
+                return estandarValue; //Si no ha cumplido el tiempo de retrabajo, retorna false
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                MessageBox.Show(e.Message);
+                return estandarValue;
+            }
+
+            
+        }
 
 
     }

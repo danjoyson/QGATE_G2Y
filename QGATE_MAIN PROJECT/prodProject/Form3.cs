@@ -235,6 +235,7 @@ namespace prodProject
 
                     this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
                     NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
+                    
                 }
             }else
             {
@@ -259,11 +260,26 @@ namespace prodProject
                             this.BtnOK.Enabled = false;
                             AFKTimer.Start();
                         }*/
+                        Form1.conatadorPiezas++;
                         SetButtonsTimerDuration();
                         buttonsTimer.Start();
                         this.BtnOK.Enabled = false;
                         AFKTimer.Start();
-                        generaRegistro(textEtiqueta);
+                        if(Form1.conatadorPiezas == Form1.estandar)
+                        {
+                            generaRegistro(textEtiqueta);
+                            Form1.estandar = 0;
+                            Form1.conatadorPiezas = 0;
+                            ReturnToMobisys();
+                        }
+                        else
+                        {
+                            generaRegistro(textEtiqueta);
+                            //Form1.conatadorPiezas++;
+                            ReturnToHome();
+
+                        }
+                        
                         
                     }
                     else
@@ -286,6 +302,7 @@ namespace prodProject
                             //Se comento para no enviar a impresión al momento de hacer pruebas
                             //callPrinter(); //Print box label
                             MessageBox.Show("Se cumplieron todos los pasos con exito");
+                            Form1.conatadorPiezas++;
                         }
                         ReturnToHome();
                     } 
@@ -322,7 +339,7 @@ namespace prodProject
                 AddToMobisys(text);
                 MessageBox.Show("Se cumplieron todos los pasos con exito");
             }
-            ReturnToHome();
+            //ReturnToHome();
         }
 
         /*
@@ -694,6 +711,15 @@ namespace prodProject
             this.Close();
         }
 
+        //Metodo cuando para regresar a menu Mobisys cuando se completa el contenido de un Container
+        private void ReturnToMobisys()
+        {
+            if (Form1.conn.State == ConnectionState.Open)
+                Form1.conn.Close();
+            Application.OpenForms["menuMobisys"].Show();
+            //f1.StartForeignTimer();
+            this.Close();
+        }
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Método de llamado impresión de etiqueta de caja
@@ -826,7 +852,7 @@ namespace prodProject
                 GetCurrentProcessName();
                 CopyToClipboard(text);
                 SuperposePid(mobisysProcessName);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
                 PasteFromClipboard();
                 System.Threading.Thread.Sleep(1000);
                 SuperposeProgram(currentProcess);
@@ -894,6 +920,7 @@ namespace prodProject
             {
 
                 BringWindowToFrontByPID(targetProcessPID);
+                
             }
             else
             {
