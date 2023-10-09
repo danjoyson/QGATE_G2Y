@@ -2,6 +2,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO.Ports;
+
 namespace prodProject
 {
     public partial class Form1 : Form
@@ -11,7 +12,7 @@ namespace prodProject
         public static int opText; //Texto del número de operador
         public static string piezaText; //Comparador de clave de pieza (10 caracteres)
         public static string etiqueta;  //Texto de etiqueta completo
-
+        DatabaseConnector connection = new DatabaseConnector();
         public static string inicioDeCadena; //V o X de cadena de pieza
         public static string finDeCadena; //últimos 2 dígitos del identificador de pieza (Obtenido de la base de datos)
         public static int idPiezaCatalog; //Id de la pieza en la base de datos
@@ -165,10 +166,10 @@ namespace prodProject
 
             try
             {
-
+                
                 conn.Open();
                 //MessageBox.Show("Connection Granted");
-
+                connection.connectionString = queryString;
                 SqlCommand cmd = new(queryString, conn);
                 cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
 
