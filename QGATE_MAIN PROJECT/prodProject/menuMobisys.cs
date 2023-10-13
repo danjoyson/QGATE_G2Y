@@ -27,10 +27,7 @@ namespace prodProject
         public menuMobisys()
         {
             InitializeComponent();
-            timer.Interval = 1000; // 1000 ms = 1 segundo
-            timer.Tick += Timer_Tick;
-            connectionString = CsvReader.SetConnectionString();
-            piezasContainer = 0;
+            startWindow();
             if (connectionString != string.Empty)
             {
                 conn = new SqlConnection(connectionString);
@@ -40,8 +37,17 @@ namespace prodProject
                 MessageBox.Show("No se pudo realizar la conexión a BD");
             }
 
-            containerIdTxt.TextChanged += containerIdTxt_TextChanged;
+            
 
+        }
+
+        public void startWindow()
+        {
+            timer.Interval = 1000; // 1000 ms = 1 segundo
+            timer.Tick += Timer_Tick;
+            connectionString = CsvReader.SetConnectionString();
+            piezasContainer = 0;
+            containerIdTxt.TextChanged += containerIdTxt_TextChanged;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -66,7 +72,7 @@ namespace prodProject
             {
                 StartForms();
             }
-            else containerIdMessage.Text = "";
+            else containerIdMessage.Text = String.Empty;
 
 
         }

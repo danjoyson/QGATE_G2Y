@@ -40,5 +40,8 @@
     <Compile Update="WaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="WinScanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

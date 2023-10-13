@@ -13,14 +13,18 @@ namespace prodProject
         private int serial;
         private Form1 f1;
         private EmailWarner emailW; //objeto de la clase que se encarga de enviar los emails
-        public string currentProcess;
         private string textEtiqueta;
-        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
+        private string currentProcess = "";
         private System.Timers.Timer buttonsTimer = new(3000); //timer de bloqueo de botón OK (duración inicial, luego cambia)
         private System.Timers.Timer NOKTimer = new(60000); //timer para el Punto 10. Si pasan 60 segundos, se presionará NOK automáticamente.
         private bool timerP9Flag = false;                   //En realidad funciona para el P10.
         private System.Timers.Timer AFKTimer = new(60000); //Timer de 1 minuto. Al terminar este timer, se devuelve al formulario de inicio. (AFK)
-
+        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
+        private ProcessManipulation mobisys = new ProcessManipulation();
+        private bool waitScanFlag = false;
+        //private System.Timers.Timer scanMobisysTimer = new(60000);
+        private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
+       
         //Driver necesario para acceder a los procesos del sistema
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -41,7 +45,8 @@ namespace prodProject
          */
         public Form3(Form1 f1)
         {
-
+            scanMobisysTimer.Interval = 60000;
+            waitScanFlag = false;
             if (SetImage())
             {
                 this.FormClosing += new FormClosingEventHandler(Form3_FormClosing);
@@ -270,13 +275,19 @@ namespace prodProject
                             generaRegistro(textEtiqueta);
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
+                            //Posible to add a window named WinScanForm to superpose mobisys and wait that the user scan the tag
+                            //ScanMobisys
                             ReturnToMobisys();
                         }
                         else
                         {
                             generaRegistro(textEtiqueta);
                             //Form1.conatadorPiezas++;
-                            ReturnToHome();
+                            //
+                            //scanMobisysTimer.Enabled = true;
+                            //scanMobisysTimer.Tick += new System.EventHandler(OnTimerScanEvent);
+                            ShowWaitScan();
+                            //ReturnToHome();
 
                         }
                         
@@ -304,7 +315,7 @@ namespace prodProject
                             MessageBox.Show("Se cumplieron todos los pasos con exito");
                             Form1.conatadorPiezas++;
                         }
-                        ReturnToHome();
+                        //ReturnToHome();
                     } 
                     else 
                     { 
@@ -336,7 +347,7 @@ namespace prodProject
             {
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
-                AddToMobisys(text);
+                mobisys.AddToMobisys(text);
                 MessageBox.Show("Se cumplieron todos los pasos con exito");
             }
             //ReturnToHome();
@@ -695,6 +706,16 @@ namespace prodProject
 
         }
 
+        //Método para entrar al formulario de espera para que el usuario escanee la etiqueta dentro de mobisys
+        private void ScanMobisys()
+        {
+            if (Form1.conn.State == ConnectionState.Open)
+                Form1.conn.Close();
+            Application.OpenForms["WinScanForm"].Show();
+            //f1.StartForeignTimer();
+            this.Close();
+        }
+
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Método para regresar al formulario de inicio e iniciar el timer del formulario inicial.
@@ -716,6 +737,8 @@ namespace prodProject
         {
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
+            //f1.Close();
+
             Application.OpenForms["menuMobisys"].Show();
             //f1.StartForeignTimer();
             this.Close();
@@ -771,161 +794,39 @@ namespace prodProject
                 {
                     NOKTimer.Stop();
                 }
-                if (Application.OpenForms["Form1"].Visible == false)
+                if (Application.OpenForms["Form1"].Visible == false && Form1.estandar!=Form1.conatadorPiezas && !waitScanFlag)
                     Application.OpenForms["Form1"].Visible = true;
                 f1.StartForeignTimer();
             }
             
         }
 
-        public void CopyToClipboard(String text)
+
+        private void ShowWaitScan()
         {
-            try
-            {
-                Clipboard.SetText(text);
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "No se puede copiar el texto");
-            }
+            waitScanFlag = true;
+            if (Form1.conn.State == ConnectionState.Open)
+                Form1.conn.Close();
+            //f1.Close();
+
+            //Application.OpenForms["WaitScanForm"].Show();
+            this.Close();
+            WinScanForm wmenu = new WinScanForm(f1);
+            wmenu.Show();
+            //f1.StartForeignTimer();
+            
         }
 
-        public void PasteFromClipboard()
+        //Method to change the event when the timer for Mobisys Scan finish
+        private void OnTimerScanEvent(object source, EventArgs e)
         {
-            try
-            {
-                SendKeys.SendWait("^(v)");
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message,"No se puede pegar el texto");
-            }
-        }
-        private void SuperposeProgram(string procName)
-        {
-            string processName = procName;
-            string mainProcess = "";
-            // Buscar el proceso por nombre
-            Process[] processes = Process.GetProcessesByName(processName);
+            if (Form1.conn.State == ConnectionState.Open)
+                Form1.conn.Close();
+            //f1.Close();
 
-            if (processes.Length > 0)
-            {
-                // Obtener el identificador de la ventana principal del primer proceso encontrado
-                IntPtr windowHandle = processes[0].MainWindowHandle;
-
-                if (windowHandle != IntPtr.Zero)
-                {
-
-                    // Traer la ventana de Microsoft Teams al frente
-                    SetForegroundWindow(windowHandle);
-                    //MessageBox.Show("Debería");
-
-
-                }
-                else
-                {
-                    MessageBox.Show($"La ventana principal de {processName} no se encontró.");
-                }
-            }
-            else
-            {
-                MessageBox.Show($"{processName} no está en ejecución.");
-            }
-        }
-
-        private void GetCurrentProcessName()
-        {
-            Process procesoActual = Process.GetCurrentProcess();
-            // Obtener el nombre del proceso
-            string nombreDelProceso = procesoActual.ProcessName;
-            currentProcess = nombreDelProceso;
-            //MessageBox.Show("Nombre del proceso actual: " + nombreDelProceso);
-
-        }
-
-        private void AddToMobisys(string text)
-        {
-            try
-            {
-                //EL código del if comentado será implementado para la siguiete modificación
-                //Si el if se cumple debe mandar a la pantalla llamada menu Mobisys, sino se cumple continua con el código que esta despues del if 
-                //ese código estaría en un else y ahí debe incrementarse el contador de piezas en 1
-                //if(Form1.conatadorPiezas==Form1.estandar)
-                GetCurrentProcessName();
-                CopyToClipboard(text);
-                SuperposePid(mobisysProcessName);
-                System.Threading.Thread.Sleep(2000);
-                PasteFromClipboard();
-                System.Threading.Thread.Sleep(1000);
-                SuperposeProgram(currentProcess);
-                
-            }
-            catch(Exception ex) 
-            {
-                MessageBox.Show(ex.Message,"Error tratando de añadir a mobisys");
-            }
-        }
-
-
-        public static int GetProcessID(string processName)
-        {
-            int processID = -1; // Valor predeterminado en caso de que no se encuentre el proceso
-
-            Process[] processes = Process.GetProcessesByName(processName);
-
-            if (processes.Length > 0)
-            {
-                // Obtiene el PID del primer proceso con el nombre especificado
-                processID = processes[0].Id;
-            }
-            else
-            {
-                Console.WriteLine($"No se encontró el proceso con nombre '{processName}'.");
-            }
-
-            return processID;
-        }
-
-        public static void BringWindowToFrontByPID(int targetPID)
-        {
-            IntPtr targetWindowHandle = IntPtr.Zero;
-
-            EnumWindows((hWnd, lParam) =>
-            {
-                int windowPID;
-                GetWindowThreadProcessId(hWnd, out windowPID);
-
-                if (windowPID == targetPID)
-                {
-                    targetWindowHandle = hWnd;
-                    return false; // Detener la enumeración
-                }
-
-                return true; // Continuar enumerando
-            }, IntPtr.Zero);
-
-            if (targetWindowHandle != IntPtr.Zero)
-            {
-                SetForegroundWindow(targetWindowHandle);
-            }
-            else
-            {
-                MessageBox.Show($"No se encontró ninguna ventana para el proceso con PID {targetPID}.");
-            }
-        }
-
-        private void SuperposePid(string procName)
-        {
-            int targetProcessPID = -1;
-            targetProcessPID = GetProcessID(mobisysProcessName);
-            if (targetProcessPID != -1)
-            {
-
-                BringWindowToFrontByPID(targetProcessPID);
-                
-            }
-            else
-            {
-                MessageBox.Show("The app cant get the PID");
-            }
+            Application.OpenForms["WaitScanForm"].Show();
+            //f1.StartForeignTimer();
+            this.Close();
         }
 
     }
