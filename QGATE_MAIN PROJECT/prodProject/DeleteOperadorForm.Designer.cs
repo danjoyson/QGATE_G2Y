@@ -124,6 +124,7 @@
             Controls.Add(label1);
             Controls.Add(BtnReturn);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DeleteOperadorForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Borrar operador";

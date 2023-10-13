@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             BtnOK = new Button();
             BtnNOK = new Button();
             pictureBox1 = new PictureBox();
@@ -113,6 +114,7 @@
             Controls.Add(BtnNOK);
             Controls.Add(BtnOK);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form3";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Revisión";

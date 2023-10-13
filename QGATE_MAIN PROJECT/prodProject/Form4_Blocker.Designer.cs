@@ -154,6 +154,7 @@
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "Form4_Blocker";
             StartPosition = FormStartPosition.CenterScreen;

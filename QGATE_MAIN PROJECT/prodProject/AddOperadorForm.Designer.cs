@@ -162,6 +162,7 @@
             Controls.Add(NameOpTxtBox);
             Controls.Add(NumOpTxtBox);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddOperadorForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Añadir nuevo operador";

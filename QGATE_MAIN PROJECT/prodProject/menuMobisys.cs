@@ -37,7 +37,7 @@ namespace prodProject
                 MessageBox.Show("No se pudo realizar la conexión a BD");
             }
 
-            
+
 
         }
 
@@ -103,7 +103,7 @@ namespace prodProject
                 {
                     StartForms();
                     cambioFormularioRealizado = true;
-                    containerIdTxt.Text= String.Empty;
+                    containerIdTxt.Text = String.Empty;
                 }
                 else
                 {

@@ -137,6 +137,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login de configuración";

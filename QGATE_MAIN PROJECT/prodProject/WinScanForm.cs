@@ -13,10 +13,10 @@ namespace prodProject
     public partial class WinScanForm : Form
     {
         private Form1 f1;
-        ProcessManipulation mobiProcess= new ProcessManipulation();
+        ProcessManipulation mobiProcess = new ProcessManipulation();
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
-        
+
         public WinScanForm(Form1 f1)
         {
             this.f1 = f1;

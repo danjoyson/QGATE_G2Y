@@ -24,7 +24,7 @@ namespace prodProject
         private bool waitScanFlag = false;
         //private System.Timers.Timer scanMobisysTimer = new(60000);
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
-       
+
         //Driver necesario para acceder a los procesos del sistema
         [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -145,85 +145,85 @@ namespace prodProject
              * en vez de cambiar a if's anidados. Para no alentar el tiempo de ejecución.
              */
             //int remainFormsTillRESCAN;
-            
-           /* switch (Form1.formSlideCont)
-            {
-                case 9: //Cambia de formulario y habilita la caja de etiqueta para el punto 10
-                    AFKTimer.Stop();
-                    Form1.formSlideCont++;
-                    //this.Hide();
-                    if (SetImage())
-                    {
-                        SetButtonsTimerDuration();
-                        buttonsTimer.Start();
-                        this.BtnOK.Enabled = false;
 
-                        this.messageLabel.Visible = true;
-                        this.txtEtiqueta.Visible = true;
-                        this.pictureBox1.Visible = true;
+            /* switch (Form1.formSlideCont)
+             {
+                 case 9: //Cambia de formulario y habilita la caja de etiqueta para el punto 10
+                     AFKTimer.Stop();
+                     Form1.formSlideCont++;
+                     //this.Hide();
+                     if (SetImage())
+                     {
+                         SetButtonsTimerDuration();
+                         buttonsTimer.Start();
+                         this.BtnOK.Enabled = false;
 
-                        this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                        NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
-                    }
+                         this.messageLabel.Visible = true;
+                         this.txtEtiqueta.Visible = true;
+                         this.pictureBox1.Visible = true;
 
-
-                    break;
-
-                case 10:
-                    if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
-                    {
-                        timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
-                        NOKTimer.Stop();
-                        Form1.formSlideCont++;
-                        this.txtEtiqueta.Visible = false;
-                        this.pictureBox1.Visible = false;
-                        this.messageLabel.Visible = false;
-                        txtEtiqueta.Text = string.Empty;
-
-                        if (SetImage())
-                        {
-                            SetButtonsTimerDuration();
-                            buttonsTimer.Start();
-                            this.BtnOK.Enabled = false;
-                            AFKTimer.Start();
-                        }
-                    }
-                    else
-                    {
-                        this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                        messageLabel.Text = "La etiqueta no coincide.";
-                        messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
-                        txtEtiqueta.Text = string.Empty;
-                    }
-                    break;
+                         this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
+                         NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
+                     }
 
 
-                case 11:
-                    
-                    Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
-                    AFKTimer.Stop();
-                    if (InsertDbRecord())
-                    {
-                        callPrinter(); //Print box label
-                    }
-                    ReturnToHome();
-                    break;
+                     break;
 
-                default:
-                    AFKTimer.Stop();
-                    Form1.formSlideCont++;
-                    if (SetImage())
-                    {
-                        SetButtonsTimerDuration();
-                        buttonsTimer.Start();
-                        this.BtnOK.Enabled = false;
+                 case 10:
+                     if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
+                     {
+                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
+                         NOKTimer.Stop();
+                         Form1.formSlideCont++;
+                         this.txtEtiqueta.Visible = false;
+                         this.pictureBox1.Visible = false;
+                         this.messageLabel.Visible = false;
+                         txtEtiqueta.Text = string.Empty;
 
-                        AFKTimer.Start();
-                    }
-                    break;
-            }*/
+                         if (SetImage())
+                         {
+                             SetButtonsTimerDuration();
+                             buttonsTimer.Start();
+                             this.BtnOK.Enabled = false;
+                             AFKTimer.Start();
+                         }
+                     }
+                     else
+                     {
+                         this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
+                         messageLabel.Text = "La etiqueta no coincide.";
+                         messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
+                         txtEtiqueta.Text = string.Empty;
+                     }
+                     break;
 
-            if (Form1.formSlideCont==Form1.pasoRescaneo-1)
+
+                 case 11:
+
+                     Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
+                     AFKTimer.Stop();
+                     if (InsertDbRecord())
+                     {
+                         callPrinter(); //Print box label
+                     }
+                     ReturnToHome();
+                     break;
+
+                 default:
+                     AFKTimer.Stop();
+                     Form1.formSlideCont++;
+                     if (SetImage())
+                     {
+                         SetButtonsTimerDuration();
+                         buttonsTimer.Start();
+                         this.BtnOK.Enabled = false;
+
+                         AFKTimer.Start();
+                     }
+                     break;
+             }*/
+
+            if (Form1.formSlideCont == Form1.pasoRescaneo - 1)
             {
                 AFKTimer.Stop();
                 Form1.formSlideCont++;
@@ -240,13 +240,14 @@ namespace prodProject
 
                     this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
                     NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
-                    
+
                 }
-            }else
+            }
+            else
             {
-                if (Form1.formSlideCont == Form1.pasoRescaneo && Form1.formSlideCont==Form1.numPasos )
+                if (Form1.formSlideCont == Form1.pasoRescaneo && Form1.formSlideCont == Form1.numPasos)
                 {
-                    
+
                     if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
                     {
                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
@@ -270,7 +271,7 @@ namespace prodProject
                         buttonsTimer.Start();
                         this.BtnOK.Enabled = false;
                         AFKTimer.Start();
-                        if(Form1.conatadorPiezas == Form1.estandar)
+                        if (Form1.conatadorPiezas == Form1.estandar)
                         {
                             generaRegistro(textEtiqueta);
                             Form1.estandar = 0;
@@ -290,8 +291,8 @@ namespace prodProject
                             //ReturnToHome();
 
                         }
-                        
-                        
+
+
                     }
                     else
                     {
@@ -303,11 +304,11 @@ namespace prodProject
                 }
                 else
                 {
-                    if (Form1.formSlideCont==Form1.numPasos ) 
+                    if (Form1.formSlideCont == Form1.numPasos)
                     {
                         Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
                         AFKTimer.Stop();
-                        
+
                         if (InsertDbRecord())
                         {
                             //Se comento para no enviar a impresión al momento de hacer pruebas
@@ -316,9 +317,9 @@ namespace prodProject
                             Form1.conatadorPiezas++;
                         }
                         //ReturnToHome();
-                    } 
-                    else 
-                    { 
+                    }
+                    else
+                    {
                         AFKTimer.Stop();
                         Form1.formSlideCont++;
                         if (SetImage())
@@ -443,7 +444,7 @@ namespace prodProject
          */
         private static void WaitFunction(object sender, ElapsedEventArgs e)
         {
-            
+
         }
 
         /* 
@@ -484,28 +485,28 @@ namespace prodProject
 
             if (GenerateDBSerial())
             {
-                 if (InsertDbRecord())
-                 {
-                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
-                     {
+                if (InsertDbRecord())
+                {
+                    if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
+                    {
                         // ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         // z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
-                         this.blockAppClosing = true;
-                         BlockApp();
-                         this.Close();
-                     }
-                     else
-                     {
+                        this.blockAppClosing = true;
+                        BlockApp();
+                        this.Close();
+                    }
+                    else
+                    {
 
                         // ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         // z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
-                         emailW.SendNOKWarning();
-                         ReturnToHome();
+                        emailW.SendNOKWarning();
+                        ReturnToHome();
 
-                     }
-                 }
+                    }
+                }
 
             }
         }
@@ -618,8 +619,8 @@ namespace prodProject
             }
             catch (Exception e1)
             {
-                
-                MessageBox.Show("Error generando serial :",e1.Message);
+
+                MessageBox.Show("Error generando serial :", e1.Message);
                 ReturnToHome();
                 return false;
             }
@@ -649,12 +650,12 @@ namespace prodProject
                 queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
                 //Se modifica el query ya que no en todos los casos son 11 OK, depende de el numero de pasos de cada pieza, por eso se hizo dinamico.
                 //Prueba temporal por guardar en la misma BD, se colocan los 11 por el numero de campos en la BD actual (Form1.numPasos-1
-                
+
                 for (int i = 0; i < Form1.numPasos; i++)
                 {
                     queryString += ",'OK' ";
                 }
-                for (int i=Form1.numPasos;i<11;i++) queryString += ", NULL";
+                for (int i = Form1.numPasos; i < 11; i++) queryString += ", NULL";
                 queryString += ");";
 
             }
@@ -787,18 +788,18 @@ namespace prodProject
         */
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(this.blockAppClosing == false)
+            if (this.blockAppClosing == false)
             {
                 //Se cambio la condición que antes era estatica por la comparación con Form1.pasoReescaneo que es el mismo dato pero sacado de la BD
-                if(Form1.formSlideCont == Form1.pasoRescaneo) //Si se cierra el programa incorrectamente en el punto de reingreso de etiqueta. Para que no lo guarde como NOK necesariamente
+                if (Form1.formSlideCont == Form1.pasoRescaneo) //Si se cierra el programa incorrectamente en el punto de reingreso de etiqueta. Para que no lo guarde como NOK necesariamente
                 {
                     NOKTimer.Stop();
                 }
-                if (Application.OpenForms["Form1"].Visible == false && Form1.estandar!=Form1.conatadorPiezas && !waitScanFlag)
+                if (Application.OpenForms["Form1"].Visible == false && Form1.estandar != Form1.conatadorPiezas && !waitScanFlag)
                     Application.OpenForms["Form1"].Visible = true;
                 f1.StartForeignTimer();
             }
-            
+
         }
 
 
@@ -814,7 +815,7 @@ namespace prodProject
             WinScanForm wmenu = new WinScanForm(f1);
             wmenu.Show();
             //f1.StartForeignTimer();
-            
+
         }
 
         //Method to change the event when the timer for Mobisys Scan finish

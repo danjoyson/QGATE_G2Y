@@ -64,6 +64,7 @@
             Controls.Add(pictureBox3);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WaitForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "WaitForm";

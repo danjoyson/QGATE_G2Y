@@ -109,6 +109,7 @@
             Controls.Add(BtnReturn);
             Controls.Add(BtnPrintLastLabel);
             Controls.Add(BtnPrintTest);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SimplePrinterForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SimplePrinterForm";

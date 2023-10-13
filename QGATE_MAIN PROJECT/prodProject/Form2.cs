@@ -22,7 +22,7 @@ namespace prodProject
             this.FormClosing += new FormClosingEventHandler(Form2_FormClosing);
             if (SetImage())
             {
-                
+
                 closedIncorrectlyFlag = true; //Temporalmente true. Cambia a false en el método para cambiar al siguiente formulario
                 this.f1 = f1;
                 InitializeComponent();

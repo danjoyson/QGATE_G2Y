@@ -229,6 +229,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(label3);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DeletePiezaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DeletePiezaForm";

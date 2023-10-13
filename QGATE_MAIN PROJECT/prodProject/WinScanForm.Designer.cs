@@ -90,6 +90,7 @@
             Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WinScanForm";
             Text = "WinScanForm";
             Load += WinScanForm_Load;

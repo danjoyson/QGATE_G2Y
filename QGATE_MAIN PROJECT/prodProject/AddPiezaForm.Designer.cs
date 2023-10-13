@@ -316,6 +316,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(label3);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddPiezaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Añadir pieza";

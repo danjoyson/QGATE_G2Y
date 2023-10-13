@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(menuMobisys));
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
@@ -225,6 +226,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "menuMobisys";
             Text = "menuMobisys";
             Load += menuMobisys_Load;
