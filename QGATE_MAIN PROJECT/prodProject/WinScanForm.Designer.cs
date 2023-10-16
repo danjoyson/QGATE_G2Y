@@ -42,9 +42,9 @@
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(131, 72);
             label1.Name = "label1";
-            label1.Size = new Size(235, 30);
+            label1.Size = new Size(231, 30);
             label1.TabIndex = 1;
-            label1.Text = "Espera unos segundos...";
+            label1.Text = "¿Se ingresó la etiqueta?";
             // 
             // pictureBox3
             // 

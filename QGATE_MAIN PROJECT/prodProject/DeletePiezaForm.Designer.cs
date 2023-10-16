@@ -161,6 +161,7 @@
             claveTxtBox.Name = "claveTxtBox";
             claveTxtBox.Size = new Size(666, 39);
             claveTxtBox.TabIndex = 16;
+            claveTxtBox.TextChanged += claveTxtBox_TextChanged;
             // 
             // label4
             // 

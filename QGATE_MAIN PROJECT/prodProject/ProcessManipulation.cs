@@ -117,6 +117,7 @@ namespace prodProject
             }
         }
 
+        //Extrae el ID del proceso que se esta ejecutando actualmente (Mobisys)
         public string GetCurrentProcessName()
         {
             Process procesoActual = Process.GetCurrentProcess();
@@ -129,13 +130,12 @@ namespace prodProject
 
         }
 
+        /*Método para realizar la superoposición de Mobisys despues de revisar una pieza.
+        y pegar el texto del portapapeles*/
         public void AddToMobisys(string text)
         {
             try
             {
-                //EL código del if comentado será implementado para la siguiete modificación
-                //Si el if se cumple debe mandar a la pantalla llamada menu Mobisys, sino se cumple continua con el código que esta despues del if 
-                //ese código estaría en un else y ahí debe incrementarse el contador de piezas en 1
                 //if(Form1.conatadorPiezas==Form1.estandar)
                 currentProcess = GetCurrentProcessName();
                 CopyToClipboard(text);
@@ -153,6 +153,7 @@ namespace prodProject
             }
         }
 
+        //Método para el proceso de superposición, copiar texto al clipboard del sistema 
         public void CopyToClipboard(String text)
         {
             try
@@ -165,6 +166,7 @@ namespace prodProject
             }
         }
 
+        //Método para pegar el texto que se encuentra en el clipboard del sistema 
         public void PasteFromClipboard()
         {
             try

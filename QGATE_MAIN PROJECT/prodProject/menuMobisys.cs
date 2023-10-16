@@ -23,7 +23,7 @@ namespace prodProject
         public static SqlConnection conn;
         public int Estandar;
         public int piezasContainer;
-        public string numParte;
+        public string numParte = "";
         public menuMobisys()
         {
             InitializeComponent();
@@ -138,8 +138,9 @@ namespace prodProject
                 }
                 else
                 {
-                    return false;
                     conn.Close();
+                    return false;
+                    
                 }
 
             }
@@ -159,7 +160,7 @@ namespace prodProject
             {
                 conn.Close();
             }
-            return true;
+           
         }
 
         //Método para obtener el estandar de piezas por lote correspondiente al numero de pieza

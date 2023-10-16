@@ -274,11 +274,14 @@ namespace prodProject
                         if (Form1.conatadorPiezas == Form1.estandar)
                         {
                             generaRegistro(textEtiqueta);
+                            f1.completedContainer = true;
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
                             //Posible to add a window named WinScanForm to superpose mobisys and wait that the user scan the tag
                             //ScanMobisys
-                            ReturnToMobisys();
+                            //ReturnToMobisys();
+                            ShowWaitScan(f1.completedContainer);
+                            //ReturnToContainerMenu();
                         }
                         else
                         {
@@ -287,7 +290,7 @@ namespace prodProject
                             //
                             //scanMobisysTimer.Enabled = true;
                             //scanMobisysTimer.Tick += new System.EventHandler(OnTimerScanEvent);
-                            ShowWaitScan();
+                            ShowWaitScan(f1.completedContainer);
                             //ReturnToHome();
 
                         }
@@ -744,6 +747,18 @@ namespace prodProject
             //f1.StartForeignTimer();
             this.Close();
         }
+
+        //Metodo cuando para regresar a menu escaneo de Container cuando se completa el contenido de un Container
+        private void ReturnToContainerMenu()
+        {
+            if (Form1.conn.State == ConnectionState.Open)
+                Form1.conn.Close();
+            //f1.Close();
+
+            Application.OpenForms["ContainerIdForm"].Show();
+            //f1.StartForeignTimer();
+            this.Close();
+        }
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Método de llamado impresión de etiqueta de caja
@@ -803,7 +818,7 @@ namespace prodProject
         }
 
 
-        private void ShowWaitScan()
+        private void ShowWaitScan(bool nextWindow)
         {
             waitScanFlag = true;
             if (Form1.conn.State == ConnectionState.Open)
@@ -812,7 +827,7 @@ namespace prodProject
 
             //Application.OpenForms["WaitScanForm"].Show();
             this.Close();
-            WinScanForm wmenu = new WinScanForm(f1);
+            WinScanForm wmenu = new WinScanForm(f1,nextWindow);
             wmenu.Show();
             //f1.StartForeignTimer();
 

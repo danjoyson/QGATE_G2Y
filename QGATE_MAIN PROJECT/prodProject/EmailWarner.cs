@@ -7,7 +7,7 @@ namespace prodProject
     internal class EmailWarner
     {
         private string emailSenderAddress;
-        private string emailSenderPassword;
+        private string? emailSenderPassword;
 
         public EmailWarner()
         {
@@ -110,6 +110,7 @@ namespace prodProject
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -152,7 +153,7 @@ namespace prodProject
 
                 string separador = ";";
                 string[] info = new string[2];
-                string linea;
+                string? linea;
                 int i = 0;
                 while ((linea = sr.ReadLine()) != null || i < 2)
                 {

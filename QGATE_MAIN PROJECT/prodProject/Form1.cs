@@ -8,30 +8,31 @@ namespace prodProject
     public partial class Form1 : Form
     {
         menuMobisys menuMobi;
+        ContainerIdForm containerIdMenu;
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
-        public static string piezaText; //Comparador de clave de pieza (10 caracteres)
-        public static string etiqueta;  //Texto de etiqueta completo
+        public static string piezaText = ""; //Comparador de clave de pieza (10 caracteres)
+        public static string etiqueta = "";  //Texto de etiqueta completo
         //DatabaseConnector connection = new DatabaseConnector();
-        public static string inicioDeCadena; //V o X de cadena de pieza
-        public static string finDeCadena; //últimos 2 dígitos del identificador de pieza (Obtenido de la base de datos)
+        public static string inicioDeCadena = ""; //V o X de cadena de pieza
+        public static string finDeCadena = ""; //últimos 2 dígitos del identificador de pieza (Obtenido de la base de datos)
         public static int idPiezaCatalog; //Id de la pieza en la base de datos
-        public static string descripcion; //Nombre de pieza en la base de datos
+        public static string descripcion = ""; //Nombre de pieza en la base de datos
         public static int numPasos;
         public static int pasoRescaneo;
-        public static string claveComp="";
+        public static string claveComp = "";
         public static int formSlideCont = 1; //Contador que maneja qué imagen del formulario se mostrará
-        public static string printerIP;
+        public static string printerIP = "";
         public static int dpi; //dpi de la impresora
 
         private System.Timers.Timer t = new(60000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
         private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
-        public static string lastZPLCommand = null; //último comando de impresión enviado
+        public static string lastZPLCommand = ""; //último comando de impresión enviado
 
         public static int consecutveNOKCounter = 0; //Contador de NOK seguidos
-
+        public bool completedContainer = false;
         // public static int totalSteps; //Número de pasos total de revisión de la pieza. Obtenido de la base de datos
-        public static String connectionString;
+        public static String connectionString = "";
         public static SqlConnection conn;
 
 
@@ -57,7 +58,7 @@ namespace prodProject
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
             connectionString = CsvReader.SetConnectionString();
-            if (connectionString!=string.Empty && printerIP != string.Empty)
+            if (connectionString != string.Empty && printerIP != string.Empty)
             {
                 conn = new SqlConnection(connectionString);
                 //connection.connectionString=connectionString;
@@ -73,10 +74,33 @@ namespace prodProject
                     MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
                 Process.GetCurrentProcess().Kill();
             }
-
-            
         }
 
+        public Form1(ContainerIdForm firstMenu)
+        {
+            this.containerIdMenu = firstMenu;
+            Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
+            CsvReader cr = new();
+            printerIP = cr.GetPrinterIP();
+            connectionString = CsvReader.SetConnectionString();
+            estandar = 0;
+            if (connectionString != string.Empty && printerIP != string.Empty)
+            {
+                conn = new SqlConnection(connectionString);
+                //connection.connectionString=connectionString;
+                //connection.GetConnection();
+                InitializeComponent();
+                this.Show();
+                ConfigTimer();
+                dpi = 203;
+            }
+            else
+            {
+                if (printerIP == string.Empty)
+                    MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
+                Process.GetCurrentProcess().Kill();
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -113,7 +137,7 @@ namespace prodProject
                     getPiezaPartSteps();
                     if (CheckNotSerialZero())
                     {
-                        if (estandar == 0) 
+                        if (estandar == 0)
                         {
                             estandar = GetStandard(claveComp);
                         }
@@ -168,7 +192,7 @@ namespace prodProject
 
             try
             {
-                
+
                 conn.Open();
                 //MessageBox.Show("Connection Granted");
                 //connection.connectionString = queryString;
@@ -237,7 +261,7 @@ namespace prodProject
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())
                 {
-                    claveComp=record.GetString(0);
+                    claveComp = record.GetString(0);
                     numPasos = record.GetInt16(1);
                     pasoRescaneo = record.GetInt16(2);
                 }
@@ -523,7 +547,7 @@ namespace prodProject
         private int GetStandard(string clave)
         {
             int estandarValue = 0;
-           String  queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
+            String queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
             try
             {
                 conn.Open();
@@ -544,9 +568,12 @@ namespace prodProject
                 return estandarValue;
             }
 
-            
+
         }
 
-
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
+        }
     }
 }

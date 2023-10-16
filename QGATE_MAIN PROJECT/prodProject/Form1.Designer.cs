@@ -173,6 +173,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "  Inicio";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);

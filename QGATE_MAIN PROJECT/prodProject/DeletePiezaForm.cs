@@ -140,5 +140,10 @@ namespace prodProject
         {
 
         }
+
+        private void claveTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

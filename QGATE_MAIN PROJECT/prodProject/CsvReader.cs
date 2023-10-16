@@ -50,7 +50,7 @@ namespace prodProject
 
                 string separador = ";";
                 string[] info = new string[5];
-                string linea;
+                string? linea=null;
                 int i = 0;
                 while ((linea = sr.ReadLine()) != null || i < 5)
                 {
@@ -89,7 +89,7 @@ namespace prodProject
             {
                 sr = new StreamReader(path);
 
-                string linea;
+                string? linea=null;
                 while ((linea = sr.ReadLine()) != null)
                 {
                     mail.To.Add(linea);
@@ -117,7 +117,7 @@ namespace prodProject
             {
                 sr = new StreamReader(path);
 
-                string linea;
+                string? linea;
                 while ((linea = sr.ReadLine()) != null)
                 {
                     mail.To.Add(linea);
@@ -147,7 +147,7 @@ namespace prodProject
 
                 string separador = ";";
                 string[] info = new string[5];
-                string linea;
+                string? linea;
 
                 linea = sr.ReadLine();
                 string[] fila = linea.Split(separador); //Parte la linea csv en un arreglo
