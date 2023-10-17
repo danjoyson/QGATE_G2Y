@@ -22,18 +22,10 @@ namespace prodProject
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private ProcessManipulation mobisys = new ProcessManipulation();
         private bool waitScanFlag = false;
+        private int nextWindowForm = -1;
         //private System.Timers.Timer scanMobisysTimer = new(60000);
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
 
-        //Driver necesario para acceder a los procesos del sistema
-        [DllImport("user32.dll")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
-        [DllImport("user32.dll")]
-        private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
         /* 
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario 3 (Con botones OK/NOK)
@@ -47,6 +39,7 @@ namespace prodProject
         {
             scanMobisysTimer.Interval = 60000;
             waitScanFlag = false;
+            nextWindowForm = -1;
             if (SetImage())
             {
                 this.FormClosing += new FormClosingEventHandler(Form3_FormClosing);
@@ -82,14 +75,6 @@ namespace prodProject
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Busca y cambia la imagen de fondo del formulario.
-         * 1. Arma el string que contiene la ruta de la pieza, con los datos ingresados en el txtBox del primer formulario
-         * 2. Si no la encuentra manda un mensaje de error y retorna al formulario de inicio.
-         * 3. Si no hay error alguno, retorna true
-         * 
-         * Ejemplo de string Path de imagen 
-         * C:\Users\salazard\source\repos\prodProject\prodProject\bin\Debug\net6.0-windows\images\6807101\6807101_S1.JPG
-         * 
-         * Donde " C:\Users\salazard\source\repos\prodProject\prodProject\bin\Debug\net6.0-windows" equivale al Application.StartupPath
          * --------------------------------------------------------------------------------------------------------------------------------
          */
         private bool SetImage()
@@ -121,7 +106,7 @@ namespace prodProject
          * 
          * 2. Si el contador es igual a 11, esconde el formulario actual.
          * 3. Llama a la función de inserción de registro en la base de datos.
-         * 4. En caso de no baber errores, lo notifica y llama al formulario de impresión 
+         * 4. En caso de no haber errores, lo notifica y llama al formulario de impresión 
          * 
          * 
          * El timer en realidad es meramente estético, si se omite no afecta al funcionamiento de la aplicación. No obstante, si no se 
@@ -258,40 +243,25 @@ namespace prodProject
                         this.messageLabel.Visible = false;
                         textEtiqueta = this.txtEtiqueta.Text;
                         txtEtiqueta.Text = string.Empty;
-
-                        /*if (SetImage())
-                        {
-                            SetButtonsTimerDuration();
-                            buttonsTimer.Start();
-                            this.BtnOK.Enabled = false;
-                            AFKTimer.Start();
-                        }*/
                         Form1.conatadorPiezas++;
                         SetButtonsTimerDuration();
                         buttonsTimer.Start();
                         this.BtnOK.Enabled = false;
                         AFKTimer.Start();
+                        if (f1.completedContainer) nextWindowForm = 0;
+                        else nextWindowForm = 1;
                         if (Form1.conatadorPiezas == Form1.estandar)
                         {
                             generaRegistro(textEtiqueta);
                             f1.completedContainer = true;
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
-                            //Posible to add a window named WinScanForm to superpose mobisys and wait that the user scan the tag
-                            //ScanMobisys
-                            //ReturnToMobisys();
-                            ShowWaitScan(f1.completedContainer);
-                            //ReturnToContainerMenu();
+                            ShowWaitScan(0);
                         }
                         else
                         {
                             generaRegistro(textEtiqueta);
-                            //Form1.conatadorPiezas++;
-                            //
-                            //scanMobisysTimer.Enabled = true;
-                            //scanMobisysTimer.Tick += new System.EventHandler(OnTimerScanEvent);
-                            ShowWaitScan(f1.completedContainer);
-                            //ReturnToHome();
+                            ShowWaitScan(nextWindowForm);
 
                         }
 
@@ -686,8 +656,6 @@ namespace prodProject
             try
             {
                 Form1.conn.Open();
-                //MessageBox.Show("Connection Granted");
-                //MessageBox.Show(queryString);
                 SqlCommand cmd = new(queryString, Form1.conn);
                 cmd.Parameters.AddWithValue("@numEtiqueta", Form1.etiqueta);
                 cmd.Parameters.AddWithValue("@serial", this.serial);
@@ -818,14 +786,11 @@ namespace prodProject
         }
 
 
-        private void ShowWaitScan(bool nextWindow)
+        private void ShowWaitScan(int nextWindow)
         {
             waitScanFlag = true;
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
-            //f1.Close();
-
-            //Application.OpenForms["WaitScanForm"].Show();
             this.Close();
             WinScanForm wmenu = new WinScanForm(f1,nextWindow);
             wmenu.Show();

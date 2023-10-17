@@ -7,7 +7,7 @@ namespace prodProject
     public partial class DeletePiezaForm : Form
     {
         AdminForm prevForm;
-
+        DatabaseConnector db = new DatabaseConnector();
         public DeletePiezaForm(AdminForm af)
         {
             this.prevForm = af;
@@ -30,41 +30,10 @@ namespace prodProject
                 DialogResult dialog = MessageBox.Show("¿Está seguro que desea eliminar PERMANENTEMENTE el registro de la Base de Datos?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialog == DialogResult.Yes)
                 {
-                    DeleteRegisterFromDB();
+                    db.EliminaPieza(claveTxtBox.Text);
                 }
             }
         }
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método de borrado de registro de la Base de Datos
-         * 1. Se crea la query y se le pasan sus respectivos parámetros
-         * 
-         * En caso de que ocurra alguna excepción, se mostrará un mensaje de error en pantalla.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private void DeleteRegisterFromDB()
-        {
-            try
-            {
-                Form1.conn.Open();
-
-                string query = "DELETE FROM Pieza WHERE claveComp = @value;";
-
-                SqlCommand cmd = new SqlCommand(query, Form1.conn);
-                cmd.Parameters.Add(new SqlParameter("@value", claveTxtBox.Text.Substring(1, 3) + claveTxtBox.Text.Substring(5, 7)));
-                cmd.ExecuteNonQuery();
-                Form1.conn.Close();
-                MessageBox.Show("Registro eliminado exitosamente.");
-            }
-            catch (Exception ex)
-            {
-                Form1.conn.Close();
-                MessageBox.Show("Ocurrió un error al tratar de eliminar el registro: " + ex.Message);
-            }
-        }
-
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          *  Función para revisar que la información de la text box no contengan valores nulos o vacíos.
@@ -128,12 +97,10 @@ namespace prodProject
 
         private void DeletePiezaForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
-        {
-
+        { 
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

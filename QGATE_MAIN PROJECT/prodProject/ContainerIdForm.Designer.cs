@@ -41,9 +41,9 @@
             // 
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(771, 12);
+            pictureBox3.Location = new Point(679, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(116, 42);
+            pictureBox3.Size = new Size(160, 78);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 22;
             pictureBox3.TabStop = false;
@@ -99,12 +99,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(892, 367);
+            ClientSize = new Size(871, 372);
             Controls.Add(containerIdMessage);
             Controls.Add(btnContainer);
             Controls.Add(containerTxtBox);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ContainerIdForm";
             Text = "ContainerIdForm";
             Load += ContainerIdForm_Load;

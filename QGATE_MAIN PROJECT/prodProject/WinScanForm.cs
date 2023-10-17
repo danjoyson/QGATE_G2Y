@@ -16,10 +16,17 @@ namespace prodProject
         ProcessManipulation mobiProcess = new ProcessManipulation();
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
-        bool windowCase;
-        public WinScanForm(Form1 f1,bool nextWindow)
+        int windowCase=-1;
+        public WinScanForm(Form1 f1,int nextWindow)
         {
             this.f1 = f1;
+            windowCase = nextWindow;
+            scanMobisysTimer.Interval = 60000;
+            InitializeComponent();
+        }
+
+        public WinScanForm(int nextWindow)
+        {
             windowCase = nextWindow;
             scanMobisysTimer.Interval = 60000;
             InitializeComponent();
@@ -37,14 +44,21 @@ namespace prodProject
         private void button1_Click(object sender, EventArgs e)
         {
             //Vuelve a la pantalla de escaneo de pieza, significa que el usuario ya ingreso la pieza en mobisys correctamente
-            if (windowCase) 
+            scanMobisysTimer.Stop();
+            switch (windowCase) 
             {
-                f1.completedContainer = false;
-                //f1.estandar = 0;
-                ReturnToContainerMenu();
-                
-            }
-            else ReturnToHome();
+                case 0:
+                    f1.completedContainer = false;
+                    ReturnToContainerMenu();
+                    break;
+                case 1:
+                    ReturnToHome();
+                    break;
+                case 2:
+                    StartFormRevision(); 
+                    break;
+
+            } 
 
         }
 
@@ -81,6 +95,14 @@ namespace prodProject
             Application.OpenForms["ContainerIdForm"].Show();
             //f1.StartForeignTimer();
             this.Close();
+        }
+
+        private void StartFormRevision()
+        {
+            Form1 f1 = new(this);
+            this.Hide();
+            f1.StartForeignTimer();
+
         }
     }
 }

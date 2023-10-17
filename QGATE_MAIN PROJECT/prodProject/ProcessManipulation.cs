@@ -70,7 +70,7 @@ namespace prodProject
             }
         }
 
-        public void SuperposePid(string procName)
+        public bool SuperposePid(string procName)
         {
             int targetProcessPID = -1;
             targetProcessPID = GetProcessID(procName);
@@ -78,11 +78,12 @@ namespace prodProject
             {
 
                 BringWindowToFrontByPID(targetProcessPID);
-
+                return true;
             }
             else
             {
                 MessageBox.Show("The app cant get the PID");
+                return false;
             }
         }
 
@@ -102,9 +103,6 @@ namespace prodProject
 
                     // Traer la ventana de Microsoft Teams al frente
                     SetForegroundWindow(windowHandle);
-                    //MessageBox.Show("Debería");
-
-
                 }
                 else
                 {
@@ -132,24 +130,33 @@ namespace prodProject
 
         /*Método para realizar la superoposición de Mobisys despues de revisar una pieza.
         y pegar el texto del portapapeles*/
-        public void AddToMobisys(string text)
+        public bool AddToMobisys(string text)
         {
+            bool processResult=false;
             try
             {
                 //if(Form1.conatadorPiezas==Form1.estandar)
                 currentProcess = GetCurrentProcessName();
                 CopyToClipboard(text);
                 //SuperposePid(mobisysProcessName);
-                SuperposePid(mobisysProcessName);
-                System.Threading.Thread.Sleep(2000);
-                PasteFromClipboard();
-                System.Threading.Thread.Sleep(3000);
-                SuperposeProgram(currentProcess);
+                processResult = SuperposePid(mobisysProcessName);
+                if (processResult)
+                {
+                    System.Threading.Thread.Sleep(2000);
+                    PasteFromClipboard();
+                    System.Threading.Thread.Sleep(3000);
+                    SuperposeProgram(currentProcess);
+                    return true;
+                }
+                else return false;
+
+
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error tratando de añadir a mobisys");
+                MessageBox.Show(ex.Message, "Error al mostrar mobisys");
+                return false;
             }
         }
 

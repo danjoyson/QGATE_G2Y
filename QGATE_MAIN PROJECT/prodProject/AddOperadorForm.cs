@@ -6,7 +6,7 @@ namespace prodProject
     public partial class AddOperadorForm : Form
     {
         AdminForm prevForm;
-
+        DatabaseConnector db = new DatabaseConnector();
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario de Alta de operador
@@ -22,7 +22,6 @@ namespace prodProject
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         /*
@@ -36,7 +35,7 @@ namespace prodProject
         {
             if (NotNullTxtBoxData())
             {
-                InsertDbRecord();
+                db.InsertaOperador(NumOpTxtBox.Text, NameOpTxtBox.Text, SurnameOpTxtBox.Text);
             }
         }
 
@@ -86,60 +85,6 @@ namespace prodProject
                 return false;
             }
         }
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función de conexión al servidor de SQL y query DML INSERT INTO para ingresar un registro nuevo a la tabla Operador
-         *  Recibe el dmlStatement: INSERT INTO
-         *  1. Se conecta a la Base de Datos y envía la consulta de inserción formada de forma parametrizada.
-         *  2. En caso de alguna excepción, muestra un mensaje en pantalla.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private void InsertDbRecord()
-        {
-            try
-            {
-                try
-                {
-                    Form1.conn.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-
-                string query = "INSERT INTO Operador VALUES(@numOperador, @nombre, @apellido);";
-
-                SqlCommand cmd = new SqlCommand(query, Form1.conn);
-                cmd.Parameters.Add(new SqlParameter("@numOperador", NumOpTxtBox.Text));
-                cmd.Parameters.Add(new SqlParameter("@nombre", NameOpTxtBox.Text));
-                cmd.Parameters.Add(new SqlParameter("@apellido", SurnameOpTxtBox.Text));
-                cmd.ExecuteNonQuery();
-                Form1.conn.Close();
-                MessageBox.Show("Registro guardado exitosamente");
-            }
-            catch (SqlException sqlEx)
-            {
-                Form1.conn.Close();
-                if (sqlEx.Number == 2627) //Error de duplicado de Primary Key
-                {
-                    Form1.conn.Close();
-                    MessageBox.Show("Ocurrió un error al tratar de guardar el registro: El número de Operador ya existe en la Base de Datos.");
-                }
-                else
-                {
-                    Form1.conn.Close();
-                    MessageBox.Show("Ocurrió un error al tratar de guardar el registro: " + sqlEx.Number);
-                }
-            }
-            catch (Exception ex)
-            {
-                Form1.conn.Close();
-                MessageBox.Show("Ocurrió un error al tratar de guardar el registro: " + ex.Message);
-            }
-        }
-
         /*
            * --------------------------------------------------------------------------------------------------------------------------------
            * Método para manejar el cerrado de la aplicación incompleto
@@ -153,7 +98,6 @@ namespace prodProject
 
         private void AddOperadorForm_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

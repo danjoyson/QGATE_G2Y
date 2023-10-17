@@ -215,6 +215,7 @@
             ClaveTxtBox.Name = "ClaveTxtBox";
             ClaveTxtBox.Size = new Size(633, 39);
             ClaveTxtBox.TabIndex = 12;
+            ClaveTxtBox.TextChanged += ClaveTxtBox_TextChanged;
             // 
             // DescrTxtBox
             // 

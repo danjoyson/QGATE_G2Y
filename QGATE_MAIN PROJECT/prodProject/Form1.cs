@@ -9,6 +9,8 @@ namespace prodProject
     {
         menuMobisys menuMobi;
         ContainerIdForm containerIdMenu;
+        WinScanForm winScanForm;
+        DatabaseConnector db = new DatabaseConnector();
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
         public static string piezaText = ""; //Comparador de clave de pieza (10 caracteres)
@@ -18,8 +20,8 @@ namespace prodProject
         public static string finDeCadena = ""; //últimos 2 dígitos del identificador de pieza (Obtenido de la base de datos)
         public static int idPiezaCatalog; //Id de la pieza en la base de datos
         public static string descripcion = ""; //Nombre de pieza en la base de datos
-        public static int numPasos;
-        public static int pasoRescaneo;
+        public static int numPasos; //Numero de pasos de revisión de la pieza
+        public static int pasoRescaneo; //Número de paso para el rescaneo de la etiqueta
         public static string claveComp = "";
         public static int formSlideCont = 1; //Contador que maneja qué imagen del formulario se mostrará
         public static string printerIP = "";
@@ -76,6 +78,30 @@ namespace prodProject
             }
         }
 
+        public Form1(WinScanForm waitMenu)
+        {
+            this.winScanForm  = waitMenu;
+            Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
+            CsvReader cr = new();
+            printerIP = cr.GetPrinterIP();
+            connectionString = CsvReader.SetConnectionString();
+            if (connectionString != string.Empty && printerIP != string.Empty)
+            {
+                conn = new SqlConnection(connectionString);
+                InitializeComponent();
+                this.Show();
+                ConfigTimer();
+                dpi = 203;
+            }
+            else
+            {
+                if (printerIP == string.Empty)
+                    MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+
+
         public Form1(ContainerIdForm firstMenu)
         {
             this.containerIdMenu = firstMenu;
@@ -87,8 +113,6 @@ namespace prodProject
             if (connectionString != string.Empty && printerIP != string.Empty)
             {
                 conn = new SqlConnection(connectionString);
-                //connection.connectionString=connectionString;
-                //connection.GetConnection();
                 InitializeComponent();
                 this.Show();
                 ConfigTimer();
@@ -103,12 +127,10 @@ namespace prodProject
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
+        { 
         }
 
         /* 
@@ -131,15 +153,17 @@ namespace prodProject
             Cursor.Current = Cursors.WaitCursor;
             if (NotNullTxtBoxData())
             {
-                if (CheckDataBase("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text) && CheckDataBase("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena", "Pieza", "claveComp", piezaText))
+                if (CheckDataBase("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text) && CheckDataBase("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText))
                 {
 
-                    getPiezaPartSteps();
+                    //getPiezaPartSteps();
                     if (CheckNotSerialZero())
                     {
                         if (estandar == 0)
                         {
-                            estandar = GetStandard(claveComp);
+                            MessageBox.Show(claveComp);
+                            estandar = db.GetEstandarPieza(claveComp);
+                            MessageBox.Show(estandar.ToString());
                         }
                         MessageBox.Show(estandar.ToString());
                         StartForms();
@@ -165,25 +189,9 @@ namespace prodProject
             this.Hide();
             this.piezaTxtBox.Clear();
         }
-
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          *  Función de conexión al servidor de SQL y consultas DML SELECT para revisar que exista cierto atributo en la BD.
-         *  Recibe el dmlStatement: SELECT
-         *  Recibe el atributo o atributos a comparar: numOperador / claveComp
-         *  Recibe la tabla a comparar: Operador / Pieza
-         *  
-         *  1. Se forma el string para la consulta de la base de datos.
-         *  2. Se hace la consulta parametrizada (cmd.Parameters.Add)
-         *  3. Si se encuentra algún registro, comienza a guardar los datos correspondientes en las variables.
-         *  4. En caso de no encontrar registro, muestra una etiqueta con un mensaje de error debajo de las cajas de texto.
-         *  5. Cierra la conexión con la base de datos.
-         *  
-         *  Se usan consultas parametrizadas (Parametrized Query) para evitar inserción de consultas maliciosas (SQL Injection)
-         *   
-         *  Retorna false en caso de que los datos no sean encontrados o que ocurra alguna excepción.
-         *  Retorna true si los datos son encontrados correctamente en la BD.
          *  --------------------------------------------------------------------------------------------------------------------------------
          */
         private bool CheckDataBase(String dmlStatement, String attribute, String table, String condition, String value)
@@ -192,7 +200,6 @@ namespace prodProject
 
             try
             {
-
                 conn.Open();
                 //MessageBox.Show("Connection Granted");
                 //connection.connectionString = queryString;
@@ -202,12 +209,15 @@ namespace prodProject
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())
                 {
-                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena"))
+                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo"))
                     {
+                        claveComp = record.GetString(0);
                         idPiezaCatalog = record.GetInt16(1);
                         descripcion = record.GetString(2);
                         inicioDeCadena = record.GetString(3);
                         finDeCadena = record.GetString(4);
+                        numPasos = record.GetInt16(5);
+                        pasoRescaneo = record.GetInt16(6);
                         //totalSteps = record.GetInt16(5);  Futura implementación para extraer la cantidad de pasos de revisión acorde a cada tipo de pieza
                     }
                     else
@@ -249,51 +259,10 @@ namespace prodProject
             }
         }
 
-        //Función para obtener los pasos de verificación de la pieza desde la tabla Pieza y el numero de paso para reescaneo
-        private bool getPiezaPartSteps()
-        {
-            String queryString = "SELECT claveComp,pasos,puntoReescaneo FROM Pieza WHERE claveComp = @value";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", piezaText));  //Prevención de SQL Injection, mediante Parametrized Queries 
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    claveComp = record.GetString(0);
-                    numPasos = record.GetInt16(1);
-                    pasoRescaneo = record.GetInt16(2);
-                }
-                conn.Close();
-                return true;
-
-            }
-            catch (SqlNullValueException)
-            {
-                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende no necesita revisar reingreso)
-                conn.Close();
-                return false;
-            }
-
-            catch (Exception e)
-            {
-                conn.Close();
-                MessageBox.Show(e.Message);
-                return false;
-            }
-        }
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función para verificar que la pieza no haya sido guardada con serial igual a cero previamente, es decir que no haya sido 
          * liberada todavía.
-         * 
-         * 1. Genera conexión con la base de datos
-         * 2. Ejecuta la consulta parametrizada.
-         * 3. Si el serial es 0 muestra una etiqueta con el mensaje "La pieza ya fue liberada sin fallas previamente" y reinicia el timer de la caja de texto
-         * 4. En caso de que el serial sea mayor a cero, es decir ya ha tenido un NOK previamente, llama a la función CheckReingreso()
-         *    para saber si ya ha cumplido el tiempo de retrabajo.
-         * 
          * Retorna false en caso de que ya exista esa etiqueta con serial cero (Ya ha sido liberada) o si no ha cumplido el tiempo de retrabajo.
          * Retorna true en caso de que la etiqueta no haya tenido serial cero o si ya ha cumplido el tiempo de retrabajo.
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -341,15 +310,6 @@ namespace prodProject
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función para verificar que la pieza con NOK no sea reingresada dentro de X minutos (tiempo que dura el retrabajo).
-         * Se representa mediante la variable minRetrabajo.
-         * 
-         * 1. Genera conexión con la base de datos.
-         * 2. Ejecuta la consulta parametrizada.
-         * 3. Extrae la fecha y hora (DateTime) del último registro NOK de esa etiqueta.
-         * 4. Le resta la fecha y hora actuales para conocer cuánto tiempo ha transcurrido desde entonces.
-         * 5. Si los minutos transcurridos desde entonces son mayores o iguales a minRetrabajo, retorna true.
-         * 6. En caso contrario, muestra una etiqueta con el tiempo de retrabajo restante.
-         * 
          * Retorna false en caso de que no haya pasado el tiempo necesario.
          * Retorna true en caso de que haya cumplido el tiempo necesario.
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -386,17 +346,9 @@ namespace prodProject
             }
 
         }
-
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          *  Función para revisar que la información en las text box no contengan valores nulos o vacíos.
-         *  1. Revisa que no haya texto vacío en las textBoxes, en caso contrario arroja una excepción.
-         *  2. Genera un Substring con solamente los datos útiles de la etiqueta (índices entre 1 y 11) para revisarla en la BD.
-         *        *Lo anterior podría modificarse si en la BD se guardaran qué índices son útiles para otros proyectos como G2Y, ya que las etiquetas son distintas*
-         *  
-         *  Retorna true si contienen texto.
-         *  Retorna false si hay contenido nulo en cualquiera de las dos, lanza un mensaje de error en pantalla, y reinicia el timer.
          *  --------------------------------------------------------------------------------------------------------------------------------
          */
         private bool NotNullTxtBoxData()
@@ -429,7 +381,6 @@ namespace prodProject
 
             }
         }
-
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -478,8 +429,6 @@ namespace prodProject
         {
             t.Start();
         }
-
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función para desbloquear el textBox del número de operador al terminar el timer.  
@@ -512,7 +461,6 @@ namespace prodProject
             LoginForm.Show();
         }
 
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función para permitir que el formulario 3, limpie las cajas de texto al estar AFK
@@ -526,49 +474,18 @@ namespace prodProject
 
         private void PiezaTxtBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void OpeTxtBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private int GetStandard(string clave)
-        {
-            int estandarValue = 0;
-            String queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", clave));  //Prevención de SQL Injection, mediante consultas parametrizadas 
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    estandarValue = record.GetInt32(0);
-                }
-
-                return estandarValue; //Si no ha cumplido el tiempo de retrabajo, retorna false
-            }
-            catch (Exception e)
-            {
-                conn.Close();
-                MessageBox.Show(e.Message);
-                return estandarValue;
-            }
-
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

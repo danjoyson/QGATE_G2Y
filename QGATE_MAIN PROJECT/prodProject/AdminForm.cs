@@ -4,6 +4,8 @@ namespace prodProject
 {
     public partial class AdminForm : Form
     {
+
+        DatabaseConnector db = new DatabaseConnector();
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario.
@@ -119,20 +121,7 @@ namespace prodProject
             DialogResult dialog = MessageBox.Show("¿Está seguro que desea ejecutar esta acción PERMANENTE? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialog == DialogResult.Yes)
             {
-                string query = "DELETE FROM Operador_Pieza WHERE fecha < DATEADD(dd,-1, GETDATE());";
-                try
-                {
-                    Form1.conn.Open();
-
-                    SqlCommand cmd = new(query, Form1.conn);
-                    cmd.ExecuteNonQuery();
-                    Form1.conn.Close();
-
-                }
-                catch (Exception e1)
-                {
-                    MessageBox.Show(e1.Message);
-                }
+                db.VaciarDb();
             }
         }
 

@@ -44,7 +44,7 @@ namespace prodProject
             else //Si no hay más aplicaciones abiertas
             {
                 ApplicationConfiguration.Initialize();
-                Application.Run(new ContainerIdForm());
+                Application.Run(new AdminForm());
             }
 
         }

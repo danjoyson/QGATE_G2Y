@@ -7,7 +7,7 @@ namespace prodProject
     public partial class DeleteOperadorForm : Form
     {
         AdminForm prevForm;
-
+        DatabaseConnector db = new DatabaseConnector();
         /*
          * ---------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario
@@ -32,14 +32,12 @@ namespace prodProject
             {
                 DialogResult dialog = MessageBox.Show("¿Está seguro que desea eliminar PERMANENTEMENTE el registro de la Base de Datos?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialog == DialogResult.Yes)
-                {
-                    DeleteRegisterFromDB();
+                { 
+                    db.EliminaOperador(numOpTxtBox.Text);
                 }
             }
 
         }
-
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función llamada al hacer click sobre el botón de retorno
@@ -48,33 +46,6 @@ namespace prodProject
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnToPreviousForm();
-        }
-
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función de borrado de registro de la Base de Datos
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private void DeleteRegisterFromDB()
-        {
-            try
-            {
-                Form1.conn.Open();
-
-                string query = "DELETE FROM Operador WHERE numOperador = @value;";
-
-                SqlCommand cmd = new SqlCommand(query, Form1.conn);
-                cmd.Parameters.Add(new SqlParameter("@value", numOpTxtBox.Text));
-                cmd.ExecuteNonQuery();
-                Form1.conn.Close();
-                MessageBox.Show("Registro eliminado exitosamente");
-            }
-            catch (Exception ex)
-            {
-                Form1.conn.Close();
-                MessageBox.Show("Ocurrió un error al tratar de eliminar el registro: " + ex.Message);
-            }
         }
 
         /*
