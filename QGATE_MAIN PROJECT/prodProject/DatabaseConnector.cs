@@ -310,7 +310,7 @@ namespace prodProject
 
         public int GetEstandarPieza(string clave)
         {
-            int estandarValue = 0;
+            int estandarValue = -1;
             String queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
             try
             {

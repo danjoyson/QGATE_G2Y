@@ -82,7 +82,7 @@ namespace prodProject
             }
             else
             {
-                MessageBox.Show("The app cant get the PID");
+               
                 return false;
             }
         }

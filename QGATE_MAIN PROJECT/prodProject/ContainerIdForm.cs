@@ -32,21 +32,21 @@ namespace prodProject
             if (containerTxtBox.Text != String.Empty)
             {
                 if (containersId.Contains(containerTxtBox.Text))
-                {
-                    containerIdMessage.Text = "Esta etiqueta ya fue escaneada";
-                    containerIdMessage.Location = new Point(containerTxtBox.Width / 2 - containerIdMessage.Width / 2, 311);
-                }
+                    setMessageLabel("Esta etiqueta ya fue escaneada");
                 else
                 {
                     flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
-                    //StartForms();
                     if (flagSuperposicion)
                         ShowWaitScan(2);
                     else MessageBox.Show("No se encontró la ventana de mobysis");
+
+
                 }
 
             }
-            else MessageBox.Show("Se debe introducir la etiqueta de contenedor");
+            else setMessageLabel("Se debe introducir la etiqueta de contenedor");
+           
+
 
         }
         private void StartForms()
@@ -57,6 +57,11 @@ namespace prodProject
 
         }
 
+        private void setMessageLabel(string message)
+        {
+            containerIdMessage.Text = message;
+            containerIdMessage.Location = new Point(ClientSize.Width / 2 - containerIdMessage.Width / 2, ClientSize.Height / 2 - 25);
+        }
         private void ContainerIdForm_Load(object sender, EventArgs e)
         {
         }

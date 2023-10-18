@@ -161,12 +161,13 @@ namespace prodProject
                     {
                         if (estandar == 0)
                         {
-                            MessageBox.Show(claveComp);
                             estandar = db.GetEstandarPieza(claveComp);
-                            MessageBox.Show(estandar.ToString());
+                            if (estandar == -1) MessageBox.Show("No se pudo obtener el estandar de la pieza");
+                            else StartForms();
                         }
-                        MessageBox.Show(estandar.ToString());
-                        StartForms();
+                        else
+                            StartForms();
+
                     }
                 }
             }
