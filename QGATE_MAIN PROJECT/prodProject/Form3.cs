@@ -322,7 +322,6 @@ namespace prodProject
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
                 mobisys.AddToMobisys(text);
-                MessageBox.Show("Se cumplieron todos los pasos con exito");
             }
             //ReturnToHome();
         }

@@ -41,12 +41,14 @@
             // 
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(679, 12);
+            pictureBox3.Dock = DockStyle.Top;
+            pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(160, 78);
+            pictureBox3.Size = new Size(871, 78);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 22;
             pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
             // 
             // label1
             // 
@@ -63,7 +65,7 @@
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             containerTxtBox.Location = new Point(169, 116);
-            containerTxtBox.MaxLength = 40;
+            containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
             containerTxtBox.Size = new Size(670, 43);
             containerTxtBox.TabIndex = 24;
@@ -105,8 +107,10 @@
             Controls.Add(containerTxtBox);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ContainerIdForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "ContainerIdForm";
             Load += ContainerIdForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

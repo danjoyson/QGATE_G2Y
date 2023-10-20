@@ -28,7 +28,7 @@ namespace prodProject
         public static int dpi; //dpi de la impresora
 
         private System.Timers.Timer t = new(60000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
-        private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
+        private readonly int minRetrabajo = 1; //MINUTOS m que estará bloqueada la pieza después de un NOK
         public static string lastZPLCommand = ""; //último comando de impresión enviado
 
         public static int consecutveNOKCounter = 0; //Contador de NOK seguidos
@@ -52,32 +52,6 @@ namespace prodProject
          * 5. Asigna el dpi de la impresora zebra.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-
-        public Form1(menuMobisys firstMenu)
-        {
-            this.menuMobi = firstMenu;
-            Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
-            CsvReader cr = new();
-            printerIP = cr.GetPrinterIP();
-            connectionString = CsvReader.SetConnectionString();
-            if (connectionString != string.Empty && printerIP != string.Empty)
-            {
-                conn = new SqlConnection(connectionString);
-                //connection.connectionString=connectionString;
-                //connection.GetConnection();
-                InitializeComponent();
-                this.Show();
-                ConfigTimer();
-                dpi = 203;
-            }
-            else
-            {
-                if (printerIP == string.Empty)
-                    MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
-                Process.GetCurrentProcess().Kill();
-            }
-        }
-
         public Form1(WinScanForm waitMenu)
         {
             this.winScanForm  = waitMenu;
@@ -166,7 +140,13 @@ namespace prodProject
                             else StartForms();
                         }
                         else
-                            StartForms();
+                        {
+                            int estandarPieza = 0;
+                            estandarPieza = db.GetEstandarPieza(claveComp);
+                            if (estandarPieza != estandar) setMessagleLabel("Esta pieza no corresponde al estandar actual");
+                            else StartForms();
+                        }
+                        
 
                     }
                 }
@@ -233,18 +213,17 @@ namespace prodProject
 
                     if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena"))
                     {
-                        messageLabel.Text = "Número de pieza no encontrado en la Base de Datos";
+                        
                         piezaTxtBox.Clear();
                         t.Start();
-                        messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                        setMessagleLabel("Número de pieza no encontrado en la Base de Datos");
                     }
 
                     else
                     {
-                        messageLabel.Text = "Número de operador no encontrado en la Base de Datos";
                         opeTxtBox.Clear();
                         t.Start();
-                        messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                        setMessagleLabel("Número de operador no encontrado en la Base de Datos");
                     }
 
                     conn.Close();
@@ -258,6 +237,12 @@ namespace prodProject
                 t.Start();
                 return false;
             }
+        }
+
+        private void setMessagleLabel(string message)
+        {
+            messageLabel.Text = message;
+            messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
         }
 
         /*
@@ -281,8 +266,7 @@ namespace prodProject
                 {
                     if (record.GetInt16(0) == 0)
                     {
-                        messageLabel.Text = "La pieza ya fue liberada sin fallas previamente.";
-                        messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                        setMessagleLabel("La pieza ya fue liberada sin fallas previamente.");
                         t.Start();
                         return false;
                     }
@@ -333,8 +317,7 @@ namespace prodProject
                         return true;                                //Si ya pasó el tiempo de retrabajo, retorna true
                     }
                     string remain = (this.minRetrabajo - span.TotalMinutes).ToString("0.0");
-                    messageLabel.Text = "Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remain + " minutos";
-                    messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                    setMessagleLabel("Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remain + " minutos");
                 }
 
                 return false; //Si no ha cumplido el tiempo de retrabajo, retorna false
@@ -368,15 +351,13 @@ namespace prodProject
             }
             catch (ArgumentNullException)
             {
-                messageLabel.Text = "Ingrese todos los datos";
-                messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                setMessagleLabel("Ingrese todos los datos");
                 t.Start();
                 return false;
             }
             catch (Exception)
             {
-                messageLabel.Text = "Formato inválido";
-                messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+                setMessagleLabel("Formato inválido");
                 t.Stop();
                 return false;
 

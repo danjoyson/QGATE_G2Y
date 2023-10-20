@@ -33,6 +33,7 @@ namespace prodProject
                     }
 
                     ApplicationConfiguration.Initialize();
+
                     //Prueba para verificacion de formularios, el formulario de inicio es form1
                     Application.Run(new ContainerIdForm());
                 }

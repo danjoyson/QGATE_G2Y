@@ -80,9 +80,9 @@ namespace prodProject
         private void StartForms()
         {
             conn.Close();
-            Form1 f1 = new(this);
+            //Form1 f1 = new(this);
             this.Hide();
-            f1.StartForeignTimer();
+            //f1.StartForeignTimer();
 
         }
 
@@ -152,7 +152,7 @@ namespace prodProject
             catch (Exception e1)
             {
                 conn.Close();
-                MessageBox.Show("Error generando serial :", e1.Message);
+                MessageBox.Show("Error localizando container :", e1.Message);
 
                 return true;
             }
@@ -161,12 +161,6 @@ namespace prodProject
                 conn.Close();
             }
            
-        }
-
-        //Método para obtener el estandar de piezas por lote correspondiente al numero de pieza
-        private int GetEstandar(string claveComp)
-        {
-            return 0;
         }
     }
 }

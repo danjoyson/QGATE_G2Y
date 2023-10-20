@@ -85,11 +85,11 @@ namespace prodProject
             ReturnToPreviousForm();
         }
 
-        /*
-           * --------------------------------------------------------------------------------------------------------------------------------
-           * Método para manejar el cerrado de la aplicación incompleto
-           * --------------------------------------------------------------------------------------------------------------------------------
-       */
+        /// <summary>
+        /// Método para manejar el cerrado de la aplicación incompleto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">Contiene la información del evento de cerrado de Formulario</param>
         private void DeletePieza_FormClosing(object sender, FormClosingEventArgs e)
         {
             prevForm.Show();
@@ -105,12 +105,10 @@ namespace prodProject
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void claveTxtBox_TextChanged(object sender, EventArgs e)
-        {
-
+        { 
         }
     }
 }

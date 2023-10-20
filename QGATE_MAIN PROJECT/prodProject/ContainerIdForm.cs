@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,10 @@ namespace prodProject
         ProcessManipulation processes = new ProcessManipulation();
         public ContainerIdForm()
         {
+            //this.WindowState = FormWindowState.Maximized;
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             InitializeComponent();
+            //Process.Start("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
         }
 
         private void btnContainer_Click(object sender, EventArgs e)
@@ -45,7 +49,7 @@ namespace prodProject
 
             }
             else setMessageLabel("Se debe introducir la etiqueta de contenedor");
-           
+
 
 
         }
@@ -72,13 +76,17 @@ namespace prodProject
 
         private void ShowWaitScan(int nextWindow)
         {
-            //this.Close();
             containerTxtBox.Clear();
             this.Hide();
             WinScanForm wmenu = new WinScanForm(nextWindow);
             wmenu.Show();
             //this.Close();
             //f1.StartForeignTimer();
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
 
         }
     }

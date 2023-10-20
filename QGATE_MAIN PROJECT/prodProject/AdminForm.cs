@@ -20,12 +20,10 @@ namespace prodProject
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-
         }
 
         /*
@@ -127,7 +125,6 @@ namespace prodProject
 
         private void label6_Click(object sender, EventArgs e)
         {
-
         }
 
         /*
