@@ -39,9 +39,9 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Dock = DockStyle.Top;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(871, 78);
@@ -52,6 +52,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(33, 125);
@@ -62,6 +63,7 @@
             // 
             // containerTxtBox
             // 
+            containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             containerTxtBox.Location = new Point(169, 116);
@@ -74,6 +76,7 @@
             // 
             // btnContainer
             // 
+            btnContainer.Anchor = AnchorStyles.None;
             btnContainer.BackColor = Color.Lime;
             btnContainer.Cursor = Cursors.Hand;
             btnContainer.FlatAppearance.BorderColor = Color.Chartreuse;

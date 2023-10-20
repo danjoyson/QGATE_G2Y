@@ -22,6 +22,7 @@ namespace prodProject
             //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             InitializeComponent();
             //Process.Start("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
+            ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
         }
 
         private void btnContainer_Click(object sender, EventArgs e)
@@ -83,6 +84,14 @@ namespace prodProject
             //this.Close();
             //f1.StartForeignTimer();
 
+        }
+        public void ExecuteAsAdmin(string fileName)
+        {
+            Process proc = new Process();
+            proc.StartInfo.FileName = fileName;
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.Verb = "runas";
+            proc.Start();
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
