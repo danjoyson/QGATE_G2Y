@@ -117,7 +117,7 @@ namespace prodProject
                     switch (dpi)
                     {
                         case 203:
-                            zplData = "^XA^FO80,45^AQ,150,150^FDNOK^FS^XZ";
+                            zplData = "^XA^FO90,45^AQ,150,150^FDNOK^FS^XZ";
                             break;
 
                         case 300:

@@ -461,8 +461,8 @@ namespace prodProject
                 {
                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
-                        // ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        // z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
+                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                         z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
                         this.blockAppClosing = true;
                         BlockApp();
@@ -471,8 +471,8 @@ namespace prodProject
                     else
                     {
 
-                        // ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        // z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
+                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                         z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
                         emailW.SendNOKWarning();
                         ReturnToHome();

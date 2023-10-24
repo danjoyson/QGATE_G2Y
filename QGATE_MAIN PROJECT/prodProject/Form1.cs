@@ -56,6 +56,7 @@ namespace prodProject
         {
             this.winScanForm  = waitMenu;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
+            estandar = waitMenu.estandarContainer;
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
             connectionString = CsvReader.SetConnectionString();
@@ -79,6 +80,7 @@ namespace prodProject
         public Form1(ContainerIdForm firstMenu)
         {
             this.containerIdMenu = firstMenu;
+            estandar = firstMenu.Estandar;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
@@ -133,19 +135,13 @@ namespace prodProject
                     //getPiezaPartSteps();
                     if (CheckNotSerialZero())
                     {
-                        if (estandar == 0)
-                        {
-                            estandar = db.GetEstandarPieza(claveComp);
-                            if (estandar == -1) MessageBox.Show("No se pudo obtener el estandar de la pieza");
-                            else StartForms();
-                        }
-                        else
-                        {
-                            int estandarPieza = 0;
-                            estandarPieza = db.GetEstandarPieza(claveComp);
-                            if (estandarPieza != estandar) setMessagleLabel("Esta pieza no corresponde al estandar actual");
-                            else StartForms();
-                        }
+
+                        //int estandarPieza = 0;
+                        //estandarPieza = db.GetEstandarPieza(claveComp);
+                        //if (estandarPieza != estandar) setMessagleLabel("Esta pieza no corresponde al estandar actual");
+                        //else 
+                       StartForms();
+                        
                         
 
                     }

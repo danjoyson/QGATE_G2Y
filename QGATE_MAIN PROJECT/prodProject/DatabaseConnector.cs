@@ -21,6 +21,7 @@ namespace prodProject
         {
             connectionString = CsvReader.SetConnectionString();
             conn = new SqlConnection(connectionString);
+            
         }
         public bool GetConnection()
         {

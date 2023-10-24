@@ -17,6 +17,7 @@ namespace prodProject
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
         int windowCase=-1;
+        public int estandarContainer = -1;
         public WinScanForm(Form1 f1,int nextWindow)
         {
             this.f1 = f1;

@@ -34,14 +34,16 @@
             containerTxtBox = new TextBox();
             btnContainer = new Button();
             containerIdMessage = new Label();
+            label2 = new Label();
+            comboBoxEstandar = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox3.Dock = DockStyle.Top;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(871, 78);
@@ -55,7 +57,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(33, 125);
+            label1.Location = new Point(33, 188);
             label1.Name = "label1";
             label1.Size = new Size(130, 30);
             label1.TabIndex = 23;
@@ -66,7 +68,7 @@
             containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            containerTxtBox.Location = new Point(169, 116);
+            containerTxtBox.Location = new Point(169, 179);
             containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
             containerTxtBox.Size = new Size(670, 43);
@@ -83,7 +85,7 @@
             btnContainer.FlatAppearance.BorderSize = 10;
             btnContainer.FlatStyle = FlatStyle.Popup;
             btnContainer.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnContainer.Location = new Point(328, 207);
+            btnContainer.Location = new Point(341, 329);
             btnContainer.Name = "btnContainer";
             btnContainer.Size = new Size(228, 157);
             btnContainer.TabIndex = 25;
@@ -100,11 +102,38 @@
             containerIdMessage.Size = new Size(0, 32);
             containerIdMessage.TabIndex = 26;
             // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.None;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(184, 247);
+            label2.Name = "label2";
+            label2.Size = new Size(93, 30);
+            label2.TabIndex = 27;
+            label2.Text = "Estandar";
+            // 
+            // comboBoxEstandar
+            // 
+            comboBoxEstandar.Anchor = AnchorStyles.None;
+            comboBoxEstandar.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxEstandar.DropDownWidth = 140;
+            comboBoxEstandar.Font = new Font("Arial Narrow", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstandar.FormattingEnabled = true;
+            comboBoxEstandar.ItemHeight = 33;
+            comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
+            comboBoxEstandar.Location = new Point(283, 247);
+            comboBoxEstandar.Name = "comboBoxEstandar";
+            comboBoxEstandar.Size = new Size(513, 41);
+            comboBoxEstandar.TabIndex = 28;
+            // 
             // ContainerIdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(871, 372);
+            ClientSize = new Size(871, 498);
+            Controls.Add(comboBoxEstandar);
+            Controls.Add(label2);
             Controls.Add(containerIdMessage);
             Controls.Add(btnContainer);
             Controls.Add(containerTxtBox);
@@ -115,6 +144,7 @@
             Name = "ContainerIdForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "ContainerIdForm";
+            WindowState = FormWindowState.Maximized;
             Load += ContainerIdForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
@@ -128,5 +158,7 @@
         private TextBox containerTxtBox;
         private Button btnContainer;
         private Label containerIdMessage;
+        private Label label2;
+        private ComboBox comboBoxEstandar;
     }
 }
