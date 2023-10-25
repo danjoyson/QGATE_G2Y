@@ -39,6 +39,7 @@
             // 
             // BtnPrintTest
             // 
+            BtnPrintTest.Anchor = AnchorStyles.None;
             BtnPrintTest.BackColor = SystemColors.ActiveCaption;
             BtnPrintTest.FlatStyle = FlatStyle.Popup;
             BtnPrintTest.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -52,6 +53,7 @@
             // 
             // BtnPrintLastLabel
             // 
+            BtnPrintLastLabel.Anchor = AnchorStyles.None;
             BtnPrintLastLabel.BackColor = Color.Khaki;
             BtnPrintLastLabel.FlatStyle = FlatStyle.Popup;
             BtnPrintLastLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -65,6 +67,7 @@
             // 
             // BtnReturn
             // 
+            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
@@ -78,6 +81,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(166, 430);
@@ -89,6 +93,7 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox3.Location = new Point(595, 12);

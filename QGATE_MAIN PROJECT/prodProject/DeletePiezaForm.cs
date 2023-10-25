@@ -13,6 +13,8 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(DeletePieza_FormClosing);
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /*
@@ -100,7 +102,7 @@ namespace prodProject
         }
 
         private void label2_Click(object sender, EventArgs e)
-        { 
+        {
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -108,7 +110,7 @@ namespace prodProject
         }
 
         private void claveTxtBox_TextChanged(object sender, EventArgs e)
-        { 
+        {
         }
     }
 }

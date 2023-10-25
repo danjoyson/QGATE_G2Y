@@ -20,9 +20,12 @@ namespace prodProject
         public int Estandar = 0;
         public ContainerIdForm()
         {
+
             ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
             InitializeComponent();
             containerIdMessage.Anchor = AnchorStyles.None;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
 
         }
@@ -123,7 +126,7 @@ namespace prodProject
             //proc.StartInfo.RedirectStandardOutput = true;
             //proc.StartInfo.Verb = "runas";
             //proc.Start();
-            //Thread.Sleep(18000);
+            Thread.Sleep(1000);
         }
 
         private SecureString SetPass()
@@ -147,6 +150,11 @@ namespace prodProject
             return pass;
         }
         private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxEstandar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -41,10 +41,10 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(274, 73);
+            label1.Location = new Point(456, 152);
             label1.Name = "label1";
             label1.Size = new Size(102, 32);
             label1.TabIndex = 0;
@@ -52,10 +52,10 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(244, 236);
+            label2.Location = new Point(440, 320);
             label2.Name = "label2";
             label2.Size = new Size(143, 32);
             label2.TabIndex = 1;
@@ -63,34 +63,35 @@
             // 
             // userTxtBox
             // 
-            userTxtBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            userTxtBox.Anchor = AnchorStyles.None;
             userTxtBox.CharacterCasing = CharacterCasing.Upper;
             userTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            userTxtBox.Location = new Point(152, 108);
+            userTxtBox.Location = new Point(254, 187);
             userTxtBox.Name = "userTxtBox";
-            userTxtBox.Size = new Size(327, 43);
+            userTxtBox.Size = new Size(512, 43);
             userTxtBox.TabIndex = 2;
             userTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
             // passwordTxtBox
             // 
-            passwordTxtBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            passwordTxtBox.Anchor = AnchorStyles.None;
             passwordTxtBox.CharacterCasing = CharacterCasing.Upper;
             passwordTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            passwordTxtBox.Location = new Point(152, 283);
+            passwordTxtBox.Location = new Point(254, 366);
             passwordTxtBox.Name = "passwordTxtBox";
             passwordTxtBox.PasswordChar = '*';
-            passwordTxtBox.Size = new Size(327, 43);
+            passwordTxtBox.Size = new Size(512, 43);
             passwordTxtBox.TabIndex = 3;
             passwordTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
             // BtnLogin
             // 
-            BtnLogin.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnLogin.Anchor = AnchorStyles.None;
+            BtnLogin.AutoSize = true;
             BtnLogin.BackColor = Color.Khaki;
             BtnLogin.FlatStyle = FlatStyle.Popup;
             BtnLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnLogin.Location = new Point(230, 406);
+            BtnLogin.Location = new Point(409, 575);
             BtnLogin.Name = "BtnLogin";
             BtnLogin.Size = new Size(174, 103);
             BtnLogin.TabIndex = 4;
@@ -100,25 +101,26 @@
             // 
             // BtnReturn
             // 
-            BtnReturn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
             BtnReturn.FlatStyle = FlatStyle.Popup;
             BtnReturn.Location = new Point(12, 12);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(94, 93);
+            BtnReturn.Size = new Size(133, 113);
             BtnReturn.TabIndex = 5;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(409, 12);
+            pictureBox3.Location = new Point(704, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(172, 66);
+            pictureBox3.Size = new Size(235, 93);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -127,7 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(593, 521);
+            ClientSize = new Size(951, 690);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(BtnReturn);

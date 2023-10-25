@@ -76,7 +76,6 @@ namespace prodProject
             targetProcessPID = GetProcessID(procName);
             if (targetProcessPID != -1)
             {
-
                 BringWindowToFrontByPID(targetProcessPID);
                 return true;
             }

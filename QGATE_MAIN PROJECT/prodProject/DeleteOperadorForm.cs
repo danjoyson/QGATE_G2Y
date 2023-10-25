@@ -18,6 +18,8 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(DeleteOperador_FormClosing);
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /*
@@ -32,7 +34,7 @@ namespace prodProject
             {
                 DialogResult dialog = MessageBox.Show("¿Está seguro que desea eliminar PERMANENTEMENTE el registro de la Base de Datos?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialog == DialogResult.Yes)
-                { 
+                {
                     db.EliminaOperador(numOpTxtBox.Text);
                 }
             }

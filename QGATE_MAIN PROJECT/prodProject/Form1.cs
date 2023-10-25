@@ -7,7 +7,7 @@ namespace prodProject
 {
     public partial class Form1 : Form
     {
-        menuMobisys menuMobi;
+
         ContainerIdForm containerIdMenu;
         WinScanForm winScanForm;
         DatabaseConnector db = new DatabaseConnector();
@@ -44,17 +44,19 @@ namespace prodProject
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario, este método es llamado al ejecutar el programa.
          * 1. Llama a la clase CsvReader para armar el connection string con los datos del archivo DatabaseSettings.
          * 2. Llama a la clase CsvReader para obtener la IP de la impresora Zebra del archivo. Si no obtiene algún valor, cierra la aplicación.
-         * 3. Inicializa los componentes del formulario 1.
          * 4. Configura inicialmente al timer de inactividad para mantener el número de operador.
          * 5. Asigna el dpi de la impresora zebra.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
+        /// <summary>
+        /// Se establece la conexion a la BD y se obtienen los datos de la impresora
+        /// </summary>
+        /// <param name="waitMenu">Instancia de formulario anterior de la cual resive el estandar de contened0r</param>
         public Form1(WinScanForm waitMenu)
         {
-            this.winScanForm  = waitMenu;
+            this.winScanForm = waitMenu;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             estandar = waitMenu.estandarContainer;
             CsvReader cr = new();
@@ -64,6 +66,8 @@ namespace prodProject
             {
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
                 dpi = 203;
@@ -90,6 +94,8 @@ namespace prodProject
             {
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
                 dpi = 203;
@@ -106,7 +112,7 @@ namespace prodProject
         }
 
         private void label1_Click(object sender, EventArgs e)
-        { 
+        {
         }
 
         /* 
@@ -140,9 +146,9 @@ namespace prodProject
                         //estandarPieza = db.GetEstandarPieza(claveComp);
                         //if (estandarPieza != estandar) setMessagleLabel("Esta pieza no corresponde al estandar actual");
                         //else 
-                       StartForms();
-                        
-                        
+                        StartForms();
+
+
 
                     }
                 }
@@ -209,7 +215,7 @@ namespace prodProject
 
                     if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena"))
                     {
-                        
+
                         piezaTxtBox.Clear();
                         t.Start();
                         setMessagleLabel("Número de pieza no encontrado en la Base de Datos");

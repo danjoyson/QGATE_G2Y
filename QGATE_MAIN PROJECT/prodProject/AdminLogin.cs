@@ -10,6 +10,8 @@ namespace prodProject
         {
             this.FormClosing += new FormClosingEventHandler(AdminLogin_FormClosing);
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /*

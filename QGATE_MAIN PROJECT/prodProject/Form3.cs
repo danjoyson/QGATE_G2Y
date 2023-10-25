@@ -57,9 +57,9 @@ namespace prodProject
                 AFKTimer.AutoReset = false;
                 AFKTimer.Elapsed += new ElapsedEventHandler(AFKReturn);
 
-
-
                 InitializeComponent();
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
                 txtEtiqueta.TextChanged += txtEtiqueta_TextChanged;
                 this.BtnOK.Enabled = false;
                 this.Show();
@@ -461,8 +461,8 @@ namespace prodProject
                 {
                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
-                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                         z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
+                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
                         this.blockAppClosing = true;
                         BlockApp();
@@ -471,8 +471,8 @@ namespace prodProject
                     else
                     {
 
-                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                         z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
+                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
 
                         emailW.SendNOKWarning();
                         ReturnToHome();
@@ -791,7 +791,7 @@ namespace prodProject
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
             this.Close();
-            WinScanForm wmenu = new WinScanForm(f1,nextWindow);
+            WinScanForm wmenu = new WinScanForm(f1, nextWindow);
             wmenu.Show();
             //f1.StartForeignTimer();
 

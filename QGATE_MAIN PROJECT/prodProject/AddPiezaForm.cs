@@ -20,6 +20,8 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(AddPieza_FormClosing);
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void label2_Click(object sender, EventArgs e)

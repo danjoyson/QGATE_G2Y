@@ -43,6 +43,7 @@
             // 
             // opeTxtBox
             // 
+            opeTxtBox.Anchor = AnchorStyles.None;
             opeTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             opeTxtBox.Location = new Point(301, 91);
             opeTxtBox.Name = "opeTxtBox";
@@ -53,6 +54,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(431, 41);
@@ -64,6 +66,7 @@
             // 
             // btn1
             // 
+            btn1.Anchor = AnchorStyles.None;
             btn1.BackColor = Color.Lime;
             btn1.Cursor = Cursors.Hand;
             btn1.FlatAppearance.BorderColor = Color.Chartreuse;
@@ -80,6 +83,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(448, 219);
@@ -91,6 +95,7 @@
             // 
             // piezaTxtBox
             // 
+            piezaTxtBox.Anchor = AnchorStyles.None;
             piezaTxtBox.CharacterCasing = CharacterCasing.Upper;
             piezaTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             piezaTxtBox.Location = new Point(206, 265);
@@ -103,6 +108,7 @@
             // 
             // BtnOpChange
             // 
+            BtnOpChange.Anchor = AnchorStyles.None;
             BtnOpChange.BackColor = Color.Yellow;
             BtnOpChange.Cursor = Cursors.Hand;
             BtnOpChange.FlatStyle = FlatStyle.Popup;
@@ -117,6 +123,7 @@
             // 
             // BtnSettings
             // 
+            BtnSettings.Anchor = AnchorStyles.None;
             BtnSettings.BackColor = SystemColors.ControlLight;
             BtnSettings.BackgroundImage = Properties.Resources.settings;
             BtnSettings.BackgroundImageLayout = ImageLayout.Zoom;
@@ -143,6 +150,7 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox3.Location = new Point(814, 12);

@@ -167,7 +167,7 @@
             // 
             // label7
             // 
-            label7.Anchor = AnchorStyles.None;
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.Location = new Point(866, 151);

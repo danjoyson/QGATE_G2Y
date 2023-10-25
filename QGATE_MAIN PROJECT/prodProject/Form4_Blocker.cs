@@ -27,6 +27,8 @@ namespace prodProject
          */
         public Form4_Blocker(string unblockCode, Form1 f1)
         {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
             this.unblockCode = unblockCode;
             emailW = new();

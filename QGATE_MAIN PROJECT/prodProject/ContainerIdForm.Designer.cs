@@ -46,7 +46,7 @@
             pictureBox3.Dock = DockStyle.Top;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(871, 78);
+            pictureBox3.Size = new Size(1302, 78);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 22;
             pictureBox3.TabStop = false;
@@ -56,10 +56,10 @@
             // 
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(33, 188);
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(124, 126);
             label1.Name = "label1";
-            label1.Size = new Size(130, 30);
+            label1.Size = new Size(198, 45);
             label1.TabIndex = 23;
             label1.Text = "Container ID";
             // 
@@ -68,10 +68,10 @@
             containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            containerTxtBox.Location = new Point(169, 179);
+            containerTxtBox.Location = new Point(413, 126);
             containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
-            containerTxtBox.Size = new Size(670, 43);
+            containerTxtBox.Size = new Size(667, 43);
             containerTxtBox.TabIndex = 24;
             containerTxtBox.TextAlign = HorizontalAlignment.Center;
             containerTxtBox.TextChanged += containerTxtBox_TextChanged;
@@ -85,7 +85,7 @@
             btnContainer.FlatAppearance.BorderSize = 10;
             btnContainer.FlatStyle = FlatStyle.Popup;
             btnContainer.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnContainer.Location = new Point(341, 329);
+            btnContainer.Location = new Point(562, 406);
             btnContainer.Name = "btnContainer";
             btnContainer.Size = new Size(228, 157);
             btnContainer.TabIndex = 25;
@@ -106,10 +106,10 @@
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(184, 247);
+            label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(154, 269);
             label2.Name = "label2";
-            label2.Size = new Size(93, 30);
+            label2.Size = new Size(141, 45);
             label2.TabIndex = 27;
             label2.Text = "Estandar";
             // 
@@ -122,16 +122,17 @@
             comboBoxEstandar.FormattingEnabled = true;
             comboBoxEstandar.ItemHeight = 33;
             comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
-            comboBoxEstandar.Location = new Point(283, 247);
+            comboBoxEstandar.Location = new Point(492, 275);
             comboBoxEstandar.Name = "comboBoxEstandar";
             comboBoxEstandar.Size = new Size(513, 41);
             comboBoxEstandar.TabIndex = 28;
+            comboBoxEstandar.SelectedIndexChanged += comboBoxEstandar_SelectedIndexChanged;
             // 
             // ContainerIdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(871, 498);
+            ClientSize = new Size(1302, 668);
             Controls.Add(comboBoxEstandar);
             Controls.Add(label2);
             Controls.Add(containerIdMessage);

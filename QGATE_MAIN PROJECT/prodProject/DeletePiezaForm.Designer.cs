@@ -51,6 +51,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.None;
             groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 84);
@@ -87,6 +88,7 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.Location = new Point(1045, 95);
@@ -98,6 +100,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(673, 47);
@@ -109,6 +112,7 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(594, 84);
@@ -120,6 +124,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.BackgroundImage = Properties.Resources.DeletePieza;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Location = new Point(528, 116);
@@ -130,7 +135,7 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.BackColor = Color.LightSteelBlue;
             label3.BorderStyle = BorderStyle.FixedSingle;
@@ -144,17 +149,19 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox2.Location = new Point(1065, 12);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(71, 52);
+            pictureBox2.Size = new Size(85, 63);
             pictureBox2.TabIndex = 15;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
             // claveTxtBox
             // 
+            claveTxtBox.Anchor = AnchorStyles.None;
             claveTxtBox.CharacterCasing = CharacterCasing.Upper;
             claveTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             claveTxtBox.Location = new Point(437, 349);
@@ -165,6 +172,7 @@
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label4.Location = new Point(171, 336);
@@ -176,6 +184,7 @@
             // 
             // BtnDeletePieza
             // 
+            BtnDeletePieza.Anchor = AnchorStyles.None;
             BtnDeletePieza.BackColor = Color.Red;
             BtnDeletePieza.FlatStyle = FlatStyle.Popup;
             BtnDeletePieza.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -189,6 +198,7 @@
             // 
             // BtnReturn
             // 
+            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.FlatStyle = FlatStyle.Popup;
@@ -201,11 +211,12 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1155, 12);
+            pictureBox3.Location = new Point(1156, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(136, 52);
+            pictureBox3.Size = new Size(139, 63);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;

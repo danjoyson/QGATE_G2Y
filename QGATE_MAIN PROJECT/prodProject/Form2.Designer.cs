@@ -34,13 +34,15 @@
             // 
             // BtnNext
             // 
+            BtnNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            BtnNext.AutoSize = true;
             BtnNext.BackColor = Color.Transparent;
             BtnNext.Cursor = Cursors.Hand;
             BtnNext.FlatStyle = FlatStyle.Popup;
             BtnNext.ForeColor = SystemColors.ActiveCaptionText;
-            BtnNext.Location = new Point(92, 590);
+            BtnNext.Location = new Point(157, 507);
             BtnNext.Name = "BtnNext";
-            BtnNext.Size = new Size(565, 119);
+            BtnNext.Size = new Size(707, 176);
             BtnNext.TabIndex = 0;
             BtnNext.UseVisualStyleBackColor = false;
             BtnNext.Click += BtnNext_Click;
@@ -60,6 +62,7 @@
             Text = "Inicio";
             Load += Form2_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

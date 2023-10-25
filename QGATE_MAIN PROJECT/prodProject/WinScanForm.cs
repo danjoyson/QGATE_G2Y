@@ -16,9 +16,9 @@ namespace prodProject
         ProcessManipulation mobiProcess = new ProcessManipulation();
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
-        int windowCase=-1;
+        int windowCase = -1;
         public int estandarContainer = -1;
-        public WinScanForm(Form1 f1,int nextWindow)
+        public WinScanForm(Form1 f1, int nextWindow)
         {
             this.f1 = f1;
             windowCase = nextWindow;
@@ -46,7 +46,7 @@ namespace prodProject
         {
             //Vuelve a la pantalla de escaneo de pieza, significa que el usuario ya ingreso la pieza en mobisys correctamente
             scanMobisysTimer.Stop();
-            switch (windowCase) 
+            switch (windowCase)
             {
                 case 0:
                     f1.completedContainer = false;
@@ -56,10 +56,10 @@ namespace prodProject
                     ReturnToHome();
                     break;
                 case 2:
-                    StartFormRevision(); 
+                    StartFormRevision();
                     break;
 
-            } 
+            }
 
         }
 

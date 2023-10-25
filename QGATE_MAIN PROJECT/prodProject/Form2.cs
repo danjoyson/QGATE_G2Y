@@ -25,7 +25,10 @@ namespace prodProject
 
                 closedIncorrectlyFlag = true; //Temporalmente true. Cambia a false en el método para cambiar al siguiente formulario
                 this.f1 = f1;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
                 InitializeComponent();
+
                 this.Show();
             }
         }

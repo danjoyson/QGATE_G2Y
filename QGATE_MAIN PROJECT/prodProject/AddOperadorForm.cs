@@ -18,6 +18,8 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(AddOperador_FormClosing);
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

@@ -119,6 +119,7 @@
             // 
             // GB2
             // 
+            GB2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             GB2.Controls.Add(label4);
             GB2.Controls.Add(label3);
             GB2.Controls.Add(BtnDeletePieza);
@@ -244,6 +245,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(BtnPrinterOpt);
             groupBox2.Location = new Point(743, 445);
@@ -269,9 +271,9 @@
             // 
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1118, 12);
+            pictureBox3.Location = new Point(1118, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(185, 43);
+            pictureBox3.Size = new Size(185, 53);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;

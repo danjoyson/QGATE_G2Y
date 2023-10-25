@@ -228,6 +228,5 @@ C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debu
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.csproj.CopyComplete
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.genruntimeconfig.cache
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\ref\prodProject.dll
-C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.menuMobisys.resources
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.WinScanForm.resources
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.ContainerIdForm.resources
