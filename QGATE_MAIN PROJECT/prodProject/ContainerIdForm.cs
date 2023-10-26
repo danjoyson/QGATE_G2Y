@@ -47,6 +47,7 @@ namespace prodProject
                 else
                 {
                     Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+                    comboBoxEstandar.SelectedIndex = -1;
                     flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
                     if (flagSuperposicion)
                         ShowWaitScan(2);
@@ -83,7 +84,7 @@ namespace prodProject
                     break;
                 //Índice 1 corresponde a China
                 case 1:
-                    piezasContainer = 23;
+                    piezasContainer = 35;
                     break;
             }
             return piezasContainer;
@@ -118,14 +119,22 @@ namespace prodProject
             SecureString pass = SetPass();
             Process proc = new Process();
             proc.StartInfo.FileName = fileName;
-            proc.StartInfo.Domain = "";
             proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.Arguments = "";
+            //proc.StartInfo.Verb = "runas";
             //proc.StartInfo.UserName = "qmx-administrator";
             //proc.StartInfo.Password = pass;
             //proc.StartInfo.RedirectStandardError = true;
-            //proc.StartInfo.RedirectStandardOutput = true;
-            //proc.StartInfo.Verb = "runas";
-            //proc.Start();
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.StartInfo.Verb = "runas";
+            proc.Start();
+            /*try
+            {
+                Process.Start(fileName, "qmx-administrator", pass, "");
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }*/
             Thread.Sleep(1000);
         }
 
@@ -146,6 +155,7 @@ namespace prodProject
             pass.AppendChar('M');
             pass.AppendChar('#');
             pass.AppendChar('X');
+            
             String plainStr = new System.Net.NetworkCredential(string.Empty, pass).Password;
             return pass;
         }

@@ -92,6 +92,7 @@ namespace prodProject
             estandar = 0;
             if (connectionString != string.Empty && printerIP != string.Empty)
             {
+                connectionString = connectionString + "; Connection Timeout = 30";
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
                 this.FormBorderStyle = FormBorderStyle.None;

@@ -23,6 +23,8 @@ namespace prodProject
             this.f1 = f1;
             windowCase = nextWindow;
             scanMobisysTimer.Interval = 60000;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
         }
 
@@ -30,12 +32,14 @@ namespace prodProject
         {
             windowCase = nextWindow;
             scanMobisysTimer.Interval = 60000;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
         }
 
+        //Boton para volver a superponer la pantalla para el reescaneo de la pieza si aun no se escanea
         private void button2_Click(object sender, EventArgs e)
         {
-            //Boton para volver a superponer la pantalla para el reescaneo de la pieza si aun no se escanea
             //superpose window
             mobiProcess.AddToMobisys(mobisysProcessName);
             scanMobisysTimer.Enabled = true;

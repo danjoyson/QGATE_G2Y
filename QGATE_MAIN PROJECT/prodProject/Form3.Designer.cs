@@ -115,7 +115,9 @@
             Controls.Add(pictureBox1);
             Controls.Add(BtnNOK);
             Controls.Add(BtnOK);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            //FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form3";
             StartPosition = FormStartPosition.CenterScreen;

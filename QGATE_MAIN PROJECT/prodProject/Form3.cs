@@ -58,8 +58,6 @@ namespace prodProject
                 AFKTimer.Elapsed += new ElapsedEventHandler(AFKReturn);
 
                 InitializeComponent();
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
                 txtEtiqueta.TextChanged += txtEtiqueta_TextChanged;
                 this.BtnOK.Enabled = false;
                 this.Show();
@@ -100,15 +98,11 @@ namespace prodProject
          * 
          * 1. Si el contador de slide es diferente a 11: Aumenta el contador en 1, vuelve invisible el formulario actual, cambia la imagen a 
          *    la slide siguiente de la pieza que se está evaluando, espera a que el timer cambie el valor de la bandera de espera,
-         *    lo hace visible de nuevo y resetea el valor de la bandera a false para el funcionamiento de los siguientes formularios.
-         *    
+         *    lo hace visible de nuevo y resetea el valor de la bandera a false para el funcionamiento de los siguientes formularios.  
          *    También se maneja el timer de bloqueo de botones OK.
-         * 
          * 2. Si el contador es igual a 11, esconde el formulario actual.
          * 3. Llama a la función de inserción de registro en la base de datos.
          * 4. En caso de no haber errores, lo notifica y llama al formulario de impresión 
-         * 
-         * 
          * El timer en realidad es meramente estético, si se omite no afecta al funcionamiento de la aplicación. No obstante, si no se 
          * estuviese o si es muy corto, el cambio de slides parece un efecto visual de glitcheo.
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -130,83 +124,6 @@ namespace prodProject
              * en vez de cambiar a if's anidados. Para no alentar el tiempo de ejecución.
              */
             //int remainFormsTillRESCAN;
-
-            /* switch (Form1.formSlideCont)
-             {
-                 case 9: //Cambia de formulario y habilita la caja de etiqueta para el punto 10
-                     AFKTimer.Stop();
-                     Form1.formSlideCont++;
-                     //this.Hide();
-                     if (SetImage())
-                     {
-                         SetButtonsTimerDuration();
-                         buttonsTimer.Start();
-                         this.BtnOK.Enabled = false;
-
-                         this.messageLabel.Visible = true;
-                         this.txtEtiqueta.Visible = true;
-                         this.pictureBox1.Visible = true;
-
-                         this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                         NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
-                     }
-
-
-                     break;
-
-                 case 10:
-                     if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
-                     {
-                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
-                         NOKTimer.Stop();
-                         Form1.formSlideCont++;
-                         this.txtEtiqueta.Visible = false;
-                         this.pictureBox1.Visible = false;
-                         this.messageLabel.Visible = false;
-                         txtEtiqueta.Text = string.Empty;
-
-                         if (SetImage())
-                         {
-                             SetButtonsTimerDuration();
-                             buttonsTimer.Start();
-                             this.BtnOK.Enabled = false;
-                             AFKTimer.Start();
-                         }
-                     }
-                     else
-                     {
-                         this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                         messageLabel.Text = "La etiqueta no coincide.";
-                         messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
-                         txtEtiqueta.Text = string.Empty;
-                     }
-                     break;
-
-
-                 case 11:
-
-                     Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
-                     AFKTimer.Stop();
-                     if (InsertDbRecord())
-                     {
-                         callPrinter(); //Print box label
-                     }
-                     ReturnToHome();
-                     break;
-
-                 default:
-                     AFKTimer.Stop();
-                     Form1.formSlideCont++;
-                     if (SetImage())
-                     {
-                         SetButtonsTimerDuration();
-                         buttonsTimer.Start();
-                         this.BtnOK.Enabled = false;
-
-                         AFKTimer.Start();
-                     }
-                     break;
-             }*/
 
             if (Form1.formSlideCont == Form1.pasoRescaneo - 1)
             {
@@ -252,15 +169,19 @@ namespace prodProject
                         else nextWindowForm = 1;
                         if (Form1.conatadorPiezas == Form1.estandar)
                         {
+                            
                             generaRegistro(textEtiqueta);
                             f1.completedContainer = true;
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
+                            this.Hide();
                             ShowWaitScan(0);
                         }
                         else
                         {
+                            
                             generaRegistro(textEtiqueta);
+                            this.Hide();
                             ShowWaitScan(nextWindowForm);
 
                         }
@@ -321,7 +242,8 @@ namespace prodProject
             {
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
-                mobisys.AddToMobisys(text);
+                //mobisys.AddToMobisys(text);
+                mobisys.HideShowProcess(text);
             }
             //ReturnToHome();
         }
@@ -404,10 +326,6 @@ namespace prodProject
                     break;
             }
         }
-
-
-
-
         /* 
          * --------------------------------------------------------------------------------------------------------------------------------
          * Esta función es llamada cada que el Timer de formulario realiza un ciclo de inicio-fin mediante el evento ElapsedEvent.
@@ -508,8 +426,8 @@ namespace prodProject
                         if (this.serial >= 3)
                         {
 
-                            //ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                            //z.printOkNokLabelZPL(Form1.dpi);
+                            ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                            z.printOkNokLabelZPL(Form1.dpi);
 
                             BlockApp();
                             this.Close();

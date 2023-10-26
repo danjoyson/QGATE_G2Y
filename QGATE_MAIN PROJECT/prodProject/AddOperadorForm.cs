@@ -8,10 +8,8 @@ namespace prodProject
         AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
         /*
-         * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario de Alta de operador
          * Recibe el formulario previo (AdminForm) y asigna una función de manejo de cierre del formulario.
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         public AddOperadorForm(AdminForm af)
         {

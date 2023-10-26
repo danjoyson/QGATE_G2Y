@@ -20,6 +20,7 @@ namespace prodProject
         public DatabaseConnector()
         {
             connectionString = CsvReader.SetConnectionString();
+            connectionString = connectionString + "; Connection Timeout = 30";
             conn = new SqlConnection(connectionString);
             
         }
@@ -27,7 +28,7 @@ namespace prodProject
         {
             try
             {
-                conn = new SqlConnection(connectionString);
+                conn = new SqlConnection(connectionString + "; Connection Timeout = 30");
                 return true;
             }catch (Exception ex)
             {

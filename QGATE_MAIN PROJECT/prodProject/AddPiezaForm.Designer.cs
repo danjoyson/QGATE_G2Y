@@ -58,6 +58,7 @@
             // 
             // BtnReturn
             // 
+            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.FlatStyle = FlatStyle.Popup;
@@ -70,6 +71,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(690, 30);
@@ -81,6 +83,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.BackgroundImage = Properties.Resources.addPieza;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(521, 119);
@@ -91,7 +94,7 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
             label3.BackColor = Color.LightSteelBlue;
             label3.BorderStyle = BorderStyle.FixedSingle;
@@ -118,13 +121,14 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.None;
             groupBox1.BackColor = SystemColors.Control;
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label4);
             groupBox1.Font = new Font("Segoe UI", 12.75F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 44);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(499, 179);
+            groupBox1.Size = new Size(503, 179);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Explicación";
@@ -145,6 +149,7 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(617, 91);
@@ -156,6 +161,7 @@
             // 
             // label6
             // 
+            label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label6.Location = new Point(1048, 91);
@@ -167,7 +173,7 @@
             // 
             // label7
             // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.Location = new Point(866, 151);
@@ -188,6 +194,7 @@
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.None;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label8.Location = new Point(186, 284);
@@ -198,6 +205,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.None;
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(248, 363);
@@ -209,6 +217,7 @@
             // 
             // ClaveTxtBox
             // 
+            ClaveTxtBox.Anchor = AnchorStyles.None;
             ClaveTxtBox.CharacterCasing = CharacterCasing.Upper;
             ClaveTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             ClaveTxtBox.Location = new Point(430, 284);
@@ -219,6 +228,7 @@
             // 
             // DescrTxtBox
             // 
+            DescrTxtBox.Anchor = AnchorStyles.None;
             DescrTxtBox.CharacterCasing = CharacterCasing.Upper;
             DescrTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             DescrTxtBox.Location = new Point(430, 363);
@@ -228,6 +238,7 @@
             // 
             // BtnAddPi
             // 
+            BtnAddPi.Anchor = AnchorStyles.None;
             BtnAddPi.BackColor = Color.Orange;
             BtnAddPi.Cursor = Cursors.Hand;
             BtnAddPi.FlatStyle = FlatStyle.Popup;
@@ -242,6 +253,7 @@
             // 
             // label10
             // 
+            label10.Anchor = AnchorStyles.None;
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label10.Location = new Point(186, 443);
@@ -252,6 +264,7 @@
             // 
             // txtPasos
             // 
+            txtPasos.Anchor = AnchorStyles.None;
             txtPasos.CharacterCasing = CharacterCasing.Upper;
             txtPasos.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             txtPasos.Location = new Point(430, 440);
@@ -261,6 +274,7 @@
             // 
             // label11
             // 
+            label11.Anchor = AnchorStyles.None;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label11.Location = new Point(63, 529);
@@ -271,6 +285,7 @@
             // 
             // txtReescaneo
             // 
+            txtReescaneo.Anchor = AnchorStyles.None;
             txtReescaneo.CharacterCasing = CharacterCasing.Upper;
             txtReescaneo.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             txtReescaneo.Location = new Point(430, 522);

@@ -23,6 +23,17 @@ namespace prodProject
         public string porcName = "";
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Timers.Timer scanMobisysTimer = new(60000);
+        private const int SW_HIDE = 0;
+        private const int SW_SHOW = 5;
+        [DllImport("User32")]
+        private static extern int ShowWindow(int hwnd, int nCmdShow);
+        [DllImport("user32.dll")]
+        public static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, IntPtr dwExtraInfo);
+
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int RIGHTDOWN = 0x00000008;
+        private const int RIGHTUP = 0x00000010;
         public static int GetProcessID(string procName)
         {
             int processID = -1; // Valor predeterminado en caso de que no se encuentre el proceso
@@ -157,6 +168,30 @@ namespace prodProject
                 MessageBox.Show(ex.Message, "Error al mostrar mobisys");
                 return false;
             }
+        }
+
+        public void HideShowProcess(string text)
+        {           
+            CopyToClipboard(text);
+            //superposeProgram(mobisysProcessName);
+            System.Threading.Thread.Sleep(1000);
+            Process p = Process.GetCurrentProcess();
+            int hWnd;
+            hWnd = p.MainWindowHandle.ToInt32();
+            ShowWindow(hWnd, SW_HIDE);
+            System.Threading.Thread.Sleep(2000);
+            Cursor.Position = new System.Drawing.Point(850, 400);
+            mouse_event(MOUSEEVENTF_LEFTDOWN, 850, 400, 0, IntPtr.Zero);
+            Thread.Sleep(1000);
+            mouse_event(MOUSEEVENTF_LEFTUP, 850, 400, 0, IntPtr.Zero);
+            Thread.Sleep(1000);
+            PasteFromClipboard();
+            System.Threading.Thread.Sleep(3000);
+            ShowWindow(hWnd, SW_SHOW);
+
+            /*Rectangle activeScreenDimensions = Screen.FromControl(this).Bounds;
+            Size Size = new Size(activeScreenDimensions.Width + activeScreenDimensions.X, activeScreenDimensions.Height + activeScreenDimensions.Y);
+            MessageBox.Show("Width :" + Size.Width.ToString() + "Height :" + Size.Height.ToString());*/
         }
 
         //Método para el proceso de superposición, copiar texto al clipboard del sistema 

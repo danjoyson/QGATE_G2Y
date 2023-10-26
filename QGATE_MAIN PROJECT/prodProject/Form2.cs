@@ -20,13 +20,13 @@ namespace prodProject
         {
             Form1.formSlideCont = 0; //Se resetea el contador de los formularios
             this.FormClosing += new FormClosingEventHandler(Form2_FormClosing);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             if (SetImage())
             {
-
+                
                 closedIncorrectlyFlag = true; //Temporalmente true. Cambia a false en el método para cambiar al siguiente formulario
                 this.f1 = f1;
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
                 InitializeComponent();
 
                 this.Show();
