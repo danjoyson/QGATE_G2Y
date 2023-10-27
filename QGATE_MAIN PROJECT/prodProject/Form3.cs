@@ -58,6 +58,10 @@ namespace prodProject
                 AFKTimer.Elapsed += new ElapsedEventHandler(AFKReturn);
 
                 InitializeComponent();
+                this.SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.DoubleBuffer, true);
                 txtEtiqueta.TextChanged += txtEtiqueta_TextChanged;
                 this.BtnOK.Enabled = false;
                 this.Show();
@@ -164,25 +168,26 @@ namespace prodProject
                         SetButtonsTimerDuration();
                         buttonsTimer.Start();
                         this.BtnOK.Enabled = false;
+                        MessageBox.Show(Form1.estandar.ToString() + " " + Form1.conatadorPiezas);
                         AFKTimer.Start();
                         if (f1.completedContainer) nextWindowForm = 0;
                         else nextWindowForm = 1;
                         if (Form1.conatadorPiezas == Form1.estandar)
-                        {
-                            
+                        {     
                             generaRegistro(textEtiqueta);
                             f1.completedContainer = true;
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
                             this.Hide();
-                            ShowWaitScan(0);
+                            //ShowWaitScan(0);
+                            ReturnToContainerMenu();
                         }
                         else
                         {
-                            
                             generaRegistro(textEtiqueta);
                             this.Hide();
-                            ShowWaitScan(nextWindowForm);
+                            ReturnToHome();
+                            //ShowWaitScan(nextWindowForm);
 
                         }
 
@@ -380,8 +385,9 @@ namespace prodProject
                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
-
+                        //Impresión de etiqueta NOK
+                        if (!z.printOkNokLabelZPL(Form1.dpi))
+                            MessageBox.Show("No se pudo generar la etiqueta de NOK");
                         this.blockAppClosing = true;
                         BlockApp();
                         this.Close();
@@ -390,8 +396,9 @@ namespace prodProject
                     {
 
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        z.printOkNokLabelZPL(Form1.dpi);//Impresión de etiqueta NOK
-
+                        //Impresión de etiqueta NOK
+                        if (!z.printOkNokLabelZPL(Form1.dpi))
+                            MessageBox.Show("No se pudo generar la etiqueta de NOK");
                         emailW.SendNOKWarning();
                         ReturnToHome();
 
@@ -427,7 +434,8 @@ namespace prodProject
                         {
 
                             ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                            z.printOkNokLabelZPL(Form1.dpi);
+                            if (!z.printOkNokLabelZPL(Form1.dpi))
+                                MessageBox.Show("No se pudo generar la etiqueta de NOK");
 
                             BlockApp();
                             this.Close();
@@ -435,8 +443,9 @@ namespace prodProject
                         else
                         {
 
-                            //ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                            //z.printOkNokLabelZPL(Form1.dpi);
+                            ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                            if(!z.printOkNokLabelZPL(Form1.dpi))
+                                MessageBox.Show("No se pudo generar la etiqueta de NOK");
 
                             emailW.SendNOKWarning();
                             ReturnToHome();
@@ -726,6 +735,8 @@ namespace prodProject
             //f1.StartForeignTimer();
             this.Close();
         }
+
+
 
     }
 }

@@ -102,7 +102,7 @@ namespace prodProject
          * 4. Envía el código a la impresora en forma de Bytes. Y guarda el código como última impresión para el formulario de administrador.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-        public void printOkNokLabelZPL(int dpi)
+        public bool printOkNokLabelZPL(int dpi)
         {
             try
             {
@@ -131,10 +131,12 @@ namespace prodProject
                     Form1.lastZPLCommand = zplData; //Guarda la última impresión realizada
                     printerConn.Write(Encoding.UTF8.GetBytes(zplData));
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error al imprimir:" + ex.Message);
+                return false;
             }
             finally
             {

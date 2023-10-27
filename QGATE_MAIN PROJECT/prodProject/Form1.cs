@@ -85,11 +85,11 @@ namespace prodProject
         {
             this.containerIdMenu = firstMenu;
             estandar = firstMenu.Estandar;
+            MessageBox.Show(estandar.ToString());
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
             connectionString = CsvReader.SetConnectionString();
-            estandar = 0;
             if (connectionString != string.Empty && printerIP != string.Empty)
             {
                 connectionString = connectionString + "; Connection Timeout = 30";

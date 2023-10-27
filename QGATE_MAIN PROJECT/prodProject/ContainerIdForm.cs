@@ -21,12 +21,15 @@ namespace prodProject
         public ContainerIdForm()
         {
 
-            ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
+            //ThreadStart tr = new ThreadStart(RunMobisys);
+            //Thread t = new Thread(tr);
+            //t.Start();
+            RunMobisys();
             InitializeComponent();
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-
+            
 
         }
 
@@ -47,10 +50,16 @@ namespace prodProject
                 else
                 {
                     Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+                    MessageBox.Show(Estandar.ToString());
+                    
+                    //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
+                    flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
                     comboBoxEstandar.SelectedIndex = -1;
-                    flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
+                    containerTxtBox.Text = "";
                     if (flagSuperposicion)
-                        ShowWaitScan(2);
+                        //ShowWaitScan(2);
+                        StartFormRevision();
+
                     else MessageBox.Show("No se encontró la ventana de mobysis");
 
 
@@ -60,6 +69,14 @@ namespace prodProject
             else setMessageLabel("Se deben introducir todos los datos");
 
 
+
+        }
+
+        private void StartFormRevision()
+        {
+            Form1 f1 = new(this);
+            this.Hide();
+            f1.StartForeignTimer();
 
         }
         private void StartForms()
@@ -116,7 +133,6 @@ namespace prodProject
         }
         public void ExecuteAsAdmin(string fileName)
         {
-            SecureString pass = SetPass();
             Process proc = new Process();
             proc.StartInfo.FileName = fileName;
             proc.StartInfo.UseShellExecute = false;
@@ -127,7 +143,8 @@ namespace prodProject
             //proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.Verb = "runas";
-            proc.Start();
+            proc.Start(); 
+            //processes.GoToMenuMobiSys(this);
             /*try
             {
                 Process.Start(fileName, "qmx-administrator", pass, "");
@@ -138,27 +155,11 @@ namespace prodProject
             Thread.Sleep(1000);
         }
 
-        private SecureString SetPass()
+        public void RunMobisys()
         {
-            var pass = new SecureString();
-            pass.AppendChar('m');
-            pass.AppendChar('X');
-            pass.AppendChar('m');
-            pass.AppendChar('D');
-            pass.AppendChar('C');
-            pass.AppendChar('0');
-            pass.AppendChar('1');
-            pass.AppendChar('\\');
-            pass.AppendChar('=');
-            pass.AppendChar('Q');
-            pass.AppendChar('#');
-            pass.AppendChar('M');
-            pass.AppendChar('#');
-            pass.AppendChar('X');
-            
-            String plainStr = new System.Net.NetworkCredential(string.Empty, pass).Password;
-            return pass;
+            ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
         }
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
 

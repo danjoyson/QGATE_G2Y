@@ -170,25 +170,32 @@ namespace prodProject
             }
         }
 
-        public void HideShowProcess(string text)
-        {           
-            CopyToClipboard(text);
-            //superposeProgram(mobisysProcessName);
-            System.Threading.Thread.Sleep(1000);
-            Process p = Process.GetCurrentProcess();
-            int hWnd;
-            hWnd = p.MainWindowHandle.ToInt32();
-            ShowWindow(hWnd, SW_HIDE);
-            System.Threading.Thread.Sleep(2000);
-            Cursor.Position = new System.Drawing.Point(850, 400);
-            mouse_event(MOUSEEVENTF_LEFTDOWN, 850, 400, 0, IntPtr.Zero);
-            Thread.Sleep(1000);
-            mouse_event(MOUSEEVENTF_LEFTUP, 850, 400, 0, IntPtr.Zero);
-            Thread.Sleep(1000);
-            PasteFromClipboard();
-            System.Threading.Thread.Sleep(3000);
-            ShowWindow(hWnd, SW_SHOW);
-
+        //Manejo de superposición de pantallas desde mi proceso actual
+        public bool HideShowProcess(string text)
+        {
+            try
+            {
+                CopyToClipboard(text);
+                //superposeProgram(mobisysProcessName);
+                System.Threading.Thread.Sleep(1000);
+                Process p = Process.GetCurrentProcess();
+                int hWnd;
+                hWnd = p.MainWindowHandle.ToInt32();
+                ShowWindow(hWnd, SW_HIDE);
+                System.Threading.Thread.Sleep(1500);
+                Cursor.Position = new System.Drawing.Point(850, 400);
+                mouse_event(MOUSEEVENTF_LEFTDOWN, 850, 400, 0, IntPtr.Zero);
+                Thread.Sleep(800);
+                mouse_event(MOUSEEVENTF_LEFTUP, 850, 400, 0, IntPtr.Zero);
+                Thread.Sleep(800);
+                PasteFromClipboard();
+                System.Threading.Thread.Sleep(2500);
+                ShowWindow(hWnd, SW_SHOW);
+                return true;
+            }catch(Exception e)
+            {
+                return false;
+            }
             /*Rectangle activeScreenDimensions = Screen.FromControl(this).Bounds;
             Size Size = new Size(activeScreenDimensions.Width + activeScreenDimensions.X, activeScreenDimensions.Height + activeScreenDimensions.Y);
             MessageBox.Show("Width :" + Size.Width.ToString() + "Height :" + Size.Height.ToString());*/
@@ -218,6 +225,36 @@ namespace prodProject
             {
                 MessageBox.Show(ex.Message, "No se puede pegar el texto");
             }
+        }
+
+        public void GoToMenuMobiSys(ContainerIdForm c)
+        {
+
+            Rectangle activeScreenDimensions = Screen.FromControl(c).Bounds;
+            Size Size = new Size(activeScreenDimensions.Width + activeScreenDimensions.X, activeScreenDimensions.Height + activeScreenDimensions.Y);
+            int width = Size.Width;
+            int height = Size.Height;
+            System.Threading.Thread.Sleep(2000);
+            Cursor.Position = new System.Drawing.Point(width / 2, height - 10);
+            mouse_event(MOUSEEVENTF_LEFTDOWN, width / 2, height - 10, 0, IntPtr.Zero);
+            Thread.Sleep(1500);
+            mouse_event(MOUSEEVENTF_LEFTUP, width / 2, height - 10, 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(3000);
+            Cursor.Position = new System.Drawing.Point(width / 2, (int)(height * (0.2)));
+            mouse_event(MOUSEEVENTF_LEFTDOWN, width / 2, (int)(height * (0.2)), 0, IntPtr.Zero);
+            Thread.Sleep(1000);
+            mouse_event(MOUSEEVENTF_LEFTUP, width / 2, (int)(height * (0.2)), 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(2500);
+            Cursor.Position = new System.Drawing.Point(width / 2, (int)(height * (0.8)));
+            mouse_event(MOUSEEVENTF_LEFTDOWN, width / 2, (int)(height * (0.8)), 0, IntPtr.Zero);
+            Thread.Sleep(1000);
+            mouse_event(MOUSEEVENTF_LEFTUP, width / 2, (int)(height * (0.8)), 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(1500);
+            Cursor.Position = new System.Drawing.Point(width / 2, (int)(height * (0.55)));
+            mouse_event(MOUSEEVENTF_LEFTDOWN, width / 2, (int)(height * (0.55)), 0, IntPtr.Zero);
+            Thread.Sleep(1000);
+            mouse_event(MOUSEEVENTF_LEFTUP, width / 2, (int)(height * (0.55)), 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(1500);
         }
 
 
