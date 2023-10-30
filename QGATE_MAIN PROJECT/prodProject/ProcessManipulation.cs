@@ -183,13 +183,13 @@ namespace prodProject
                 hWnd = p.MainWindowHandle.ToInt32();
                 ShowWindow(hWnd, SW_HIDE);
                 System.Threading.Thread.Sleep(1500);
-                Cursor.Position = new System.Drawing.Point(850, 400);
-                mouse_event(MOUSEEVENTF_LEFTDOWN, 850, 400, 0, IntPtr.Zero);
+                Cursor.Position = new System.Drawing.Point(850, 300);
+                mouse_event(MOUSEEVENTF_LEFTDOWN, 850, 300, 0, IntPtr.Zero);
                 Thread.Sleep(800);
-                mouse_event(MOUSEEVENTF_LEFTUP, 850, 400, 0, IntPtr.Zero);
-                Thread.Sleep(800);
+                mouse_event(MOUSEEVENTF_LEFTUP, 850, 300, 0, IntPtr.Zero);
+                Thread.Sleep(700);
                 PasteFromClipboard();
-                System.Threading.Thread.Sleep(2500);
+                System.Threading.Thread.Sleep(2200);
                 ShowWindow(hWnd, SW_SHOW);
                 return true;
             }catch(Exception e)
@@ -254,7 +254,7 @@ namespace prodProject
             mouse_event(MOUSEEVENTF_LEFTDOWN, width / 2, (int)(height * (0.55)), 0, IntPtr.Zero);
             Thread.Sleep(1000);
             mouse_event(MOUSEEVENTF_LEFTUP, width / 2, (int)(height * (0.55)), 0, IntPtr.Zero);
-            System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(1100);
         }
 
 

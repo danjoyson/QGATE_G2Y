@@ -83,7 +83,7 @@ namespace prodProject
         {
             try
             {
-                this.BackgroundImage = Image.FromFile(Application.StartupPath + @"\images2\" + Form1.piezaText + @"\" + Form1.piezaText + "_S" + Form1.formSlideCont + ".JPG");
+                this.BackgroundImage = Image.FromFile(Application.StartupPath + @"\images\" + Form1.piezaText + @"\" + Form1.piezaText + "_S" + Form1.formSlideCont + ".JPG");
             }
             catch (Exception)
             {
@@ -123,9 +123,6 @@ namespace prodProject
              * Si es de tipo 1 slide antes de escaneo de pieza (2)
              * Si es de tipo slide de escaneo (3)
              * Si es de tipo slide final de proceso (4)
-             * 
-             * Esto serviría en caso de que el total de puntos de inspección de pieza sea diferente para cada una. Y así se seguiría usando un switch
-             * en vez de cambiar a if's anidados. Para no alentar el tiempo de ejecución.
              */
             //int remainFormsTillRESCAN;
 
@@ -168,12 +165,11 @@ namespace prodProject
                         SetButtonsTimerDuration();
                         buttonsTimer.Start();
                         this.BtnOK.Enabled = false;
-                        MessageBox.Show(Form1.estandar.ToString() + " " + Form1.conatadorPiezas);
                         AFKTimer.Start();
                         if (f1.completedContainer) nextWindowForm = 0;
                         else nextWindowForm = 1;
                         if (Form1.conatadorPiezas == Form1.estandar)
-                        {     
+                        {
                             generaRegistro(textEtiqueta);
                             f1.completedContainer = true;
                             Form1.estandar = 0;
@@ -247,12 +243,9 @@ namespace prodProject
             {
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
-                //mobisys.AddToMobisys(text);
                 mobisys.HideShowProcess(text);
             }
-            //ReturnToHome();
         }
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función para prevenir doble chequeo de pieza del escáner en el punto de reescaneo
@@ -444,7 +437,7 @@ namespace prodProject
                         {
 
                             ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                            if(!z.printOkNokLabelZPL(Form1.dpi))
+                            if (!z.printOkNokLabelZPL(Form1.dpi))
                                 MessageBox.Show("No se pudo generar la etiqueta de NOK");
 
                             emailW.SendNOKWarning();
@@ -635,8 +628,6 @@ namespace prodProject
         {
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
-            //f1.Close();
-
             Application.OpenForms["menuMobisys"].Show();
             //f1.StartForeignTimer();
             this.Close();

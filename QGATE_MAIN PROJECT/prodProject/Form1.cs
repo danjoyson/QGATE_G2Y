@@ -28,7 +28,7 @@ namespace prodProject
         public static int dpi; //dpi de la impresora
 
         private System.Timers.Timer t = new(60000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
-        private readonly int minRetrabajo = 1; //MINUTOS m que estará bloqueada la pieza después de un NOK
+        private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
         public static string lastZPLCommand = ""; //último comando de impresión enviado
 
         public static int consecutveNOKCounter = 0; //Contador de NOK seguidos
@@ -85,7 +85,6 @@ namespace prodProject
         {
             this.containerIdMenu = firstMenu;
             estandar = firstMenu.Estandar;
-            MessageBox.Show(estandar.ToString());
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();
@@ -99,7 +98,7 @@ namespace prodProject
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
-                dpi = 203;
+                dpi = 600;
             }
             else
             {

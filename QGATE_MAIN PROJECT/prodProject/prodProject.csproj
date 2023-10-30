@@ -6,92 +6,38 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\Debug\net6.0-windows\images\6800901\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6803902\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6804902\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6806101\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6806502\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6806902\**" />
+    <Compile Remove="bin\Debug\net6.0-windows\images\6807101\**" />
     <Compile Remove="bin\Debug\net6.0-windows\runtimes\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6800901\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6803902\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6804902\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6806101\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6806502\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6806902\**" />
+    <EmbeddedResource Remove="bin\Debug\net6.0-windows\images\6807101\**" />
     <EmbeddedResource Remove="bin\Debug\net6.0-windows\runtimes\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6800901\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6803902\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6804902\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6806101\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6806502\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6806902\**" />
+    <None Remove="bin\Debug\net6.0-windows\images\6807101\**" />
     <None Remove="bin\Debug\net6.0-windows\runtimes\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\6800901_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\Diapositiva10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6800901\Diapositiva11.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6803902\6803902_S9.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6804902\6804902_S9.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806101\6806101_S9.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806502\6806502_S9.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6806902\6806902_S9.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S0.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S1.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S10.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S2.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S3.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S4.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S5.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S6.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S7.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S8.JPG" />
-    <Content Include="bin\Debug\net6.0-windows\images\6807101\6807101_S9.JPG" />
+    <Content Include="Resources\logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,6 +66,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net6.0-windows\images\" />
   </ItemGroup>
 
 </Project>

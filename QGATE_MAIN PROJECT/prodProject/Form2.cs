@@ -20,8 +20,6 @@ namespace prodProject
         {
             Form1.formSlideCont = 0; //Se resetea el contador de los formularios
             this.FormClosing += new FormClosingEventHandler(Form2_FormClosing);
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
             if (SetImage())
             {
 
@@ -29,10 +27,10 @@ namespace prodProject
                 this.f1 = f1;
 
                 InitializeComponent();
-                /*this.SetStyle(
+                this.SetStyle(
                 ControlStyles.UserPaint |
                 ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.DoubleBuffer, true);*/
+                ControlStyles.DoubleBuffer, true);
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
@@ -52,7 +50,7 @@ namespace prodProject
         {
             try
             {
-                this.BackgroundImage = Image.FromFile(Application.StartupPath + @"\images2\" + Form1.piezaText + @"\" + Form1.piezaText + "_S" + Form1.formSlideCont + ".JPG");
+                this.BackgroundImage = Image.FromFile(Application.StartupPath + @"\images\" + Form1.piezaText + @"\" + Form1.piezaText + "_S" + Form1.formSlideCont + ".JPG");
             }
             catch (Exception)
             {
@@ -83,6 +81,7 @@ namespace prodProject
             closedIncorrectlyFlag = false;
             Form1.formSlideCont++;
             Form3 frm = new(f1);
+            Thread.Sleep(200);
             this.Close();
         }
 

@@ -96,7 +96,7 @@
             BtnUnblock.BackColor = Color.Gold;
             BtnUnblock.FlatStyle = FlatStyle.Popup;
             BtnUnblock.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnUnblock.Location = new Point(920, 522);
+            BtnUnblock.Location = new Point(920, 520);
             BtnUnblock.Name = "BtnUnblock";
             BtnUnblock.Size = new Size(302, 217);
             BtnUnblock.TabIndex = 4;
@@ -110,7 +110,7 @@
             BtnReSend.BackColor = Color.RosyBrown;
             BtnReSend.FlatStyle = FlatStyle.Popup;
             BtnReSend.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnReSend.Location = new Point(27, 522);
+            BtnReSend.Location = new Point(27, 520);
             BtnReSend.Name = "BtnReSend";
             BtnReSend.Size = new Size(302, 217);
             BtnReSend.TabIndex = 5;
@@ -144,7 +144,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.ScrollBar;
-            ClientSize = new Size(1236, 751);
+            ClientSize = new Size(1236, 749);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(messageLabel);

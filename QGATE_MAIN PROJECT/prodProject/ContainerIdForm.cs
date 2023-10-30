@@ -20,11 +20,9 @@ namespace prodProject
         public int Estandar = 0;
         public ContainerIdForm()
         {
-
-            //ThreadStart tr = new ThreadStart(RunMobisys);
-            //Thread t = new Thread(tr);
-            //t.Start();
-            RunMobisys();
+            Thread runMobi = new Thread(new ThreadStart(RunMobisys));
+            runMobi.Start();
+            //RunMobisys();
             InitializeComponent();
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
@@ -49,15 +47,13 @@ namespace prodProject
                     setMessageLabel("Esta etiqueta ya fue escaneada");
                 else
                 {
+                    containersId.Add(containerTxtBox.Text); 
                     Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
-                    MessageBox.Show(Estandar.ToString());
-                    
                     //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
                     flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
                     comboBoxEstandar.SelectedIndex = -1;
                     containerTxtBox.Text = "";
                     if (flagSuperposicion)
-                        //ShowWaitScan(2);
                         StartFormRevision();
 
                     else MessageBox.Show("No se encontró la ventana de mobysis");
@@ -137,21 +133,8 @@ namespace prodProject
             proc.StartInfo.FileName = fileName;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.Arguments = "";
-            //proc.StartInfo.Verb = "runas";
-            //proc.StartInfo.UserName = "qmx-administrator";
-            //proc.StartInfo.Password = pass;
-            //proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.Verb = "runas";
             proc.Start(); 
-            //processes.GoToMenuMobiSys(this);
-            /*try
-            {
-                Process.Start(fileName, "qmx-administrator", pass, "");
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }*/
             Thread.Sleep(1000);
         }
 

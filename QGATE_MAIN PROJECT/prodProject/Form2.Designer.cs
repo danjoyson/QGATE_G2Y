@@ -40,9 +40,9 @@
             BtnNext.Cursor = Cursors.Hand;
             BtnNext.FlatStyle = FlatStyle.Popup;
             BtnNext.ForeColor = SystemColors.ActiveCaptionText;
-            BtnNext.Location = new Point(157, 507);
+            BtnNext.Location = new Point(82, 531);
             BtnNext.Name = "BtnNext";
-            BtnNext.Size = new Size(707, 176);
+            BtnNext.Size = new Size(581, 167);
             BtnNext.TabIndex = 0;
             BtnNext.UseVisualStyleBackColor = false;
             BtnNext.Click += BtnNext_Click;
