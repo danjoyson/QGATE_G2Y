@@ -56,7 +56,8 @@ namespace prodProject
 
                 AFKTimer.AutoReset = false;
                 AFKTimer.Elapsed += new ElapsedEventHandler(AFKReturn);
-
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
                 InitializeComponent();
                 this.SetStyle(
                 ControlStyles.UserPaint |
@@ -375,12 +376,13 @@ namespace prodProject
             {
                 if (InsertDbRecord())
                 {
-                    if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
+                    if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la m4663464isma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
-                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        /*ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
-                            MessageBox.Show("No se pudo generar la etiqueta de NOK");
+                            MessageBox.Show("No se pudo generar la etiqueta de NOK");*/
+                        MessageBox.Show("Impresion de etiqueta NOK");
                         this.blockAppClosing = true;
                         BlockApp();
                         this.Close();
@@ -388,11 +390,12 @@ namespace prodProject
                     else
                     {
 
-                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        /*ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
                             MessageBox.Show("No se pudo generar la etiqueta de NOK");
-                        emailW.SendNOKWarning();
+                        emailW.SendNOKWarning();*/
+                        MessageBox.Show("Impresion de etiqueta NOK");
                         ReturnToHome();
 
                     }

@@ -34,7 +34,8 @@ namespace prodProject
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int RIGHTDOWN = 0x00000008;
         private const int RIGHTUP = 0x00000010;
-        public static int GetProcessID(string procName)
+        
+        public int GetProcessID(string procName)
         {
             int processID = -1; // Valor predeterminado en caso de que no se encuentre el proceso
 

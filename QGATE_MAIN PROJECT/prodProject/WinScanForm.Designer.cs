@@ -54,7 +54,7 @@
             pictureBox3.Dock = DockStyle.Top;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1236, 58);
+            pictureBox3.Size = new Size(1236, 79);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 21;
             pictureBox3.TabStop = false;

@@ -41,12 +41,13 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Dock = DockStyle.Top;
-            pictureBox3.Location = new Point(0, 0);
+            pictureBox3.Enabled = false;
+            pictureBox3.Location = new Point(1061, 6);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1302, 78);
+            pictureBox3.Size = new Size(229, 114);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 22;
             pictureBox3.TabStop = false;

@@ -98,7 +98,7 @@ namespace prodProject
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
-                dpi = 600;
+                dpi = 203;
             }
             else
             {
@@ -141,15 +141,7 @@ namespace prodProject
                     //getPiezaPartSteps();
                     if (CheckNotSerialZero())
                     {
-
-                        //int estandarPieza = 0;
-                        //estandarPieza = db.GetEstandarPieza(claveComp);
-                        //if (estandarPieza != estandar) setMessagleLabel("Esta pieza no corresponde al estandar actual");
-                        //else 
                         StartForms();
-
-
-
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.Intrinsics.Arm;
+using System.Text;
 using Zebra.Sdk.Comm;    //Biblioteca directamente descargada de la página oficial de Zebra Technologies
 using Zebra.Sdk.Printer; //Biblioteca directamente descargada de la página oficial de Zebra Technologies
 
@@ -102,6 +103,7 @@ namespace prodProject
          * 4. Envía el código a la impresora en forma de Bytes. Y guarda el código como última impresión para el formulario de administrador.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
+
         public bool printOkNokLabelZPL(int dpi)
         {
             try

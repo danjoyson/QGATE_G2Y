@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,9 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
+
 
 namespace prodProject
 {
@@ -17,17 +20,20 @@ namespace prodProject
 
         private List<string> containersId = new List<string>();
         ProcessManipulation processes = new ProcessManipulation();
+        private static System.Timers.Timer timer;
         public int Estandar = 0;
         public ContainerIdForm()
         {
             Thread runMobi = new Thread(new ThreadStart(RunMobisys));
-            runMobi.Start();
+            //runMobi.Start();
             //RunMobisys();
             InitializeComponent();
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-            
+            timer = new System.Timers.Timer(24*60*60*1000);
+            timer.Elapsed += BorrarLista;
+            timer.Start();
 
         }
 
@@ -40,24 +46,31 @@ namespace prodProject
         {
             //Verificar que pasaría si la etiqueta que se introdujo es una etiqueta que ya se introdujo anteriormente o si es una etiqueta mala, no debe permitir continua qgate
             bool flagSuperposicion = false;
-
+            int mobisysId = 0;
             if (containerTxtBox.Text != String.Empty && comboBoxEstandar.SelectedIndex != -1)
             {
                 if (containersId.Contains(containerTxtBox.Text))
                     setMessageLabel("Esta etiqueta ya fue escaneada");
                 else
                 {
-                    containersId.Add(containerTxtBox.Text); 
+                    containersId.Add(containerTxtBox.Text);
                     Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
                     //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
-                    flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
-                    comboBoxEstandar.SelectedIndex = -1;
-                    containerTxtBox.Text = "";
-                    if (flagSuperposicion)
-                        StartFormRevision();
+                    mobisysId = processes.GetProcessID(processes.porcName);
+                    if (mobisysId != 0)
+                    {
+                        flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
 
-                    else MessageBox.Show("No se encontró la ventana de mobysis");
-
+                        comboBoxEstandar.SelectedIndex = -1;
+                        containerTxtBox.Text = "";
+                        if (flagSuperposicion)
+                            StartFormRevision();
+                        else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
+                    }
 
                 }
 
@@ -134,7 +147,7 @@ namespace prodProject
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.Arguments = "";
             proc.StartInfo.RedirectStandardOutput = true;
-            proc.Start(); 
+            proc.Start();
             Thread.Sleep(1000);
         }
 
@@ -151,6 +164,19 @@ namespace prodProject
         private void comboBoxEstandar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ClearList(object state)
+        {
+            // Vaciar la lista
+            containersId.Clear();
+            Console.WriteLine("Lista vaciada después de un día.");
+        }
+
+        private void BorrarLista(object sender, ElapsedEventArgs e)
+        {
+            // Borra la lista
+            containersId.Clear();
         }
     }
 }

@@ -40,13 +40,12 @@
             // BtnOK
             // 
             BtnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            BtnOK.AutoSize = true;
             BtnOK.BackColor = Color.Transparent;
             BtnOK.Cursor = Cursors.Hand;
             BtnOK.FlatStyle = FlatStyle.Popup;
-            BtnOK.Location = new Point(37, 629);
+            BtnOK.Location = new Point(53, 634);
             BtnOK.Name = "BtnOK";
-            BtnOK.Size = new Size(252, 147);
+            BtnOK.Size = new Size(252, 142);
             BtnOK.TabIndex = 0;
             BtnOK.UseVisualStyleBackColor = false;
             BtnOK.Click += BtnOK_Click;
@@ -58,9 +57,9 @@
             BtnNOK.BackColor = Color.Transparent;
             BtnNOK.Cursor = Cursors.Hand;
             BtnNOK.FlatStyle = FlatStyle.Popup;
-            BtnNOK.Location = new Point(1141, 629);
+            BtnNOK.Location = new Point(1120, 634);
             BtnNOK.Name = "BtnNOK";
-            BtnNOK.Size = new Size(233, 147);
+            BtnNOK.Size = new Size(242, 142);
             BtnNOK.TabIndex = 1;
             BtnNOK.UseVisualStyleBackColor = false;
             BtnNOK.Click += BtnNOK_Click;
