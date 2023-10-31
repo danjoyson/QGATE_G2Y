@@ -39,7 +39,7 @@
             // 
             // BtnOK
             // 
-            BtnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            BtnOK.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BtnOK.BackColor = Color.Transparent;
             BtnOK.Cursor = Cursors.Hand;
             BtnOK.FlatStyle = FlatStyle.Popup;
@@ -52,7 +52,7 @@
             // 
             // BtnNOK
             // 
-            BtnNOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnNOK.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BtnNOK.AutoSize = true;
             BtnNOK.BackColor = Color.Transparent;
             BtnNOK.Cursor = Cursors.Hand;

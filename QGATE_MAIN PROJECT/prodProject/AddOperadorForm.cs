@@ -36,6 +36,7 @@ namespace prodProject
             if (NotNullTxtBoxData())
             {
                 db.InsertaOperador(NumOpTxtBox.Text, NameOpTxtBox.Text, SurnameOpTxtBox.Text);
+                ClearInputs();
             }
         }
 
@@ -57,6 +58,12 @@ namespace prodProject
             this.Close();
         }
 
+        private void ClearInputs()
+        {
+            NumOpTxtBox.Clear();
+            NameOpTxtBox.Clear();
+            SurnameOpTxtBox.Clear();
+        }
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          *  Método para revisar que las cajas de texto no contengan valores nulos o vacíos.

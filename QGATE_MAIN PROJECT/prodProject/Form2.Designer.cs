@@ -34,7 +34,7 @@
             // 
             // BtnNext
             // 
-            BtnNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            BtnNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BtnNext.AutoSize = true;
             BtnNext.BackColor = Color.Transparent;
             BtnNext.Cursor = Cursors.Hand;
