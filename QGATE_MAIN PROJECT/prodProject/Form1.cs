@@ -205,7 +205,7 @@ namespace prodProject
                 else
                 {
 
-                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena"))
+                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo"))
                     {
 
                         piezaTxtBox.Clear();
@@ -236,7 +236,7 @@ namespace prodProject
         private void setMessagleLabel(string message)
         {
             messageLabel.Text = message;
-            messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, 311);
+            messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, (ClientSize.Width / 3) - 100);
         }
 
         /*

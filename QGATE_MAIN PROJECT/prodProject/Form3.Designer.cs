@@ -39,27 +39,27 @@
             // 
             // BtnOK
             // 
-            BtnOK.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BtnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             BtnOK.BackColor = Color.Transparent;
             BtnOK.Cursor = Cursors.Hand;
             BtnOK.FlatStyle = FlatStyle.Popup;
-            BtnOK.Location = new Point(53, 634);
+            BtnOK.Location = new Point(80, 676);
             BtnOK.Name = "BtnOK";
-            BtnOK.Size = new Size(252, 142);
+            BtnOK.Size = new Size(332, 169);
             BtnOK.TabIndex = 0;
             BtnOK.UseVisualStyleBackColor = false;
             BtnOK.Click += BtnOK_Click;
             // 
             // BtnNOK
             // 
-            BtnNOK.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BtnNOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             BtnNOK.AutoSize = true;
             BtnNOK.BackColor = Color.Transparent;
             BtnNOK.Cursor = Cursors.Hand;
             BtnNOK.FlatStyle = FlatStyle.Popup;
-            BtnNOK.Location = new Point(1120, 634);
+            BtnNOK.Location = new Point(1012, 676);
             BtnNOK.Name = "BtnNOK";
-            BtnNOK.Size = new Size(242, 142);
+            BtnNOK.Size = new Size(340, 169);
             BtnNOK.TabIndex = 1;
             BtnNOK.UseVisualStyleBackColor = false;
             BtnNOK.Click += BtnNOK_Click;
@@ -68,7 +68,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Bottom;
             pictureBox1.BackColor = SystemColors.ButtonHighlight;
-            pictureBox1.Location = new Point(321, 606);
+            pictureBox1.Location = new Point(321, 703);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(783, 147);
             pictureBox1.TabIndex = 4;
@@ -81,7 +81,7 @@
             messageLabel.AutoSize = true;
             messageLabel.BackColor = Color.White;
             messageLabel.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            messageLabel.Location = new Point(446, 697);
+            messageLabel.Location = new Point(446, 794);
             messageLabel.Name = "messageLabel";
             messageLabel.Size = new Size(528, 32);
             messageLabel.TabIndex = 9;
@@ -94,7 +94,7 @@
             txtEtiqueta.BackColor = Color.PaleGoldenrod;
             txtEtiqueta.BorderStyle = BorderStyle.FixedSingle;
             txtEtiqueta.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txtEtiqueta.Location = new Point(332, 640);
+            txtEtiqueta.Location = new Point(332, 737);
             txtEtiqueta.MaxLength = 40;
             txtEtiqueta.Name = "txtEtiqueta";
             txtEtiqueta.Size = new Size(760, 54);
@@ -107,7 +107,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1386, 788);
+            ClientSize = new Size(1386, 885);
             ControlBox = false;
             Controls.Add(messageLabel);
             Controls.Add(txtEtiqueta);

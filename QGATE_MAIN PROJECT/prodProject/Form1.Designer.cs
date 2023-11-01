@@ -44,10 +44,10 @@
             // opeTxtBox
             // 
             opeTxtBox.Anchor = AnchorStyles.None;
-            opeTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            opeTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
             opeTxtBox.Location = new Point(301, 91);
             opeTxtBox.Name = "opeTxtBox";
-            opeTxtBox.Size = new Size(480, 43);
+            opeTxtBox.Size = new Size(480, 54);
             opeTxtBox.TabIndex = 0;
             opeTxtBox.TextAlign = HorizontalAlignment.Center;
             opeTxtBox.TextChanged += OpeTxtBox_TextChanged;
@@ -73,9 +73,9 @@
             btn1.FlatAppearance.BorderSize = 10;
             btn1.FlatStyle = FlatStyle.Popup;
             btn1.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btn1.Location = new Point(749, 424);
+            btn1.Location = new Point(730, 398);
             btn1.Name = "btn1";
-            btn1.Size = new Size(228, 157);
+            btn1.Size = new Size(247, 183);
             btn1.TabIndex = 2;
             btn1.Text = "Comenzar";
             btn1.UseVisualStyleBackColor = false;
@@ -97,11 +97,11 @@
             // 
             piezaTxtBox.Anchor = AnchorStyles.None;
             piezaTxtBox.CharacterCasing = CharacterCasing.Upper;
-            piezaTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            piezaTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
             piezaTxtBox.Location = new Point(206, 265);
             piezaTxtBox.MaxLength = 40;
             piezaTxtBox.Name = "piezaTxtBox";
-            piezaTxtBox.Size = new Size(670, 43);
+            piezaTxtBox.Size = new Size(670, 54);
             piezaTxtBox.TabIndex = 4;
             piezaTxtBox.TextAlign = HorizontalAlignment.Center;
             piezaTxtBox.TextChanged += PiezaTxtBox_TextChanged;
@@ -113,9 +113,9 @@
             BtnOpChange.Cursor = Cursors.Hand;
             BtnOpChange.FlatStyle = FlatStyle.Popup;
             BtnOpChange.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            BtnOpChange.Location = new Point(113, 420);
+            BtnOpChange.Location = new Point(113, 398);
             BtnOpChange.Name = "BtnOpChange";
-            BtnOpChange.Size = new Size(240, 164);
+            BtnOpChange.Size = new Size(263, 186);
             BtnOpChange.TabIndex = 5;
             BtnOpChange.Text = "Borrar texto";
             BtnOpChange.UseVisualStyleBackColor = false;
@@ -123,7 +123,6 @@
             // 
             // BtnSettings
             // 
-            BtnSettings.Anchor = AnchorStyles.None;
             BtnSettings.BackColor = SystemColors.ControlLight;
             BtnSettings.BackgroundImage = Properties.Resources.settings;
             BtnSettings.BackgroundImageLayout = ImageLayout.Zoom;
@@ -150,7 +149,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox3.Location = new Point(814, 12);

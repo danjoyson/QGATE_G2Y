@@ -34,15 +34,15 @@
             // 
             // BtnNext
             // 
-            BtnNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BtnNext.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             BtnNext.AutoSize = true;
             BtnNext.BackColor = Color.Transparent;
             BtnNext.Cursor = Cursors.Hand;
             BtnNext.FlatStyle = FlatStyle.Popup;
             BtnNext.ForeColor = SystemColors.ActiveCaptionText;
-            BtnNext.Location = new Point(87, 584);
+            BtnNext.Location = new Point(157, 551);
             BtnNext.Name = "BtnNext";
-            BtnNext.Size = new Size(566, 139);
+            BtnNext.Size = new Size(741, 186);
             BtnNext.TabIndex = 0;
             BtnNext.UseVisualStyleBackColor = false;
             BtnNext.Click += BtnNext_Click;
@@ -51,7 +51,7 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1366, 745);
+            ClientSize = new Size(1366, 783);
             ControlBox = false;
             Controls.Add(BtnNext);
             FormBorderStyle = FormBorderStyle.Fixed3D;

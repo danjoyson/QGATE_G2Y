@@ -31,7 +31,7 @@ namespace prodProject
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-            timer = new System.Timers.Timer(24*60*60*1000);
+            timer = new System.Timers.Timer(24 * 60 * 60 * 1000);
             timer.Elapsed += BorrarLista;
             timer.Start();
 
@@ -57,7 +57,7 @@ namespace prodProject
                     Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
                     //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
                     mobisysId = processes.GetProcessID(processes.porcName);
-                    if (mobisysId != 0)
+                    if (mobisysId > 0)
                     {
                         flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
 
@@ -69,6 +69,8 @@ namespace prodProject
                     }
                     else
                     {
+                        if (containersId.Count > 0)
+                            containersId.RemoveAt(containersId.Count-1);
                         MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
                     }
 

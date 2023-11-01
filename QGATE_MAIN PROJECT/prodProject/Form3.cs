@@ -382,7 +382,8 @@ namespace prodProject
                         //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
                             MessageBox.Show("No se pudo generar la etiqueta de NOK");*/
-                        MessageBox.Show("Impresion de etiqueta NOK");
+                        MessageBox.Show("Impresion de etiqueta NOK","Impresion de etiqueta");
+                        AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta",5);
                         this.blockAppClosing = true;
                         BlockApp();
                         this.Close();
@@ -395,7 +396,8 @@ namespace prodProject
                         if (!z.printOkNokLabelZPL(Form1.dpi))
                             MessageBox.Show("No se pudo generar la etiqueta de NOK");
                         emailW.SendNOKWarning();*/
-                        MessageBox.Show("Impresion de etiqueta NOK");
+                        //MessageBox.Show("Impresion de etiqueta NOK");
+                        AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         ReturnToHome();
 
                     }

@@ -88,7 +88,7 @@
             btnContainer.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnContainer.Location = new Point(562, 406);
             btnContainer.Name = "btnContainer";
-            btnContainer.Size = new Size(228, 157);
+            btnContainer.Size = new Size(256, 171);
             btnContainer.TabIndex = 25;
             btnContainer.Text = "Comenzar";
             btnContainer.UseVisualStyleBackColor = false;
@@ -119,13 +119,13 @@
             comboBoxEstandar.Anchor = AnchorStyles.None;
             comboBoxEstandar.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxEstandar.DropDownWidth = 140;
-            comboBoxEstandar.Font = new Font("Arial Narrow", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstandar.Font = new Font("Arial Narrow", 36F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxEstandar.FormattingEnabled = true;
-            comboBoxEstandar.ItemHeight = 33;
+            comboBoxEstandar.ItemHeight = 57;
             comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
-            comboBoxEstandar.Location = new Point(492, 275);
+            comboBoxEstandar.Location = new Point(492, 269);
             comboBoxEstandar.Name = "comboBoxEstandar";
-            comboBoxEstandar.Size = new Size(513, 41);
+            comboBoxEstandar.Size = new Size(513, 65);
             comboBoxEstandar.TabIndex = 28;
             comboBoxEstandar.SelectedIndexChanged += comboBoxEstandar_SelectedIndexChanged;
             // 
