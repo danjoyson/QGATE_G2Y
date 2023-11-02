@@ -190,7 +190,7 @@ namespace prodProject
                 mouse_event(MOUSEEVENTF_LEFTUP, 850, 300, 0, IntPtr.Zero);
                 Thread.Sleep(700);
                 PasteFromClipboard();
-                System.Threading.Thread.Sleep(1500);
+                System.Threading.Thread.Sleep(2500);
                 ShowWindow(hWnd, SW_SHOW);
                 return true;
             }catch(Exception e)

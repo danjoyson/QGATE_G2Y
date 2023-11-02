@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             GB1 = new GroupBox();
+            button1 = new Button();
+            configEstandar = new GroupBox();
+            setEstandar = new Button();
+            comboBoxEstandar = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             BtnDeleteOp = new Button();
@@ -48,6 +52,7 @@
             label6 = new Label();
             pictureBox3 = new PictureBox();
             GB1.SuspendLayout();
+            configEstandar.SuspendLayout();
             GB2.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -56,6 +61,8 @@
             // 
             // GB1
             // 
+            GB1.Controls.Add(button1);
+            GB1.Controls.Add(configEstandar);
             GB1.Controls.Add(label2);
             GB1.Controls.Add(label1);
             GB1.Controls.Add(BtnDeleteOp);
@@ -63,16 +70,67 @@
             GB1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             GB1.Location = new Point(160, 38);
             GB1.Name = "GB1";
-            GB1.Size = new Size(529, 378);
+            GB1.Size = new Size(558, 515);
             GB1.TabIndex = 0;
             GB1.TabStop = false;
             GB1.Text = "Operadores";
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.GradientInactiveCaption;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(18, 383);
+            button1.Name = "button1";
+            button1.Size = new Size(180, 126);
+            button1.TabIndex = 5;
+            button1.Text = "Configurar Estandar";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // configEstandar
+            // 
+            configEstandar.Controls.Add(setEstandar);
+            configEstandar.Controls.Add(comboBoxEstandar);
+            configEstandar.Location = new Point(229, 368);
+            configEstandar.Name = "configEstandar";
+            configEstandar.Size = new Size(323, 141);
+            configEstandar.TabIndex = 4;
+            configEstandar.TabStop = false;
+            configEstandar.Text = "Estandar";
+            // 
+            // setEstandar
+            // 
+            setEstandar.BackColor = Color.Lime;
+            setEstandar.FlatStyle = FlatStyle.Popup;
+            setEstandar.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            setEstandar.Location = new Point(118, 97);
+            setEstandar.Name = "setEstandar";
+            setEstandar.Size = new Size(75, 38);
+            setEstandar.TabIndex = 6;
+            setEstandar.Text = "OK";
+            setEstandar.UseVisualStyleBackColor = false;
+            setEstandar.Click += button2_Click;
+            // 
+            // comboBoxEstandar
+            // 
+            comboBoxEstandar.Anchor = AnchorStyles.None;
+            comboBoxEstandar.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxEstandar.DropDownWidth = 140;
+            comboBoxEstandar.Font = new Font("Arial Narrow", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstandar.FormattingEnabled = true;
+            comboBoxEstandar.ItemHeight = 42;
+            comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
+            comboBoxEstandar.Location = new Point(59, 26);
+            comboBoxEstandar.Name = "comboBoxEstandar";
+            comboBoxEstandar.Size = new Size(204, 50);
+            comboBoxEstandar.TabIndex = 29;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(229, 280);
+            label2.Location = new Point(229, 260);
             label2.Name = "label2";
             label2.Size = new Size(297, 50);
             label2.TabIndex = 3;
@@ -96,7 +154,7 @@
             BtnDeleteOp.BackColor = SystemColors.GradientInactiveCaption;
             BtnDeleteOp.FlatStyle = FlatStyle.Popup;
             BtnDeleteOp.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnDeleteOp.Location = new Point(18, 240);
+            BtnDeleteOp.Location = new Point(18, 220);
             BtnDeleteOp.Name = "BtnDeleteOp";
             BtnDeleteOp.Size = new Size(180, 126);
             BtnDeleteOp.TabIndex = 1;
@@ -236,9 +294,9 @@
             // 
             groupBox1.Controls.Add(BtnClearDB);
             groupBox1.Controls.Add(label5);
-            groupBox1.Location = new Point(160, 445);
+            groupBox1.Location = new Point(160, 559);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(529, 194);
+            groupBox1.Size = new Size(558, 194);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Base de Datos";
@@ -248,7 +306,7 @@
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(BtnPrinterOpt);
-            groupBox2.Location = new Point(743, 445);
+            groupBox2.Location = new Point(743, 559);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(507, 194);
             groupBox2.TabIndex = 11;
@@ -283,7 +341,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1315, 663);
+            ClientSize = new Size(1315, 807);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(groupBox2);
@@ -299,6 +357,7 @@
             Load += AdminForm_Load;
             GB1.ResumeLayout(false);
             GB1.PerformLayout();
+            configEstandar.ResumeLayout(false);
             GB2.ResumeLayout(false);
             GB2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -329,5 +388,9 @@
         private GroupBox groupBox2;
         private Label label6;
         private PictureBox pictureBox3;
+        private Button button1;
+        private GroupBox configEstandar;
+        private Button setEstandar;
+        private ComboBox comboBoxEstandar;
     }
 }

@@ -35,7 +35,8 @@
             btnContainer = new Button();
             containerIdMessage = new Label();
             label2 = new Label();
-            comboBoxEstandar = new ComboBox();
+            BtnSettings = new Button();
+            estandarLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(124, 126);
+            label1.Location = new Point(137, 159);
             label1.Name = "label1";
             label1.Size = new Size(198, 45);
             label1.TabIndex = 23;
@@ -69,7 +70,7 @@
             containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            containerTxtBox.Location = new Point(413, 126);
+            containerTxtBox.Location = new Point(414, 165);
             containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
             containerTxtBox.Size = new Size(667, 43);
@@ -108,33 +109,47 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(154, 269);
+            label2.Location = new Point(402, 257);
             label2.Name = "label2";
             label2.Size = new Size(141, 45);
             label2.TabIndex = 27;
             label2.Text = "Estandar";
             // 
-            // comboBoxEstandar
+            // BtnSettings
             // 
-            comboBoxEstandar.Anchor = AnchorStyles.None;
-            comboBoxEstandar.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxEstandar.DropDownWidth = 140;
-            comboBoxEstandar.Font = new Font("Arial Narrow", 36F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxEstandar.FormattingEnabled = true;
-            comboBoxEstandar.ItemHeight = 57;
-            comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
-            comboBoxEstandar.Location = new Point(492, 269);
-            comboBoxEstandar.Name = "comboBoxEstandar";
-            comboBoxEstandar.Size = new Size(513, 65);
-            comboBoxEstandar.TabIndex = 28;
-            comboBoxEstandar.SelectedIndexChanged += comboBoxEstandar_SelectedIndexChanged;
+            BtnSettings.BackColor = SystemColors.ControlLight;
+            BtnSettings.BackgroundImage = Properties.Resources.settings;
+            BtnSettings.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnSettings.Cursor = Cursors.Hand;
+            BtnSettings.FlatAppearance.BorderColor = Color.FromArgb(255, 255, 192);
+            BtnSettings.FlatStyle = FlatStyle.Popup;
+            BtnSettings.Location = new Point(12, 6);
+            BtnSettings.Name = "BtnSettings";
+            BtnSettings.Size = new Size(141, 135);
+            BtnSettings.TabIndex = 29;
+            BtnSettings.Text = " ";
+            BtnSettings.UseVisualStyleBackColor = false;
+            BtnSettings.Click += BtnSettings_Click;
+            // 
+            // estandarLabel
+            // 
+            estandarLabel.Anchor = AnchorStyles.None;
+            estandarLabel.AutoSize = true;
+            estandarLabel.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            estandarLabel.ForeColor = Color.Red;
+            estandarLabel.Location = new Point(646, 257);
+            estandarLabel.Name = "estandarLabel";
+            estandarLabel.Size = new Size(164, 50);
+            estandarLabel.TabIndex = 30;
+            estandarLabel.Text = "Estandar";
             // 
             // ContainerIdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1302, 668);
-            Controls.Add(comboBoxEstandar);
+            Controls.Add(estandarLabel);
+            Controls.Add(BtnSettings);
             Controls.Add(label2);
             Controls.Add(containerIdMessage);
             Controls.Add(btnContainer);
@@ -161,6 +176,7 @@
         private Button btnContainer;
         private Label containerIdMessage;
         private Label label2;
-        private ComboBox comboBoxEstandar;
+        private Button BtnSettings;
+        private Label estandarLabel;
     }
 }

@@ -59,7 +59,7 @@ namespace prodProject
          */
         private void ReturnHome()
         {
-            Application.OpenForms["Form1"].Show();
+            Application.OpenForms["ContainerIdForm"].Show();
             this.Hide();
             this.Close();
         }
@@ -72,7 +72,7 @@ namespace prodProject
         private void AdminLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (correctExitFlag == false)
-                Application.OpenForms["Form1"].Show();
+                Application.OpenForms["ContainerIdForm"].Show();
         }
 
         private void AdminLogin_Load(object sender, EventArgs e)

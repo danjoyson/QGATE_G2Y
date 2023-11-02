@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.ComponentModel;
+using System.Data.SqlClient;
 
 namespace prodProject
 {
@@ -6,6 +7,8 @@ namespace prodProject
     {
 
         DatabaseConnector db = new DatabaseConnector();
+        public IComponent contrato { get; set; }
+        private int estandarContainer;
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario.
@@ -16,6 +19,7 @@ namespace prodProject
         {
             this.FormClosing += new FormClosingEventHandler(AdminForm_FormClosing);
             InitializeComponent();
+            configEstandar.Visible = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
         }
@@ -48,7 +52,8 @@ namespace prodProject
          */
         private void ReturnHome()
         {
-            Application.OpenForms["Form1"].Show();
+            
+            Application.OpenForms["ContainerIdForm"].Show();
             this.Hide();
             this.Close();
         }
@@ -137,7 +142,7 @@ namespace prodProject
        */
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.OpenForms["Form1"].Show();
+            Application.OpenForms["ContainerIdForm"].Show();
         }
 
         /*
@@ -152,6 +157,37 @@ namespace prodProject
             SimplePrinterForm nextForm = new(this);
             nextForm.Show();
             this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(comboBoxEstandar.SelectedIndex != -1)
+            {
+                ContainerIdForm.Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+            }
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            configEstandar.Visible = true;
+        }
+
+        public int SetEstandarCount(int idCountry)
+        {
+            int piezasContainer = 0;
+            switch (idCountry)
+            {
+                //Índice 0 corresponde a México
+                case 0:
+                    piezasContainer = 4;
+                    break;
+                //Índice 1 corresponde a China
+                case 1:
+                    piezasContainer = 35;
+                    break;
+            }
+            return piezasContainer;
         }
     }
 }

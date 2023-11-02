@@ -84,7 +84,7 @@ namespace prodProject
         public Form1(ContainerIdForm firstMenu)
         {
             this.containerIdMenu = firstMenu;
-            estandar = firstMenu.Estandar;
+            estandar = ContainerIdForm.Estandar;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             printerIP = cr.GetPrinterIP();

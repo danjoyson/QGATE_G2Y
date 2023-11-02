@@ -15,19 +15,22 @@ using System.Windows.Forms;
 
 namespace prodProject
 {
-    public partial class ContainerIdForm : Form
+    public partial class ContainerIdForm : Form, IComponent
     {
 
         private List<string> containersId = new List<string>();
         ProcessManipulation processes = new ProcessManipulation();
         private static System.Timers.Timer timer;
-        public int Estandar = 0;
+        int estandarContainer { get; }
+        public static int Estandar = 4;
+
         public ContainerIdForm()
         {
             Thread runMobi = new Thread(new ThreadStart(RunMobisys));
             //runMobi.Start();
             //RunMobisys();
             InitializeComponent();
+            estandarLabel.Text = "México";
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
@@ -47,21 +50,22 @@ namespace prodProject
             //Verificar que pasaría si la etiqueta que se introdujo es una etiqueta que ya se introdujo anteriormente o si es una etiqueta mala, no debe permitir continua qgate
             bool flagSuperposicion = false;
             int mobisysId = 0;
-            if (containerTxtBox.Text != String.Empty && comboBoxEstandar.SelectedIndex != -1)
+            if (containerTxtBox.Text != String.Empty)
             {
                 if (containersId.Contains(containerTxtBox.Text))
                     setMessageLabel("Esta etiqueta ya fue escaneada");
                 else
                 {
                     containersId.Add(containerTxtBox.Text);
-                    Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+                    //Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+                    SetEstandarLable(Estandar);
                     //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
                     mobisysId = processes.GetProcessID(processes.porcName);
                     if (mobisysId > 0)
                     {
                         flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
 
-                        comboBoxEstandar.SelectedIndex = -1;
+
                         containerTxtBox.Text = "";
                         if (flagSuperposicion)
                             StartFormRevision();
@@ -70,7 +74,7 @@ namespace prodProject
                     else
                     {
                         if (containersId.Count > 0)
-                            containersId.RemoveAt(containersId.Count-1);
+                            containersId.RemoveAt(containersId.Count - 1);
                         MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
                     }
 
@@ -81,6 +85,18 @@ namespace prodProject
 
 
 
+        }
+
+        private void SetEstandarLable(int estandar)
+        {
+            switch (estandar) { 
+                case 4:
+                estandarLabel.Text = "México";
+                break;
+            case 35:
+                estandarLabel.Text = "China";
+                break;
+            }
         }
 
         private void StartFormRevision()
@@ -101,7 +117,7 @@ namespace prodProject
         /// Devuelve el número de piesas por container id para el pais seleccionado
         /// </summary>
         /// <param name="idCountry"> Indice que corresponde al pais seleccionado en estandar</param>
-        private int SetEstandarCount(int idCountry)
+        public int SetEstandarCount(int idCountry)
         {
             int piezasContainer = 0;
             switch (idCountry)
@@ -179,6 +195,14 @@ namespace prodProject
         {
             // Borra la lista
             containersId.Clear();
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            AdminLogin LoginForm = new();
+            //LoginForm.contrato = this;
+            this.Hide();
+            LoginForm.Show();
         }
     }
 }
