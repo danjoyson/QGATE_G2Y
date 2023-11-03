@@ -62,6 +62,9 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Limpia los inputs en los que el usuario introdujo datos
+        /// </summary>
         private void ClearTxtBox()
         {
             ClaveTxtBox.Clear();
