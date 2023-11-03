@@ -213,15 +213,23 @@ namespace prodProject
         {
             configEstandar.Visible = true;
         }
-
+        /// <summary>
+        /// Asigna los valores definidos en la configuración de estandar
+        /// </summary>
+        /// <param name="estandarIndex"> indice del estandar seleccionado</param>
+        private void SetEstandarValues(int estandarIndex)
+        {
+            Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+            SetEstandarLabel(Estandar);
+            configEstandar.Visible = false;
+        }
 
         private void setEstandar_Click(object sender, EventArgs e)
         {
             if (comboBoxEstandar.SelectedIndex != -1)
             {
-                Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
-                SetEstandarLabel(Estandar);
-                configEstandar.Visible = false;
+                SetEstandarValues(comboBoxEstandar.SelectedIndex);
+
             }
         }
     }
