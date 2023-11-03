@@ -37,7 +37,12 @@
             label2 = new Label();
             BtnSettings = new Button();
             estandarLabel = new Label();
+            configEstandar = new GroupBox();
+            setEstandar = new Button();
+            comboBoxEstandar = new ComboBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            configEstandar.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox3
@@ -59,7 +64,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(137, 159);
+            label1.Location = new Point(137, 169);
             label1.Name = "label1";
             label1.Size = new Size(198, 45);
             label1.TabIndex = 23;
@@ -70,7 +75,7 @@
             containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            containerTxtBox.Location = new Point(414, 165);
+            containerTxtBox.Location = new Point(414, 175);
             containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
             containerTxtBox.Size = new Size(667, 43);
@@ -87,7 +92,7 @@
             btnContainer.FlatAppearance.BorderSize = 10;
             btnContainer.FlatStyle = FlatStyle.Popup;
             btnContainer.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnContainer.Location = new Point(562, 406);
+            btnContainer.Location = new Point(557, 508);
             btnContainer.Name = "btnContainer";
             btnContainer.Size = new Size(256, 171);
             btnContainer.TabIndex = 25;
@@ -109,7 +114,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(402, 257);
+            label2.Location = new Point(402, 267);
             label2.Name = "label2";
             label2.Size = new Size(141, 45);
             label2.TabIndex = 27;
@@ -137,17 +142,72 @@
             estandarLabel.AutoSize = true;
             estandarLabel.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             estandarLabel.ForeColor = Color.Red;
-            estandarLabel.Location = new Point(646, 257);
+            estandarLabel.Location = new Point(646, 267);
             estandarLabel.Name = "estandarLabel";
             estandarLabel.Size = new Size(164, 50);
             estandarLabel.TabIndex = 30;
             estandarLabel.Text = "Estandar";
             // 
+            // configEstandar
+            // 
+            configEstandar.Anchor = AnchorStyles.None;
+            configEstandar.Controls.Add(setEstandar);
+            configEstandar.Controls.Add(comboBoxEstandar);
+            configEstandar.Location = new Point(444, 324);
+            configEstandar.Name = "configEstandar";
+            configEstandar.Size = new Size(422, 100);
+            configEstandar.TabIndex = 31;
+            configEstandar.TabStop = false;
+            configEstandar.Text = "Configurar Estandar";
+            // 
+            // setEstandar
+            // 
+            setEstandar.BackColor = Color.LightBlue;
+            setEstandar.FlatStyle = FlatStyle.Popup;
+            setEstandar.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            setEstandar.Location = new Point(291, 13);
+            setEstandar.Name = "setEstandar";
+            setEstandar.Size = new Size(125, 81);
+            setEstandar.TabIndex = 6;
+            setEstandar.Text = "OK";
+            setEstandar.UseVisualStyleBackColor = false;
+            setEstandar.Click += setEstandar_Click;
+            // 
+            // comboBoxEstandar
+            // 
+            comboBoxEstandar.Anchor = AnchorStyles.None;
+            comboBoxEstandar.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxEstandar.DropDownWidth = 140;
+            comboBoxEstandar.Font = new Font("Arial Narrow", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxEstandar.FormattingEnabled = true;
+            comboBoxEstandar.ItemHeight = 42;
+            comboBoxEstandar.Items.AddRange(new object[] { "México", "China" });
+            comboBoxEstandar.Location = new Point(20, 22);
+            comboBoxEstandar.Name = "comboBoxEstandar";
+            comboBoxEstandar.Size = new Size(265, 50);
+            comboBoxEstandar.TabIndex = 29;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.BackColor = SystemColors.GradientInactiveCaption;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.Location = new Point(1113, 560);
+            button1.Name = "button1";
+            button1.Size = new Size(155, 102);
+            button1.TabIndex = 32;
+            button1.Text = "Configurar Estandar";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // ContainerIdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1302, 668);
+            ClientSize = new Size(1302, 688);
+            Controls.Add(button1);
+            Controls.Add(configEstandar);
             Controls.Add(estandarLabel);
             Controls.Add(BtnSettings);
             Controls.Add(label2);
@@ -164,6 +224,7 @@
             WindowState = FormWindowState.Maximized;
             Load += ContainerIdForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            configEstandar.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,5 +239,9 @@
         private Label label2;
         private Button BtnSettings;
         private Label estandarLabel;
+        private GroupBox configEstandar;
+        private Button setEstandar;
+        private ComboBox comboBoxEstandar;
+        private Button button1;
     }
 }

@@ -242,6 +242,9 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Vacía los registros de las piezas inspeccionadas del dia anterior 
+        /// </summary>
         public void VaciarDb()
         {
             string query = "DELETE FROM Operador_Pieza WHERE fecha < DATEADD(dd,-1, GETDATE());";
@@ -261,11 +264,10 @@ namespace prodProject
         }
 
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función de borrado de registro de la Base de Datos
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+    /// <summary>
+    ///Elimina de la tabla operador en la BD el registro con el numero especificado 
+    /// </summary>
+    /// <param name="numOperador"> identificador del registro a eliminar</param>
         public void EliminaOperador(string numOperador)
         {
             try
@@ -286,11 +288,11 @@ namespace prodProject
                 MessageBox.Show("Ocurrió un error al tratar de eliminar el registro: " + ex.Message);
             }
         }
-        /*
-        * --------------------------------------------------------------------------------------------------------------------------------
-        * Método de borrado de registro de la Pieza especificada de la Base de Datos
-        * --------------------------------------------------------------------------------------------------------------------------------
-        */
+       
+        /// <summary>
+        /// Elimina de la BD el registro especificado
+        /// </summary>
+        /// <param name="claveComp"> clave de la pieza que se eliminara</param>
         public void EliminaPieza(string claveComp)
         {
             try
@@ -310,32 +312,14 @@ namespace prodProject
             }
         }
 
-        public int GetEstandarPieza(string clave)
-        {
-            int estandarValue = -1;
-            String queryString = "SELECT estandar from EstandarPieza WHERE claveComp=@value";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", clave));  //Prevención de SQL Injection, mediante consultas parametrizadas 
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    estandarValue = record.GetInt32(0);
-                }
-                conn.Close();
-                return estandarValue; //Si no ha cumplido el tiempo de retrabajo, retorna false
-            }
-            catch (Exception e)
-            {
-                conn.Close();
-                MessageBox.Show(e.Message);
-                return estandarValue;
-            }
-           
-        }
-
+        /// <summary>
+        /// Inserta el registro de la pieza revisada a la base de datos
+        /// </summary>
+        /// <param name="numEtiqueta"> numero de Etiqueta inspeccionado</param>
+        /// <param name="serial"> numero de veces que ha sido revisada esa pieza</param>
+        /// <param name="numOperador">Numero de operador que reviso la pieza</param>
+        /// <param name="idPieza"></param>
+        /// <returns></returns>
         public bool InsertaRegInspeccion(string numEtiqueta,int serial,string numOperador,string idPieza)
         {
             String queryString;
@@ -395,50 +379,15 @@ namespace prodProject
             catch (Exception e1)
             {
                 MessageBox.Show(e1.Message, "Error insertando operador-pieza a la bd");
-                //ReturnToHome();
                 return false;
             }
         }
 
-        public Pieza GetPieza(string claveComp)
-        {
-            Pieza actual = new Pieza();
-            String queryString = "" + "SELECT" + " " + "claveComp, idPieza, descripcion, inicioCadena, finCadena" + " FROM " + "Pieza" + " WHERE " + "claveComp" + " = @value";
-
-            try
-            {
-
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", claveComp));  //Prevención de SQL Injection, mediante Parametrized Queries 
-
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                  
-                        actual.id = record.GetInt16(1);
-                        actual.descripcion = record.GetString(2);
-                        actual.inicioCadena = record.GetString(4);
-                        actual.finCadena = record.GetString(5);
-                        actual.pasos = record.GetInt16(6);  
-                    
-                  
-                    conn.Close();
-                    return actual;
-                }
-                conn.Close();
-                return actual;
-                
-            }
-            catch (Exception e1)
-            {
-                conn.Close();
-                MessageBox.Show(e1.Message);
-                return actual;
-            }
-            
-        }
-
+        /// <summary>
+        /// Devuelve el tiempo restante para volver a 
+        /// inspeccionar una pieza previamente revisada
+        /// </summary>
+        /// <returns> Tiempo restante</returns>
         public DateTime ChecaReingresoPieza()
         {
             DateTime actual = DateTime.Now;

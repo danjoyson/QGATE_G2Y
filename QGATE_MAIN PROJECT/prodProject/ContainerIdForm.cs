@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace prodProject
 {
-    public partial class ContainerIdForm : Form, IComponent
+    public partial class ContainerIdForm : Form
     {
 
         private List<string> containersId = new List<string>();
@@ -26,7 +26,7 @@ namespace prodProject
 
         public ContainerIdForm()
         {
-            Thread runMobi = new Thread(new ThreadStart(RunMobisys));
+            Thread runMobi = new Thread(new ThreadStart(processes.RunMobisys));
             //runMobi.Start();
             //RunMobisys();
             InitializeComponent();
@@ -34,51 +34,64 @@ namespace prodProject
             containerIdMessage.Anchor = AnchorStyles.None;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            configEstandar.Visible = false;
             timer = new System.Timers.Timer(24 * 60 * 60 * 1000);
             timer.Elapsed += BorrarLista;
             timer.Start();
 
         }
-
+        
         private void btnContainer_Click(object sender, EventArgs e)
         {
-            CheckContainerId();
+            StartRevision();
         }
 
-        private void CheckContainerId()
+        private bool CheckContainerId()
+        {
+            if (containerTxtBox.Text != String.Empty)
+            {
+                if (containersId.Contains(containerTxtBox.Text))
+                {
+                    setMessageLabel("Esta etiqueta ya fue escaneada");
+                    return false;
+                }
+               
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+                
+        }
+        /// <summary>
+        /// Valida que la etiqueta ingresada sea correcta y no haya sido introducida previamente
+        /// </summary>
+        private void StartRevision()
         {
             //Verificar que pasaría si la etiqueta que se introdujo es una etiqueta que ya se introdujo anteriormente o si es una etiqueta mala, no debe permitir continua qgate
             bool flagSuperposicion = false;
             int mobisysId = 0;
-            if (containerTxtBox.Text != String.Empty)
+            if(CheckContainerId())
             {
-                if (containersId.Contains(containerTxtBox.Text))
-                    setMessageLabel("Esta etiqueta ya fue escaneada");
-                else
+               SetEstandarLabel(Estandar);
+               mobisysId = processes.GetProcessID(processes.porcName);
+               if (mobisysId > 0)
                 {
                     containersId.Add(containerTxtBox.Text);
-                    //Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
-                    SetEstandarLable(Estandar);
-                    //flagSuperposicion = processes.AddToMobisys(containerTxtBox.Text);
-                    mobisysId = processes.GetProcessID(processes.porcName);
-                    if (mobisysId > 0)
+                    flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
+                    containerTxtBox.Text = "";
+                    if (flagSuperposicion)
+                        StartFormRevision();
+                    else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
+                }
+                else
                     {
-                        flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
-
-
-                        containerTxtBox.Text = "";
-                        if (flagSuperposicion)
-                            StartFormRevision();
-                        else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
-                    }
-                    else
-                    {
-                        if (containersId.Count > 0)
-                            containersId.RemoveAt(containersId.Count - 1);
                         MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
                     }
 
-                }
+                
 
             }
             else setMessageLabel("Se deben introducir todos los datos");
@@ -87,18 +100,26 @@ namespace prodProject
 
         }
 
-        private void SetEstandarLable(int estandar)
+        /// <summary>
+        /// Asigna el estandar de contenedor que será mostrado en el menu
+        /// </summary>
+        /// <param name="estandar"></param>
+        private void SetEstandarLabel(int estandar)
         {
-            switch (estandar) { 
+            switch (estandar)
+            {
                 case 4:
-                estandarLabel.Text = "México";
-                break;
-            case 35:
-                estandarLabel.Text = "China";
-                break;
+                    estandarLabel.Text = "México";
+                    break;
+                case 35:
+                    estandarLabel.Text = "China";
+                    break;
             }
         }
 
+        /// <summary>
+        /// Cambia a la ventana de inspeccion de pieza
+        /// </summary>
         private void StartFormRevision()
         {
             Form1 f1 = new(this);
@@ -106,13 +127,7 @@ namespace prodProject
             f1.StartForeignTimer();
 
         }
-        private void StartForms()
-        {
-            Form1 f1 = new(this);
-            this.Hide();
-            f1.StartForeignTimer();
 
-        }
         /// <summary>
         /// Devuelve el número de piesas por container id para el pais seleccionado
         /// </summary>
@@ -134,6 +149,10 @@ namespace prodProject
             return piezasContainer;
         }
 
+        /// <summary>
+        /// Asigna el menssaje que se mostrara en pantalla
+        /// </summary>
+        /// <param name="message"> mensaje que se muestra en pantalla cuando no se cumple una condición</param>
         private void setMessageLabel(string message)
         {
             containerIdMessage.Text = message;
@@ -157,21 +176,6 @@ namespace prodProject
             //this.Close();
             //f1.StartForeignTimer();
 
-        }
-        public void ExecuteAsAdmin(string fileName)
-        {
-            Process proc = new Process();
-            proc.StartInfo.FileName = fileName;
-            proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.Arguments = "";
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.Start();
-            Thread.Sleep(1000);
-        }
-
-        public void RunMobisys()
-        {
-            ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -203,6 +207,22 @@ namespace prodProject
             //LoginForm.contrato = this;
             this.Hide();
             LoginForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            configEstandar.Visible = true;
+        }
+
+
+        private void setEstandar_Click(object sender, EventArgs e)
+        {
+            if (comboBoxEstandar.SelectedIndex != -1)
+            {
+                Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
+                SetEstandarLabel(Estandar);
+                configEstandar.Visible = false;
+            }
         }
     }
 }

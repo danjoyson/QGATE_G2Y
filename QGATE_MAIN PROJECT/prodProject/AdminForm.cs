@@ -19,7 +19,6 @@ namespace prodProject
         {
             this.FormClosing += new FormClosingEventHandler(AdminForm_FormClosing);
             InitializeComponent();
-            configEstandar.Visible = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
         }
@@ -52,7 +51,7 @@ namespace prodProject
          */
         private void ReturnHome()
         {
-            
+
             Application.OpenForms["ContainerIdForm"].Show();
             this.Hide();
             this.Close();
@@ -157,20 +156,6 @@ namespace prodProject
             SimplePrinterForm nextForm = new(this);
             nextForm.Show();
             this.Hide();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if(comboBoxEstandar.SelectedIndex != -1)
-            {
-                ContainerIdForm.Estandar = SetEstandarCount(comboBoxEstandar.SelectedIndex);
-            }
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            configEstandar.Visible = true;
         }
 
         public int SetEstandarCount(int idCountry)

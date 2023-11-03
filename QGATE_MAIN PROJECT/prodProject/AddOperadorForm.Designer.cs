@@ -47,7 +47,7 @@
             // 
             NumOpTxtBox.Anchor = AnchorStyles.None;
             NumOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            NumOpTxtBox.Location = new Point(584, 167);
+            NumOpTxtBox.Location = new Point(602, 186);
             NumOpTxtBox.Name = "NumOpTxtBox";
             NumOpTxtBox.Size = new Size(461, 39);
             NumOpTxtBox.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             NameOpTxtBox.Anchor = AnchorStyles.None;
             NameOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            NameOpTxtBox.Location = new Point(584, 274);
+            NameOpTxtBox.Location = new Point(602, 293);
             NameOpTxtBox.Name = "NameOpTxtBox";
             NameOpTxtBox.Size = new Size(461, 39);
             NameOpTxtBox.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             SurnameOpTxtBox.Anchor = AnchorStyles.None;
             SurnameOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            SurnameOpTxtBox.Location = new Point(584, 397);
+            SurnameOpTxtBox.Location = new Point(602, 416);
             SurnameOpTxtBox.Name = "SurnameOpTxtBox";
             SurnameOpTxtBox.Size = new Size(461, 39);
             SurnameOpTxtBox.TabIndex = 2;
@@ -75,7 +75,7 @@
             // 
             label1.Anchor = AnchorStyles.None;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(199, 160);
+            label1.Location = new Point(217, 179);
             label1.Name = "label1";
             label1.Size = new Size(339, 50);
             label1.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             label2.Anchor = AnchorStyles.None;
             label2.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(218, 267);
+            label2.Location = new Point(236, 286);
             label2.Name = "label2";
             label2.Size = new Size(284, 50);
             label2.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             label3.Anchor = AnchorStyles.None;
             label3.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(218, 390);
+            label3.Location = new Point(236, 409);
             label3.Name = "label3";
             label3.Size = new Size(263, 51);
             label3.TabIndex = 5;
@@ -106,7 +106,7 @@
             pictureBox1.Anchor = AnchorStyles.Top;
             pictureBox1.BackgroundImage = Properties.Resources.OpIcon;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(526, 2);
+            pictureBox1.Location = new Point(544, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(385, 103);
             pictureBox1.TabIndex = 6;
@@ -118,7 +118,7 @@
             BtnAddOperator.BackColor = Color.LimeGreen;
             BtnAddOperator.FlatStyle = FlatStyle.Popup;
             BtnAddOperator.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnAddOperator.Location = new Point(467, 559);
+            BtnAddOperator.Location = new Point(485, 597);
             BtnAddOperator.Name = "BtnAddOperator";
             BtnAddOperator.Size = new Size(230, 120);
             BtnAddOperator.TabIndex = 7;
@@ -145,7 +145,7 @@
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(917, 2);
+            pictureBox2.Location = new Point(952, 2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(232, 103);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -156,7 +156,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1161, 691);
+            ClientSize = new Size(1196, 729);
             ControlBox = false;
             Controls.Add(pictureBox2);
             Controls.Add(BtnReturn);

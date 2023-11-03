@@ -27,7 +27,7 @@ namespace prodProject
         public static string printerIP = "";
         public static int dpi; //dpi de la impresora
 
-        private System.Timers.Timer t = new(60000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
+        private System.Timers.Timer t = new(120000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
         private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
         public static string lastZPLCommand = ""; //último comando de impresión enviado
 
@@ -164,11 +164,16 @@ namespace prodProject
             this.Hide();
             this.piezaTxtBox.Clear();
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función de conexión al servidor de SQL y consultas DML SELECT para revisar que exista cierto atributo en la BD.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
+     
+        /// <summary>
+        /// Verifica que el valor que se inserto exista en la base de datos
+        /// </summary>
+        /// <param name="dmlStatement"></param>
+        /// <param name="attribute"></param>
+        /// <param name="table"></param>
+        /// <param name="condition"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private bool CheckDataBase(String dmlStatement, String attribute, String table, String condition, String value)
         {
             String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
@@ -176,7 +181,6 @@ namespace prodProject
             try
             {
                 conn.Open();
-                //MessageBox.Show("Connection Granted");
                 //connection.connectionString = queryString;
                 SqlCommand cmd = new(queryString, conn);
                 cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
@@ -324,11 +328,11 @@ namespace prodProject
             }
 
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función para revisar que la información en las text box no contengan valores nulos o vacíos.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
+       
+        /// <summary>
+        /// Valida que se hayan ingresado todos los datos que solicita el sistema.
+        /// </summary>
+        /// <returns></returns>
         private bool NotNullTxtBoxData()
         {
             try

@@ -54,6 +54,10 @@ namespace prodProject
             return processID;
         }
 
+        /// <summary>
+        /// Coloca como ventana principal el proceso con el id especificado
+        /// </summary>
+        /// <param name="targetPID">id del programa a cambiar</param>
         public static void BringWindowToFrontByPID(int targetPID)
         {
             IntPtr targetWindowHandle = IntPtr.Zero;
@@ -82,6 +86,11 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Coloca como ventana principal el programa espeficiado
+        /// </summary>
+        /// <param name="procName">Nombre del programa que se desea colocar como principal</param>
+        /// <returns></returns>
         public bool SuperposePid(string procName)
         {
             int targetProcessPID = -1;
@@ -98,6 +107,10 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Coloca como ventana principal del sistema el programa quespecifica
+        /// </summary>
+        /// <param name="procName">Nombre del programa que se colocara como principal</param>
         public void SuperposeProgram(string procName)
         {
             string processName = procName;
@@ -171,13 +184,16 @@ namespace prodProject
             }
         }
        
-        //Manejo de superposición de pantallas desde mi proceso actual
+        /// <summary>
+        /// Oculta la ventana del proceso actual para realizar la inserción de la etiqueta dentro de mobisys
+        /// </summary>
+        /// <param name="text"> Valor de la etiqueta actual que se insertará en mobisys</param>
+        /// <returns></returns>
         public bool HideShowProcess(string text)
         {
             try
             {
                 CopyToClipboard(text);
-                //superposeProgram(mobisysProcessName);
                 System.Threading.Thread.Sleep(800);
                 Process p = Process.GetCurrentProcess();
                 int hWnd;
@@ -193,13 +209,16 @@ namespace prodProject
                 System.Threading.Thread.Sleep(2500);
                 ShowWindow(hWnd, SW_SHOW);
                 return true;
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return false;
             }
         }
 
-        //Método para el proceso de superposición, copiar texto al clipboard del sistema 
+        /// <summary>
+        /// Copia en el clipboard del sistema el texto especificado
+        /// </summary>
+        /// <param name="text">Texto que sera almacenado en clipboard</param>
         public void CopyToClipboard(String text)
         {
             try
@@ -212,7 +231,9 @@ namespace prodProject
             }
         }
 
-        //Método para pegar el texto que se encuentra en el clipboard del sistema 
+        /// <summary>
+        /// Ejecuta las teclas Ctrl+v virtuales para pegar el texto que se encuentra en el clipboard 
+        /// </summary>
         public void PasteFromClipboard()
         {
             try
@@ -225,6 +246,11 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Ejecuta los eventos de clic de mouse para entrar al menu de escaneo de contador automaticamente en mobisys,
+        /// es necesario que previamente se haya puesto mobisys como ventana principal.
+        /// </summary>
+        /// <param name="c"> Instancia de formulario actual para obtener las dimensiones de la ventana</param>
         public void GoToMenuMobiSys(ContainerIdForm c)
         {
 
@@ -254,6 +280,27 @@ namespace prodProject
             mouse_event(MOUSEEVENTF_LEFTUP, width / 2, (int)(height * (0.55)), 0, IntPtr.Zero);
             System.Threading.Thread.Sleep(1100);
         }
+
+        /// <summary>
+        /// Ejecuta el proceso del nombre indicado con la configuración definida para solicitar permisos de administrador
+        /// </summary>
+        /// <param name="fileName">Direccion del archivo exe del proceso que se desea ejecutar</param>
+        public void ExecuteAsAdmin(string fileName)
+        {
+            Process proc = new Process();
+            proc.StartInfo.FileName = fileName;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.Arguments = "";
+            proc.StartInfo.RedirectStandardOutput = true;
+            proc.Start();
+            Thread.Sleep(1000);
+        }
+
+        public void RunMobisys()
+        {
+            ExecuteAsAdmin("C:\\Program Files (x86)\\Mobisys GmbH\\Mobisys MSB Client\\MobisysClient100.exe");
+        }
+
 
 
     }
