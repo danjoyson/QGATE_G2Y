@@ -14,7 +14,6 @@ namespace prodProject
         private Form1 f1;
         private EmailWarner emailW; //objeto de la clase que se encarga de enviar los emails
         private string textEtiqueta;
-        private string currentProcess = "";
         private System.Timers.Timer buttonsTimer = new(3000); //timer de bloqueo de botón OK (duración inicial, luego cambia)
         private System.Timers.Timer NOKTimer = new(60000); //timer para el Punto 10. Si pasan 60 segundos, se presionará NOK automáticamente.
         private bool timerP9Flag = false;                   //En realidad funciona para el P10.
@@ -376,29 +375,28 @@ namespace prodProject
             {
                 if (InsertDbRecord())
                 {
-                    if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la m4663464isma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
+                    if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
-                        /*ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
-                            MessageBox.Show("No se pudo generar la etiqueta de NOK");*/
+                            //MessageBox.Show("No se pudo generar la etiqueta de NOK");
+                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         //MessageBox.Show("Impresion de etiqueta NOK","Impresion de etiqueta");
                         this.blockAppClosing = true;
                         BlockApp();
-                        AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta",5);
-
                         this.Close();
                     }
                     else
                     {
-
-                        /*ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                       
+                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        if(!z.printOkNokLabelZPL(Form1.dpi))
+                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         //Impresión de etiqueta NOK
-                        if (!z.printOkNokLabelZPL(Form1.dpi))
-                            MessageBox.Show("No se pudo generar la etiqueta de NOK");*/
+                        //MessageBox.Show("No se pudo generar la etiqueta de NOK");                           
                         emailW.SendNOKWarning();
                         //MessageBox.Show("Impresion de etiqueta NOK");
-                        AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         ReturnToHome();
 
                     }

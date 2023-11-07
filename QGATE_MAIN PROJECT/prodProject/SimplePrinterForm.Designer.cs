@@ -34,18 +34,20 @@
             BtnReturn = new Button();
             label1 = new Label();
             pictureBox3 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // BtnPrintTest
             // 
             BtnPrintTest.Anchor = AnchorStyles.None;
-            BtnPrintTest.BackColor = SystemColors.ActiveCaption;
+            BtnPrintTest.BackColor = Color.SteelBlue;
             BtnPrintTest.FlatStyle = FlatStyle.Popup;
-            BtnPrintTest.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnPrintTest.Location = new Point(53, 191);
+            BtnPrintTest.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnPrintTest.ForeColor = SystemColors.ButtonFace;
+            BtnPrintTest.Location = new Point(262, 270);
             BtnPrintTest.Name = "BtnPrintTest";
-            BtnPrintTest.Size = new Size(249, 192);
+            BtnPrintTest.Size = new Size(978, 110);
             BtnPrintTest.TabIndex = 0;
             BtnPrintTest.Text = "Impresión de prueba";
             BtnPrintTest.UseVisualStyleBackColor = false;
@@ -54,12 +56,13 @@
             // BtnPrintLastLabel
             // 
             BtnPrintLastLabel.Anchor = AnchorStyles.None;
-            BtnPrintLastLabel.BackColor = Color.Khaki;
+            BtnPrintLastLabel.BackColor = Color.SteelBlue;
             BtnPrintLastLabel.FlatStyle = FlatStyle.Popup;
-            BtnPrintLastLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnPrintLastLabel.Location = new Point(553, 191);
+            BtnPrintLastLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnPrintLastLabel.ForeColor = SystemColors.Window;
+            BtnPrintLastLabel.Location = new Point(262, 587);
             BtnPrintLastLabel.Name = "BtnPrintLastLabel";
-            BtnPrintLastLabel.Size = new Size(258, 192);
+            BtnPrintLastLabel.Size = new Size(978, 111);
             BtnPrintLastLabel.TabIndex = 1;
             BtnPrintLastLabel.Text = "Reimprimir última etiqueta impresa";
             BtnPrintLastLabel.UseVisualStyleBackColor = false;
@@ -67,14 +70,13 @@
             // 
             // BtnReturn
             // 
-            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
             BtnReturn.FlatStyle = FlatStyle.Popup;
-            BtnReturn.Location = new Point(12, 12);
+            BtnReturn.Location = new Point(42, 22);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(107, 109);
+            BtnReturn.Size = new Size(192, 148);
             BtnReturn.TabIndex = 3;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
@@ -84,7 +86,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(166, 430);
+            label1.Location = new Point(450, 886);
             label1.Name = "label1";
             label1.Size = new Size(534, 32);
             label1.TabIndex = 4;
@@ -96,19 +98,35 @@
             pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(595, 12);
+            pictureBox3.Location = new Point(1221, 27);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(216, 71);
+            pictureBox3.Size = new Size(281, 156);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.None;
+            button1.BackColor = Color.SteelBlue;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(262, 428);
+            button1.Name = "button1";
+            button1.Size = new Size(978, 112);
+            button1.TabIndex = 21;
+            button1.Text = "Configurar impresora";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // SimplePrinterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(857, 490);
+            ClientSize = new Size(1544, 1061);
             ControlBox = false;
+            Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(label1);
             Controls.Add(BtnReturn);
@@ -131,5 +149,6 @@
         private Button BtnReturn;
         private Label label1;
         private PictureBox pictureBox3;
+        private Button button1;
     }
 }

@@ -137,15 +137,58 @@ namespace prodProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al imprimir:" + ex.Message);
+                //MessageBox.Show("Ocurrió un error al imprimir:" + ex.Message);
                 return false;
             }
             finally
             {
                 printerConn.Close();
+                
             }
         }
 
+
+        public async Task<bool> PrintOkNokLabelZPLAsync(int dpi)
+        {
+            try
+            {
+                await Task.Run(() => printerConn.Open()); // Ejecuta la apertura en un hilo separado
+                ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
+                PrinterStatus printerStatus = printer.GetCurrentStatus();
+                string zplData = null;
+
+                if (printerStatus.isReadyToPrint)
+                {
+                    switch (dpi)
+                    {
+                        case 203:
+                            zplData = "^XA^FO90,45^AQ,150,150^FDNOK^FS^XZ";
+                            break;
+
+                        case 300:
+                            zplData = "^XA^FO150,45^AQ,200,200^FDNOK^FS^XZ";
+                            break;
+
+                        default: //600 dpi
+                            zplData = "^XA^FO440,170^AQ,300,300^FDNOK^FS^XZ";
+                            break;
+                    }
+
+                    Form1.lastZPLCommand = zplData;
+                    await Task.Run(()=>printerConn.Write(Encoding.UTF8.GetBytes(zplData)));
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
+                return false;
+            }
+            finally
+            {
+                printerConn.Close(); // Cierra la conexión de forma sincrónica
+            }
+        }
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------

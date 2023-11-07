@@ -8,7 +8,6 @@ namespace prodProject
 
         DatabaseConnector db = new DatabaseConnector();
         public IComponent contrato { get; set; }
-        private int estandarContainer;
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Constructor del formulario.

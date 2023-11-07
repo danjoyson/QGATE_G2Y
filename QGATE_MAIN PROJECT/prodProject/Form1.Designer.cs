@@ -45,9 +45,9 @@
             // 
             opeTxtBox.Anchor = AnchorStyles.None;
             opeTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
-            opeTxtBox.Location = new Point(301, 91);
+            opeTxtBox.Location = new Point(427, 292);
             opeTxtBox.Name = "opeTxtBox";
-            opeTxtBox.Size = new Size(480, 54);
+            opeTxtBox.Size = new Size(670, 54);
             opeTxtBox.TabIndex = 0;
             opeTxtBox.TextAlign = HorizontalAlignment.Center;
             opeTxtBox.TextChanged += OpeTxtBox_TextChanged;
@@ -57,7 +57,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(431, 41);
+            label1.Location = new Point(654, 229);
             label1.Name = "label1";
             label1.Size = new Size(252, 33);
             label1.TabIndex = 1;
@@ -73,7 +73,7 @@
             btn1.FlatAppearance.BorderSize = 10;
             btn1.FlatStyle = FlatStyle.Popup;
             btn1.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btn1.Location = new Point(730, 398);
+            btn1.Location = new Point(1066, 633);
             btn1.Name = "btn1";
             btn1.Size = new Size(247, 183);
             btn1.TabIndex = 2;
@@ -86,7 +86,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(448, 219);
+            label2.Location = new Point(669, 420);
             label2.Name = "label2";
             label2.Size = new Size(207, 33);
             label2.TabIndex = 3;
@@ -98,7 +98,7 @@
             piezaTxtBox.Anchor = AnchorStyles.None;
             piezaTxtBox.CharacterCasing = CharacterCasing.Upper;
             piezaTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
-            piezaTxtBox.Location = new Point(206, 265);
+            piezaTxtBox.Location = new Point(427, 466);
             piezaTxtBox.MaxLength = 40;
             piezaTxtBox.Name = "piezaTxtBox";
             piezaTxtBox.Size = new Size(670, 54);
@@ -113,7 +113,7 @@
             BtnOpChange.Cursor = Cursors.Hand;
             BtnOpChange.FlatStyle = FlatStyle.Popup;
             BtnOpChange.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            BtnOpChange.Location = new Point(113, 398);
+            BtnOpChange.Location = new Point(255, 630);
             BtnOpChange.Name = "BtnOpChange";
             BtnOpChange.Size = new Size(263, 186);
             BtnOpChange.TabIndex = 5;
@@ -152,7 +152,7 @@
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(814, 12);
+            pictureBox3.Location = new Point(1256, 12);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(249, 97);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -163,7 +163,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1097, 654);
+            ClientSize = new Size(1539, 1057);
             Controls.Add(pictureBox3);
             Controls.Add(messageLabel);
             Controls.Add(BtnSettings);

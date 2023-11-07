@@ -10,6 +10,7 @@ namespace prodProject
 
         ContainerIdForm containerIdMenu;
         WinScanForm winScanForm;
+        Printer p;
         DatabaseConnector db = new DatabaseConnector();
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
@@ -25,8 +26,8 @@ namespace prodProject
         public static string claveComp = "";
         public static int formSlideCont = 1; //Contador que maneja qué imagen del formulario se mostrará
         public static string printerIP = "";
-        public static int dpi; //dpi de la impresora
-
+        public static int dpi = 0; //dpi de la impresora
+        public string[] printerData;
         private System.Timers.Timer t = new(120000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
         private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
         public static string lastZPLCommand = ""; //último comando de impresión enviado
@@ -60,9 +61,13 @@ namespace prodProject
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             estandar = waitMenu.estandarContainer;
             CsvReader cr = new();
-            printerIP = cr.GetPrinterIP();
+            printerData = cr.GetPrinterIP();
+            printerIP = printerData[1];
+            p.IP = printerData[1];
+            dpi = Convert.ToInt32(printerData[2]);
+            p.DPI = Convert.ToInt32(printerData[2]);
             connectionString = CsvReader.SetConnectionString();
-            if (connectionString != string.Empty && printerIP != string.Empty)
+            if (connectionString != string.Empty && printerIP != string.Empty && dpi != 0)
             {
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
@@ -70,7 +75,7 @@ namespace prodProject
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
-                dpi = 203;
+
             }
             else
             {
@@ -87,9 +92,11 @@ namespace prodProject
             estandar = ContainerIdForm.Estandar;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
-            printerIP = cr.GetPrinterIP();
+            printerData = cr.GetPrinterIP();
+            printerIP = printerData[1];
+            dpi = Convert.ToInt32(printerData[2]);
             connectionString = CsvReader.SetConnectionString();
-            if (connectionString != string.Empty && printerIP != string.Empty)
+            if (connectionString != string.Empty && printerIP != string.Empty && dpi != 0)
             {
                 connectionString = connectionString + "; Connection Timeout = 30";
                 conn = new SqlConnection(connectionString);
@@ -98,7 +105,6 @@ namespace prodProject
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
-                dpi = 203;
             }
             else
             {
@@ -120,7 +126,7 @@ namespace prodProject
          * Función ejecutada al presionar el botón "Comenzar"
          * 1. Cambia visualmente al cursor com una rueda de carga.
          * 2. Primero llama a la función para revisar que no haya texto vacío.
-         * 3. Bloquea el número de operador para no tener que reingresarlo.
+         * 3. Bloquea el número de operador para no tener que reingresarlo.4536587762
          * 4. Después llama a la función de conexión a la base de datos para revisar la existencia del número de Operador y la Pieza.
          * 5. Extrae los datos de la pieza (claveComp, idPieza, descripción, inicioCadena y finCadena)
          * 5.1 Extrae de la tabla pieza los datos del numero de pasos de revisión y el pasoReescaneo
@@ -137,6 +143,7 @@ namespace prodProject
             {
                 if (CheckDataBase("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text) && CheckDataBase("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText))
                 {
+
 
                     //getPiezaPartSteps();
                     if (CheckNotSerialZero())
@@ -160,11 +167,13 @@ namespace prodProject
         private void StartForms()
         {
             messageLabel.Text = "";
+
             Form2 f2 = new(this);
+            Thread.Sleep(1000);
             this.Hide();
             this.piezaTxtBox.Clear();
         }
-     
+
         /// <summary>
         /// Verifica que el valor que se inserto exista en la base de datos
         /// </summary>
@@ -328,7 +337,7 @@ namespace prodProject
             }
 
         }
-       
+
         /// <summary>
         /// Valida que se hayan ingresado todos los datos que solicita el sistema.
         /// </summary>

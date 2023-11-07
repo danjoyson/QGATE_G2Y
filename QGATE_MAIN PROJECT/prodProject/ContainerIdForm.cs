@@ -40,7 +40,7 @@ namespace prodProject
             timer.Start();
 
         }
-        
+
         private void btnContainer_Click(object sender, EventArgs e)
         {
             StartRevision();
@@ -55,7 +55,7 @@ namespace prodProject
                     setMessageLabel("Esta etiqueta ya fue escaneada");
                     return false;
                 }
-               
+
                 return true;
 
             }
@@ -63,7 +63,7 @@ namespace prodProject
             {
                 return false;
             }
-                
+
         }
         /// <summary>
         /// Valida que la etiqueta ingresada sea correcta y no haya sido introducida previamente
@@ -73,11 +73,11 @@ namespace prodProject
             //Verificar que pasaría si la etiqueta que se introdujo es una etiqueta que ya se introdujo anteriormente o si es una etiqueta mala, no debe permitir continua qgate
             bool flagSuperposicion = false;
             int mobisysId = 0;
-            if(CheckContainerId())
+            if (CheckContainerId())
             {
-               SetEstandarLabel(Estandar);
-               mobisysId = processes.GetProcessID(processes.porcName);
-               if (mobisysId > 0)
+                SetEstandarLabel(Estandar);
+                mobisysId = processes.GetProcessID(processes.porcName);
+                if (mobisysId > 0)
                 {
                     containersId.Add(containerTxtBox.Text);
                     flagSuperposicion = processes.HideShowProcess(containerTxtBox.Text);
@@ -87,11 +87,11 @@ namespace prodProject
                     else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
                 }
                 else
-                    {
-                        MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
-                    }
+                {
+                    MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
+                }
 
-                
+
 
             }
             else setMessageLabel("Se deben introducir todos los datos");
@@ -123,6 +123,7 @@ namespace prodProject
         private void StartFormRevision()
         {
             Form1 f1 = new(this);
+            Thread.Sleep(1000);
             this.Hide();
             f1.StartForeignTimer();
 

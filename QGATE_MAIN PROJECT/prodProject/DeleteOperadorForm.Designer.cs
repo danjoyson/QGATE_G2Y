@@ -41,49 +41,49 @@
             // 
             // BtnReturn
             // 
-            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.FlatStyle = FlatStyle.Popup;
             BtnReturn.Location = new Point(12, 12);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(118, 113);
+            BtnReturn.Size = new Size(346, 170);
             BtnReturn.TabIndex = 0;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.None;
+            label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(48, 188);
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(48, 462);
             label1.Name = "label1";
-            label1.Size = new Size(239, 50);
+            label1.Size = new Size(265, 60);
             label1.TabIndex = 1;
             label1.Text = "Número de operador a\r\neliminar en Base de Datos";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // numOpTxtBox
             // 
-            numOpTxtBox.Anchor = AnchorStyles.None;
-            numOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            numOpTxtBox.Location = new Point(329, 192);
+            numOpTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            numOpTxtBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            numOpTxtBox.Location = new Point(329, 466);
             numOpTxtBox.Name = "numOpTxtBox";
-            numOpTxtBox.Size = new Size(433, 39);
+            numOpTxtBox.Size = new Size(1135, 50);
             numOpTxtBox.TabIndex = 2;
             numOpTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
             // BtnDelete
             // 
-            BtnDelete.Anchor = AnchorStyles.None;
+            BtnDelete.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             BtnDelete.BackColor = Color.Red;
             BtnDelete.Cursor = Cursors.Hand;
             BtnDelete.FlatStyle = FlatStyle.Popup;
             BtnDelete.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnDelete.Location = new Point(317, 343);
+            BtnDelete.ForeColor = SystemColors.ButtonHighlight;
+            BtnDelete.Location = new Point(399, 663);
             BtnDelete.Name = "BtnDelete";
-            BtnDelete.Size = new Size(218, 106);
+            BtnDelete.Size = new Size(826, 110);
             BtnDelete.TabIndex = 3;
             BtnDelete.Text = "Eliminar";
             BtnDelete.UseVisualStyleBackColor = false;
@@ -91,23 +91,23 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.BackgroundImage = Properties.Resources.OpIcon;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(548, 12);
+            pictureBox1.Location = new Point(1007, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(105, 113);
+            pictureBox1.Size = new Size(290, 135);
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(659, 31);
+            pictureBox3.Location = new Point(1303, 31);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(172, 66);
+            pictureBox3.Size = new Size(230, 88);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -116,7 +116,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(843, 466);
+            ClientSize = new Size(1545, 1015);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);

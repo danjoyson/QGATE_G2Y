@@ -49,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Spire.Presentation" Version="8.10.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="Zebra.Printer.SDK" Version="2.15.2634" />
   </ItemGroup>

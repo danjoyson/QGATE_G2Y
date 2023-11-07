@@ -37,6 +37,9 @@
     <Compile Update="Form4_Blocker.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PrintConfForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="SimplePrinterForm.cs">
       <SubType>Form</SubType>
     </Compile>

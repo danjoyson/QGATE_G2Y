@@ -39,7 +39,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(479, 274);
+            label1.Location = new Point(506, 310);
             label1.Name = "label1";
             label1.Size = new Size(235, 30);
             label1.TabIndex = 0;
@@ -52,7 +52,7 @@
             pictureBox3.Dock = DockStyle.Top;
             pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(1193, 60);
+            pictureBox3.Size = new Size(1246, 60);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -61,7 +61,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1193, 588);
+            ClientSize = new Size(1246, 661);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(label1);

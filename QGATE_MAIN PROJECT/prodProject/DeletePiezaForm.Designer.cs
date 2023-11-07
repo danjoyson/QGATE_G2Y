@@ -54,7 +54,7 @@
             groupBox1.Anchor = AnchorStyles.None;
             groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(12, 84);
+            groupBox1.Location = new Point(259, 281);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(498, 119);
             groupBox1.TabIndex = 4;
@@ -80,7 +80,7 @@
             label7.Anchor = AnchorStyles.None;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(864, 135);
+            label7.Location = new Point(1108, 330);
             label7.Name = "label7";
             label7.Size = new Size(45, 21);
             label7.TabIndex = 14;
@@ -91,7 +91,7 @@
             label6.Anchor = AnchorStyles.None;
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(1045, 95);
+            label6.Location = new Point(1277, 296);
             label6.Name = "label6";
             label6.Size = new Size(133, 21);
             label6.TabIndex = 13;
@@ -103,7 +103,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(673, 47);
+            label1.Location = new Point(1004, 216);
             label1.Name = "label1";
             label1.Size = new Size(372, 37);
             label1.TabIndex = 9;
@@ -115,7 +115,7 @@
             label5.Anchor = AnchorStyles.None;
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(594, 84);
+            label5.Location = new Point(818, 263);
             label5.Name = "label5";
             label5.Size = new Size(158, 21);
             label5.TabIndex = 12;
@@ -127,7 +127,7 @@
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.BackgroundImage = Properties.Resources.DeletePieza;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(528, 116);
+            pictureBox1.Location = new Point(772, 296);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(330, 104);
             pictureBox1.TabIndex = 10;
@@ -140,7 +140,7 @@
             label3.BackColor = Color.LightSteelBlue;
             label3.BorderStyle = BorderStyle.FixedSingle;
             label3.Font = new Font("Calibri", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(927, 127);
+            label3.Location = new Point(1174, 324);
             label3.Name = "label3";
             label3.Size = new Size(368, 31);
             label3.TabIndex = 11;
@@ -152,9 +152,9 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(1065, 12);
+            pictureBox2.Location = new Point(1241, 55);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(85, 63);
+            pictureBox2.Size = new Size(124, 118);
             pictureBox2.TabIndex = 15;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
@@ -163,10 +163,10 @@
             // 
             claveTxtBox.Anchor = AnchorStyles.None;
             claveTxtBox.CharacterCasing = CharacterCasing.Upper;
-            claveTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            claveTxtBox.Location = new Point(437, 349);
+            claveTxtBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            claveTxtBox.Location = new Point(681, 503);
             claveTxtBox.Name = "claveTxtBox";
-            claveTxtBox.Size = new Size(666, 39);
+            claveTxtBox.Size = new Size(666, 50);
             claveTxtBox.TabIndex = 16;
             claveTxtBox.TextChanged += claveTxtBox_TextChanged;
             // 
@@ -174,10 +174,10 @@
             // 
             label4.Anchor = AnchorStyles.None;
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(171, 336);
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(350, 483);
             label4.Name = "label4";
-            label4.Size = new Size(231, 64);
+            label4.Size = new Size(304, 90);
             label4.TabIndex = 17;
             label4.Text = "Número de parte a\r\neliminar";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -188,9 +188,10 @@
             BtnDeletePieza.BackColor = Color.Red;
             BtnDeletePieza.FlatStyle = FlatStyle.Popup;
             BtnDeletePieza.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnDeletePieza.Location = new Point(507, 583);
+            BtnDeletePieza.ForeColor = SystemColors.ButtonHighlight;
+            BtnDeletePieza.Location = new Point(743, 737);
             BtnDeletePieza.Name = "BtnDeletePieza";
-            BtnDeletePieza.Size = new Size(311, 138);
+            BtnDeletePieza.Size = new Size(319, 158);
             BtnDeletePieza.TabIndex = 18;
             BtnDeletePieza.Text = "Eliminar";
             BtnDeletePieza.UseVisualStyleBackColor = false;
@@ -202,9 +203,9 @@
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.FlatStyle = FlatStyle.Popup;
-            BtnReturn.Location = new Point(12, 583);
+            BtnReturn.Location = new Point(48, 55);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(129, 112);
+            BtnReturn.Size = new Size(150, 139);
             BtnReturn.TabIndex = 19;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
@@ -214,9 +215,9 @@
             pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1156, 12);
+            pictureBox3.Location = new Point(1395, 55);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(139, 63);
+            pictureBox3.Size = new Size(288, 118);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -226,7 +227,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1302, 753);
+            ClientSize = new Size(1790, 1061);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(BtnReturn);

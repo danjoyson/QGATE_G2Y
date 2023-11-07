@@ -36,15 +36,17 @@
             BtnLogin = new Button();
             BtnReturn = new Button();
             pictureBox3 = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.None;
+            label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(456, 152);
+            label1.Location = new Point(876, 423);
             label1.Name = "label1";
             label1.Size = new Size(102, 32);
             label1.TabIndex = 0;
@@ -52,10 +54,10 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.None;
+            label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(440, 320);
+            label2.Location = new Point(876, 602);
             label2.Name = "label2";
             label2.Size = new Size(143, 32);
             label2.TabIndex = 1;
@@ -63,24 +65,24 @@
             // 
             // userTxtBox
             // 
-            userTxtBox.Anchor = AnchorStyles.None;
+            userTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             userTxtBox.CharacterCasing = CharacterCasing.Upper;
-            userTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            userTxtBox.Location = new Point(254, 187);
+            userTxtBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            userTxtBox.Location = new Point(345, 472);
             userTxtBox.Name = "userTxtBox";
-            userTxtBox.Size = new Size(512, 43);
+            userTxtBox.Size = new Size(1012, 50);
             userTxtBox.TabIndex = 2;
             userTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
             // passwordTxtBox
             // 
-            passwordTxtBox.Anchor = AnchorStyles.None;
+            passwordTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             passwordTxtBox.CharacterCasing = CharacterCasing.Upper;
-            passwordTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            passwordTxtBox.Location = new Point(254, 366);
+            passwordTxtBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
+            passwordTxtBox.Location = new Point(345, 653);
             passwordTxtBox.Name = "passwordTxtBox";
             passwordTxtBox.PasswordChar = '*';
-            passwordTxtBox.Size = new Size(512, 43);
+            passwordTxtBox.Size = new Size(1012, 50);
             passwordTxtBox.TabIndex = 3;
             passwordTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -91,9 +93,9 @@
             BtnLogin.BackColor = Color.Khaki;
             BtnLogin.FlatStyle = FlatStyle.Popup;
             BtnLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnLogin.Location = new Point(409, 575);
+            BtnLogin.Location = new Point(713, 830);
             BtnLogin.Name = "BtnLogin";
-            BtnLogin.Size = new Size(174, 103);
+            BtnLogin.Size = new Size(418, 191);
             BtnLogin.TabIndex = 4;
             BtnLogin.Text = "Acceder";
             BtnLogin.UseVisualStyleBackColor = false;
@@ -101,36 +103,48 @@
             // 
             // BtnReturn
             // 
-            BtnReturn.Anchor = AnchorStyles.None;
             BtnReturn.BackgroundImage = Properties.Resources._return;
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
             BtnReturn.FlatStyle = FlatStyle.Popup;
             BtnReturn.Location = new Point(12, 12);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(133, 113);
+            BtnReturn.Size = new Size(208, 151);
             BtnReturn.TabIndex = 5;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(704, 12);
+            pictureBox3.Location = new Point(1354, 23);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(235, 93);
+            pictureBox3.Size = new Size(299, 151);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Image = Properties.Resources.login2;
+            pictureBox1.Location = new Point(798, 156);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(180, 174);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 21;
+            pictureBox1.TabStop = false;
             // 
             // AdminLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(951, 690);
+            ClientSize = new Size(1678, 1057);
             ControlBox = false;
+            Controls.Add(pictureBox1);
             Controls.Add(pictureBox3);
             Controls.Add(BtnReturn);
             Controls.Add(BtnLogin);
@@ -145,6 +159,7 @@
             Text = "Login de configuración";
             Load += AdminLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -158,5 +173,6 @@
         private Button BtnLogin;
         private Button BtnReturn;
         private PictureBox pictureBox3;
+        private PictureBox pictureBox1;
     }
 }

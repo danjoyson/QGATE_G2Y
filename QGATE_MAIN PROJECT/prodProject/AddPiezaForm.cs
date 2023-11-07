@@ -62,6 +62,10 @@ namespace prodProject
             }
         }
 
+        private void SaveImages(string folderName)
+        {
+
+        }
         /// <summary>
         /// Limpia los inputs en los que el usuario introdujo datos
         /// </summary>
@@ -140,6 +144,15 @@ namespace prodProject
         private void ClaveTxtBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Document dc = new Document();
+            string path="";
+            path = dc.getPath();
+            MessageBox.Show(path);
+            //dc.PptxToImages(path);
         }
     }
 }

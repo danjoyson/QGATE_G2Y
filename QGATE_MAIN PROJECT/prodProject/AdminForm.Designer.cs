@@ -47,6 +47,7 @@
             groupBox2 = new GroupBox();
             label6 = new Label();
             pictureBox3 = new PictureBox();
+            label7 = new Label();
             GB1.SuspendLayout();
             GB2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -56,15 +57,15 @@
             // 
             // GB1
             // 
-            GB1.Anchor = AnchorStyles.None;
+            GB1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             GB1.Controls.Add(label2);
             GB1.Controls.Add(label1);
             GB1.Controls.Add(BtnDeleteOp);
             GB1.Controls.Add(BtnAddOp);
             GB1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            GB1.Location = new Point(160, 38);
+            GB1.Location = new Point(141, 211);
             GB1.Name = "GB1";
-            GB1.Size = new Size(558, 390);
+            GB1.Size = new Size(697, 390);
             GB1.TabIndex = 0;
             GB1.TabStop = false;
             GB1.Text = "Operadores";
@@ -73,7 +74,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(229, 260);
+            label2.Location = new Point(229, 253);
             label2.Name = "label2";
             label2.Size = new Size(297, 50);
             label2.TabIndex = 3;
@@ -97,9 +98,9 @@
             BtnDeleteOp.BackColor = SystemColors.GradientInactiveCaption;
             BtnDeleteOp.FlatStyle = FlatStyle.Popup;
             BtnDeleteOp.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnDeleteOp.Location = new Point(18, 220);
+            BtnDeleteOp.Location = new Point(18, 207);
             BtnDeleteOp.Name = "BtnDeleteOp";
-            BtnDeleteOp.Size = new Size(180, 126);
+            BtnDeleteOp.Size = new Size(205, 139);
             BtnDeleteOp.TabIndex = 1;
             BtnDeleteOp.Text = "Baja de Operador";
             BtnDeleteOp.UseVisualStyleBackColor = false;
@@ -112,7 +113,7 @@
             BtnAddOp.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             BtnAddOp.Location = new Point(18, 26);
             BtnAddOp.Name = "BtnAddOp";
-            BtnAddOp.Size = new Size(180, 126);
+            BtnAddOp.Size = new Size(205, 145);
             BtnAddOp.TabIndex = 0;
             BtnAddOp.Text = "Alta de Operador";
             BtnAddOp.UseVisualStyleBackColor = false;
@@ -120,15 +121,15 @@
             // 
             // GB2
             // 
-            GB2.Anchor = AnchorStyles.None;
+            GB2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             GB2.Controls.Add(label4);
             GB2.Controls.Add(label3);
             GB2.Controls.Add(BtnDeletePieza);
             GB2.Controls.Add(BtnAddPi);
             GB2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            GB2.Location = new Point(743, 50);
+            GB2.Location = new Point(862, 211);
             GB2.Name = "GB2";
-            GB2.Size = new Size(507, 378);
+            GB2.Size = new Size(1098, 390);
             GB2.TabIndex = 1;
             GB2.TabStop = false;
             GB2.Text = "Piezas";
@@ -137,7 +138,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(218, 272);
+            label4.Location = new Point(227, 270);
             label4.Name = "label4";
             label4.Size = new Size(274, 50);
             label4.TabIndex = 3;
@@ -148,7 +149,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(213, 66);
+            label3.Location = new Point(227, 66);
             label3.Name = "label3";
             label3.Size = new Size(279, 50);
             label3.TabIndex = 2;
@@ -162,7 +163,7 @@
             BtnDeletePieza.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             BtnDeletePieza.Location = new Point(18, 232);
             BtnDeletePieza.Name = "BtnDeletePieza";
-            BtnDeletePieza.Size = new Size(180, 126);
+            BtnDeletePieza.Size = new Size(203, 152);
             BtnDeletePieza.TabIndex = 1;
             BtnDeletePieza.Text = "Baja de pieza";
             BtnDeletePieza.UseVisualStyleBackColor = false;
@@ -173,9 +174,9 @@
             BtnAddPi.BackColor = SystemColors.GradientInactiveCaption;
             BtnAddPi.FlatStyle = FlatStyle.Popup;
             BtnAddPi.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnAddPi.Location = new Point(18, 26);
+            BtnAddPi.Location = new Point(6, 26);
             BtnAddPi.Name = "BtnAddPi";
-            BtnAddPi.Size = new Size(180, 126);
+            BtnAddPi.Size = new Size(215, 145);
             BtnAddPi.TabIndex = 0;
             BtnAddPi.Text = "Alta de pieza";
             BtnAddPi.UseVisualStyleBackColor = false;
@@ -187,9 +188,9 @@
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
             BtnReturn.FlatStyle = FlatStyle.Popup;
-            BtnReturn.Location = new Point(12, 38);
+            BtnReturn.Location = new Point(12, 12);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(107, 109);
+            BtnReturn.Size = new Size(156, 146);
             BtnReturn.TabIndex = 2;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
@@ -202,7 +203,7 @@
             BtnClearDB.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             BtnClearDB.Location = new Point(18, 32);
             BtnClearDB.Name = "BtnClearDB";
-            BtnClearDB.Size = new Size(180, 126);
+            BtnClearDB.Size = new Size(205, 148);
             BtnClearDB.TabIndex = 3;
             BtnClearDB.Text = "Limpiar Base de Datos";
             BtnClearDB.UseVisualStyleBackColor = false;
@@ -212,7 +213,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(209, 48);
+            label5.Location = new Point(229, 67);
             label5.Name = "label5";
             label5.Size = new Size(283, 75);
             label5.TabIndex = 4;
@@ -226,33 +227,33 @@
             BtnPrinterOpt.BackgroundImageLayout = ImageLayout.Zoom;
             BtnPrinterOpt.Cursor = Cursors.Hand;
             BtnPrinterOpt.FlatStyle = FlatStyle.Popup;
-            BtnPrinterOpt.Location = new Point(18, 39);
+            BtnPrinterOpt.Location = new Point(18, 32);
             BtnPrinterOpt.Name = "BtnPrinterOpt";
-            BtnPrinterOpt.Size = new Size(152, 135);
+            BtnPrinterOpt.Size = new Size(193, 162);
             BtnPrinterOpt.TabIndex = 9;
             BtnPrinterOpt.UseVisualStyleBackColor = false;
             BtnPrinterOpt.Click += BtnPrinterOpt_Click;
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = AnchorStyles.None;
+            groupBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(BtnClearDB);
             groupBox1.Controls.Add(label5);
-            groupBox1.Location = new Point(160, 559);
+            groupBox1.Location = new Point(141, 669);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(558, 194);
+            groupBox1.Size = new Size(697, 209);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Base de Datos";
             // 
             // groupBox2
             // 
-            groupBox2.Anchor = AnchorStyles.None;
+            groupBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(BtnPrinterOpt);
-            groupBox2.Location = new Point(743, 559);
+            groupBox2.Location = new Point(862, 669);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(507, 194);
+            groupBox2.Size = new Size(1080, 209);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Impresiones";
@@ -261,7 +262,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(176, 73);
+            label6.Location = new Point(217, 73);
             label6.Name = "label6";
             label6.Size = new Size(223, 25);
             label6.TabIndex = 4;
@@ -271,22 +272,36 @@
             // 
             // pictureBox3
             // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1118, 2);
+            pictureBox3.Location = new Point(1768, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(185, 53);
+            pictureBox3.Size = new Size(240, 92);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = SystemColors.ControlLight;
+            label7.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(589, 27);
+            label7.Name = "label7";
+            label7.Size = new Size(378, 50);
+            label7.TabIndex = 21;
+            label7.Text = "Menu administrador";
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1315, 807);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(2020, 1061);
             ControlBox = false;
+            Controls.Add(label7);
             Controls.Add(pictureBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -309,6 +324,7 @@
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -331,5 +347,6 @@
         private GroupBox groupBox2;
         private Label label6;
         private PictureBox pictureBox3;
+        private Label label7;
     }
 }

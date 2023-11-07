@@ -46,7 +46,7 @@
             label1.AutoSize = true;
             label1.BackColor = SystemColors.ScrollBar;
             label1.Font = new Font("Calibri", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(386, 41);
+            label1.Location = new Point(494, 41);
             label1.Name = "label1";
             label1.Size = new Size(501, 90);
             label1.TabIndex = 0;
@@ -59,7 +59,7 @@
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(210, 193);
+            label2.Location = new Point(318, 193);
             label2.Name = "label2";
             label2.Size = new Size(886, 50);
             label2.TabIndex = 1;
@@ -68,11 +68,11 @@
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            textBox1.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
             textBox1.ForeColor = SystemColors.ActiveCaptionText;
-            textBox1.Location = new Point(465, 481);
+            textBox1.Location = new Point(573, 481);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(310, 57);
+            textBox1.Size = new Size(325, 71);
             textBox1.TabIndex = 2;
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
@@ -82,7 +82,7 @@
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(255, 330);
+            label3.Location = new Point(363, 330);
             label3.Name = "label3";
             label3.Size = new Size(774, 130);
             label3.TabIndex = 3;
@@ -93,12 +93,13 @@
             // BtnUnblock
             // 
             BtnUnblock.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            BtnUnblock.BackColor = Color.Gold;
+            BtnUnblock.BackColor = Color.ForestGreen;
             BtnUnblock.FlatStyle = FlatStyle.Popup;
             BtnUnblock.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnUnblock.Location = new Point(920, 520);
+            BtnUnblock.ForeColor = SystemColors.ButtonHighlight;
+            BtnUnblock.Location = new Point(1127, 733);
             BtnUnblock.Name = "BtnUnblock";
-            BtnUnblock.Size = new Size(302, 217);
+            BtnUnblock.Size = new Size(312, 243);
             BtnUnblock.TabIndex = 4;
             BtnUnblock.Text = "Desbloquear";
             BtnUnblock.UseVisualStyleBackColor = false;
@@ -107,12 +108,13 @@
             // BtnReSend
             // 
             BtnReSend.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            BtnReSend.BackColor = Color.RosyBrown;
+            BtnReSend.BackColor = Color.SteelBlue;
             BtnReSend.FlatStyle = FlatStyle.Popup;
             BtnReSend.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnReSend.Location = new Point(27, 520);
+            BtnReSend.ForeColor = SystemColors.ButtonHighlight;
+            BtnReSend.Location = new Point(27, 746);
             BtnReSend.Name = "BtnReSend";
-            BtnReSend.Size = new Size(302, 217);
+            BtnReSend.Size = new Size(332, 230);
             BtnReSend.TabIndex = 5;
             BtnReSend.Text = "Reenviar\r\ncódigo";
             BtnReSend.UseVisualStyleBackColor = false;
@@ -131,9 +133,9 @@
             // 
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(988, 12);
+            pictureBox3.Location = new Point(1174, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(215, 84);
+            pictureBox3.Size = new Size(265, 97);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -144,7 +146,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.ScrollBar;
-            ClientSize = new Size(1236, 749);
+            ClientSize = new Size(1453, 988);
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(messageLabel);

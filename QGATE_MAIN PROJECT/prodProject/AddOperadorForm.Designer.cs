@@ -39,53 +39,54 @@
             BtnAddOperator = new Button();
             BtnReturn = new Button();
             pictureBox2 = new PictureBox();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // NumOpTxtBox
             // 
-            NumOpTxtBox.Anchor = AnchorStyles.None;
-            NumOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            NumOpTxtBox.Location = new Point(602, 186);
+            NumOpTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            NumOpTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            NumOpTxtBox.Location = new Point(764, 319);
             NumOpTxtBox.Name = "NumOpTxtBox";
-            NumOpTxtBox.Size = new Size(461, 39);
+            NumOpTxtBox.Size = new Size(523, 43);
             NumOpTxtBox.TabIndex = 0;
             // 
             // NameOpTxtBox
             // 
-            NameOpTxtBox.Anchor = AnchorStyles.None;
+            NameOpTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             NameOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            NameOpTxtBox.Location = new Point(602, 293);
+            NameOpTxtBox.Location = new Point(764, 430);
             NameOpTxtBox.Name = "NameOpTxtBox";
-            NameOpTxtBox.Size = new Size(461, 39);
+            NameOpTxtBox.Size = new Size(523, 39);
             NameOpTxtBox.TabIndex = 1;
             // 
             // SurnameOpTxtBox
             // 
-            SurnameOpTxtBox.Anchor = AnchorStyles.None;
+            SurnameOpTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             SurnameOpTxtBox.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            SurnameOpTxtBox.Location = new Point(602, 416);
+            SurnameOpTxtBox.Location = new Point(764, 553);
             SurnameOpTxtBox.Name = "SurnameOpTxtBox";
-            SurnameOpTxtBox.Size = new Size(461, 39);
+            SurnameOpTxtBox.Size = new Size(523, 39);
             SurnameOpTxtBox.TabIndex = 2;
             SurnameOpTxtBox.TextChanged += textBox3_TextChanged;
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.None;
+            label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(217, 179);
+            label1.Location = new Point(236, 316);
             label1.Name = "label1";
-            label1.Size = new Size(339, 50);
+            label1.Size = new Size(338, 50);
             label1.TabIndex = 3;
             label1.Text = "Número de operador";
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.None;
+            label2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label2.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(236, 286);
+            label2.Location = new Point(290, 419);
             label2.Name = "label2";
             label2.Size = new Size(284, 50);
             label2.TabIndex = 4;
@@ -93,9 +94,9 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.None;
+            label3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label3.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(236, 409);
+            label3.Location = new Point(290, 541);
             label3.Name = "label3";
             label3.Size = new Size(263, 51);
             label3.TabIndex = 5;
@@ -106,9 +107,9 @@
             pictureBox1.Anchor = AnchorStyles.Top;
             pictureBox1.BackgroundImage = Properties.Resources.OpIcon;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(544, 2);
+            pictureBox1.Location = new Point(820, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(385, 103);
+            pictureBox1.Size = new Size(381, 137);
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
@@ -118,9 +119,9 @@
             BtnAddOperator.BackColor = Color.LimeGreen;
             BtnAddOperator.FlatStyle = FlatStyle.Popup;
             BtnAddOperator.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnAddOperator.Location = new Point(485, 597);
+            BtnAddOperator.Location = new Point(492, 761);
             BtnAddOperator.Name = "BtnAddOperator";
-            BtnAddOperator.Size = new Size(230, 120);
+            BtnAddOperator.Size = new Size(473, 169);
             BtnAddOperator.TabIndex = 7;
             BtnAddOperator.Text = "Agregar";
             BtnAddOperator.UseVisualStyleBackColor = false;
@@ -133,9 +134,9 @@
             BtnReturn.BackgroundImageLayout = ImageLayout.Zoom;
             BtnReturn.Cursor = Cursors.Hand;
             BtnReturn.FlatStyle = FlatStyle.Popup;
-            BtnReturn.Location = new Point(3, 2);
+            BtnReturn.Location = new Point(25, 12);
             BtnReturn.Name = "BtnReturn";
-            BtnReturn.Size = new Size(105, 103);
+            BtnReturn.Size = new Size(222, 137);
             BtnReturn.TabIndex = 8;
             BtnReturn.UseVisualStyleBackColor = true;
             BtnReturn.Click += BtnReturn_Click;
@@ -145,19 +146,30 @@
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Location = new Point(952, 2);
+            pictureBox2.Location = new Point(1242, 12);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(232, 103);
+            pictureBox2.Size = new Size(247, 137);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 9;
             pictureBox2.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(585, 199);
+            label4.Name = "label4";
+            label4.Size = new Size(398, 50);
+            label4.TabIndex = 10;
+            label4.Text = "Datos de operador";
             // 
             // AddOperadorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1196, 729);
+            ClientSize = new Size(1521, 1002);
             ControlBox = false;
+            Controls.Add(label4);
             Controls.Add(pictureBox2);
             Controls.Add(BtnReturn);
             Controls.Add(BtnAddOperator);
@@ -192,5 +204,6 @@
         private Button BtnAddOperator;
         private Button BtnReturn;
         private PictureBox pictureBox2;
+        private Label label4;
     }
 }

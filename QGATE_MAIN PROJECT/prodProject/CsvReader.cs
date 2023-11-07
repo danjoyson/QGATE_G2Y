@@ -137,7 +137,7 @@ namespace prodProject
          * Función para obtener y desencriptar la IP de la impresora del archivo .csv
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-        public string GetPrinterIP()
+        public string[] GetPrinterIP()
         {
             string path = Application.StartupPath + @"\csvfilestest\PrinterSettings.csv";
             StreamReader sr;
@@ -155,7 +155,7 @@ namespace prodProject
 
                 fila[1] = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
 
-                return fila[1];
+                return fila;
             }
             catch (Exception e)
             {
