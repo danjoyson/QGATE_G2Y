@@ -85,7 +85,10 @@ namespace prodProject
             }
         }
 
-
+        /// <summary>
+        /// Constructor de formulario inicializa las variables de la pantalla de inspecció
+        /// </summary>
+        /// <param name="firstMenu">Instancia de menu container</param>
         public Form1(ContainerIdForm firstMenu)
         {
             this.containerIdMenu = firstMenu;
@@ -103,6 +106,11 @@ namespace prodProject
                 InitializeComponent();
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
+                this.SetStyle(
+                    ControlStyles.UserPaint |
+                    ControlStyles.AllPaintingInWmPaint |
+                    ControlStyles.DoubleBuffer, true);
+                this.FormBorderStyle = FormBorderStyle.None;
                 this.Show();
                 ConfigTimer();
             }

@@ -11,6 +11,12 @@ namespace prodProject
     {
         string imagesPath = Application.StartupPath + @"\images\";
 
+        /// <summary>
+        /// Convierte la presentación especificada en imagenes y la almacena en el directorio especificado
+        /// </summary>
+        /// <param name="path"> Dirección de la presentación</param>
+        /// <param name="partName">Numero de parte a la que corresponde la presentación</param>
+        /// <returns>True si almacena las imagenes correctamente</returns>
         public  bool PptxToImage(string path, string partName)
         {
             imagesPath = imagesPath + partName + @"\";
@@ -52,7 +58,10 @@ namespace prodProject
             }
         }
 
-
+        /// <summary>
+        /// Almacena el path de la presentación seleccionada
+        /// </summary>
+        /// <returns></returns>
         public string getPath()
         {
             var filePath = string.Empty;

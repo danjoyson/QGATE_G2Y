@@ -155,7 +155,7 @@ namespace prodProject
             imagesPath = dc.getPath();
             if (imagesPath == string.Empty)
                 MessageBox.Show("Debe de introducirse una dirección válida");
-            else 
+            else
                 imageFile.Text = Path.GetFileName(imagesPath);
             //dc.PptxToImages(path);
         }

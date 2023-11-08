@@ -24,6 +24,11 @@ namespace prodProject
             conn = new SqlConnection(connectionString);
             
         }
+
+        /// <summary>
+        /// Crea la instancia para la conexion a la Base de Datos
+        /// </summary>
+        /// <returns>True si se crea la instancia correctamente</returns>
         public bool GetConnection()
         {
             try

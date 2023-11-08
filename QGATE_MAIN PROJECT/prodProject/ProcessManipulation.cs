@@ -35,6 +35,11 @@ namespace prodProject
         private const int RIGHTDOWN = 0x00000008;
         private const int RIGHTUP = 0x00000010;
         
+        /// <summary>
+        /// Devuelve el ID del proceso con el nombre especificado
+        /// </summary>
+        /// <param name="procName">Nombre del proceso</param>
+        /// <returns></returns>
         public int GetProcessID(string procName)
         {
             int processID = -1; // Valor predeterminado en caso de que no se encuentre el proceso

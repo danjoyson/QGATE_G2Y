@@ -313,7 +313,7 @@
             button1.BackColor = SystemColors.GradientInactiveCaption;
             button1.Cursor = Cursors.Hand;
             button1.FlatStyle = FlatStyle.Popup;
-            button1.Location = new Point(328, 734);
+            button1.Location = new Point(317, 734);
             button1.Name = "button1";
             button1.Size = new Size(286, 58);
             button1.TabIndex = 20;

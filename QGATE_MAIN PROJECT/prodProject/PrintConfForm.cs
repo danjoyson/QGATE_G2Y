@@ -57,6 +57,11 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Verifica que se agreguen todos los datos de configuración y los asigna 
+        /// en la instancia de clase
+        /// </summary>
+        /// <returns>True si se asignaron los valores</returns>
         private bool checkInputs()
         {
             if (ipTextbox.Text != string.Empty && dpiTxtbx.Text != string.Empty && etiquetaTxtbx.Text != string.Empty)
@@ -70,13 +75,15 @@ namespace prodProject
                 return false;
         }
 
+        /// <summary>
+        /// Actualiza los datos de configuración que se muestran en pantalla
+        /// </summary>
         private void ShowConfig()
         {
             Printer currentConf = new Printer();
             currentConf = p.GetConfig();
             if (currentConf != null)
             {
-
                 currIpLabel.Location = new Point(label2.Location.X + 50, label2.Location.Y);
                 currIpLabel.ForeColor = Color.Red;
                 currIpLabel.Text = currentConf.IP;

@@ -142,6 +142,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1678, 1057);
             ControlBox = false;
             Controls.Add(pictureBox1);
@@ -152,6 +153,7 @@
             Controls.Add(userTxtBox);
             Controls.Add(label2);
             Controls.Add(label1);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminLogin";

@@ -22,6 +22,10 @@ namespace prodProject
 
         }
 
+        /// <summary>
+        /// Actualiza el archivo de configuración de impresion con los datos definidos
+        /// </summary>
+        /// <returns> True si se guardo la configuración en el archivo</returns>
         public bool SaveConfig()
         {
             StreamWriter csvStream;
@@ -41,6 +45,10 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Obtiene la configuración que se encuentra actualmente en el archivo
+        /// </summary>
+        /// <returns>Instancia de Printer con los datos de configuración actual</returns>
         public Printer GetConfig()
         {
             Printer actual = new Printer();

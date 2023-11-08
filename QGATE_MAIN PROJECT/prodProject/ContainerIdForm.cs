@@ -46,6 +46,10 @@ namespace prodProject
             StartRevision();
         }
 
+        /// <summary>
+        /// Verifica que la etiqueta de contenedor ingresada sea valida
+        /// </summary>
+        /// <returns>True si es una etiqueta valida</returns>
         private bool CheckContainerId()
         {
             if (containerTxtBox.Text != String.Empty)

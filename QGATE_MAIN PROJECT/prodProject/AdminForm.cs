@@ -157,6 +157,11 @@ namespace prodProject
             this.Hide();
         }
 
+        /// <summary>
+        /// Asigna el valor del estandar de contenedor basado en el pais seleccionado
+        /// </summary>
+        /// <param name="idCountry"> id del Pais seleccionado</param>
+        /// <returns></returns>
         public int SetEstandarCount(int idCountry)
         {
             int piezasContainer = 0;

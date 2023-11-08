@@ -39,11 +39,12 @@ namespace prodProject
             scanMobisysTimer.Interval = 60000;
             waitScanFlag = false;
             nextWindowForm = -1;
+            this.f1 = f1;
             if (SetImage())
             {
                 this.FormClosing += new FormClosingEventHandler(Form3_FormClosing);
                 this.serial = 0;
-                this.f1 = f1;
+                
                 emailW = new();
 
                 buttonsTimer.AutoReset = true;
@@ -380,9 +381,7 @@ namespace prodProject
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
-                            //MessageBox.Show("No se pudo generar la etiqueta de NOK");
                             AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
-                        //MessageBox.Show("Impresion de etiqueta NOK","Impresion de etiqueta");
                         this.blockAppClosing = true;
                         BlockApp();
                         this.Close();
@@ -393,10 +392,8 @@ namespace prodProject
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
                         if(!z.printOkNokLabelZPL(Form1.dpi))
                             AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
-                        //Impresión de etiqueta NOK
-                        //MessageBox.Show("No se pudo generar la etiqueta de NOK");                           
+                        //Impresión de etiqueta NOK                        
                         emailW.SendNOKWarning();
-                        //MessageBox.Show("Impresion de etiqueta NOK");
                         ReturnToHome();
 
                     }
@@ -623,7 +620,7 @@ namespace prodProject
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
             Application.OpenForms["Form1"].Show();
-            f1.StartForeignTimer();
+            this.f1.StartForeignTimer();
             this.Close();
         }
 
