@@ -65,7 +65,7 @@
             GB1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             GB1.Location = new Point(141, 211);
             GB1.Name = "GB1";
-            GB1.Size = new Size(697, 390);
+            GB1.Size = new Size(826, 390);
             GB1.TabIndex = 0;
             GB1.TabStop = false;
             GB1.Text = "Operadores";
@@ -127,9 +127,9 @@
             GB2.Controls.Add(BtnDeletePieza);
             GB2.Controls.Add(BtnAddPi);
             GB2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            GB2.Location = new Point(862, 211);
+            GB2.Location = new Point(992, 211);
             GB2.Name = "GB2";
-            GB2.Size = new Size(1098, 390);
+            GB2.Size = new Size(968, 390);
             GB2.TabIndex = 1;
             GB2.TabStop = false;
             GB2.Text = "Piezas";
@@ -241,7 +241,7 @@
             groupBox1.Controls.Add(label5);
             groupBox1.Location = new Point(141, 669);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(697, 209);
+            groupBox1.Size = new Size(826, 209);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Base de Datos";
@@ -251,9 +251,9 @@
             groupBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(BtnPrinterOpt);
-            groupBox2.Location = new Point(862, 669);
+            groupBox2.Location = new Point(992, 669);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1080, 209);
+            groupBox2.Size = new Size(968, 209);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Impresiones";
@@ -275,9 +275,9 @@
             pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1768, 12);
+            pictureBox3.Location = new Point(1690, 12);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(240, 92);
+            pictureBox3.Size = new Size(270, 103);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -287,7 +287,7 @@
             label7.AutoSize = true;
             label7.BackColor = SystemColors.ControlLight;
             label7.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(589, 27);
+            label7.Location = new Point(814, 54);
             label7.Name = "label7";
             label7.Size = new Size(378, 50);
             label7.TabIndex = 21;

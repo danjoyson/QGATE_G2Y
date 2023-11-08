@@ -51,9 +51,9 @@
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox3.Enabled = false;
-            pictureBox3.Location = new Point(1128, 23);
+            pictureBox3.Location = new Point(1184, 26);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(287, 153);
+            pictureBox3.Size = new Size(300, 155);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 22;
             pictureBox3.TabStop = false;
@@ -64,7 +64,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(199, 296);
+            label1.Location = new Point(245, 322);
             label1.Name = "label1";
             label1.Size = new Size(198, 45);
             label1.TabIndex = 23;
@@ -75,7 +75,7 @@
             containerTxtBox.Anchor = AnchorStyles.None;
             containerTxtBox.CharacterCasing = CharacterCasing.Upper;
             containerTxtBox.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            containerTxtBox.Location = new Point(476, 302);
+            containerTxtBox.Location = new Point(522, 328);
             containerTxtBox.MaxLength = 400;
             containerTxtBox.Name = "containerTxtBox";
             containerTxtBox.Size = new Size(667, 43);
@@ -93,9 +93,9 @@
             btnContainer.FlatStyle = FlatStyle.Popup;
             btnContainer.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnContainer.ForeColor = SystemColors.ButtonHighlight;
-            btnContainer.Location = new Point(619, 635);
+            btnContainer.Location = new Point(617, 673);
             btnContainer.Name = "btnContainer";
-            btnContainer.Size = new Size(256, 171);
+            btnContainer.Size = new Size(328, 186);
             btnContainer.TabIndex = 25;
             btnContainer.Text = "Comenzar";
             btnContainer.UseVisualStyleBackColor = false;
@@ -115,7 +115,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(464, 394);
+            label2.Location = new Point(510, 420);
             label2.Name = "label2";
             label2.Size = new Size(141, 45);
             label2.TabIndex = 27;
@@ -143,7 +143,7 @@
             estandarLabel.AutoSize = true;
             estandarLabel.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             estandarLabel.ForeColor = Color.Red;
-            estandarLabel.Location = new Point(708, 394);
+            estandarLabel.Location = new Point(754, 420);
             estandarLabel.Name = "estandarLabel";
             estandarLabel.Size = new Size(164, 50);
             estandarLabel.TabIndex = 30;
@@ -154,7 +154,7 @@
             configEstandar.Anchor = AnchorStyles.None;
             configEstandar.Controls.Add(setEstandar);
             configEstandar.Controls.Add(comboBoxEstandar);
-            configEstandar.Location = new Point(506, 451);
+            configEstandar.Location = new Point(574, 485);
             configEstandar.Name = "configEstandar";
             configEstandar.Size = new Size(422, 100);
             configEstandar.TabIndex = 31;
@@ -194,7 +194,7 @@
             button1.BackColor = SystemColors.GradientInactiveCaption;
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(1238, 815);
+            button1.Location = new Point(1329, 867);
             button1.Name = "button1";
             button1.Size = new Size(155, 102);
             button1.TabIndex = 32;
@@ -206,7 +206,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1427, 943);
+            ClientSize = new Size(1518, 995);
             Controls.Add(button1);
             Controls.Add(configEstandar);
             Controls.Add(estandarLabel);

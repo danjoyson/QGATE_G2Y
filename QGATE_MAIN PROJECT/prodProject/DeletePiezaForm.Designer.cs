@@ -191,7 +191,7 @@
             BtnDeletePieza.ForeColor = SystemColors.ButtonHighlight;
             BtnDeletePieza.Location = new Point(743, 737);
             BtnDeletePieza.Name = "BtnDeletePieza";
-            BtnDeletePieza.Size = new Size(319, 158);
+            BtnDeletePieza.Size = new Size(382, 158);
             BtnDeletePieza.TabIndex = 18;
             BtnDeletePieza.Text = "Eliminar";
             BtnDeletePieza.UseVisualStyleBackColor = false;

@@ -36,6 +36,7 @@ namespace prodProject
                 if (dialog == DialogResult.Yes)
                 {
                     db.EliminaOperador(numOpTxtBox.Text);
+                    numOpTxtBox.Clear();
                 }
             }
 

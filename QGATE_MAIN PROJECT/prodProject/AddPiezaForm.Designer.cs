@@ -51,6 +51,7 @@
             txtReescaneo = new TextBox();
             pictureBox3 = new PictureBox();
             button1 = new Button();
+            imageFile = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -309,13 +310,26 @@
             // 
             // button1
             // 
-            button1.Location = new Point(620, 725);
+            button1.BackColor = SystemColors.GradientInactiveCaption;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatStyle = FlatStyle.Popup;
+            button1.Location = new Point(328, 734);
             button1.Name = "button1";
             button1.Size = new Size(286, 58);
             button1.TabIndex = 20;
-            button1.Text = "Save Images";
-            button1.UseVisualStyleBackColor = true;
+            button1.Text = "Cargar presentación";
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // imageFile
+            // 
+            imageFile.Anchor = AnchorStyles.None;
+            imageFile.CharacterCasing = CharacterCasing.Upper;
+            imageFile.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            imageFile.Location = new Point(620, 739);
+            imageFile.Name = "imageFile";
+            imageFile.Size = new Size(633, 39);
+            imageFile.TabIndex = 21;
             // 
             // AddPiezaForm
             // 
@@ -325,6 +339,7 @@
             AutoSize = true;
             ClientSize = new Size(1710, 1061);
             ControlBox = false;
+            Controls.Add(imageFile);
             Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(txtReescaneo);
@@ -384,5 +399,6 @@
         private TextBox txtReescaneo;
         private PictureBox pictureBox3;
         private Button button1;
+        private TextBox imageFile;
     }
 }

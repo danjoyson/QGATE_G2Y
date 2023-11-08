@@ -300,7 +300,7 @@ namespace prodProject
                 conn.Open();
                 string query = "DELETE FROM Pieza WHERE claveComp = @value;";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", claveComp.Substring(1, 3) + claveComp.Substring(5, 7)));
+                cmd.Parameters.Add(new SqlParameter("@value", claveComp.Substring(2, 7)));
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 MessageBox.Show("Registro eliminado exitosamente.");

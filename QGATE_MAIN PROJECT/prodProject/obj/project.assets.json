@@ -104,6 +104,15 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll": {}
+        }
+      },
       "Microsoft.Win32.Primitives/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -164,6 +173,15 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "MicrosoftOfficeCore/15.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Office.dll": {}
+        },
+        "runtime": {
+          "lib/net35/Office.dll": {}
         }
       },
       "MSBuild.Sdk.Extras/1.6.46": {
@@ -2123,6 +2141,19 @@
         "runtime.json"
       ]
     },
+    "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+      "sha512": "3XkJAqbYq93MqqSOPusNE+6Tve5yBkbE92n9W8f+k8Z9AzXeoTMqMYqhZMrzVOp4saHhMMbOD78JkCjvk+qIzw==",
+      "type": "package",
+      "path": "microsoft.office.interop.powerpoint/15.0.4420.1018",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/Microsoft.Office.Interop.PowerPoint.dll",
+        "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll",
+        "microsoft.office.interop.powerpoint.15.0.4420.1018.nupkg.sha512",
+        "microsoft.office.interop.powerpoint.nuspec"
+      ]
+    },
     "Microsoft.Win32.Primitives/4.3.0": {
       "sha512": "9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "type": "package",
@@ -2235,6 +2266,18 @@
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "MicrosoftOfficeCore/15.0.0": {
+      "sha512": "/KgYw8uvv0Ut8FPvyEa1XJ/TrLSRgvTv3JgC2IT0/8NwoICzbEJWfmfwsE6Dwi8WH0jVkTEO7zRvGvaKqUOhqQ==",
+      "type": "package",
+      "path": "microsoftofficecore/15.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Office.dll",
+        "microsoftofficecore.15.0.0.nupkg.sha512",
+        "microsoftofficecore.nuspec"
       ]
     },
     "MSBuild.Sdk.Extras/1.6.46": {
@@ -6524,6 +6567,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "Microsoft.Office.Interop.PowerPoint >= 15.0.4420.1018",
+      "MicrosoftOfficeCore >= 15.0.0",
       "Spire.Presentation >= 8.10.2",
       "System.Data.SqlClient >= 4.8.5",
       "Zebra.Printer.SDK >= 2.15.2634"
@@ -6568,6 +6613,14 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "Microsoft.Office.Interop.PowerPoint": {
+            "target": "Package",
+            "version": "[15.0.4420.1018, )"
+          },
+          "MicrosoftOfficeCore": {
+            "target": "Package",
+            "version": "[15.0.0, )"
+          },
           "Spire.Presentation": {
             "target": "Package",
             "version": "[8.10.2, )"
@@ -6603,5 +6656,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"MicrosoftOfficeCore 15.0.0\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\" en lugar de la plataforma de destino del proyecto \"net6.0-windows7.0\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "MicrosoftOfficeCore",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }

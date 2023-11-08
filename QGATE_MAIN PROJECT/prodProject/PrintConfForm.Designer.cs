@@ -161,8 +161,9 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            button1.BackColor = SystemColors.GradientActiveCaption;
+            button1.BackColor = Color.SteelBlue;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = SystemColors.ButtonHighlight;
             button1.Location = new Point(369, 745);
             button1.Name = "button1";
             button1.Size = new Size(1073, 135);

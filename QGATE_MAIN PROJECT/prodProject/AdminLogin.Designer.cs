@@ -90,7 +90,7 @@
             // 
             BtnLogin.Anchor = AnchorStyles.None;
             BtnLogin.AutoSize = true;
-            BtnLogin.BackColor = Color.Khaki;
+            BtnLogin.BackColor = Color.Orange;
             BtnLogin.FlatStyle = FlatStyle.Popup;
             BtnLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             BtnLogin.Location = new Point(713, 830);

@@ -233,3 +233,5 @@ C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debu
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\obj\Debug\net6.0-windows\prodProject.PrintConfForm.resources
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\bin\Debug\net6.0-windows\Spire.Pdf.dll
 C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\bin\Debug\net6.0-windows\Spire.Presentation.dll
+C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\bin\Debug\net6.0-windows\Microsoft.Office.Interop.PowerPoint.dll
+C:\Users\vazquezd\source\repos\QGATE_G2Y\QGATE_MAIN PROJECT\prodProject\bin\Debug\net6.0-windows\Office.dll

@@ -109,7 +109,7 @@
             // BtnOpChange
             // 
             BtnOpChange.Anchor = AnchorStyles.None;
-            BtnOpChange.BackColor = Color.Yellow;
+            BtnOpChange.BackColor = Color.Orange;
             BtnOpChange.Cursor = Cursors.Hand;
             BtnOpChange.FlatStyle = FlatStyle.Popup;
             BtnOpChange.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);

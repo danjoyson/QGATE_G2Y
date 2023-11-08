@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "prodProject/1.0.0": {
         "dependencies": {
+          "Microsoft.Office.Interop.PowerPoint": "15.0.4420.1018",
+          "MicrosoftOfficeCore": "15.0.0",
           "Spire.Presentation": "8.10.2",
           "System.Data.SqlClient": "4.8.5",
           "Zebra.Printer.SDK": "2.15.2634"
@@ -89,6 +91,14 @@
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.4420.1017"
+          }
+        }
+      },
       "Microsoft.Win32.Primitives/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -103,6 +113,14 @@
         }
       },
       "Microsoft.Win32.SystemEvents/6.0.0": {},
+      "MicrosoftOfficeCore/15.0.0": {
+        "runtime": {
+          "lib/net35/Office.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.4420.1017"
+          }
+        }
+      },
       "MSBuild.Sdk.Extras/1.6.46": {},
       "NETStandard.Library/1.6.1": {
         "dependencies": {
@@ -1101,6 +1119,13 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
+    "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3XkJAqbYq93MqqSOPusNE+6Tve5yBkbE92n9W8f+k8Z9AzXeoTMqMYqhZMrzVOp4saHhMMbOD78JkCjvk+qIzw==",
+      "path": "microsoft.office.interop.powerpoint/15.0.4420.1018",
+      "hashPath": "microsoft.office.interop.powerpoint.15.0.4420.1018.nupkg.sha512"
+    },
     "Microsoft.Win32.Primitives/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1121,6 +1146,13 @@
       "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
       "path": "microsoft.win32.systemevents/6.0.0",
       "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
+    },
+    "MicrosoftOfficeCore/15.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/KgYw8uvv0Ut8FPvyEa1XJ/TrLSRgvTv3JgC2IT0/8NwoICzbEJWfmfwsE6Dwi8WH0jVkTEO7zRvGvaKqUOhqQ==",
+      "path": "microsoftofficecore/15.0.0",
+      "hashPath": "microsoftofficecore.15.0.0.nupkg.sha512"
     },
     "MSBuild.Sdk.Extras/1.6.46": {
       "type": "package",

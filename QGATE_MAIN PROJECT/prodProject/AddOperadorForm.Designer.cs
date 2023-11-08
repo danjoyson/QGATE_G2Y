@@ -116,10 +116,11 @@
             // BtnAddOperator
             // 
             BtnAddOperator.Anchor = AnchorStyles.Bottom;
-            BtnAddOperator.BackColor = Color.LimeGreen;
+            BtnAddOperator.BackColor = Color.Green;
             BtnAddOperator.FlatStyle = FlatStyle.Popup;
             BtnAddOperator.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            BtnAddOperator.Location = new Point(492, 761);
+            BtnAddOperator.ForeColor = SystemColors.ButtonHighlight;
+            BtnAddOperator.Location = new Point(510, 760);
             BtnAddOperator.Name = "BtnAddOperator";
             BtnAddOperator.Size = new Size(473, 169);
             BtnAddOperator.TabIndex = 7;

@@ -40,6 +40,14 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Microsoft.Office.Interop.PowerPoint": {
+              "target": "Package",
+              "version": "[15.0.4420.1018, )"
+            },
+            "MicrosoftOfficeCore": {
+              "target": "Package",
+              "version": "[15.0.0, )"
+            },
             "Spire.Presentation": {
               "target": "Package",
               "version": "[8.10.2, )"

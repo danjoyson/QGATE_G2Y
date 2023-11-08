@@ -33,6 +33,7 @@ namespace prodProject
                 if (dialog == DialogResult.Yes)
                 {
                     db.EliminaPieza(claveTxtBox.Text);
+                    claveTxtBox.Clear();
                 }
             }
         }
@@ -49,7 +50,7 @@ namespace prodProject
             {
                 if (claveTxtBox.Text == string.Empty)
                     throw new ArgumentNullException();
-                if (claveTxtBox.Text.Length != 15)
+                if (claveTxtBox.Text.Length != 11)
                     throw new ArgumentException();
                 return true;
             }

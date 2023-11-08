@@ -37,7 +37,7 @@ namespace prodProject
             configEstandar.Visible = false;
             timer = new System.Timers.Timer(24 * 60 * 60 * 1000);
             timer.Elapsed += BorrarLista;
-            timer.Start();
+            timer.Start(); 
 
         }
 
@@ -53,6 +53,12 @@ namespace prodProject
                 if (containersId.Contains(containerTxtBox.Text))
                 {
                     setMessageLabel("Esta etiqueta ya fue escaneada");
+                    containerTxtBox.Text = string.Empty;
+                    return false;
+                }else if(containerTxtBox.Text.Length == 31)
+                {
+                    setMessageLabel("Etiqueta no valida");
+                    containerTxtBox.Text = string.Empty;
                     return false;
                 }
 
@@ -61,6 +67,7 @@ namespace prodProject
             }
             else
             {
+                setMessageLabel("Debe introducirse la etiqueta de contenedor");
                 return false;
             }
 
@@ -94,7 +101,7 @@ namespace prodProject
 
 
             }
-            else setMessageLabel("Se deben introducir todos los datos");
+            
 
 
 

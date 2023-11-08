@@ -8,7 +8,9 @@ namespace prodProject
     {
         private AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
+        Document dc = new Document();
         private int id;
+        private string imagesPath;
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -55,6 +57,7 @@ namespace prodProject
                 if (this.id != -1)
                 {
                     db.InsertaPieza(this.id, DescrTxtBox.Text, ClaveTxtBox.Text.Substring(2, 7), ClaveTxtBox.Text.Substring(0, 1), ClaveTxtBox.Text.Substring(ClaveTxtBox.Text.Length - 2, 2), txtPasos.Text, txtReescaneo.Text);
+                    dc.PptxToImage(imagesPath, ClaveTxtBox.Text.Substring(2, 7));
                     ClearTxtBox();
                 }
 
@@ -148,10 +151,12 @@ namespace prodProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Document dc = new Document();
-            string path="";
-            path = dc.getPath();
-            MessageBox.Show(path);
+
+            imagesPath = dc.getPath();
+            if (imagesPath == string.Empty)
+                MessageBox.Show("Debe de introducirse una dirección válida");
+            else 
+                imageFile.Text = Path.GetFileName(imagesPath);
             //dc.PptxToImages(path);
         }
     }
