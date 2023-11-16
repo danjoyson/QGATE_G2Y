@@ -26,7 +26,7 @@ namespace prodProject
 
         public ContainerIdForm()
         {
-            Thread runMobi = new Thread(new ThreadStart(processes.RunMobisys));
+            //Thread runMobi = new Thread(new ThreadStart(processes.RunMobisys));
             //runMobi.Start();
             //RunMobisys();
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace prodProject
         /// <returns>True si es una etiqueta valida</returns>
         private bool CheckContainerId()
         {
-            if (containerTxtBox.Text != String.Empty)
+            if (!String.IsNullOrEmpty(containerTxtBox.Text))
             {
                 if (containersId.Contains(containerTxtBox.Text))
                 {
@@ -134,7 +134,6 @@ namespace prodProject
         private void StartFormRevision()
         {
             Form1 f1 = new(this);
-            Thread.Sleep(1000);
             this.Hide();
             f1.StartForeignTimer();
 

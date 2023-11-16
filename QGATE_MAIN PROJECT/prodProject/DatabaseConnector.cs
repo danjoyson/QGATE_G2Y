@@ -127,7 +127,7 @@ namespace prodProject
                 cmd.ExecuteNonQuery(); //Ejecución de query
 
                 MessageBox.Show("Pieza guardada correctamente en la base de datos");
-                DialogResult dialog = MessageBox.Show("Recuerde agregar las imágenes de la pieza en la carpeta de la aplicación para el correcto funcionamiento del programa. Procedimiento del manual de usuario.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
             }
             catch (SqlException sqlEx)
             {
@@ -325,46 +325,8 @@ namespace prodProject
         /// <param name="numOperador">Numero de operador que reviso la pieza</param>
         /// <param name="idPieza"></param>
         /// <returns></returns>
-        public bool InsertaRegInspeccion(string numEtiqueta,int serial,string numOperador,string idPieza)
+        public bool InsertaRegInspeccion(string queryString,string numEtiqueta,int serial,int numOperador,int idPieza)
         {
-            String queryString;
-
-            if (serial == 0) //Si la pieza es OK, GUARDA 11 OK'S
-            {
-                //queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha, 'OK', 'OK', 'OK' , 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK');";
-                queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
-                //Se modifica el query ya que no en todos los casos son 11 OK, depende de el numero de pasos de cada pieza, por eso se hizo dinamico.
-                //Prueba temporal por guardar en la misma BD, se colocan los 11 por el numero de campos en la BD actual (Form1.numPasos-1
-
-                for (int i = 0; i < Form1.numPasos; i++)
-                {
-                    queryString += ",'OK' ";
-                }
-                for (int i = Form1.numPasos; i < 11; i++) queryString += ", NULL";
-                queryString += ");";
-
-            }
-            else //Si la pieza es NOK, guarda n NOK's a partir de donde se haya quedado el contador de slide
-            {
-                queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
-
-                for (int i = 0; i < Form1.formSlideCont - 1; i++)
-                {
-                    queryString += ",'OK' ";
-                }
-
-                queryString += ", 'NOK'";
-
-                //Debe ser el limite del for Form1.numPasos, como prueba se puso 11 para validar en la bd
-                for (int j = Form1.formSlideCont + 1; j <= 11; j++)
-                {
-                    queryString += ", NULL";
-                }
-
-                queryString += ");";
-            }
-
-
             try
             {
                 conn.Open();
@@ -377,7 +339,7 @@ namespace prodProject
                 cmd.Parameters.AddWithValue("@fecha", formatDateTime);
 
                 cmd.ExecuteNonQuery(); //Ejecuta la consulta de inserción.
-                Form1.conn.Close();
+                conn.Close();
 
                 return true;
             }
@@ -386,6 +348,77 @@ namespace prodProject
                 MessageBox.Show(e1.Message, "Error insertando operador-pieza a la bd");
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Verifica si una pieza ya fue ingresada previamente.
+        /// </summary>
+        /// <param name="etiqueta"> Etiqueta de pieza ingresada</param>
+        /// <returns>Retorna el tiempo restante para volver a ingresar la pieza</returns>
+        public DateTime CheckReingreso(string etiqueta)
+        {
+            String queryString = "SELECT MAX(fecha) FROM Operador_Pieza WHERE numEtiqueta = @value";
+            DateTime dateRead=DateTime.Now;
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new(queryString, conn);
+                cmd.Parameters.Add(new SqlParameter("@value", etiqueta));  //Prevención de SQL Injection, mediante consultas parametrizadas 
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    dateRead = record.GetDateTime(0);       //Fecha y hora del último NOK de la pieza
+                    
+                    return dateRead;
+                }
+                return dateRead;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                MessageBox.Show(e.Message);
+                return dateRead;
+            }
+
+        }
+
+        public int GenerateDBSerial(string etiqueta)
+        {
+            String query = "SELECT MAX(serial) FROM Operador_Pieza WHERE numEtiqueta = '" + etiqueta + "';";
+            int serial=0;
+            try
+            {
+                conn.Open();
+                //MessageBox.Show("Connection Granted");
+
+                SqlCommand cmd = new(query, conn);
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    serial = record.GetInt16(0) + 1;
+                    conn.Close();
+                    return serial;
+                }
+                return serial;
+            }
+            catch (SqlNullValueException)
+            {
+                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende serial = 1)
+                serial = 1;
+                return serial;
+            }
+            catch (Exception e1)
+            {
+
+                MessageBox.Show("Error generando serial :", e1.Message);
+                serial = -2;
+                return serial;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
         }
 
         /// <summary>

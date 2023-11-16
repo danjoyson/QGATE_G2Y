@@ -10,7 +10,8 @@ namespace prodProject
 
         ContainerIdForm containerIdMenu;
         WinScanForm winScanForm;
-        Printer p;
+        Printer p = new Printer();
+        Pieza pz  = new Pieza();    
         DatabaseConnector db = new DatabaseConnector();
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
@@ -61,13 +62,9 @@ namespace prodProject
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             estandar = waitMenu.estandarContainer;
             CsvReader cr = new();
-            printerData = cr.GetPrinterIP();
-            printerIP = printerData[1];
-            p.IP = printerData[1];
-            dpi = Convert.ToInt32(printerData[2]);
-            p.DPI = Convert.ToInt32(printerData[2]);
+            SetPrinterConfig(cr);
             connectionString = CsvReader.SetConnectionString();
-            if (connectionString != string.Empty && printerIP != string.Empty && dpi != 0)
+            if (!String.IsNullOrEmpty(connectionString) && !String.IsNullOrEmpty(printerIP) && dpi != 0)
             {
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
@@ -75,11 +72,10 @@ namespace prodProject
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
                 ConfigTimer();
-
             }
             else
             {
-                if (printerIP == string.Empty)
+                if (String.IsNullOrEmpty(printerIP))
                     MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
                 Process.GetCurrentProcess().Kill();
             }
@@ -95,30 +91,53 @@ namespace prodProject
             estandar = ContainerIdForm.Estandar;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
-            printerData = cr.GetPrinterIP();
-            printerIP = printerData[1];
-            dpi = Convert.ToInt32(printerData[2]);
+            SetPrinterConfig(cr);
             connectionString = CsvReader.SetConnectionString();
-            if (connectionString != string.Empty && printerIP != string.Empty && dpi != 0)
+
+            if (!String.IsNullOrEmpty(connectionString) && !String.IsNullOrEmpty(printerIP) && dpi != 0)
             {
                 connectionString = connectionString + "; Connection Timeout = 30";
                 conn = new SqlConnection(connectionString);
                 InitializeComponent();
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
-                this.SetStyle(
+                /*this.SetStyle(
                     ControlStyles.UserPaint |
                     ControlStyles.AllPaintingInWmPaint |
-                    ControlStyles.DoubleBuffer, true);
-                this.FormBorderStyle = FormBorderStyle.None;
+                    ControlStyles.DoubleBuffer, true);*/
                 this.Show();
                 ConfigTimer();
             }
             else
             {
-                if (printerIP == string.Empty)
+                if (String.IsNullOrEmpty(printerIP))
                     MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
                 Process.GetCurrentProcess().Kill();
+            }
+        }
+
+        private void SetPrinterConfig(CsvReader cr)
+        {
+            try
+            {
+                printerData = cr.GetPrinterIP();
+                if (printerData != null)
+                {
+                    printerIP = printerData[1];
+                    p.IP = printerData[1];
+                    dpi = Convert.ToInt32(printerData[2]);
+                    p.DPI = dpi;
+                }
+                else
+                {
+                    MessageBox.Show("Error al extraer los datos de la impresora");
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al obtener datos de impresora",ex.Message);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -149,6 +168,7 @@ namespace prodProject
             Cursor.Current = Cursors.WaitCursor;
             if (NotNullTxtBoxData())
             {
+                SetDatosPieza();
                 if (CheckDataBase("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text) && CheckDataBase("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText))
                 {
 
@@ -177,7 +197,6 @@ namespace prodProject
             messageLabel.Text = "";
 
             Form2 f2 = new(this);
-            Thread.Sleep(1000);
             this.Hide();
             this.piezaTxtBox.Clear();
         }
@@ -257,7 +276,7 @@ namespace prodProject
         private void setMessagleLabel(string message)
         {
             messageLabel.Text = message;
-            messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, (ClientSize.Width / 3) - 100);
+            messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, (ClientSize.Width / 3) - 20);
         }
 
         /*
@@ -346,6 +365,19 @@ namespace prodProject
 
         }
 
+        private bool ValidaReingreso(string etiqueta)
+        {
+            DateTime remain;
+            remain = db.CheckReingreso(etiqueta);
+            TimeSpan span = DateTime.Now.Subtract(remain);
+            if (span.TotalMinutes >= this.minRetrabajo)     //Total minutes convierte el timespan a minutos, ejemplo: 1 hora = 60 minutos
+            {
+                return true;                                //Si ya pasó el tiempo de retrabajo, retorna true
+            }
+            string remainTime = (this.minRetrabajo - span.TotalMinutes).ToString("0.0");
+            setMessagleLabel("Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remain + " minutos");
+            return false;
+        }
         /// <summary>
         /// Valida que se hayan ingresado todos los datos que solicita el sistema.
         /// </summary>
@@ -354,13 +386,10 @@ namespace prodProject
         {
             try
             {
-                if (piezaTxtBox.Text == string.Empty || opeTxtBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(piezaTxtBox.Text)  || String.IsNullOrEmpty(opeTxtBox.Text))
                     throw new ArgumentNullException();
                 else
                 {
-                    opText = int.Parse(opeTxtBox.Text);
-                    etiqueta = piezaTxtBox.Text;
-                    piezaText = piezaTxtBox.Text.Substring(2, 7);
                     return true;
                 }
             }
@@ -377,6 +406,13 @@ namespace prodProject
                 return false;
 
             }
+        }
+
+        private void SetDatosPieza()
+        {
+            opText = int.Parse(opeTxtBox.Text);
+            etiqueta = piezaTxtBox.Text;
+            piezaText = piezaTxtBox.Text.Substring(2, 7);
         }
 
         /*

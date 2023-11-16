@@ -41,7 +41,7 @@ namespace prodProject
          */
         public static string SetConnectionString()
         {
-            string path = Application.StartupPath + @"\csvfilestest\DatabaseSettings.csv";
+            string path = Application.StartupPath + @"\csvfiles2\DatabaseSettings.csv";
             StreamReader sr;
             string connectData="";
             try
@@ -83,7 +83,7 @@ namespace prodProject
          */
         public bool SetNOKRecipientsList(MailMessage mail)
         {
-            string path = Application.StartupPath + @"\csvfilestest\NOKNotificationList.csv";
+            string path = Application.StartupPath + @"\csvfiles2\NOKNotificationList.csv";
             StreamReader sr;
             try
             {
@@ -111,7 +111,7 @@ namespace prodProject
          */
         public bool SetBWarningRecipientsList(MailMessage mail)
         {
-            string path = Application.StartupPath + @"\csvfilestest\BlockedWarningList.csv";
+            string path = Application.StartupPath + @"\csvfiles2\BlockedWarningList.csv";
             StreamReader sr;
             try
             {
@@ -139,7 +139,7 @@ namespace prodProject
          */
         public string[] GetPrinterIP()
         {
-            string path = Application.StartupPath + @"\csvfilestest\PrinterSettings.csv";
+            string path = Application.StartupPath + @"\csvfiles2\PrinterSettings.csv";
             StreamReader sr;
             try
             {

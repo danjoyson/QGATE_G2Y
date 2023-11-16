@@ -35,7 +35,6 @@
             label2 = new Label();
             piezaTxtBox = new TextBox();
             BtnOpChange = new Button();
-            BtnSettings = new Button();
             messageLabel = new Label();
             pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -47,7 +46,7 @@
             opeTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
             opeTxtBox.Location = new Point(427, 292);
             opeTxtBox.Name = "opeTxtBox";
-            opeTxtBox.Size = new Size(670, 54);
+            opeTxtBox.Size = new Size(731, 54);
             opeTxtBox.TabIndex = 0;
             opeTxtBox.TextAlign = HorizontalAlignment.Center;
             opeTxtBox.TextChanged += OpeTxtBox_TextChanged;
@@ -57,7 +56,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(654, 229);
+            label1.Location = new Point(656, 217);
             label1.Name = "label1";
             label1.Size = new Size(252, 33);
             label1.TabIndex = 1;
@@ -66,16 +65,17 @@
             // 
             // btn1
             // 
-            btn1.Anchor = AnchorStyles.None;
-            btn1.BackColor = Color.Lime;
+            btn1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btn1.BackColor = Color.Green;
             btn1.Cursor = Cursors.Hand;
             btn1.FlatAppearance.BorderColor = Color.Chartreuse;
             btn1.FlatAppearance.BorderSize = 10;
             btn1.FlatStyle = FlatStyle.Popup;
             btn1.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btn1.Location = new Point(1066, 633);
+            btn1.ForeColor = SystemColors.ButtonHighlight;
+            btn1.Location = new Point(1067, 694);
             btn1.Name = "btn1";
-            btn1.Size = new Size(247, 183);
+            btn1.Size = new Size(334, 232);
             btn1.TabIndex = 2;
             btn1.Text = "Comenzar";
             btn1.UseVisualStyleBackColor = false;
@@ -85,8 +85,9 @@
             // 
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Calibri", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(669, 420);
+            label2.Location = new Point(667, 448);
             label2.Name = "label2";
             label2.Size = new Size(207, 33);
             label2.TabIndex = 3;
@@ -98,44 +99,28 @@
             piezaTxtBox.Anchor = AnchorStyles.None;
             piezaTxtBox.CharacterCasing = CharacterCasing.Upper;
             piezaTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
-            piezaTxtBox.Location = new Point(427, 466);
+            piezaTxtBox.Location = new Point(427, 514);
             piezaTxtBox.MaxLength = 40;
             piezaTxtBox.Name = "piezaTxtBox";
-            piezaTxtBox.Size = new Size(670, 54);
+            piezaTxtBox.Size = new Size(731, 54);
             piezaTxtBox.TabIndex = 4;
             piezaTxtBox.TextAlign = HorizontalAlignment.Center;
             piezaTxtBox.TextChanged += PiezaTxtBox_TextChanged;
             // 
             // BtnOpChange
             // 
-            BtnOpChange.Anchor = AnchorStyles.None;
-            BtnOpChange.BackColor = Color.Orange;
+            BtnOpChange.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            BtnOpChange.BackColor = Color.Gold;
             BtnOpChange.Cursor = Cursors.Hand;
             BtnOpChange.FlatStyle = FlatStyle.Popup;
             BtnOpChange.Font = new Font("Calibri", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            BtnOpChange.Location = new Point(255, 630);
+            BtnOpChange.Location = new Point(225, 694);
             BtnOpChange.Name = "BtnOpChange";
-            BtnOpChange.Size = new Size(263, 186);
+            BtnOpChange.Size = new Size(328, 232);
             BtnOpChange.TabIndex = 5;
             BtnOpChange.Text = "Borrar texto";
             BtnOpChange.UseVisualStyleBackColor = false;
             BtnOpChange.Click += BtnOpChange_Click;
-            // 
-            // BtnSettings
-            // 
-            BtnSettings.BackColor = SystemColors.ControlLight;
-            BtnSettings.BackgroundImage = Properties.Resources.settings;
-            BtnSettings.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnSettings.Cursor = Cursors.Hand;
-            BtnSettings.FlatAppearance.BorderColor = Color.FromArgb(255, 255, 192);
-            BtnSettings.FlatStyle = FlatStyle.Popup;
-            BtnSettings.Location = new Point(12, 12);
-            BtnSettings.Name = "BtnSettings";
-            BtnSettings.Size = new Size(141, 135);
-            BtnSettings.TabIndex = 6;
-            BtnSettings.Text = " ";
-            BtnSettings.UseVisualStyleBackColor = false;
-            BtnSettings.Click += BtnSettings_Click;
             // 
             // messageLabel
             // 
@@ -149,12 +134,12 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox3.BackgroundImage = (Image)resources.GetObject("pictureBox3.BackgroundImage");
             pictureBox3.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox3.Location = new Point(1256, 12);
+            pictureBox3.Dock = DockStyle.Top;
+            pictureBox3.Location = new Point(0, 0);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(249, 97);
+            pictureBox3.Size = new Size(1539, 129);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 20;
             pictureBox3.TabStop = false;
@@ -163,16 +148,17 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1539, 1057);
             Controls.Add(pictureBox3);
             Controls.Add(messageLabel);
-            Controls.Add(BtnSettings);
             Controls.Add(BtnOpChange);
             Controls.Add(piezaTxtBox);
             Controls.Add(label2);
             Controls.Add(btn1);
             Controls.Add(label1);
             Controls.Add(opeTxtBox);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -195,7 +181,6 @@
         private Label label2;
         private TextBox piezaTxtBox;
         private Button BtnOpChange;
-        private Button BtnSettings;
         private Label messageLabel;
         private PictureBox pictureBox3;
     }

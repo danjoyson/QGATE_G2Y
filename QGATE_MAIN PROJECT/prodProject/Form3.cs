@@ -12,6 +12,7 @@ namespace prodProject
         private bool blockAppClosing = false;
         private int serial;
         private Form1 f1;
+        DatabaseConnector db = new DatabaseConnector();
         private EmailWarner emailW; //objeto de la clase que se encarga de enviar los emails
         private string textEtiqueta;
         private System.Timers.Timer buttonsTimer = new(3000); //timer de bloqueo de botón OK (duración inicial, luego cambia)
@@ -44,7 +45,7 @@ namespace prodProject
             {
                 this.FormClosing += new FormClosingEventHandler(Form3_FormClosing);
                 this.serial = 0;
-                
+
                 emailW = new();
 
                 buttonsTimer.AutoReset = true;
@@ -115,8 +116,6 @@ namespace prodProject
         private void BtnOK_Click(object sender, EventArgs e)
         {
             Form1.consecutveNOKCounter = 0; //Reinicia el contador de NOKs consecutivos
-
-
             /*
              * Podría hacerse un switch de "Tipo de formulario"
              * 
@@ -157,9 +156,7 @@ namespace prodProject
                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
                         NOKTimer.Stop();
                         Form1.formSlideCont++;
-                        this.txtEtiqueta.Visible = false;
-                        this.pictureBox1.Visible = false;
-                        this.messageLabel.Visible = false;
+                        HideControls();
                         textEtiqueta = this.txtEtiqueta.Text;
                         txtEtiqueta.Text = string.Empty;
                         Form1.conatadorPiezas++;
@@ -176,7 +173,6 @@ namespace prodProject
                             Form1.estandar = 0;
                             Form1.conatadorPiezas = 0;
                             this.Hide();
-                            //ShowWaitScan(0);
                             ReturnToContainerMenu();
                         }
                         else
@@ -184,7 +180,6 @@ namespace prodProject
                             generaRegistro(textEtiqueta);
                             this.Hide();
                             ReturnToHome();
-                            //ShowWaitScan(nextWindowForm);
 
                         }
 
@@ -205,14 +200,18 @@ namespace prodProject
                         Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
                         AFKTimer.Stop();
 
-                        if (InsertDbRecord())
+                        if (InsertaDbRecord())
                         {
                             //Se comento para no enviar a impresión al momento de hacer pruebas
                             //callPrinter(); //Print box label
                             MessageBox.Show("Se cumplieron todos los pasos con exito");
                             Form1.conatadorPiezas++;
                         }
-                        //ReturnToHome();
+                        else
+                        {
+                            ReturnToHome();
+                        }
+
                     }
                     else
                     {
@@ -231,6 +230,15 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Oculta los imputs que no son utilizados en la pantalla actual
+        /// </summary>
+        private void HideControls()
+        {
+            this.txtEtiqueta.Visible = false;
+            this.pictureBox1.Visible = false;
+            this.messageLabel.Visible = false;
+        }
         /*
             Metodo post escaneo de etiqueta este debe ejecutarse despues de que se presiona el boton ok en el paso de reescaneo, envia registro a BD y lanza la pantalla de mobisys
          */
@@ -240,11 +248,15 @@ namespace prodProject
             Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
             AFKTimer.Stop();
 
-            if (InsertDbRecord())
+            if (InsertaDbRecord())
             {
                 //Se comento para no enviar a impresión al momento de hacer pruebas
                 //callPrinter(); //Print box label
                 mobisys.HideShowProcess(text);
+            }
+            else
+            {
+                ReturnToHome();
             }
         }
         /*
@@ -372,9 +384,9 @@ namespace prodProject
 
             this.Hide();
 
-            if (GenerateDBSerial())
+            if (GenerateSerial())
             {
-                if (InsertDbRecord())
+                if (InsertaDbRecord())
                 {
                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
@@ -388,15 +400,19 @@ namespace prodProject
                     }
                     else
                     {
-                       
+
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        if(!z.printOkNokLabelZPL(Form1.dpi))
+                        if (!z.printOkNokLabelZPL(Form1.dpi))
                             AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         //Impresión de etiqueta NOK                        
                         emailW.SendNOKWarning();
                         ReturnToHome();
 
                     }
+                }
+                else
+                {
+                    ReturnToHome();
                 }
 
             }
@@ -420,9 +436,9 @@ namespace prodProject
             {
                 this.Hide();
 
-                if (GenerateDBSerial())
+                if (GenerateSerial())
                 {
-                    if (InsertDbRecord())
+                    if (InsertaDbRecord())
                     {
                         if (this.serial >= 3)
                         {
@@ -445,6 +461,10 @@ namespace prodProject
                             ReturnToHome();
 
                         }
+                    }
+                    else
+                    {
+                        ReturnToHome();
                     }
                 }
 
@@ -486,41 +506,15 @@ namespace prodProject
          * Retorna false en caso de alguna excepción.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-        private bool GenerateDBSerial()
+        private bool GenerateSerial()
         {
-            String queryString = "SELECT MAX(serial) FROM Operador_Pieza WHERE numEtiqueta = '" + Form1.etiqueta + "';";
-
-            try
+            this.serial = db.GenerateDBSerial(Form1.etiqueta);
+            if (serial == -2)
             {
-                Form1.conn.Open();
-                //MessageBox.Show("Connection Granted");
-
-                SqlCommand cmd = new(queryString, Form1.conn);
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    this.serial = record.GetInt16(0) + 1;
-                    Form1.conn.Close();
-                }
-                return true;
-            }
-            catch (SqlNullValueException)
-            {
-                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende serial = 1)
-                this.serial = 1;
-                return true;
-            }
-            catch (Exception e1)
-            {
-
-                MessageBox.Show("Error generando serial :", e1.Message);
                 ReturnToHome();
                 return false;
             }
-            finally
-            {
-                Form1.conn.Close();
-            }
+            else return true;
 
         }
 
@@ -533,10 +527,20 @@ namespace prodProject
          *  Se conecta a la Base de Datos e inserta el registro de inspección.
          *  --------------------------------------------------------------------------------------------------------------------------------
          */
-        private bool InsertDbRecord()
+
+        private bool InsertaDbRecord()
         {
             String queryString;
 
+            queryString = SetReportQueryString();
+            if (db.InsertaRegInspeccion(queryString, Form1.etiqueta, this.serial, Form1.opText, Form1.idPiezaCatalog))
+                return true;
+            else return false;
+        }
+
+        private string SetReportQueryString()
+        {
+            String queryString;
             if (this.serial == 0) //Si la pieza es OK, GUARDA 11 OK'S
             {
                 //queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha, 'OK', 'OK', 'OK' , 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK');";
@@ -571,31 +575,7 @@ namespace prodProject
 
                 queryString += ");";
             }
-
-
-            try
-            {
-                Form1.conn.Open();
-                SqlCommand cmd = new(queryString, Form1.conn);
-                cmd.Parameters.AddWithValue("@numEtiqueta", Form1.etiqueta);
-                cmd.Parameters.AddWithValue("@serial", this.serial);
-                cmd.Parameters.AddWithValue("@numOperador", Form1.opText);
-                cmd.Parameters.AddWithValue("@idPieza", Form1.idPiezaCatalog);
-                String formatDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); //Fecha y Hora actuales con formato adecuado para SQL server
-                cmd.Parameters.AddWithValue("@fecha", formatDateTime);
-
-                cmd.ExecuteNonQuery(); //Ejecuta la consulta de inserción.
-                Form1.conn.Close();
-
-                return true;
-            }
-            catch (Exception e1)
-            {
-                MessageBox.Show(e1.Message, "Error insertando operador-pieza a la bd");
-                ReturnToHome();
-                return false;
-            }
-
+            return queryString;
         }
 
         //Método para entrar al formulario de espera para que el usuario escanee la etiqueta dentro de mobisys

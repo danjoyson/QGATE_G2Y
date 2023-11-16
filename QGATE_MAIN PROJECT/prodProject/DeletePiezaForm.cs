@@ -8,6 +8,7 @@ namespace prodProject
     {
         AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
+        Document doc = new Document();
         public DeletePiezaForm(AdminForm af)
         {
             this.prevForm = af;
@@ -33,6 +34,7 @@ namespace prodProject
                 if (dialog == DialogResult.Yes)
                 {
                     db.EliminaPieza(claveTxtBox.Text);
+                    doc.DeleteFolder(claveTxtBox.Text.Substring(2, 7));
                     claveTxtBox.Clear();
                 }
             }
@@ -48,7 +50,7 @@ namespace prodProject
         {
             try
             {
-                if (claveTxtBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(claveTxtBox.Text))
                     throw new ArgumentNullException();
                 if (claveTxtBox.Text.Length != 11)
                     throw new ArgumentException();

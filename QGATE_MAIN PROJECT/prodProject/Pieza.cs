@@ -9,12 +9,12 @@ namespace prodProject
     public class Pieza
     {
         public int id;
-        public string descripcion;
-        public string claveComp;
-        public string inicioCadena;
-        public string finCadena;
-        public int pasos;
-        public int puntoReescaneo;
+        public string descripcion { get; set; }
+        public string claveComp { get; set; }
+        public string inicioCadena { get; set; }
+        public string finCadena { get; set; }
+        public int pasos { get; set; }
+        public int puntoReescaneo { get; set; }
         public Pieza() 
         {
             

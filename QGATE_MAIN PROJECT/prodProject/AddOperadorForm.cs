@@ -76,7 +76,7 @@ namespace prodProject
         {
             try
             {
-                if (NumOpTxtBox.Text == string.Empty || NameOpTxtBox.Text == string.Empty || SurnameOpTxtBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(NumOpTxtBox.Text) || String.IsNullOrEmpty(NameOpTxtBox.Text)  || String.IsNullOrEmpty(SurnameOpTxtBox.Text))
                     throw new ArgumentNullException();
                 else
                     return true;

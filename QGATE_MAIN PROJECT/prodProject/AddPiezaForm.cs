@@ -57,8 +57,10 @@ namespace prodProject
                 if (this.id != -1)
                 {
                     db.InsertaPieza(this.id, DescrTxtBox.Text, ClaveTxtBox.Text.Substring(2, 7), ClaveTxtBox.Text.Substring(0, 1), ClaveTxtBox.Text.Substring(ClaveTxtBox.Text.Length - 2, 2), txtPasos.Text, txtReescaneo.Text);
-                    dc.PptxToImage(imagesPath, ClaveTxtBox.Text.Substring(2, 7));
-                    ClearTxtBox();
+                    if(dc.PptxToImage(imagesPath, ClaveTxtBox.Text.Substring(2, 7)))
+                        ClearTxtBox();
+                    else
+                        MessageBox.Show("Hubo un problema al agregar las imagenes, debe agregarlas en la carpeta de la aplicación de forma manual para el correcto funcionamiento del programa. Procedimiento del manual de usuario.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
 
@@ -78,6 +80,7 @@ namespace prodProject
             DescrTxtBox.Clear();
             txtPasos.Clear();
             txtReescaneo.Clear();
+            imageFile.Clear();
         }
         /*
          * ---------------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +118,7 @@ namespace prodProject
         {
             try
             {
-                if (ClaveTxtBox.Text == string.Empty || DescrTxtBox.Text == string.Empty)
+                if (String.IsNullOrEmpty(ClaveTxtBox.Text) || String.IsNullOrEmpty(DescrTxtBox.Text))
                     throw new ArgumentNullException();
                 if (ClaveTxtBox.Text.Length > 15)
                     throw new ArgumentException();
@@ -153,7 +156,7 @@ namespace prodProject
         {
 
             imagesPath = dc.getPath();
-            if (imagesPath == string.Empty)
+            if (String.IsNullOrEmpty(imagesPath))
                 MessageBox.Show("Debe de introducirse una dirección válida");
             else
                 imageFile.Text = Path.GetFileName(imagesPath);

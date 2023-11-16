@@ -315,7 +315,7 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Location = new Point(317, 734);
             button1.Name = "button1";
-            button1.Size = new Size(286, 58);
+            button1.Size = new Size(286, 44);
             button1.TabIndex = 20;
             button1.Text = "Cargar presentación";
             button1.UseVisualStyleBackColor = false;

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\logo QGATE.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\logo.ico" />
+    <Content Include="Resources\logo QGATE.ico" />
   </ItemGroup>
 
   <ItemGroup>

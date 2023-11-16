@@ -34,20 +34,15 @@ namespace prodProject
                 {
                     // Obtener la diapositiva actual
                     Microsoft.Office.Interop.PowerPoint.Slide slide = pptPresentation.Slides[i];
-
                     // Ruta donde guardar la imagen
                     string imagePath = string.Format(imagesPath+partName + "_S{0}.JPG", i-1);
-
                     // Guardar la diapositiva como imagen JPG
-                    //MessageBox.Show(imagePath);
                     slide.Export(imagePath, "JPG", 1280, 720);
                 }
 
                 // Cerrar la presentación y salir de PowerPoint
                 pptPresentation.Close();
                 pptApplication.Quit();
-
-                MessageBox.Show("Diapositivas convertidas en imágenes.");
                 return true;
 
             }
@@ -90,6 +85,24 @@ namespace prodProject
                 return filePath;
             }
 
+        }
+
+        public void DeleteFolder(string folderName)
+        {
+            try
+            {
+                //Directory.Delete(imagesPath + folderName+@"\");
+                foreach (var item in Directory.GetFiles(imagesPath + folderName + @"\", "*.*"))
+                {
+                    File.SetAttributes(item, FileAttributes.Normal);
+                    File.Delete(item);
+                }
+                Directory.Delete(imagesPath + folderName + @"\");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Error eliminando carpeta de imagenes");
+            }
         }
 
 
