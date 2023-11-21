@@ -52,34 +52,6 @@ namespace prodProject
          * 5. Asigna el dpi de la impresora zebra.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
-        /// <summary>
-        /// Se establece la conexion a la BD y se obtienen los datos de la impresora
-        /// </summary>
-        /// <param name="waitMenu">Instancia de formulario anterior de la cual resive el estandar de contened0r</param>
-        public Form1(WinScanForm waitMenu)
-        {
-            this.winScanForm = waitMenu;
-            Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
-            estandar = waitMenu.estandarContainer;
-            CsvReader cr = new();
-            SetPrinterConfig(cr);
-            connectionString = CsvReader.SetConnectionString();
-            if (!String.IsNullOrEmpty(connectionString) && !String.IsNullOrEmpty(printerIP) && dpi != 0)
-            {
-                conn = new SqlConnection(connectionString);
-                InitializeComponent();
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
-                this.Show();
-                ConfigTimer();
-            }
-            else
-            {
-                if (String.IsNullOrEmpty(printerIP))
-                    MessageBox.Show("Revise el archivo .csv de configuración de impresora.");
-                Process.GetCurrentProcess().Kill();
-            }
-        }
 
         /// <summary>
         /// Constructor de formulario inicializa las variables de la pantalla de inspecció

@@ -530,7 +530,7 @@ namespace prodProject
 
         private bool InsertaDbRecord()
         {
-            String queryString;
+            String queryString; 
 
             queryString = SetReportQueryString();
             if (db.InsertaRegInspeccion(queryString, Form1.etiqueta, this.serial, Form1.opText, Form1.idPiezaCatalog))

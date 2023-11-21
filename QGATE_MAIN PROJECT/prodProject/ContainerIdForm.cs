@@ -101,14 +101,7 @@ namespace prodProject
                 {
                     MessageBox.Show("No se encontro la ventana de mobisys, verifica que se encuentre abierta la aplicación");
                 }
-
-
-
             }
-            
-
-
-
         }
 
         /// <summary>

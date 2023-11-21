@@ -17,11 +17,6 @@ namespace prodProject
         string path = Application.StartupPath + @"\csvfilestest\PrinterSettings.csv";
         public Printer() { }
 
-        public void WriteConfig(Printer p)
-        {
-
-        }
-
         /// <summary>
         /// Actualiza el archivo de configuración de impresion con los datos definidos
         /// </summary>

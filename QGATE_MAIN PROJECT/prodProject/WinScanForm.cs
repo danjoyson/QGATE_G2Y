@@ -104,9 +104,7 @@ namespace prodProject
 
         private void StartFormRevision()
         {
-            Form1 f1 = new(this);
-            this.Hide();
-            f1.StartForeignTimer();
+
 
         }
     }

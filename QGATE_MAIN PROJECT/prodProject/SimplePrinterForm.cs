@@ -56,7 +56,6 @@ namespace prodProject
                 ZebraLinker z = new(Form1.printerIP);
                 z.ReprintLabel(Form1.lastZPLCommand);
             }
-
         }
 
         /*
