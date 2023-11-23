@@ -94,6 +94,10 @@ namespace prodProject
                 currLabTxt.ForeColor = Color.Red;
                 currLabTxt.Text = currentConf.text;
             }
+            else
+            {
+
+            }
 
         }
 
@@ -103,6 +107,11 @@ namespace prodProject
         }
 
         private void BtnReturn_Click(object sender, EventArgs e)
+        {
+            ReturnToMenu();
+        }
+
+        private void ReturnToMenu()
         {
             this.Hide();
             printerMenu.Show();

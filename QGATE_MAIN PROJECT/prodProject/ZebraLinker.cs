@@ -1,4 +1,5 @@
-﻿using System.Runtime.Intrinsics.Arm;
+﻿using Org.BouncyCastle.Crypto.Engines;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using Zebra.Sdk.Comm;    //Biblioteca directamente descargada de la página oficial de Zebra Technologies
 using Zebra.Sdk.Printer; //Biblioteca directamente descargada de la página oficial de Zebra Technologies
@@ -25,6 +26,7 @@ namespace prodProject
             PrinterIpAddress = printerIpAddress;
             this.date = DateTime.Now.ToString("dd/MM/yyyy");
             this.printerConn = new TcpConnection(PrinterIpAddress, TcpConnection.DEFAULT_ZPL_TCP_PORT);
+            
         }
 
         /*
@@ -82,6 +84,7 @@ namespace prodProject
                 {
                     MessageBox.Show("La impresora está ocupada.");
                 }
+                
             }
             catch (Exception ex)
             {
@@ -108,32 +111,34 @@ namespace prodProject
         {
             try
             {
-                printerConn.Open();
-                ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
-                PrinterStatus printerStatus = printer.GetCurrentStatus();
-                string zplData = null;
+                
+                    printerConn.Open();
+                    ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
+                    PrinterStatus printerStatus = printer.GetCurrentStatus();
+                    string zplData = null;
 
-                if (printerStatus.isReadyToPrint)
-                {
-                    //Codigo zpl de la etiqueta NOK
-                    switch (dpi)
+                    if (printerStatus.isReadyToPrint)
                     {
-                        case 203:
-                            zplData = "^XA^FO90,45^AQ,150,150^FDNOK^FS^XZ";
-                            break;
+                        //Codigo zpl de la etiqueta NOK
+                        switch (dpi)
+                        {
+                            case 203:
+                                zplData = "^XA^FO90,45^AQ,150,150^FDNOK^FS^XZ";
+                                break;
 
-                        case 300:
-                            zplData = "^XA^FO150,45^AQ,200,200^FDNOK^FS^XZ";
-                            break;
+                            case 300:
+                                zplData = "^XA^FO150,45^AQ,200,200^FDNOK^FS^XZ";
+                                break;
 
-                        default: //600 dpi
-                            zplData = "^XA^FO440,170^AQ,300,300^FDNOK^FS^XZ";
-                            break;
+                            default: //600 dpi
+                                zplData = "^XA^FO440,170^AQ,300,300^FDNOK^FS^XZ";
+                                break;
+                        }
+                        Form1.lastZPLCommand = zplData; //Guarda la última impresión realizada
+                        printerConn.Write(Encoding.UTF8.GetBytes(zplData));
                     }
-                    Form1.lastZPLCommand = zplData; //Guarda la última impresión realizada
-                    printerConn.Write(Encoding.UTF8.GetBytes(zplData));
-                }
-                return true;
+                    return true;
+               
             }
             catch (Exception ex)
             {
@@ -143,7 +148,6 @@ namespace prodProject
             finally
             {
                 printerConn.Close();
-                
             }
         }
 

@@ -75,7 +75,6 @@ namespace prodProject
             }
         }
 
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Funcion para settear la lista de distribución de los emails de notificación NOK desde el archivo csv
@@ -115,15 +114,17 @@ namespace prodProject
             StreamReader sr;
             try
             {
-                sr = new StreamReader(path);
 
-                string? linea;
-                while ((linea = sr.ReadLine()) != null)
+                using (sr = new StreamReader(path))
                 {
-                    mail.To.Add(linea);
+                    string? linea;
+                    while ((linea = sr.ReadLine()) != null)
+                    {
+                        mail.To.Add(linea);
+                    }
+                    sr.Close();
+                    return true;
                 }
-                sr.Close();
-                return true;
             }
             catch (Exception e)
             {
@@ -143,8 +144,8 @@ namespace prodProject
             StreamReader sr;
             try
             {
-                sr = new StreamReader(path);
-
+                using (sr = new StreamReader(path)) 
+                { 
                 string separador = ";";
                 string[] info = new string[5];
                 string? linea;
@@ -154,8 +155,9 @@ namespace prodProject
                 sr.Close();
 
                 fila[1] = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
-
                 return fila;
+                }
+                
             }
             catch (Exception e)
             {

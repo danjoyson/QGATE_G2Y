@@ -8,6 +8,7 @@ using System.Data.SqlTypes;
 using Zebra.Sdk.Comm;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Asn1.Cms;
+using System.Drawing.Text;
 
 namespace prodProject
 {
@@ -16,7 +17,7 @@ namespace prodProject
         public string connectionString { get; set; }
         List<string> dataConsult = new List<string>();
         SqlConnection conn;
-
+        Pieza p = new Pieza();
         public DatabaseConnector()
         {
             connectionString = CsvReader.SetConnectionString();
@@ -368,15 +369,16 @@ namespace prodProject
                 if (record.Read())
                 {
                     dateRead = record.GetDateTime(0);       //Fecha y hora del último NOK de la pieza
-                    
+                    conn.Close();
                     return dateRead;
                 }
+                conn.Close();
                 return dateRead;
             }
             catch (Exception e)
             {
                 conn.Close();
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message,"Error al verificar tiempo de reingreso");
                 return dateRead;
             }
 
@@ -422,6 +424,50 @@ namespace prodProject
         }
 
         /// <summary>
+        /// Verifica que el status de la pieza ingresadan si ya a sido validada previamente
+        /// </summary>
+        /// <returns>Status serial de pieza 0 pieza liberada, 1 pieza ya revisada con error, -1 pieza no revisada previamente,-2 error en la consulta a bd</returns>
+        public int CheckNotSerialZero(string etiqueta)
+        {
+            int status = -1;
+            String queryString = "SELECT MIN(serial) FROM Operador_Pieza WHERE numEtiqueta = @value";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new(queryString, conn);
+                cmd.Parameters.Add(new SqlParameter("@value", etiqueta));  //Prevención de SQL Injection, mediante Parametrized Queries 
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    if (record.GetInt16(0) == 0)
+                    {
+                        //setMessagleLabel("La pieza ya fue liberada sin fallas previamente.");
+                        //t.Start();
+                        return 0;
+                    }
+                }
+                conn.Close();
+                return 1; //Llama a la función para revisar el tiempo de reingreso de la pieza
+
+            }
+            catch (SqlNullValueException)
+            {
+                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende no necesita revisar reingreso)
+                conn.Close();
+                return -1;
+            }
+
+            catch (Exception e)
+            {
+                conn.Close();
+                MessageBox.Show(e.Message);
+                //t.Start();
+                return -2;
+            }
+
+        }
+
+        /// <summary>
         /// Devuelve el tiempo restante para volver a 
         /// inspeccionar una pieza previamente revisada
         /// </summary>
@@ -436,6 +482,85 @@ namespace prodProject
             SqlCommand cmd = new SqlCommand(Query,conn);
             SqlDataReader dr = cmd.ExecuteReader();
             return dr;
+        }
+
+        private Pieza GetPiezaInfo(String dmlStatement, String attribute, String table, String condition, String value)
+        {
+            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
+
+            try
+            {
+                conn.Open();
+                //connection.connectionString = queryString;
+                SqlCommand cmd = new(queryString, conn);
+                cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
+
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    
+                        //claveComp = record.GetString(0);
+                        p.claveComp = record.GetString(0);
+                        //idPiezaCatalog = record.GetInt16(1);
+                        p.id = record.GetInt16(1);
+                        //descripcion = record.GetString(2);
+                        p.descripcion = record.GetString(2);
+                        //inicioDeCadena = record.GetString(3);
+                        p.inicioCadena = record.GetString(3);
+                        //finDeCadena = record.GetString(4);
+                        p.finCadena = record.GetString(4);
+                        //numPasos = record.GetInt16(5);
+                        p.pasos = record.GetInt16(5);
+                        //pasoRescaneo = record.GetInt16(6);
+                        p.puntoReescaneo = record.GetInt16(6);
+                        //totalSteps = record.GetInt16(5);  Futura implementación para extraer la cantidad de pasos de revisión acorde a cada tipo de pieza
+
+                    conn.Close();
+                    return p;
+                }
+                else
+                {
+                    conn.Close();
+                    return null;
+                }
+            }
+            catch (Exception e1)
+            {
+                conn.Close();
+                MessageBox.Show(e1.Message);
+                return null;
+            }
+        }
+
+        private bool CheckOperador(String dmlStatement, String attribute, String table, String condition, String value)
+        {
+            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
+
+            try
+            {
+                conn.Open();
+                //connection.connectionString = queryString;
+                SqlCommand cmd = new(queryString, conn);
+                cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
+
+                SqlDataReader record = cmd.ExecuteReader();
+                if (record.Read())
+                {
+                    conn.Close();
+                    return true; //Significa que el operador exite en la bd y se debe bloquear en pantalla para usarlo por un lapso de tiempo
+                }
+                else
+                {
+                    conn.Close();
+                    return false;//Significa que no se encontro el operador en la bd
+                }
+            }
+            catch (Exception e1)
+            {
+                conn.Close();
+                MessageBox.Show(e1.Message);
+                return false;
+            }
         }
     }
 }

@@ -19,7 +19,6 @@ namespace prodProject
         private System.Timers.Timer NOKTimer = new(60000); //timer para el Punto 10. Si pasan 60 segundos, se presionará NOK automáticamente.
         private bool timerP9Flag = false;                   //En realidad funciona para el P10.
         private System.Timers.Timer AFKTimer = new(60000); //Timer de 1 minuto. Al terminar este timer, se devuelve al formulario de inicio. (AFK)
-        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private ProcessManipulation mobisys = new ProcessManipulation();
         private bool waitScanFlag = false;
         private int nextWindowForm = -1;
@@ -96,8 +95,6 @@ namespace prodProject
             return true;
         }
 
-
-
         /* 
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función que controla los eventos al pulsar el botón OK.
@@ -116,14 +113,7 @@ namespace prodProject
         private void BtnOK_Click(object sender, EventArgs e)
         {
             Form1.consecutveNOKCounter = 0; //Reinicia el contador de NOKs consecutivos
-            /*
-             * Podría hacerse un switch de "Tipo de formulario"
-             * 
-             * Detectar si es OK/NOK normal (1)
-             * Si es de tipo 1 slide antes de escaneo de pieza (2)
-             * Si es de tipo slide de escaneo (3)
-             * Si es de tipo slide final de proceso (4)
-             */
+
             //int remainFormsTillRESCAN;
 
             if (Form1.formSlideCont == Form1.pasoRescaneo - 1)
@@ -136,11 +126,9 @@ namespace prodProject
                     SetButtonsTimerDuration();
                     buttonsTimer.Start();
                     this.BtnOK.Enabled = false;
-
                     this.messageLabel.Visible = true;
                     this.txtEtiqueta.Visible = true;
                     this.pictureBox1.Visible = true;
-
                     this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
                     NOKTimer.Start(); //Comienza el timer de escaneo de etiqueta
 
@@ -150,7 +138,6 @@ namespace prodProject
             {
                 if (Form1.formSlideCont == Form1.pasoRescaneo && Form1.formSlideCont == Form1.numPasos)
                 {
-
                     if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
                     {
                         timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
@@ -158,7 +145,7 @@ namespace prodProject
                         Form1.formSlideCont++;
                         HideControls();
                         textEtiqueta = this.txtEtiqueta.Text;
-                        txtEtiqueta.Text = string.Empty;
+                        this.txtEtiqueta.Text = string.Empty;
                         Form1.conatadorPiezas++;
                         SetButtonsTimerDuration();
                         buttonsTimer.Start();
@@ -182,8 +169,6 @@ namespace prodProject
                             ReturnToHome();
 
                         }
-
-
                     }
                     else
                     {
@@ -200,7 +185,7 @@ namespace prodProject
                         Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
                         AFKTimer.Stop();
 
-                        if (InsertaDbRecord())
+                        /*if (InsertaDbRecord())
                         {
                             //Se comento para no enviar a impresión al momento de hacer pruebas
                             //callPrinter(); //Print box label
@@ -210,21 +195,62 @@ namespace prodProject
                         else
                         {
                             ReturnToHome();
-                        }
+                        }*/
+                        generaRegistro(textEtiqueta);
+                        this.Hide();
+                        ReturnToHome();
 
                     }
                     else
                     {
-                        AFKTimer.Stop();
-                        Form1.formSlideCont++;
-                        if (SetImage())
+                        if (Form1.pasoRescaneo==Form1.formSlideCont)
                         {
-                            SetButtonsTimerDuration();
-                            buttonsTimer.Start();
-                            this.BtnOK.Enabled = false;
+                            if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
+                            {
+                                timerP9Flag = true; //Cambia a true la bandera, para evitar que se imprima la etiqueta NOK al terminar el timer
+                                NOKTimer.Stop();
+                                Form1.formSlideCont++;
+                                this.txtEtiqueta.Visible = false;
+                                this.pictureBox1.Visible = false;
+                                this.messageLabel.Visible = false;
+                                textEtiqueta = this.txtEtiqueta.Text;
+                                txtEtiqueta.Text = string.Empty;
 
-                            AFKTimer.Start();
+                                if (SetImage())
+                                {
+                                    SetButtonsTimerDuration();
+                                    buttonsTimer.Start();
+                                    this.BtnOK.Enabled = false;
+                                    AFKTimer.Start();
+                                }
+                            }
+                            else
+                            {
+                                this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
+                                messageLabel.Text = "La etiqueta no coincide.";
+                                messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
+                                txtEtiqueta.Text = string.Empty;
+                            }
                         }
+                        else
+                        {
+                            AFKTimer.Stop();
+                            Form1.formSlideCont++;
+                            if (this.txtEtiqueta.Visible)
+                            {
+                                this.txtEtiqueta.Visible = false;
+                                this.pictureBox1.Visible = false;
+                            }
+                            if (SetImage())
+                            {
+                                SetButtonsTimerDuration();
+                                buttonsTimer.Start();
+                                this.BtnOK.Enabled = false;
+
+                                AFKTimer.Start();
+                            }
+                        }
+
                     }
                 }
             }
@@ -242,7 +268,7 @@ namespace prodProject
         /*
             Metodo post escaneo de etiqueta este debe ejecutarse despues de que se presiona el boton ok en el paso de reescaneo, envia registro a BD y lanza la pantalla de mobisys
          */
-
+        
         public void generaRegistro(string text)
         {
             Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
@@ -275,8 +301,6 @@ namespace prodProject
                 //   txtEtiqueta.Focus();
             }
         }
-
-
 
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
@@ -382,7 +406,7 @@ namespace prodProject
                 NOKTimer.Stop(); //Para el punto 10. Si es que se presionó el botón antes de que el timer terminara
             }
 
-            this.Hide();
+            this.Hide(); 
 
             if (GenerateSerial())
             {
@@ -402,9 +426,10 @@ namespace prodProject
                     {
 
                         ZebraLinker z = new ZebraLinker(Form1.printerIP);
+                        //z.PrintOkNokLabelZPLAsync(Form1.dpi);
                         if (!z.printOkNokLabelZPL(Form1.dpi))
                             AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
-                        //Impresión de etiqueta NOK                        
+                        //Impresión de etiqueta NOK*/                        
                         emailW.SendNOKWarning();
                         ReturnToHome();
 
@@ -642,7 +667,6 @@ namespace prodProject
         * 1. Llama al método para generar el código de desbloqueo aleatorio.
         * 2. Muestra el formulario de bloqueo.
         * 3. Envía la notificación de bloqueo junto con el código aleatorio.
-        * 
         * Si ocurre algún error al querer enviar el código de bloqueo, se retornará a la pantalla de inicio
         * --------------------------------------------------------------------------------------------------------------------------------
         */

@@ -11,7 +11,7 @@ namespace prodProject
         ContainerIdForm containerIdMenu;
         WinScanForm winScanForm;
         Printer p = new Printer();
-        Pieza pz  = new Pieza();    
+        static Pieza pz  = new Pieza();    
         DatabaseConnector db = new DatabaseConnector();
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
@@ -146,9 +146,23 @@ namespace prodProject
 
 
                     //getPiezaPartSteps();
-                    if (CheckNotSerialZero())
+                    switch (db.CheckNotSerialZero(etiqueta))
                     {
-                        StartForms();
+                        case -2:
+                            t.Start();
+                            break;
+                        case -1:
+                            StartForms();
+                            break;
+                        case 0:
+                            setMessagleLabel("La pieza ya fue liberada sin fallas previamente.");
+                            t.Start();
+                            break;
+                        case 1:
+                            if(ValidaReingreso(etiqueta)) StartForms();
+                            break;
+
+                        
                     }
                 }
             }
@@ -251,92 +265,11 @@ namespace prodProject
             messageLabel.Location = new Point(ClientSize.Width / 2 - messageLabel.Width / 2, (ClientSize.Width / 3) - 20);
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para verificar que la pieza no haya sido guardada con serial igual a cero previamente, es decir que no haya sido 
-         * liberada todavía.
-         * Retorna false en caso de que ya exista esa etiqueta con serial cero (Ya ha sido liberada) o si no ha cumplido el tiempo de retrabajo.
-         * Retorna true en caso de que la etiqueta no haya tenido serial cero o si ya ha cumplido el tiempo de retrabajo.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private bool CheckNotSerialZero()
-        {
-            String queryString = "SELECT MIN(serial) FROM Operador_Pieza WHERE numEtiqueta = @value";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", etiqueta));  //Prevención de SQL Injection, mediante Parametrized Queries 
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    if (record.GetInt16(0) == 0)
-                    {
-                        setMessagleLabel("La pieza ya fue liberada sin fallas previamente.");
-                        t.Start();
-                        return false;
-                    }
-                }
-                conn.Close();
-                return CheckReingreso(); //Llama a la función para revisar el tiempo de reingreso de la pieza
-
-            }
-            catch (SqlNullValueException)
-            {
-                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende no necesita revisar reingreso)
-                conn.Close();
-                return true;
-            }
-
-            catch (Exception e)
-            {
-                conn.Close();
-                MessageBox.Show(e.Message);
-                t.Start();
-                return false;
-            }
-
-        }
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para verificar que la pieza con NOK no sea reingresada dentro de X minutos (tiempo que dura el retrabajo).
-         * Retorna false en caso de que no haya pasado el tiempo necesario.
-         * Retorna true en caso de que haya cumplido el tiempo necesario.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private bool CheckReingreso()
-        {
-            String queryString = "SELECT MAX(fecha) FROM Operador_Pieza WHERE numEtiqueta = @value";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", etiqueta));  //Prevención de SQL Injection, mediante consultas parametrizadas 
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    DateTime dateRead = record.GetDateTime(0);       //Fecha y hora del último NOK de la pieza
-                    TimeSpan span = DateTime.Now.Subtract(dateRead);
-                    if (span.TotalMinutes >= this.minRetrabajo)     //Total minutes convierte el timespan a minutos, ejemplo: 1 hora = 60 minutos
-                    {
-                        return true;                                //Si ya pasó el tiempo de retrabajo, retorna true
-                    }
-                    string remain = (this.minRetrabajo - span.TotalMinutes).ToString("0.0");
-                    setMessagleLabel("Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remain + " minutos");
-                }
-
-                return false; //Si no ha cumplido el tiempo de retrabajo, retorna false
-            }
-            catch (Exception e)
-            {
-                conn.Close();
-                MessageBox.Show(e.Message);
-                return false;
-            }
-
-        }
-
+        /// <summary>
+        /// Verifica que una pieza que ya fue revisada cumpla con el tiempo de espera para volver a revisar
+        /// </summary>
+        /// <param name="etiqueta">Etiqueta de pieza que se desea revisar</param>
+        /// <returns></returns>
         private bool ValidaReingreso(string etiqueta)
         {
             DateTime remain;
@@ -347,7 +280,7 @@ namespace prodProject
                 return true;                                //Si ya pasó el tiempo de retrabajo, retorna true
             }
             string remainTime = (this.minRetrabajo - span.TotalMinutes).ToString("0.0");
-            setMessagleLabel("Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remain + " minutos");
+            setMessagleLabel("Todavía no se ha cumplido el tiempo de retrabajo de la pieza. \nFaltan: " + remainTime + " minutos");
             return false;
         }
         /// <summary>

@@ -23,7 +23,7 @@ namespace prodProject
         public string porcName = "MobisysClient100";
         private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
         private System.Timers.Timer scanMobisysTimer = new(60000);
-        private System.Timers.Timer copyPasteTimer = new(800);
+        private System.Timers.Timer copyPasteTimer = new(3500);
         
         private const int SW_HIDE = 0;
         private const int SW_SHOW = 5;

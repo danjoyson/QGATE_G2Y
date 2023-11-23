@@ -14,7 +14,7 @@ namespace prodProject
         public int x { get; set; }
         public int y { get; set; }
         public string text { get; set; }
-        string path = Application.StartupPath + @"\csvfilestest\PrinterSettings.csv";
+        string path = Application.StartupPath + @"\csvfiles2\PrinterSettings.csv";
         public Printer() { }
 
         /// <summary>
