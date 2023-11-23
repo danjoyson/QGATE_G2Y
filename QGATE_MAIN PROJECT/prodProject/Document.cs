@@ -60,7 +60,6 @@ namespace prodProject
         public string getPath()
         {
             var filePath = string.Empty;
-            string fileDir;
             try
             {
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())

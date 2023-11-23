@@ -429,7 +429,6 @@ namespace prodProject
         /// <returns>Status serial de pieza 0 pieza liberada, 1 pieza ya revisada con error, -1 pieza no revisada previamente,-2 error en la consulta a bd</returns>
         public int CheckNotSerialZero(string etiqueta)
         {
-            int status = -1;
             String queryString = "SELECT MIN(serial) FROM Operador_Pieza WHERE numEtiqueta = @value";
             try
             {

@@ -57,7 +57,7 @@ namespace prodProject
                 printerConn.Open();
                 ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
                 PrinterStatus printerStatus = printer.GetCurrentStatus();
-                string zplData = null;
+                string zplData = "";
                 if(printerStatus.isReadyToPrint)
                 {
                     //Codigo zpl de la etiqueta de caja
@@ -115,7 +115,7 @@ namespace prodProject
                     printerConn.Open();
                     ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
                     PrinterStatus printerStatus = printer.GetCurrentStatus();
-                    string zplData = null;
+                    string zplData = "";
 
                     if (printerStatus.isReadyToPrint)
                     {
@@ -140,7 +140,7 @@ namespace prodProject
                     return true;
                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //MessageBox.Show("Ocurrió un error al imprimir:" + ex.Message);
                 return false;
@@ -159,7 +159,7 @@ namespace prodProject
                 await Task.Run(() => printerConn.Open()); // Ejecuta la apertura en un hilo separado
                 ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
                 PrinterStatus printerStatus = printer.GetCurrentStatus();
-                string zplData = null;
+                string zplData = "";
 
                 if (printerStatus.isReadyToPrint)
                 {
@@ -183,7 +183,7 @@ namespace prodProject
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                 return false;

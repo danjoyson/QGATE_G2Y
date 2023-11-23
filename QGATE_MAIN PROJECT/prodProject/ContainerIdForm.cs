@@ -26,9 +26,6 @@ namespace prodProject
 
         public ContainerIdForm()
         {
-            //Thread runMobi = new Thread(new ThreadStart(processes.RunMobisys));
-            //runMobi.Start();
-            //RunMobisys();
             InitializeComponent();
             estandarLabel.Text = "México";
             containerIdMessage.Anchor = AnchorStyles.None;
@@ -56,12 +53,12 @@ namespace prodProject
             {
                 if (containersId.Contains(containerTxtBox.Text))
                 {
-                    setMessageLabel("Esta etiqueta ya fue escaneada");
+                    SetMessageLabel("Esta etiqueta ya fue escaneada");
                     containerTxtBox.Text = string.Empty;
                     return false;
                 }else if(containerTxtBox.Text.Length == 31)
                 {
-                    setMessageLabel("Etiqueta no valida");
+                    SetMessageLabel("Etiqueta no valida");
                     containerTxtBox.Text = string.Empty;
                     return false;
                 }
@@ -71,7 +68,7 @@ namespace prodProject
             }
             else
             {
-                setMessageLabel("Debe introducirse la etiqueta de contenedor");
+                SetMessageLabel("Debe introducirse la etiqueta de contenedor");
                 return false;
             }
 
@@ -157,7 +154,7 @@ namespace prodProject
         /// Asigna el menssaje que se mostrara en pantalla
         /// </summary>
         /// <param name="message"> mensaje que se muestra en pantalla cuando no se cumple una condición</param>
-        private void setMessageLabel(string message)
+        private void SetMessageLabel(string message)
         {
             containerIdMessage.Text = message;
             containerIdMessage.Location = new Point(ClientSize.Width / 2 - containerIdMessage.Width / 2, ClientSize.Height / 2 + 40);
@@ -170,18 +167,6 @@ namespace prodProject
         {
         }
 
-        private void ShowWaitScan(int nextWindow)
-        {
-            containerTxtBox.Clear();
-            this.Hide();
-            WinScanForm wmenu = new WinScanForm(nextWindow);
-            wmenu.estandarContainer = Estandar;
-            wmenu.Show();
-            //this.Close();
-            //f1.StartForeignTimer();
-
-        }
-
         private void pictureBox3_Click(object sender, EventArgs e)
         {
 
@@ -190,13 +175,6 @@ namespace prodProject
         private void comboBoxEstandar_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void ClearList(object state)
-        {
-            // Vaciar la lista
-            containersId.Clear();
-            Console.WriteLine("Lista vaciada después de un día.");
         }
 
         private void BorrarLista(object sender, ElapsedEventArgs e)

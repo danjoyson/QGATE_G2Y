@@ -22,17 +22,13 @@ namespace prodProject
         private ProcessManipulation mobisys = new ProcessManipulation();
         private bool waitScanFlag = false;
         private int nextWindowForm = -1;
-        //private System.Timers.Timer scanMobisysTimer = new(60000);
+        ZebraLinker z;
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
 
         /* 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario 3 (Con botones OK/NOK)
          * 1. Llama a la función de búsqueda y asignación de imagen. En caso de no haber errores continúa.
          * 2. Crea un nuevo objeto de la clase "EmailWarner"
          * 3. Configura el funcionamiento del timer para los "botones OK", el timer del punto 10 y el timer de inactividad.
-         * 4. Inicializa el formulario y lo muestra.
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         public Form3(Form1 f1)
         {
@@ -40,6 +36,7 @@ namespace prodProject
             waitScanFlag = false;
             nextWindowForm = -1;
             this.f1 = f1;
+            z = new ZebraLinker(Form1.printerIP);
             if (SetImage())
             {
                 this.FormClosing += new FormClosingEventHandler(Form3_FormClosing);
@@ -75,11 +72,10 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Busca y cambia la imagen de fondo del formulario.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Actualiza la imagen que se asigna como background del formulario
+        /// </summary>
+        /// <returns></returns>
         private bool SetImage()
         {
             try
@@ -95,27 +91,18 @@ namespace prodProject
             return true;
         }
 
-        /* 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función que controla los eventos al pulsar el botón OK.
-         * 
-         * 1. Si el contador de slide es diferente a 11: Aumenta el contador en 1, vuelve invisible el formulario actual, cambia la imagen a 
-         *    la slide siguiente de la pieza que se está evaluando, espera a que el timer cambie el valor de la bandera de espera,
-         *    lo hace visible de nuevo y resetea el valor de la bandera a false para el funcionamiento de los siguientes formularios.  
-         *    También se maneja el timer de bloqueo de botones OK.
-         * 2. Si el contador es igual a 11, esconde el formulario actual.
-         * 3. Llama a la función de inserción de registro en la base de datos.
-         * 4. En caso de no haber errores, lo notifica y llama al formulario de impresión 
-         * El timer en realidad es meramente estético, si se omite no afecta al funcionamiento de la aplicación. No obstante, si no se 
-         * estuviese o si es muy corto, el cambio de slides parece un efecto visual de glitcheo.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
         private void BtnOK_Click(object sender, EventArgs e)
         {
+            SetButtonOkAction();
+        }
+
+        /// <summary>
+        /// Controla la acción al presionarse el boton OK
+        /// </summary>
+        private void SetButtonOkAction()
+        {
             Form1.consecutveNOKCounter = 0; //Reinicia el contador de NOKs consecutivos
-
             //int remainFormsTillRESCAN;
-
             if (Form1.formSlideCont == Form1.pasoRescaneo - 1)
             {
                 AFKTimer.Stop();
@@ -147,10 +134,7 @@ namespace prodProject
                         textEtiqueta = this.txtEtiqueta.Text;
                         this.txtEtiqueta.Text = string.Empty;
                         Form1.conatadorPiezas++;
-                        SetButtonsTimerDuration();
-                        buttonsTimer.Start();
-                        this.BtnOK.Enabled = false;
-                        AFKTimer.Start();
+                        ActivateButtonTimer();
                         if (f1.completedContainer) nextWindowForm = 0;
                         else nextWindowForm = 1;
                         if (Form1.conatadorPiezas == Form1.estandar)
@@ -173,8 +157,7 @@ namespace prodProject
                     else
                     {
                         this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                        messageLabel.Text = "La etiqueta no coincide.";
-                        messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
+                        SetScrenMessage("La etiqueta no coincide.");
                         txtEtiqueta.Text = string.Empty;
                     }
                 }
@@ -184,26 +167,13 @@ namespace prodProject
                     {
                         Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
                         AFKTimer.Stop();
-
-                        /*if (InsertaDbRecord())
-                        {
-                            //Se comento para no enviar a impresión al momento de hacer pruebas
-                            //callPrinter(); //Print box label
-                            MessageBox.Show("Se cumplieron todos los pasos con exito");
-                            Form1.conatadorPiezas++;
-                        }
-                        else
-                        {
-                            ReturnToHome();
-                        }*/
                         generaRegistro(textEtiqueta);
                         this.Hide();
                         ReturnToHome();
-
                     }
                     else
                     {
-                        if (Form1.pasoRescaneo==Form1.formSlideCont)
+                        if (Form1.pasoRescaneo == Form1.formSlideCont)
                         {
                             if (this.txtEtiqueta.Text.Equals(Form1.etiqueta))
                             {
@@ -218,17 +188,13 @@ namespace prodProject
 
                                 if (SetImage())
                                 {
-                                    SetButtonsTimerDuration();
-                                    buttonsTimer.Start();
-                                    this.BtnOK.Enabled = false;
-                                    AFKTimer.Start();
+                                    ActivateButtonTimer();
                                 }
                             }
                             else
                             {
                                 this.txtEtiqueta.Focus(); //Selecciona automáticamente la caja de texto de re-escaneo de etiqueta
-                                messageLabel.Text = "La etiqueta no coincide.";
-                                messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
+                                SetScrenMessage("La etiqueta no coincide.");
                                 txtEtiqueta.Text = string.Empty;
                             }
                         }
@@ -243,11 +209,7 @@ namespace prodProject
                             }
                             if (SetImage())
                             {
-                                SetButtonsTimerDuration();
-                                buttonsTimer.Start();
-                                this.BtnOK.Enabled = false;
-
-                                AFKTimer.Start();
+                                ActivateButtonTimer();
                             }
                         }
 
@@ -256,6 +218,22 @@ namespace prodProject
             }
         }
 
+        private void ActivateButtonTimer()
+        {
+            SetButtonsTimerDuration();
+            buttonsTimer.Start();
+            this.BtnOK.Enabled = false;
+            AFKTimer.Start();
+        }
+        /// <summary>
+        /// Asigna el valor y la posición del mensaje que se 
+        /// muestra en pantalla
+        /// </summary>
+        private void SetScrenMessage(string message)
+        {
+            messageLabel.Text = message;
+            messageLabel.Location = new Point(txtEtiqueta.Location.X + messageLabel.Width, txtEtiqueta.Location.Y + txtEtiqueta.Height);
+        }
         /// <summary>
         /// Oculta los imputs que no son utilizados en la pantalla actual
         /// </summary>
@@ -302,12 +280,9 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * SETTEA EL INTERVALO DEL TIMER DE BOTONES ACORDE A CADA PUNTO, en milisengundos. 
-         * Todos manejan un rango de -500 milisegundos para no obstruir o alentar al operador
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Asigna el tiempo definido para el punto de inspección correspondiente
+        /// </summary>
         private void SetButtonsTimerDuration()
         {
             switch (Form1.formSlideCont)
@@ -372,12 +347,11 @@ namespace prodProject
 
         }
 
-        /* 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Esta función es llamada cada que el Timer de botones realiza un ciclo de inicio-fin mediante el evento ElapsedEvent
-         * Habilita el botón OK.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Habilita el boton OK despues de que se cumple el tiempo de espera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EnableButtons(object sender, ElapsedEventArgs e)
         {
             this.BtnOK.Enabled = true;
@@ -387,7 +361,6 @@ namespace prodProject
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Función que controla los eventos al pulsar el botón NOK.
-         * 
          * 1. Llama al método para buscar el último serial de la pieza y le asigna uno nuevo.
          * 2. Después llama al método para guardar el registro en la Base de Datos.
          * 3. En caso de no haber errores, muestra un formulario de espera mientras envía los correos de notificación.
@@ -414,8 +387,6 @@ namespace prodProject
                 {
                     if (this.serial >= 3 || Form1.consecutveNOKCounter == 3) //Si la misma etiqueta ha dado 3 NOK o si 3 piezas cualquiera seguidas dan 1 NOK cada una
                     {
-                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        //Impresión de etiqueta NOK
                         if (!z.printOkNokLabelZPL(Form1.dpi))
                             AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         this.blockAppClosing = true;
@@ -424,15 +395,10 @@ namespace prodProject
                     }
                     else
                     {
-
-                        ZebraLinker z = new ZebraLinker(Form1.printerIP);
-                        //z.PrintOkNokLabelZPLAsync(Form1.dpi);
                         if (!z.printOkNokLabelZPL(Form1.dpi))
-                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
-                        //Impresión de etiqueta NOK*/                        
+                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);                     
                         emailW.SendNOKWarning();
                         ReturnToHome();
-
                     }
                 }
                 else
@@ -444,47 +410,33 @@ namespace prodProject
         }
 
         /*
-        * --------------------------------------------------------------------------------------------------------------------------------
         * Función que controla los eventos cuando se termina el timer del punto 10
-        * 
         * 1. Llama al método para buscar el último serial de la pieza y le asigna uno nuevo.
         * 2. Después llama al método para guardar el registro en la Base de Datos.
-        * 3. En caso de no haber errores, muestra un formulario de espera mientras envía los correos de notificación
-        * 4. Si el serial es mayor o igual a 3, llama al formulario de bloqueo de la aplicación
         * 5. En caso de que el serial sea menor a 3, manda una notificación de NOK mediante el EmailWarner.
-        * --------------------------------------------------------------------------------------------------------------------------------
         */
         private void TimerP9Elapsed_NOK(object sender, EventArgs e)
         {
-
             if (timerP9Flag == false) //Si no se ha presionado OK
             {
                 this.Hide();
-
                 if (GenerateSerial())
                 {
                     if (InsertaDbRecord())
                     {
                         if (this.serial >= 3)
                         {
-
-                            ZebraLinker z = new ZebraLinker(Form1.printerIP);
                             if (!z.printOkNokLabelZPL(Form1.dpi))
                                 MessageBox.Show("No se pudo generar la etiqueta de NOK");
-
                             BlockApp();
                             this.Close();
                         }
                         else
                         {
-
-                            ZebraLinker z = new ZebraLinker(Form1.printerIP);
                             if (!z.printOkNokLabelZPL(Form1.dpi))
                                 MessageBox.Show("No se pudo generar la etiqueta de NOK");
-
                             emailW.SendNOKWarning();
                             ReturnToHome();
-
                         }
                     }
                     else
@@ -492,22 +444,14 @@ namespace prodProject
                         ReturnToHome();
                     }
                 }
-
             }
             NOKTimer.Stop();
-            //Si se presionó OK, la bandera es true y por ende no hace nada
-
         }
 
-
         /*
-       * --------------------------------------------------------------------------------------------------------------------------------
        * Función que controla los eventos cuando se termina el timer AFK (Away From Keyboard)
-       * 
        * 1. Cierra este formulario
        * 2. Regresa al formulario de inicio
-       * 
-       * --------------------------------------------------------------------------------------------------------------------------------
        */
         private void AFKReturn(object sender, EventArgs e)
         {
@@ -519,18 +463,10 @@ namespace prodProject
 
         }
 
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para extraer el último serial de la parte, retorna true o false dependiendo de la capacidad de ejecutar la Query
-         * 1. Se conecta a la base de datos y hace una consulta de serial con esa etiqueta.
-         * 2. Si no hay un serial previo, se le asignará el valor de 1.
-         * 3. Si hay un serial previo, se tomará el valor máximo y se le suma 1.
-         * 
-         * Retorna true en caso de no haber ningún error.
-         * Retorna false en caso de alguna excepción.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Genera un serial para la pieza que se esta inspeccionando
+        /// </summary>
+        /// <returns>True si genero correctamente el serial</returns>
         private bool GenerateSerial()
         {
             this.serial = db.GenerateDBSerial(Form1.etiqueta);
@@ -543,16 +479,10 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función de conexión al servidor de SQL y query DML INSERT INTO para ingresar un registro nuevo a la tabla Operador_Pieza
-         *  Recibe el dmlStatement: INSERT INTO
-         *  Trabaja con el insertionQueryString
-         *  
-         *  Se conecta a la Base de Datos e inserta el registro de inspección.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
-
+        /// <summary>
+        /// Inserta en la BD el registro con el resultado de la revision de la pieza
+        /// </summary>
+        /// <returns> True si la pieza se inserto correctamente en la BD</returns>
         private bool InsertaDbRecord()
         {
             String queryString; 
@@ -603,16 +533,6 @@ namespace prodProject
             return queryString;
         }
 
-        //Método para entrar al formulario de espera para que el usuario escanee la etiqueta dentro de mobisys
-        private void ScanMobisys()
-        {
-            if (Form1.conn.State == ConnectionState.Open)
-                Form1.conn.Close();
-            Application.OpenForms["WinScanForm"].Show();
-            //f1.StartForeignTimer();
-            this.Close();
-        }
-
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Método para regresar al formulario de inicio e iniciar el timer del formulario inicial.
@@ -626,16 +546,6 @@ namespace prodProject
                 Form1.conn.Close();
             Application.OpenForms["Form1"].Show();
             this.f1.StartForeignTimer();
-            this.Close();
-        }
-
-        //Metodo cuando para regresar a menu Mobisys cuando se completa el contenido de un Container
-        private void ReturnToMobisys()
-        {
-            if (Form1.conn.State == ConnectionState.Open)
-                Form1.conn.Close();
-            Application.OpenForms["menuMobisys"].Show();
-            //f1.StartForeignTimer();
             this.Close();
         }
 
@@ -661,15 +571,9 @@ namespace prodProject
             ZBLinker.PrintBoxLabelZPL(Form1.etiqueta, Form1.descripcion, "83", Form1.dpi);
         }
 
-        /*
-        * --------------------------------------------------------------------------------------------------------------------------------
-        * Método de bloqueo de aplicación.
-        * 1. Llama al método para generar el código de desbloqueo aleatorio.
-        * 2. Muestra el formulario de bloqueo.
-        * 3. Envía la notificación de bloqueo junto con el código aleatorio.
-        * Si ocurre algún error al querer enviar el código de bloqueo, se retornará a la pantalla de inicio
-        * --------------------------------------------------------------------------------------------------------------------------------
-        */
+        /// <summary>
+        /// Bloquea la aplicación y envia por mail el código de desbloqueo cuando se rechaza 3 veces una pieza
+        /// </summary>
         private void BlockApp()
         {
 
@@ -686,16 +590,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método para manejar el cerrado de la aplicación incompleto
-         * --------------------------------------------------------------------------------------------------------------------------------
-        */
+        // Método para manejar el cerrado de la aplicación incompleto
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.blockAppClosing == false)
             {
-                //Se cambio la condición que antes era estatica por la comparación con Form1.pasoReescaneo que es el mismo dato pero sacado de la BD
                 if (Form1.formSlideCont == Form1.pasoRescaneo) //Si se cierra el programa incorrectamente en el punto de reingreso de etiqueta. Para que no lo guarde como NOK necesariamente
                 {
                     NOKTimer.Stop();
@@ -706,33 +605,5 @@ namespace prodProject
             }
 
         }
-
-
-        private void ShowWaitScan(int nextWindow)
-        {
-            waitScanFlag = true;
-            if (Form1.conn.State == ConnectionState.Open)
-                Form1.conn.Close();
-            this.Close();
-            WinScanForm wmenu = new WinScanForm(f1, nextWindow);
-            wmenu.Show();
-            //f1.StartForeignTimer();
-
-        }
-
-        //Method to change the event when the timer for Mobisys Scan finish
-        private void OnTimerScanEvent(object source, EventArgs e)
-        {
-            if (Form1.conn.State == ConnectionState.Open)
-                Form1.conn.Close();
-            //f1.Close();
-
-            Application.OpenForms["WaitScanForm"].Show();
-            //f1.StartForeignTimer();
-            this.Close();
-        }
-
-
-
     }
 }

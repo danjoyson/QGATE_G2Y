@@ -9,7 +9,6 @@ namespace prodProject
     {
 
         ContainerIdForm containerIdMenu;
-        WinScanForm winScanForm;
         Printer p = new Printer();
         static Pieza pz  = new Pieza();    
         DatabaseConnector db = new DatabaseConnector();
