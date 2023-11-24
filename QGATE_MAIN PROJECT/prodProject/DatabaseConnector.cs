@@ -26,80 +26,6 @@ namespace prodProject
             
         }
 
-        /// <summary>
-        /// Crea la instancia para la conexion a la Base de Datos
-        /// </summary>
-        /// <returns>True si se crea la instancia correctamente</returns>
-        public bool GetConnection()
-        {
-            try
-            {
-                conn = new SqlConnection(connectionString + "; Connection Timeout = 30");
-                return true;
-            }catch (Exception ex)
-            {
-                MessageBox.Show("Database connection error", ex.Message);
-                return false;
-            }
-            
-        }
-
-        private bool CloseConnection()
-        {
-            try
-            {
-                conn.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Clossing connection error",ex.Message);
-                return false;
-            }
-           
-        }
-
-
-        //Método ejecutar una consulta en sql, se debe adaptar para la manipulación de consultas parametrizadas.
-
-        public List<string> ExecuteQuery(String dmlStatement, String attribute, String table, String condition, String value)
-        {
-            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
-            List<string> result = new List<string>();
-            try
-            {
-
-                conn.Open();
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
-
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                   
-                        result.Add(record.GetInt16(1).ToString());  //idPiezaCatalog
-                        result.Add(record.GetString(2));  //descripcion
-                        result.Add(record.GetString(3)); //Inicio de cadena
-                        result.Add(record.GetString(4)); //Fin de Cadena
-                        //totalSteps = record.GetInt16(5);  Futura implementación para extraer la cantidad de pasos de revisión acorde a cada tipo de pieza
-                        return result;
-                }
-                else
-                {    
-                    conn.Close();
-                    return result;
-                }
-            }
-            catch (Exception e1)
-            {
-                conn.Close();
-                MessageBox.Show(e1.Message);
-                //t.Start();
-                return result;
-
-            }
-        }
-
         /*
         * -----------------------------------------------------------------------------------------------------------------------------------
         * Función para ingresar la pieza en la Base de Datos.
@@ -467,23 +393,15 @@ namespace prodProject
         }
 
         /// <summary>
-        /// Devuelve el tiempo restante para volver a 
-        /// inspeccionar una pieza previamente revisada
+        /// Devuelve los datos de la pieza revisada si existe.
         /// </summary>
-        /// <returns> Tiempo restante</returns>
-        public DateTime ChecaReingresoPieza()
-        {
-            DateTime actual = DateTime.Now;
-            return actual;
-        }
-        public SqlDataReader DataReader(string Query)
-        {
-            SqlCommand cmd = new SqlCommand(Query,conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            return dr;
-        }
-
-        private Pieza GetPiezaInfo(String dmlStatement, String attribute, String table, String condition, String value)
+        /// <param name="dmlStatement"></param>
+        /// <param name="attribute"></param>
+        /// <param name="table"></param>
+        /// <param name="condition"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Pieza GetPiezaInfo(String dmlStatement, String attribute, String table, String condition, String value)
         {
             String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
 
@@ -531,7 +449,16 @@ namespace prodProject
             }
         }
 
-        private bool CheckOperador(String dmlStatement, String attribute, String table, String condition, String value)
+        /// <summary>
+        /// Verifica que el numero de operador especificado exista en la BD
+        /// </summary>
+        /// <param name="dmlStatement"></param>
+        /// <param name="attribute"></param>
+        /// <param name="table"></param>
+        /// <param name="condition"></param>
+        /// <param name="value">Numero de empleado</param>
+        /// <returns></returns>
+        public bool CheckOperador(String dmlStatement, String attribute, String table, String condition, String value)
         {
             String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
 

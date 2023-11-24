@@ -56,7 +56,7 @@
             label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(48, 462);
+            label1.Location = new Point(113, 456);
             label1.Name = "label1";
             label1.Size = new Size(265, 60);
             label1.TabIndex = 1;
@@ -66,10 +66,10 @@
             // numOpTxtBox
             // 
             numOpTxtBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            numOpTxtBox.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            numOpTxtBox.Location = new Point(329, 466);
+            numOpTxtBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            numOpTxtBox.Location = new Point(400, 456);
             numOpTxtBox.Name = "numOpTxtBox";
-            numOpTxtBox.Size = new Size(1135, 50);
+            numOpTxtBox.Size = new Size(1065, 54);
             numOpTxtBox.TabIndex = 2;
             numOpTxtBox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -81,9 +81,9 @@
             BtnDelete.FlatStyle = FlatStyle.Popup;
             BtnDelete.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             BtnDelete.ForeColor = SystemColors.ButtonHighlight;
-            BtnDelete.Location = new Point(399, 663);
+            BtnDelete.Location = new Point(471, 666);
             BtnDelete.Name = "BtnDelete";
-            BtnDelete.Size = new Size(826, 110);
+            BtnDelete.Size = new Size(826, 138);
             BtnDelete.TabIndex = 3;
             BtnDelete.Text = "Eliminar";
             BtnDelete.UseVisualStyleBackColor = false;

@@ -84,13 +84,13 @@ namespace prodProject
             currentConf = p.GetConfig();
             if (currentConf != null)
             {
-                currIpLabel.Location = new Point(label2.Location.X + 50, label2.Location.Y);
+                currIpLabel.Location = new Point(label2.Location.X + 90, label2.Location.Y);
                 currIpLabel.ForeColor = Color.Red;
                 currIpLabel.Text = currentConf.IP;
-                currDpiLabel.Location = new Point(label3.Location.X + 50, label3.Location.Y);
+                currDpiLabel.Location = new Point(label3.Location.X + 90, label3.Location.Y);
                 currDpiLabel.ForeColor = Color.Red;
                 currDpiLabel.Text = currentConf.DPI.ToString();
-                currLabTxt.Location = new Point((label7.Location.X + 150), label7.Location.Y);
+                currLabTxt.Location = new Point((label7.Location.X + 190), label7.Location.Y);
                 currLabTxt.ForeColor = Color.Red;
                 currLabTxt.Text = currentConf.text;
             }

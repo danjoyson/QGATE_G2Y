@@ -27,15 +27,19 @@ namespace prodProject
         public ContainerIdForm()
         {
             InitializeComponent();
-            estandarLabel.Text = "México";
-            containerIdMessage.Anchor = AnchorStyles.None;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            ConfigureFormBuffer();
             configEstandar.Visible = false;
             timer = new System.Timers.Timer(24 * 60 * 60 * 1000);
             timer.Elapsed += BorrarLista;
             timer.Start(); 
 
+        }
+        private void ConfigureFormBuffer()
+        {
+            estandarLabel.Text = "México";
+            containerIdMessage.Anchor = AnchorStyles.None;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnContainer_Click(object sender, EventArgs e)

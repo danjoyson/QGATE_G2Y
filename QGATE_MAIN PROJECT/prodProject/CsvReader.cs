@@ -12,25 +12,6 @@ namespace prodProject
         }
 
         /*
-         * El connectionString se compone de IPServer,Puerto; Base de datos; User; Password;
-         * EJEMPLO: "Data Source=IPBaseDeDatos,Puerto;Initial Catalog=NombreBaseDeDatos;User ID=usuario;Password=contraseña";
-         * 
-         * La IP puede ser obtenida simplemente ejecutando el comando ipconfig desde el cmd del servidor.
-         * 
-         * El número de puerto que usa sql server puede cambiar si se reinicia el servidor que aloja la base de datos, ya que revisándolo notamos que utiliza 
-         * puertos dinámicos TCP.
-         * En caso de ser necesario cambiar el número de puerto en el archivo de configuración: para ver el número de puerto desde Microsoft SQL Server Management se realiza lo siguiente:
-         *      1. Conectarse a la instancia de base de datos
-         *      2. Expandir la carpeta Management
-         *      3. Expandir SQLServerLogs
-         *      4. Dar doble click en current
-         *      5. Presionar el botón Filter de la barra de herramientas superior
-         *      6. En el recuadro de "Message Contains Text" ingresar el texto "Server is listening on"
-         *      7. Aquellos textos que contengan "ipv4" e "ipv6" muestran su respectivo número de puerto
-         */
-
-
-        /*
          * -------------------------------------------------------------------------------------------------------------------------------- 
          * Función para obtener y setear los datos de la BD desde un archivo CSV (IP, Puerto, Nombre de base de datos, Usuario y Contraseña; EN ESE ORDEN)
          * 1. Obtiene los textos del archivo .csv mediante un StreamReader

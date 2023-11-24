@@ -27,16 +27,20 @@ namespace prodProject
                 this.f1 = f1;
 
                 InitializeComponent();
-                this.SetStyle(
-                ControlStyles.UserPaint |
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.DoubleBuffer, true);
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
+                SetFormConfig();
                 this.Show();
             }
         }
 
+        private void SetFormConfig()
+        {
+            this.SetStyle(
+            ControlStyles.UserPaint |
+            ControlStyles.AllPaintingInWmPaint |
+            ControlStyles.DoubleBuffer, true);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+        }
         /*
          * --------------------------------------------------------------------------------------------------------------------------------
          * Busca y cambia la imagen de fondo del formulario. Si no la encuentra en la carpeta, manda un mensaje de error y retorna al 

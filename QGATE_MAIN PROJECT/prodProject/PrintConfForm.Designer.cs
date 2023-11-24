@@ -133,9 +133,10 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label7.Location = new Point(7, 144);
             label7.Name = "label7";
-            label7.Size = new Size(120, 21);
+            label7.Size = new Size(154, 30);
             label7.TabIndex = 5;
             label7.Text = "Texto etiqueta";
             label7.Click += label7_Click;
@@ -143,18 +144,20 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label3.Location = new Point(8, 85);
             label3.Name = "label3";
-            label3.Size = new Size(37, 21);
+            label3.Size = new Size(48, 30);
             label3.TabIndex = 1;
             label3.Text = "DPI";
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(6, 31);
             label2.Name = "label2";
-            label2.Size = new Size(25, 21);
+            label2.Size = new Size(33, 30);
             label2.TabIndex = 0;
             label2.Text = "IP";
             // 

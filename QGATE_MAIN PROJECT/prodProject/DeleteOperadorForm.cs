@@ -73,7 +73,7 @@ namespace prodProject
         {
             try
             {
-                if (String.IsNullOrEmpty(numOpTxtBox.Text) )
+                if (String.IsNullOrEmpty(numOpTxtBox.Text))
                     throw new ArgumentNullException();
                 else
                     return true;

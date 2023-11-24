@@ -72,10 +72,6 @@ namespace prodProject
                 InitializeComponent();
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
-                /*this.SetStyle(
-                    ControlStyles.UserPaint |
-                    ControlStyles.AllPaintingInWmPaint |
-                    ControlStyles.DoubleBuffer, true);*/
                 this.Show();
                 ConfigTimer();
             }
@@ -140,11 +136,10 @@ namespace prodProject
             if (NotNullTxtBoxData())
             {
                 SetDatosPieza();
-                if (CheckDataBase("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text) && CheckDataBase("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText))
+                if (CheckInputs())
                 {
+                    SetDatosVariante();
 
-
-                    //getPiezaPartSteps();
                     switch (db.CheckNotSerialZero(etiqueta))
                     {
                         case -2:
@@ -186,78 +181,38 @@ namespace prodProject
             this.piezaTxtBox.Clear();
         }
 
-        /// <summary>
-        /// Verifica que el valor que se inserto exista en la base de datos
-        /// </summary>
-        /// <param name="dmlStatement"></param>
-        /// <param name="attribute"></param>
-        /// <param name="table"></param>
-        /// <param name="condition"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private bool CheckDataBase(String dmlStatement, String attribute, String table, String condition, String value)
+        private void SetDatosVariante()
         {
-            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
-
-            try
-            {
-                conn.Open();
-                //connection.connectionString = queryString;
-                SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
-
-                SqlDataReader record = cmd.ExecuteReader();
-                if (record.Read())
-                {
-                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo"))
-                    {
-                        claveComp = record.GetString(0);
-                        idPiezaCatalog = record.GetInt16(1);
-                        descripcion = record.GetString(2);
-                        inicioDeCadena = record.GetString(3);
-                        finDeCadena = record.GetString(4);
-                        numPasos = record.GetInt16(5);
-                        pasoRescaneo = record.GetInt16(6);
-                        //totalSteps = record.GetInt16(5);  Futura implementación para extraer la cantidad de pasos de revisión acorde a cada tipo de pieza
-                    }
-                    else
-                    {
-                        BlockNumOp();
-                    }
-                    conn.Close();
-                    return true;
-                }
-                else
-                {
-
-                    if (attribute.Equals("claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo"))
-                    {
-
-                        piezaTxtBox.Clear();
-                        t.Start();
-                        setMessagleLabel("Número de pieza no encontrado en la Base de Datos");
-                    }
-
-                    else
-                    {
-                        opeTxtBox.Clear();
-                        t.Start();
-                        setMessagleLabel("Número de operador no encontrado en la Base de Datos");
-                    }
-
-                    conn.Close();
-                    return false;
-                }
-            }
-            catch (Exception e1)
-            {
-                conn.Close();
-                MessageBox.Show(e1.Message);
-                t.Start();
-                return false;
-            }
+            claveComp = pz.claveComp;
+            idPiezaCatalog = pz.id;
+            descripcion = pz.descripcion;
+            inicioDeCadena = pz.inicioCadena;
+            finDeCadena = pz.finCadena;
+            numPasos = pz.pasos;
+            pasoRescaneo = pz.puntoReescaneo;
         }
 
+        private bool CheckInputs()
+        {
+            bool checkOperador; 
+            pz = db.GetPiezaInfo("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText);
+            checkOperador=db.CheckOperador("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text);
+            if (pz == null)
+            {
+                piezaTxtBox.Clear();
+                t.Start();
+                setMessagleLabel("Número de pieza no encontrado en la Base de Datos");
+                return false;
+            }
+            if(!checkOperador)
+            {
+                opeTxtBox.Clear();
+                t.Start();
+                setMessagleLabel("Número de operador no encontrado en la Base de Datos");
+                return false;
+            }
+            return true;
+        }
         private void setMessagleLabel(string message)
         {
             messageLabel.Text = message;

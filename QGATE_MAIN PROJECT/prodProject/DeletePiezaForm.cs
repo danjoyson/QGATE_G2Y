@@ -28,6 +28,11 @@ namespace prodProject
          */
         private void BtnDeletePieza_Click(object sender, EventArgs e)
         {
+            EliminaPieza();
+        }
+
+        private void EliminaPieza()
+        {
             if (NotNullTxtBoxData())
             {
                 DialogResult dialog = MessageBox.Show("¿Está seguro que desea eliminar PERMANENTEMENTE el registro de la Base de Datos?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
