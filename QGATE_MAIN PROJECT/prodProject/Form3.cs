@@ -25,11 +25,6 @@ namespace prodProject
         ZebraLinker z;
         private System.Windows.Forms.Timer scanMobisysTimer = new System.Windows.Forms.Timer();
 
-        /* 
-         * 1. Llama a la función de búsqueda y asignación de imagen. En caso de no haber errores continúa.
-         * 2. Crea un nuevo objeto de la clase "EmailWarner"
-         * 3. Configura el funcionamiento del timer para los "botones OK", el timer del punto 10 y el timer de inactividad.
-         */
         public Form3(Form1 f1)
         {
             scanMobisysTimer.Interval = 60000;
@@ -359,7 +354,6 @@ namespace prodProject
         }
 
         /*
-         * --------------------------------------------------------------------------------------------------------------------------------
          * Función que controla los eventos al pulsar el botón NOK.
          * 1. Llama al método para buscar el último serial de la pieza y le asigna uno nuevo.
          * 2. Después llama al método para guardar el registro en la Base de Datos.
@@ -367,7 +361,6 @@ namespace prodProject
          * 4. Si el serial es mayor o igual a 3, llama al formulario de bloqueo de la aplicación.
          * 5. Si es el tercer NOK consecutivo, sin importar si son de piezas distintas, también se bloqueará la aplicación.
          * 6. En caso de que el serial sea menor a 3, manda una notificación de NOK mediante el EmailWarner.
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         private void BtnNOK_Click(object sender, EventArgs e)
         {
