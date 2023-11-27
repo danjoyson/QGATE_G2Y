@@ -89,13 +89,8 @@ namespace prodProject
             this.Close();
         }
 
-        /*
-          * --------------------------------------------------------------------------------------------------------------------------------
-          * Método para manejar el cerrado de la aplicación incompleto
-          * En caso de que no haya sido cerrado para mostrar el siguiente formulario, es decir, que haya sido cerrado mediante Alt+F4 o cerrando
-          * la aplicación en la barra de tareas, devuelve al usuario al formulario inicial.
-          * --------------------------------------------------------------------------------------------------------------------------------
-       */
+        //Método para manejar el cerrado de la aplicación incompleto
+
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.closedIncorrectlyFlag == true && Application.OpenForms["Form1"].Visible == false)

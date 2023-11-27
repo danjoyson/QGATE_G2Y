@@ -10,7 +10,7 @@ namespace prodProject
 
         ContainerIdForm containerIdMenu;
         Printer p = new Printer();
-        static Pieza pz  = new Pieza();    
+        static Pieza pz = new Pieza();
         DatabaseConnector db = new DatabaseConnector();
         //Variables estáticas que contienen la información de consulta, son estáticas para permitir su manipulación desde otros formularios
         public static int opText; //Texto del número de operador
@@ -43,17 +43,9 @@ namespace prodProject
         public static int estandar = 0;
         public static int conatadorPiezas = 0;
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * 1. Llama a la clase CsvReader para armar el connection string con los datos del archivo DatabaseSettings.
-         * 2. Llama a la clase CsvReader para obtener la IP de la impresora Zebra del archivo. Si no obtiene algún valor, cierra la aplicación.
-         * 4. Configura inicialmente al timer de inactividad para mantener el número de operador.
-         * 5. Asigna el dpi de la impresora zebra.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
 
         /// <summary>
-        /// Constructor de formulario inicializa las variables de la pantalla de inspecció
+        /// Constructor de formulario inicializa las variables de la pantalla de inspección
         /// </summary>
         /// <param name="firstMenu">Instancia de menu container</param>
         public Form1(ContainerIdForm firstMenu)
@@ -83,6 +75,10 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Obtiene los datos de la impresora
+        /// </summary>
+        /// <param name="cr"></param>
         private void SetPrinterConfig(CsvReader cr)
         {
             try
@@ -102,9 +98,9 @@ namespace prodProject
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener datos de impresora",ex.Message);
+                MessageBox.Show("Error al obtener datos de impresora", ex.Message);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -115,20 +111,12 @@ namespace prodProject
         {
         }
 
-        /* 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función ejecutada al presionar el botón "Comenzar"
-         * 1. Cambia visualmente al cursor com una rueda de carga.
-         * 2. Primero llama a la función para revisar que no haya texto vacío.
-         * 3. Bloquea el número de operador para no tener que reingresarlo.4536587762
-         * 4. Después llama a la función de conexión a la base de datos para revisar la existencia del número de Operador y la Pieza.
-         * 5. Extrae los datos de la pieza (claveComp, idPieza, descripción, inicioCadena y finCadena)
-         * 5.1 Extrae de la tabla pieza los datos del numero de pasos de revisión y el pasoReescaneo
-         * 5. Por último revisa que la pieza no haya sido guardada con serial 0 previamente, es decir, que no haya sido liberada todavía.
-         * 6. Si todo se encuentra correctamente, se inicializa el siguiente formulario.
-         * 7. En caso de ya haber sido ingresada, muestra un mensaje de error y reinicia el timer de inactividad.
-         * --------------------------------------------------------------------------------------------------------------------------------
-        */
+
+        /// <summary>
+        /// Valida si se puede iniciar con el proceso de inspección de pieza
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn1_Click(object sender, EventArgs e)
         {
             t.Stop();
@@ -153,10 +141,10 @@ namespace prodProject
                             t.Start();
                             break;
                         case 1:
-                            if(ValidaReingreso(etiqueta)) StartForms();
+                            if (ValidaReingreso(etiqueta)) StartForms();
                             break;
 
-                        
+
                     }
                 }
             }
@@ -181,6 +169,9 @@ namespace prodProject
             this.piezaTxtBox.Clear();
         }
 
+        /// <summary>
+        /// Asigna los datos para la variante de la pieza ingresada
+        /// </summary>
         private void SetDatosVariante()
         {
             claveComp = pz.claveComp;
@@ -192,11 +183,15 @@ namespace prodProject
             pasoRescaneo = pz.puntoReescaneo;
         }
 
+        /// <summary>
+        /// Valida que los datos ingresados para inspección sean validos
+        /// </summary>
+        /// <returns>True si los datos son validos</returns>
         private bool CheckInputs()
         {
-            bool checkOperador; 
+            bool checkOperador;
             pz = db.GetPiezaInfo("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText);
-            checkOperador=db.CheckOperador("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text);
+            checkOperador = db.CheckOperador("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text);
             if (pz == null)
             {
                 piezaTxtBox.Clear();
@@ -204,7 +199,7 @@ namespace prodProject
                 setMessagleLabel("Número de pieza no encontrado en la Base de Datos");
                 return false;
             }
-            if(!checkOperador)
+            if (!checkOperador)
             {
                 opeTxtBox.Clear();
                 t.Start();
@@ -213,6 +208,11 @@ namespace prodProject
             }
             return true;
         }
+
+        /// <summary>
+        /// Asigna los datos y posición que se muestran en el mensaje
+        /// </summary>
+        /// <param name="message"></param>
         private void setMessagleLabel(string message)
         {
             messageLabel.Text = message;
@@ -245,7 +245,7 @@ namespace prodProject
         {
             try
             {
-                if (String.IsNullOrEmpty(piezaTxtBox.Text)  || String.IsNullOrEmpty(opeTxtBox.Text))
+                if (String.IsNullOrEmpty(piezaTxtBox.Text) || String.IsNullOrEmpty(opeTxtBox.Text))
                     throw new ArgumentNullException();
                 else
                 {
@@ -267,6 +267,9 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Asigna los valores de los datos introducidos por el usuario
+        /// </summary>
         private void SetDatosPieza()
         {
             opText = int.Parse(opeTxtBox.Text);
@@ -321,13 +324,12 @@ namespace prodProject
         {
             t.Start();
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para desbloquear el textBox del número de operador al terminar el timer.  
-         * Recibe un evento invocado al momento que el timer cumple un ciclo.
-         * Limpia el texto antes de permitir su modificación.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// habilita el input del numero de operador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void EnableNumOp(object sender, System.Timers.ElapsedEventArgs e)
         {
             EnableNumOp();

@@ -13,14 +13,10 @@ namespace prodProject
         private string date;
         private Connection printerConn;
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor, recibe la dirección IPV4 de la impresora.
-         * 1. Asigna la IP de la impresora
-         * 2. Guarda la fecha actual para la impresión que vaya a realizar posteriormente.
-         * 3. Crea una conexión TCP mediante la IP de la impresora y el método de conexión default para impresora ZPL de la biblioteca de zebra
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Asigna la ip de la impresora y genera la instancia para la conexión
+        /// </summary>
+        /// <param name="printerIpAddress">Ip de la impresora</param>
         public ZebraLinker(string printerIpAddress)
         {
             PrinterIpAddress = printerIpAddress;
@@ -29,25 +25,13 @@ namespace prodProject
             
         }
 
-        /*
-         * Método para imprimir una etiqueta de caja con código QR
-         * etiqueta: Recibe la clave leída de la etiqueta, genera un substring con los caracteres en el rango [1,11]
-         * descripcion: Recibe el campo de descripción de la pieza. EJEMPLO: "ANTHRAZIT OP BFS RH"
-         * num: Es el número después del guion bajo de las slides. E  JEMPLO: Si la pieza es 6803902_83 SCHIFFDECK OP BFS LH, el num es igual a "8 3"
-         * status: "OK/NOK"
-         */
-
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función de impresión de etiqueta de caja de pieza 
-         * 1. Genera el texto de pieza que se colocará en la etiqueta. Ejemplo: V296.1234567.83
-         * 2. Abre la conexión con la impresora.
-         * 3. Obtiene el status de la impresora. Si es "isReadyToPrint" continúa, de lo contrario muestra un mensaje.
-         * 4. Establece el código zpl que será enviado a la impresora acorde al dpi que se haya setteado en el Form1.
-         * 5. Envía el código a la impresora en forma de Bytes. Y guarda el código como última impresión para el formulario de administrador.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Imprime la etiqueta de caja de la pieza
+        /// </summary>
+        /// <param name="etiqueta">Etiqueta de la pieza</param>
+        /// <param name="descripcion">Descripcion del estandar de la pieza</param>
+        /// <param name="num">Fin de cadena del estandar de pieza </param>
+        /// <param name="dpi">Numero de puntos de impresión</param>
         public void PrintBoxLabelZPL(string etiqueta, string descripcion, string num, int dpi)
         {
             //Texto de la etiqueta de caja con el número de parte.
@@ -78,7 +62,6 @@ namespace prodProject
 
                     Form1.lastZPLCommand = zplData;
                     printerConn.Write(Encoding.UTF8.GetBytes(zplData));
-                    //MessageBox.Show("Impresión realizada.");
                 }
                 else
                 {
@@ -97,21 +80,15 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función de impresión de la etiqueta NOK
-         * 1. Abre la conexión con la impresora.
-         * 2. Obtiene el status de la impresora. Si es "isReadyToPrint" continúa, de lo contrario muestra un mensaje.
-         * 3. Establece el código zpl que será enviado a la impresora acorde al dpi que se haya setteado en el Form1.
-         * 4. Envía el código a la impresora en forma de Bytes. Y guarda el código como última impresión para el formulario de administrador.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-
+        /// <summary>
+        /// Imprime la etiqueta de pieza NOK
+        /// </summary>
+        /// <param name="dpi">Dpi de la impresora actual</param>
+        /// <returns>True si realiza el proceso de impresión</returns>
         public bool printOkNokLabelZPL(int dpi)
         {
             try
-            {
-                
+            {    
                     printerConn.Open();
                     ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
                     PrinterStatus printerStatus = printer.GetCurrentStatus();
@@ -142,55 +119,11 @@ namespace prodProject
             }
             catch (Exception)
             {
-                //MessageBox.Show("Ocurrió un error al imprimir:" + ex.Message);
                 return false;
             }
             finally
             {
                 printerConn.Close();
-            }
-        }
-
-
-        public async Task<bool> PrintOkNokLabelZPLAsync(int dpi)
-        {
-            try
-            {
-                await Task.Run(() => printerConn.Open()); // Ejecuta la apertura en un hilo separado
-                ZebraPrinter printer = ZebraPrinterFactory.GetInstance(printerConn);
-                PrinterStatus printerStatus = printer.GetCurrentStatus();
-                string zplData = "";
-
-                if (printerStatus.isReadyToPrint)
-                {
-                    switch (dpi)
-                    {
-                        case 203:
-                            zplData = "^XA^FO90,45^AQ,150,150^FDNOK^FS^XZ";
-                            break;
-
-                        case 300:
-                            zplData = "^XA^FO150,45^AQ,200,200^FDNOK^FS^XZ";
-                            break;
-
-                        default: //600 dpi
-                            zplData = "^XA^FO440,170^AQ,300,300^FDNOK^FS^XZ";
-                            break;
-                    }
-
-                    Form1.lastZPLCommand = zplData;
-                    await Task.Run(()=>printerConn.Write(Encoding.UTF8.GetBytes(zplData)));
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
-                return false;
-            }
-            finally
-            {
-                printerConn.Close(); // Cierra la conexión de forma sincrónica
             }
         }
 
@@ -228,7 +161,6 @@ namespace prodProject
                 {
                     MessageBox.Show("Cannot Print.");
                 }
-
                 MessageBox.Show("Largo de etiqueta en DPI: " + printerStatus.labelLengthInDots);
 
             }
@@ -299,14 +231,12 @@ namespace prodProject
             }
         }
 
-        /*
-        * --------------------------------------------------------------------------------------------------------------------------------
-        * Función de impresión de etiqueta de prueba
-        * --------------------------------------------------------------------------------------------------------------------------------
-        */
+        /// <summary>
+        /// Imprime una etiqueta de prueba
+        /// </summary>
+        /// <param name="dpi">Dpi de la impresora actual</param>
         public void PrintTest(int dpi)
         {
-            //Número identificador que viene después del guión bajo en los slides num = "83"
             try
             {
                 printerConn.Open();

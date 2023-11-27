@@ -353,15 +353,7 @@ namespace prodProject
             buttonsTimer.Stop();
         }
 
-        /*
-         * Función que controla los eventos al pulsar el botón NOK.
-         * 1. Llama al método para buscar el último serial de la pieza y le asigna uno nuevo.
-         * 2. Después llama al método para guardar el registro en la Base de Datos.
-         * 3. En caso de no haber errores, muestra un formulario de espera mientras envía los correos de notificación.
-         * 4. Si el serial es mayor o igual a 3, llama al formulario de bloqueo de la aplicación.
-         * 5. Si es el tercer NOK consecutivo, sin importar si son de piezas distintas, también se bloqueará la aplicación.
-         * 6. En caso de que el serial sea menor a 3, manda una notificación de NOK mediante el EmailWarner.
-         */
+        //Función que controla los eventos al pulsar el botón NOK.
         private void BtnNOK_Click(object sender, EventArgs e)
         {
             AFKTimer.Stop();
@@ -452,7 +444,7 @@ namespace prodProject
             this.Hide();
             AFKTimer.Stop();
             f1.ClearTextBoxes();
-            this.Close(); //REGRESA EN AUTOMÁTICO AL FORM1
+            this.Close(); 
 
         }
 
@@ -469,7 +461,6 @@ namespace prodProject
                 return false;
             }
             else return true;
-
         }
 
         /// <summary>
@@ -491,10 +482,7 @@ namespace prodProject
             String queryString;
             if (this.serial == 0) //Si la pieza es OK, GUARDA 11 OK'S
             {
-                //queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha, 'OK', 'OK', 'OK' , 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK', 'OK');";
                 queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
-                //Se modifica el query ya que no en todos los casos son 11 OK, depende de el numero de pasos de cada pieza, por eso se hizo dinamico.
-                //Prueba temporal por guardar en la misma BD, se colocan los 11 por el numero de campos en la BD actual (Form1.numPasos-1
 
                 for (int i = 0; i < Form1.numPasos; i++)
                 {
@@ -527,11 +515,9 @@ namespace prodProject
         }
 
         /*
-         * --------------------------------------------------------------------------------------------------------------------------------
          * Método para regresar al formulario de inicio e iniciar el timer del formulario inicial.
          * Hecha para evitar repetición de líneas de código.
          * También previene que cualquier conexión con la base de datos se quede abierta.
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         private void ReturnToHome()
         {
@@ -553,11 +539,8 @@ namespace prodProject
             //f1.StartForeignTimer();
             this.Close();
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método de llamado impresión de etiqueta de caja
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        // Método de llamado impresión de etiqueta de caja
         private void callPrinter()
         {
             ZebraLinker ZBLinker = new(Form1.printerIP);

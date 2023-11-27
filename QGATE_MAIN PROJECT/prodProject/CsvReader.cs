@@ -11,15 +11,10 @@ namespace prodProject
         {
         }
 
-        /*
-         * -------------------------------------------------------------------------------------------------------------------------------- 
-         * Función para obtener y setear los datos de la BD desde un archivo CSV (IP, Puerto, Nombre de base de datos, Usuario y Contraseña; EN ESE ORDEN)
-         * 1. Obtiene los textos del archivo .csv mediante un StreamReader
-         * 2. Separa los datos en un arreglo
-         * 2. Llama al méotodo de desencriptado para todos los datos.
-         * 3. Forma la cadena de conexión con la base de datos.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Obtiene los datos para la conexion a la BD
+        /// </summary>
+        /// <returns>Datos de la conexión</returns>
         public static string SetConnectionString()
         {
             string path = Application.StartupPath + @"\csvfiles2\DatabaseSettings.csv";

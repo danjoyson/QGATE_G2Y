@@ -68,10 +68,6 @@ namespace prodProject
             }
         }
 
-        private void SaveImages(string folderName)
-        {
-
-        }
         /// <summary>
         /// Limpia los inputs en los que el usuario introdujo datos
         /// </summary>
