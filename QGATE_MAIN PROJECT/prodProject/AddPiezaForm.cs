@@ -111,6 +111,7 @@ namespace prodProject
          *  Retorna false si hay contenido nulo en cualquiera de las dos y lanza un mensaje de error en pantalla.
          *  --------------------------------------------------------------------------------------------------------------------------------
          */
+
         private bool NotNullTxtBoxData()
         {
             try

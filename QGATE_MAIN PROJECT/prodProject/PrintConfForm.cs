@@ -34,6 +34,9 @@ namespace prodProject
 
         }
 
+        /// <summary>
+        /// Borra los datos ingresados por los usuarios en los textbox
+        /// </summary>
         private void clearInputs()
         {
             ipTextbox.Clear();
@@ -94,11 +97,6 @@ namespace prodProject
                 currLabTxt.ForeColor = Color.Red;
                 currLabTxt.Text = currentConf.text;
             }
-            else
-            {
-
-            }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -111,6 +109,9 @@ namespace prodProject
             ReturnToMenu();
         }
 
+        /// <summary>
+        /// Cierra el formulario actual y vuelve al menu  de impresió´n
+        /// </summary>
         private void ReturnToMenu()
         {
             this.Hide();

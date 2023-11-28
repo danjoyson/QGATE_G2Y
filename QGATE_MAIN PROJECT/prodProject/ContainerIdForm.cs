@@ -82,7 +82,6 @@ namespace prodProject
         /// </summary>
         private void StartRevision()
         {
-            //Verificar que pasaría si la etiqueta que se introdujo es una etiqueta que ya se introdujo anteriormente o si es una etiqueta mala, no debe permitir continua qgate
             bool flagSuperposicion = false;
             int mobisysId = 0;
             if (CheckContainerId())

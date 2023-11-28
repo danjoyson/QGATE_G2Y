@@ -97,12 +97,10 @@ namespace prodProject
         private void SetButtonOkAction()
         {
             Form1.consecutveNOKCounter = 0; //Reinicia el contador de NOKs consecutivos
-            //int remainFormsTillRESCAN;
             if (Form1.formSlideCont == Form1.pasoRescaneo - 1)
             {
                 AFKTimer.Stop();
                 Form1.formSlideCont++;
-                //this.Hide();
                 if (SetImage())
                 {
                     SetButtonsTimerDuration();
@@ -238,10 +236,11 @@ namespace prodProject
             this.pictureBox1.Visible = false;
             this.messageLabel.Visible = false;
         }
-        /*
-            Metodo post escaneo de etiqueta este debe ejecutarse despues de que se presiona el boton ok en el paso de reescaneo, envia registro a BD y lanza la pantalla de mobisys
-         */
-        
+
+        /// <summary>
+        /// Inserta reporte en la BD e inserta la etiqueta en Mobisys
+        /// </summary>
+        /// <param name="text"></param>
         public void generaRegistro(string text)
         {
             Form1.consecutveNOKCounter = 0;//reinicia el contador de NOKs cada que sale una pieza con todos sus puntos OK
@@ -394,12 +393,11 @@ namespace prodProject
             }
         }
 
-        /*
-        * Función que controla los eventos cuando se termina el timer del punto 10
-        * 1. Llama al método para buscar el último serial de la pieza y le asigna uno nuevo.
-        * 2. Después llama al método para guardar el registro en la Base de Datos.
-        * 5. En caso de que el serial sea menor a 3, manda una notificación de NOK mediante el EmailWarner.
-        */
+        /// <summary>
+        /// Inserta registro de reporte a la BD si se termina el tiempo de espera paso de reescaneo de etiqueta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TimerP9Elapsed_NOK(object sender, EventArgs e)
         {
             if (timerP9Flag == false) //Si no se ha presionado OK
@@ -433,11 +431,12 @@ namespace prodProject
             NOKTimer.Stop();
         }
 
-        /*
-       * Función que controla los eventos cuando se termina el timer AFK (Away From Keyboard)
-       * 1. Cierra este formulario
-       * 2. Regresa al formulario de inicio
-       */
+
+        /// <summary>
+        /// Cierra el formulario actual y vuelve al formulario de escaneo de pieza
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AFKReturn(object sender, EventArgs e)
         {
 
@@ -477,10 +476,14 @@ namespace prodProject
             else return false;
         }
 
+        /// <summary>
+        /// Genera el query para el reporte que se enviara a la BD
+        /// </summary>
+        /// <returns>String con el query para inserción</returns>
         private string SetReportQueryString()
         {
             String queryString;
-            if (this.serial == 0) //Si la pieza es OK, GUARDA 11 OK'S
+            if (this.serial == 0) 
             {
                 queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
 
@@ -514,11 +517,9 @@ namespace prodProject
             return queryString;
         }
 
-        /*
-         * Método para regresar al formulario de inicio e iniciar el timer del formulario inicial.
-         * Hecha para evitar repetición de líneas de código.
-         * También previene que cualquier conexión con la base de datos se quede abierta.
-         */
+        /// <summary>
+        /// Cierra el formulario actual y vuelve al menu principal
+        /// </summary>
         private void ReturnToHome()
         {
             if (Form1.conn.State == ConnectionState.Open)
@@ -528,23 +529,16 @@ namespace prodProject
             this.Close();
         }
 
-        //Metodo cuando para regresar a menu escaneo de Container cuando se completa el contenido de un Container
+
+        /// <summary>
+        /// Cierra la ventana actual y regresa al menu de escaneo de Container ID
+        /// </summary>
         private void ReturnToContainerMenu()
         {
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
-            //f1.Close();
-
             Application.OpenForms["ContainerIdForm"].Show();
-            //f1.StartForeignTimer();
             this.Close();
-        }
-
-        // Método de llamado impresión de etiqueta de caja
-        private void callPrinter()
-        {
-            ZebraLinker ZBLinker = new(Form1.printerIP);
-            ZBLinker.PrintBoxLabelZPL(Form1.etiqueta, Form1.descripcion, "83", Form1.dpi);
         }
 
         /// <summary>

@@ -21,10 +21,7 @@ namespace prodProject
         private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
         public string currentProcess="";
         public string porcName = "MobisysClient100";
-        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza
-        private System.Timers.Timer scanMobisysTimer = new(60000);
-        private System.Timers.Timer copyPasteTimer = new(3500);
-        
+        private string mobisysProcessName = "MobisysClient100"; //Variable nombre de proceso que debe ser superpuesto al completar una revision de pieza       
         private const int SW_HIDE = 0;
         private const int SW_SHOW = 5;
         [DllImport("User32")]
@@ -33,10 +30,7 @@ namespace prodProject
         public static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, IntPtr dwExtraInfo);
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        private const int MOUSEEVENTF_LEFTUP = 0x04;
-        private const int RIGHTDOWN = 0x00000008;
-        private const int RIGHTUP = 0x00000010;
-        
+        private const int MOUSEEVENTF_LEFTUP = 0x04;      
         public ProcessManipulation()
         {
             
@@ -54,14 +48,12 @@ namespace prodProject
 
             if (processes.Length > 0)
             {
-                // Obtiene el PID del primer proceso con el nombre especificado
                 processID = processes[0].Id;
             }
             else
             {
                 Console.WriteLine($"No se encontró el proceso con nombre '{procName}'.");
             }
-
             return processID;
         }
 
@@ -130,13 +122,11 @@ namespace prodProject
 
             if (processes.Length > 0)
             {
-                // Obtener el identificador de la ventana principal del primer proceso encontrado
                 IntPtr windowHandle = processes[0].MainWindowHandle;
 
                 if (windowHandle != IntPtr.Zero)
                 {
 
-                    // Traer la ventana de Microsoft Teams al frente
                     SetForegroundWindow(windowHandle);
                 }
                 else
@@ -150,30 +140,32 @@ namespace prodProject
             }
         }
 
-        //Extrae el ID del proceso que se esta ejecutando actualmente (Mobisys)
+
+        /// <summary>
+        /// Obtiene el ID del proceso de Mobisys
+        /// </summary>
+        /// <returns></returns>
         public string GetCurrentProcessName()
         {
             Process procesoActual = Process.GetCurrentProcess();
-            // Obtener el nombre del proceso
             string nombreDelProceso = procesoActual.ProcessName;
             currentProcess = nombreDelProceso;
-            //MessageBox.Show("Nombre del proceso actual: " + nombreDelProceso);
-
             return currentProcess;
 
         }
 
-        /*Método para realizar la superoposición de Mobisys despues de revisar una pieza.
-        y pegar el texto del portapapeles*/
+        /// <summary>
+        /// Realiza el proceso de inserción de etiqueta
+        /// </summary>
+        /// <param name="text">Numero de etiqueta</param>
+        /// <returns></returns>
         public bool AddToMobisys(string text)
         {
             bool processResult=false;
             try
             {
-                //if(Form1.conatadorPiezas==Form1.estandar)
                 currentProcess = GetCurrentProcessName();
                 CopyToClipboard(text);
-                //SuperposePid(mobisysProcessName);
                 processResult = SuperposePid(mobisysProcessName);
                 if (processResult)
                 {

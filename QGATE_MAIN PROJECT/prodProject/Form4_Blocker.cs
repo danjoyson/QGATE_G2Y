@@ -95,24 +95,22 @@ namespace prodProject
             BtnReSend.Enabled = false;
         }
 
-        /*
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         * Función para configurar el timer de bloqueo de botón para reenviar el código
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Define las acciones del timer del boton 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfigTimer(Object sender, EventArgs e)
         {
             t.AutoReset = true;
             t.Elapsed += new System.Timers.ElapsedEventHandler(EnableBtn);
         }
 
-        /*
-        * --------------------------------------------------------------------------------------------------------------------------------
-        * Función para rehabilitar el botón de reenviar código.  
-        * Recibe un evento invocado al momento que el timer cumple un ciclo.
-        * Limpia el texto antes de permitir su modificación.
-        * --------------------------------------------------------------------------------------------------------------------------------
-        */
+        /// <summary>
+        /// Habilita el boton para enviar nuevamente el código de desbloqueo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void EnableBtn(object sender, System.Timers.ElapsedEventArgs e)
         {
             BtnReSend.Enabled = true;

@@ -58,11 +58,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Botón de retorno al formulario inicial
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Cierra el menú actual y vuelve al menu anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             this.Hide();

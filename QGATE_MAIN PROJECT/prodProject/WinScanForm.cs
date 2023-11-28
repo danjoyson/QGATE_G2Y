@@ -76,12 +76,12 @@ namespace prodProject
         {
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
-            //f1.Close();
-
             Application.OpenForms["WaitScanForm"].Show();
-            //f1.StartForeignTimer();
             this.Close();
         }
+        /// <summary>
+        /// Cierra el formulario actual y abre el formulario de escaneo de pieza
+        /// </summary>
         private void ReturnToHome()
         {
             if (Form1.conn.State == ConnectionState.Open)
@@ -91,6 +91,9 @@ namespace prodProject
             this.Close();
         }
 
+        /// <summary>
+        /// Cierra el formulario actual y muestra el de escaneo de container ID
+        /// </summary>
         private void ReturnToContainerMenu()
         {
             if (Form1.conn.State == ConnectionState.Open)

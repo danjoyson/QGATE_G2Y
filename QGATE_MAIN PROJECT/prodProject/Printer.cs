@@ -44,7 +44,7 @@ namespace prodProject
         /// Obtiene la configuración que se encuentra actualmente en el archivo
         /// </summary>
         /// <returns>Instancia de Printer con los datos de configuración actual</returns>
-        public Printer GetConfig()
+        public Printer? GetConfig()
         {
             Printer actual = new Printer();
             StreamReader sr;
@@ -61,7 +61,6 @@ namespace prodProject
                 sr.Close();
 
                 actual.IP = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
-                //actual.IP = fila[1];
                 actual.DPI = Convert.ToInt32(fila[2]);
                 //actual.x = Convert.ToInt32(fila[3]);
                 //actual.y = Convert.ToInt32(fila[4]);
