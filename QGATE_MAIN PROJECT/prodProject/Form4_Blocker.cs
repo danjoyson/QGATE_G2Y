@@ -18,12 +18,9 @@ namespace prodProject
         private EmailWarner emailW;
 
         /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario, se le asigna el string con el código de desbloqueo. 
-         * Y recibe el una instancia del Form1 para poder reiniciar el timer AFK del inicio.
-         * 
+         Se le asigna el string con el código de desbloqueo. 
+         * Y recibe el una instancia del Form1 para poder reiniciar el timer AFK del inicio. 
          * Se asigna las credenciales del correo emisor de notificaciones ---> Podría leerlos desde algún archivo de texto
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         public Form4_Blocker(string unblockCode, Form1 f1)
         {
@@ -72,7 +69,6 @@ namespace prodProject
             {
                 messageLabel.Text = "Código incorrecto";
                 messageLabel.Location = new Point(textBox1.Location.X + messageLabel.Width / 4, 560);
-                //ClientSize.Width / 2 - messageLabel.Width / 2
             }
         }
 

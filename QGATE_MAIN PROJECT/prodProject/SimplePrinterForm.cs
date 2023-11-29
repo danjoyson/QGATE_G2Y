@@ -14,11 +14,8 @@ namespace prodProject
     {
         AdminForm prevForm;
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        //Constructor del formulario
         public SimplePrinterForm(AdminForm prevForm)
         {
             this.prevForm = prevForm;
@@ -29,22 +26,22 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Botón para imprimir una etiqueta de prueba
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Imprime una etiqueta de prueba
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrintTest_Click(object sender, EventArgs e)
         {
             ZebraLinker zl = new(Form1.printerIP);
             zl.PrintTest(Form1.dpi);
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Botón para reimprimir la última etiqueta impresa
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Re imprime la ultima etiqueta de caja generada por el sistema
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrintLastLabel_Click(object sender, EventArgs e)
         {
             if (Form1.lastZPLCommand == null || Form1.lastZPLCommand == string.Empty)
@@ -70,12 +67,12 @@ namespace prodProject
             this.Close();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método para manejar el cerrado de la aplicación incompleto.
-         * Si se cierra el formulario, se retorna al usuario al formulario anterior.
-         * --------------------------------------------------------------------------------------------------------------------------------
-        */
+        /// <summary>
+        /// Abre el formulario anterior en caso de haber forzado el cierre
+        /// de la ventana actual
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SimplePrinter_FormClosing(object sender, FormClosingEventArgs e)
         {
             prevForm.Show();
@@ -88,6 +85,11 @@ namespace prodProject
 
         }
 
+        /// <summary>
+        /// Cierra la ventana actual y abre el menu de impresión
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             PrintConfForm nextForm = new(this);
