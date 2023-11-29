@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
+using DataSecurity;
 
 namespace prodProject
 {
@@ -14,6 +15,7 @@ namespace prodProject
         public int x { get; set; }
         public int y { get; set; }
         public string text { get; set; }
+        Encryption data = new Encryption();
         string path = Application.StartupPath + @"\csvfiles2\PrinterSettings.csv";
         public Printer() { }
 
@@ -23,8 +25,9 @@ namespace prodProject
         /// <returns> True si se guardo la configuración en el archivo</returns>
         public bool SaveConfig()
         {
+            
             StreamWriter csvStream;
-            IP = Encryptor.Encriptado(IP.ToString());
+            IP = data.Encriptado(IP.ToString());
             try
             {
                 using (csvStream = new StreamWriter(path))
@@ -60,7 +63,8 @@ namespace prodProject
                 string[] fila = linea.Split(separador); //Parte la linea csv en un arreglo
                 sr.Close();
 
-                actual.IP = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
+                //actual.IP = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
+                actual.IP = data.Desencriptado(fila[1]);
                 actual.DPI = Convert.ToInt32(fila[2]);
                 //actual.x = Convert.ToInt32(fila[3]);
                 //actual.y = Convert.ToInt32(fila[4]);

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using DataSecurity;
+using System.Net;
 using System.Net.Mail;
 
 //Clase de envío automático de correos electrónicos
@@ -8,7 +9,7 @@ namespace prodProject
     {
         private string emailSenderAddress;
         private string? emailSenderPassword;
-
+        Encryption decryptor = new Encryption();
         public EmailWarner()
         {
             getEmailSettings(); //Obtener cuenta y contraseña del enviador de correos (Desde el archivo de configuración)
@@ -60,19 +61,12 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para enviar la notificación de bloqueo de máquina, generada cuando la misma etiqueta genera 3 o más revisiones NOK y 
-         * envía un código aleatorio de 4 dígitos para desbloquear el programa.
-         * 
-         * 1. Selecciona el protocolo SMTP de office365
-         * 2. Llama a la función de asignación de las direcciones receptoras del correo.
-         * 3. Genera el cuerpo del correo electrónico.
-         * 4. Activa SSL y envía el correo
-         * 
-         * En caso de haber alguna excepción, mostrará el mensaje de error en pantalla.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Envia un correo a la administración del sistema con el código de desbloqueo de la aplicación
+        /// </summary>
+        /// <param name="randomCode">Código de desbloqueo que se enviará por mail</param>
+        /// <returns></returns>
         public bool SendBlockedWarning(string randomCode)
         {
             try
@@ -87,7 +81,7 @@ namespace prodProject
                 if (cr.SetBWarningRecipientsList(mail))
                 {
                     mail.Priority = MailPriority.High;
-                    mail.Subject = " BLOQUEO NOK / QMX Digital Q-Gate System";
+                    mail.Subject = " BLOQUEO NOK / QMX Digital Q-Gate System G2Y";
 
                     String formatDateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"); //Fecha y hora actuales
 
@@ -135,13 +129,10 @@ namespace prodProject
             return randomCode;
         }
 
-        /*
-         * -------------------------------------------------------------------------------------------------------------------------------- 
-         * 1.Función para obtener y desencriptar los datos encriptados de la cuenta de email. (Email y contraseña; EN ESE ORDEN)
-         * 2. Llama al método de desencriptado.
-         * 3. A su vez los almacena en sus variables respectivas.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Obtiene los datos de la cuenta emisora de mails
+        /// </summary>
+        /// <returns></returns>
         private bool getEmailSettings()
         {
             string startup = Application.StartupPath;
@@ -162,8 +153,8 @@ namespace prodProject
                     i++;
                 }
 
-                this.emailSenderAddress = Decryptor.Desencriptado(info[0]); //Desencriptado del email
-                this.emailSenderPassword = Decryptor.Desencriptado(info[1]); //Desencriptado de la contraseña
+                this.emailSenderAddress = decryptor.Desencriptado(info[0]); //Desencriptado del email
+                this.emailSenderPassword = decryptor.Desencriptado(info[1]); //Desencriptado de la contraseña
 
 
                 sr.Close();

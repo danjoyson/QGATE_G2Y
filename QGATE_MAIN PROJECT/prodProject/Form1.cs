@@ -50,21 +50,22 @@ namespace prodProject
         /// <param name="firstMenu">Instancia de menu container</param>
         public Form1(ContainerIdForm firstMenu)
         {
+
+            InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.Show();
             this.containerIdMenu = firstMenu;
             estandar = ContainerIdForm.Estandar;
             Control.CheckForIllegalCrossThreadCalls = false; //Permite la correcta manipulación de Timers entre formularios. Ya que cada timer funciona en su propio hilo
             CsvReader cr = new();
             SetPrinterConfig(cr);
             connectionString = CsvReader.SetConnectionString();
-
             if (!String.IsNullOrEmpty(connectionString) && !String.IsNullOrEmpty(printerIP) && dpi != 0)
             {
                 connectionString = connectionString + "; Connection Timeout = 30";
                 conn = new SqlConnection(connectionString);
-                InitializeComponent();
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
-                this.Show();
+
                 ConfigTimer();
             }
             else

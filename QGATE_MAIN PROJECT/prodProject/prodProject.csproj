@@ -75,4 +75,10 @@
     <Folder Include="bin\Debug\net6.0-windows\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DataSecurity">
+      <HintPath>dll\DataSecurity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

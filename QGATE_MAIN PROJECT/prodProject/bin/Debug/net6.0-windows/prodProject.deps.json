@@ -12,7 +12,8 @@
           "MicrosoftOfficeCore": "15.0.0",
           "Spire.Presentation": "8.10.2",
           "System.Data.SqlClient": "4.8.5",
-          "Zebra.Printer.SDK": "2.15.2634"
+          "Zebra.Printer.SDK": "2.15.2634",
+          "DataSecurity": "1.0.0.0"
         },
         "runtime": {
           "prodProject.dll": {}
@@ -1061,6 +1062,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "DataSecurity/1.0.0.0": {
+        "runtime": {
+          "DataSecurity.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1853,6 +1862,11 @@
       "sha512": "sha512-rRo0HS66k9XqQ7vlomzsC5TzT7NBU2HK+idStKYmxnLKN2X1jIjhWW7FiuSWeg6GPpuJy4hJQZ/FaNYaL75NIg==",
       "path": "zebra.printer.sdk/2.15.2634",
       "hashPath": "zebra.printer.sdk.2.15.2634.nupkg.sha512"
+    },
+    "DataSecurity/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

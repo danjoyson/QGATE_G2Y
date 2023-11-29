@@ -29,7 +29,9 @@ namespace prodProject
         public static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, IntPtr dwExtraInfo);
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        private const int MOUSEEVENTF_LEFTUP = 0x04;      
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        System.Timers.Timer t = new System.Timers.Timer(1000);
+        public int hWnd;
         public ProcessManipulation()
         {
             
@@ -198,7 +200,7 @@ namespace prodProject
                 CopyToClipboard(text);
                 System.Threading.Thread.Sleep(400);
                 Process p = Process.GetCurrentProcess();
-                int hWnd;
+                
                 hWnd = p.MainWindowHandle.ToInt32();
                 ShowWindow(hWnd, SW_HIDE);
                 System.Threading.Thread.Sleep(300);
@@ -208,7 +210,8 @@ namespace prodProject
                 mouse_event(MOUSEEVENTF_LEFTUP, 850, 300, 0, IntPtr.Zero);
                 Thread.Sleep(300);
                 PasteFromClipboard();
-                System.Threading.Thread.Sleep(2500);
+                //System.Threading.Thread.Sleep(2500);
+                t.Start();
                 ShowWindow(hWnd, SW_SHOW);
                 return true;
             }catch(Exception)
@@ -246,6 +249,10 @@ namespace prodProject
             {
                 MessageBox.Show(ex.Message, "No se puede pegar el texto");
             }
+        }
+
+        private static void TimerCallback(Object o)
+        {
         }
 
     }

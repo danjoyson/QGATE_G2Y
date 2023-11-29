@@ -1,9 +1,9 @@
 ﻿using System.Net.Mail;
-
+using DataSecurity;
 //Esta clase se encarga de leer y almacenar datos de los archivos .csv
 namespace prodProject
 {
-    internal class CsvReader
+    public class CsvReader
     {
         
 
@@ -19,6 +19,7 @@ namespace prodProject
         {
             string path = Application.StartupPath + @"\csvfiles2\DatabaseSettings.csv";
             StreamReader sr;
+            Encryption decryptor = new Encryption();
             string connectData="";
             try
             {
@@ -35,10 +36,10 @@ namespace prodProject
                     i++;
                 }
 
-                info[0] = Decryptor.Desencriptado(info[0]); // Desencriptado de la IP de Base de Datos
-                info[1] = Decryptor.Desencriptado(info[1]); // Desencriptado del puerto de la Base de Datos
-                info[3] = Decryptor.Desencriptado(info[3]); // Desencriptado de User ID de la Base de Datos
-                info[4] = Decryptor.Desencriptado(info[4]); // Desencriptado de la contraseña de la BD
+                info[0] = decryptor.Desencriptado(info[0]); // Desencriptado de la IP de Base de Datos
+                info[1] = decryptor.Desencriptado(info[1]); // Desencriptado del puerto de la Base de Datos
+                info[3] = decryptor.Desencriptado(info[3]); // Desencriptado de User ID de la Base de Datos
+                info[4] = decryptor.Desencriptado(info[4]); // Desencriptado de la contraseña de la BD
 
                 connectData = "Data Source=" + info[0] + "," + info[1] + ";Initial Catalog=" + info[2] + "; encrypt = true; trustServerCertificate = true; User ID=" + info[3] + ";Password=" + info[4];
                 sr.Close();
@@ -118,6 +119,7 @@ namespace prodProject
         {
             string path = Application.StartupPath + @"\csvfiles2\PrinterSettings.csv";
             StreamReader sr;
+            Encryption decryptor = new Encryption();
             try
             {
                 using (sr = new StreamReader(path)) 
@@ -130,7 +132,7 @@ namespace prodProject
                 string[] fila = linea.Split(separador); //Parte la linea csv en un arreglo
                 sr.Close();
 
-                fila[1] = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
+                fila[1] = decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
                 return fila;
                 }
                 

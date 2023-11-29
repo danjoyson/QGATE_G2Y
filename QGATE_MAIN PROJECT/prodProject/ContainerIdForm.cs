@@ -87,7 +87,8 @@ namespace prodProject
             if (CheckContainerId())
             {
                 SetEstandarLabel(Estandar);
-                mobisysId = processes.GetProcessID(processes.porcName);
+                //Testingprocesses.porcName
+                mobisysId = processes.GetProcessID("Notepad");
                 if (mobisysId > 0)
                 {
                     containersId.Add(containerTxtBox.Text);
@@ -95,6 +96,7 @@ namespace prodProject
                     containerTxtBox.Text = "";
                     if (flagSuperposicion)
                         StartFormRevision();
+                        //Console.WriteLine("--");
                     else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
                 }
                 else
