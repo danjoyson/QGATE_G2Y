@@ -65,11 +65,12 @@
             ControlBox = false;
             Controls.Add(pictureBox3);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WaitForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "WaitForm";
+            WindowState = FormWindowState.Maximized;
             Load += WaitForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);

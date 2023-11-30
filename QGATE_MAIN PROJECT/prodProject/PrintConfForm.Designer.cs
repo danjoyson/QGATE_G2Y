@@ -337,8 +337,10 @@
             Controls.Add(button1);
             Controls.Add(groupBox1);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "PrintConfForm";
             Text = "PrintConfForm";
+            WindowState = FormWindowState.Maximized;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             configMenu.ResumeLayout(false);

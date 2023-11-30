@@ -31,15 +31,13 @@ namespace prodProject
             configEstandar.Visible = false;
             timer = new System.Timers.Timer(24 * 60 * 60 * 1000);
             timer.Elapsed += BorrarLista;
-            timer.Start(); 
+            timer.Start();
 
         }
         private void ConfigureFormBuffer()
         {
             estandarLabel.Text = "México";
             containerIdMessage.Anchor = AnchorStyles.None;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btnContainer_Click(object sender, EventArgs e)
@@ -60,7 +58,8 @@ namespace prodProject
                     SetMessageLabel("Esta etiqueta ya fue escaneada");
                     containerTxtBox.Text = string.Empty;
                     return false;
-                }else if(containerTxtBox.Text.Length == 31)
+                }
+                else if (containerTxtBox.Text.Length == 31)
                 {
                     SetMessageLabel("Etiqueta no valida");
                     containerTxtBox.Text = string.Empty;
@@ -88,7 +87,7 @@ namespace prodProject
             {
                 SetEstandarLabel(Estandar);
                 //Testingprocesses.porcName
-                mobisysId = processes.GetProcessID("Notepad");
+                mobisysId = processes.GetProcessID(processes.porcName);
                 if (mobisysId > 0)
                 {
                     containersId.Add(containerTxtBox.Text);
@@ -96,7 +95,6 @@ namespace prodProject
                     containerTxtBox.Text = "";
                     if (flagSuperposicion)
                         StartFormRevision();
-                        //Console.WriteLine("--");
                     else MessageBox.Show("No se pudo ingresar los datos en Mobisys");
                 }
                 else
@@ -128,8 +126,9 @@ namespace prodProject
         /// </summary>
         private void StartFormRevision()
         {
-            Form1 f1 = new(this);
             this.Hide();
+            Form1 f1 = new(this);
+
             f1.StartForeignTimer();
 
         }

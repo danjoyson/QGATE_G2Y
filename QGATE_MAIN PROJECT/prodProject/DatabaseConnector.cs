@@ -401,9 +401,9 @@ namespace prodProject
         /// <param name="condition"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Pieza GetPiezaInfo(String dmlStatement, String attribute, String table, String condition, String value)
+        public Pieza GetPiezaInfo(String value)
         {
-            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
+            String queryString = "" + "SELECT" + " " + "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo" + " FROM " + "Pieza" + " WHERE " + "claveComp" + " = @value";
 
             try
             {
@@ -458,9 +458,9 @@ namespace prodProject
         /// <param name="condition"></param>
         /// <param name="value">Numero de empleado</param>
         /// <returns></returns>
-        public bool CheckOperador(String dmlStatement, String attribute, String table, String condition, String value)
+        public bool CheckOperador(String value)
         {
-            String queryString = "" + dmlStatement + " " + attribute + " FROM " + table + " WHERE " + condition + " = @value";
+            String queryString = "" + "SELECT" + " " + "numOperador" + " FROM " + "Operador" + " WHERE " + "numOperador" + " = @value";
 
             try
             {

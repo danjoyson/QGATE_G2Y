@@ -16,7 +16,6 @@ namespace prodProject
         public static int opText; //Texto del número de operador
         public static string piezaText = ""; //Comparador de clave de pieza (10 caracteres)
         public static string etiqueta = "";  //Texto de etiqueta completo
-        //DatabaseConnector connection = new DatabaseConnector();
         public static string inicioDeCadena = ""; //V o X de cadena de pieza
         public static string finDeCadena = ""; //últimos 2 dígitos del identificador de pieza (Obtenido de la base de datos)
         public static int idPiezaCatalog; //Id de la pieza en la base de datos
@@ -50,10 +49,8 @@ namespace prodProject
         /// <param name="firstMenu">Instancia de menu container</param>
         public Form1(ContainerIdForm firstMenu)
         {
-
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+
             this.Show();
             this.containerIdMenu = firstMenu;
             estandar = ContainerIdForm.Estandar;
@@ -111,7 +108,7 @@ namespace prodProject
         private void label1_Click(object sender, EventArgs e)
         {
         }
-
+        
 
         /// <summary>
         /// Valida si se puede iniciar con el proceso de inspección de pieza
@@ -164,9 +161,9 @@ namespace prodProject
         private void StartForms()
         {
             messageLabel.Text = "";
-
-            Form2 f2 = new(this);
             this.Hide();
+            Form2 f2 = new(this);
+            
             this.piezaTxtBox.Clear();
         }
 
@@ -191,8 +188,8 @@ namespace prodProject
         private bool CheckInputs()
         {
             bool checkOperador;
-            pz = db.GetPiezaInfo("SELECT", "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo", "Pieza", "claveComp", piezaText);
-            checkOperador = db.CheckOperador("SELECT", "numOperador", "Operador", "numOperador", opeTxtBox.Text);
+            pz = db.GetPiezaInfo(piezaText);
+            checkOperador = db.CheckOperador(opeTxtBox.Text);
             if (pz == null)
             {
                 piezaTxtBox.Clear();

@@ -18,8 +18,6 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(DeleteOperador_FormClosing);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         /*

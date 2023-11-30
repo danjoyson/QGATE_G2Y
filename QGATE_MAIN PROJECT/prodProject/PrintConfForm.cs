@@ -17,8 +17,6 @@ namespace prodProject
         public PrintConfForm(SimplePrinterForm s)
         {
             printerMenu = s;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
             ShowConfig();
             configMenu.Visible = false;

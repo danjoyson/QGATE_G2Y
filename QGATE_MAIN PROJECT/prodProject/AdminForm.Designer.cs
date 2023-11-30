@@ -308,11 +308,12 @@
             Controls.Add(BtnReturn);
             Controls.Add(GB2);
             Controls.Add(GB1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "AdminForm";
+            WindowState = FormWindowState.Maximized;
             Load += AdminForm_Load;
             GB1.ResumeLayout(false);
             GB1.PerformLayout();

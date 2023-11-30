@@ -14,8 +14,6 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(DeletePieza_FormClosing);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         /*

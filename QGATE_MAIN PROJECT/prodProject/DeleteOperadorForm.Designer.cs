@@ -124,11 +124,12 @@
             Controls.Add(numOpTxtBox);
             Controls.Add(label1);
             Controls.Add(BtnReturn);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DeleteOperadorForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Borrar operador";
+            WindowState = FormWindowState.Maximized;
             Load += DeleteOperadorForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

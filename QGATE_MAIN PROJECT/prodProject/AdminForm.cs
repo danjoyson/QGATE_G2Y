@@ -18,8 +18,6 @@ namespace prodProject
         {
             this.FormClosing += new FormClosingEventHandler(AdminForm_FormClosing);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
 
         private void label1_Click(object sender, EventArgs e)

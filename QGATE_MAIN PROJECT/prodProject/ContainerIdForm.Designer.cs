@@ -217,7 +217,7 @@
             Controls.Add(containerTxtBox);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ContainerIdForm";
             StartPosition = FormStartPosition.CenterParent;

@@ -23,8 +23,6 @@ namespace prodProject
             this.f1 = f1;
             windowCase = nextWindow;
             scanMobisysTimer.Interval = 60000;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
         }
 

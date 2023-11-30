@@ -21,9 +21,6 @@ namespace prodProject
             this.prevForm = prevForm;
             this.FormClosing += new FormClosingEventHandler(SimplePrinter_FormClosing);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-
         }
 
         /// <summary>

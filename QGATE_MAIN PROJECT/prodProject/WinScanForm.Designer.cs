@@ -94,6 +94,7 @@
             Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WinScanForm";
             Text = "WinScanForm";

@@ -154,11 +154,12 @@
             Controls.Add(label2);
             Controls.Add(label1);
             DoubleBuffered = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login de configuración";
+            WindowState = FormWindowState.Maximized;
             Load += AdminLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

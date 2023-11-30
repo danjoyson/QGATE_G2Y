@@ -159,13 +159,14 @@
             Controls.Add(label1);
             Controls.Add(opeTxtBox);
             DoubleBuffered = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "  Inicio";
+            WindowState = FormWindowState.Maximized;
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

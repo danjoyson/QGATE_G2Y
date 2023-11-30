@@ -30,7 +30,7 @@ namespace prodProject
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x02;
         private const int MOUSEEVENTF_LEFTUP = 0x04;
-        System.Timers.Timer t = new System.Timers.Timer(1000);
+        System.Timers.Timer t = new System.Timers.Timer(5500);
         public int hWnd;
         public ProcessManipulation()
         {
@@ -210,8 +210,8 @@ namespace prodProject
                 mouse_event(MOUSEEVENTF_LEFTUP, 850, 300, 0, IntPtr.Zero);
                 Thread.Sleep(300);
                 PasteFromClipboard();
-                //System.Threading.Thread.Sleep(2500);
-                t.Start();
+                System.Threading.Thread.Sleep(2500);
+                //t.Start();
                 ShowWindow(hWnd, SW_SHOW);
                 return true;
             }catch(Exception)

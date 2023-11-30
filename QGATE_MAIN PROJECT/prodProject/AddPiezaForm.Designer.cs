@@ -360,11 +360,12 @@
             Controls.Add(BtnReturn);
             Controls.Add(pictureBox1);
             Controls.Add(label3);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AddPiezaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Añadir pieza";
+            WindowState = FormWindowState.Maximized;
             Load += AddPiezaForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBox1.ResumeLayout(false);

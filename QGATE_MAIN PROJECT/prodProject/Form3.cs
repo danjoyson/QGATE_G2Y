@@ -48,8 +48,6 @@ namespace prodProject
 
                 AFKTimer.AutoReset = false;
                 AFKTimer.Elapsed += new ElapsedEventHandler(AFKReturn);
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
                 InitializeComponent();
                 this.SetStyle(
                 ControlStyles.UserPaint |
@@ -363,7 +361,7 @@ namespace prodProject
                 NOKTimer.Stop(); //Para el punto 10. Si es que se presionó el botón antes de que el timer terminara
             }
 
-            this.Hide(); 
+            this.Hide();
 
             if (GenerateSerial())
             {
@@ -380,7 +378,7 @@ namespace prodProject
                     else
                     {
                         if (!z.printOkNokLabelZPL(Form1.dpi))
-                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);                     
+                            AutoClosingMessageBox.Show("Impresion de etiqueta NOK", "Impresion de etiqueta", 1000);
                         emailW.SendNOKWarning();
                         ReturnToHome();
                     }
@@ -443,7 +441,7 @@ namespace prodProject
             this.Hide();
             AFKTimer.Stop();
             f1.ClearTextBoxes();
-            this.Close(); 
+            this.Close();
 
         }
 
@@ -468,7 +466,7 @@ namespace prodProject
         /// <returns> True si la pieza se inserto correctamente en la BD</returns>
         private bool InsertaDbRecord()
         {
-            String queryString; 
+            String queryString;
 
             queryString = SetReportQueryString();
             if (db.InsertaRegInspeccion(queryString, Form1.etiqueta, this.serial, Form1.opText, Form1.idPiezaCatalog))
@@ -483,7 +481,7 @@ namespace prodProject
         private string SetReportQueryString()
         {
             String queryString;
-            if (this.serial == 0) 
+            if (this.serial == 0)
             {
                 queryString = "INSERT INTO Operador_Pieza VALUES(@numEtiqueta, @serial, @numOperador, @idPieza, @fecha";
 

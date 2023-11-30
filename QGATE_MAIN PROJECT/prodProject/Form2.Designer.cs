@@ -54,12 +54,13 @@
             ClientSize = new Size(1366, 783);
             ControlBox = false;
             Controls.Add(BtnNext);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
+            WindowState = FormWindowState.Maximized;
             Load += Form2_Load;
             ResumeLayout(false);
             PerformLayout();

@@ -242,10 +242,12 @@
             Controls.Add(pictureBox1);
             Controls.Add(label3);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DeletePiezaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DeletePiezaForm";
+            WindowState = FormWindowState.Maximized;
             Load += DeletePiezaForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

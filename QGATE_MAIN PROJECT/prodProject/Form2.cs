@@ -38,18 +38,12 @@ namespace prodProject
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
             ControlStyles.DoubleBuffer, true);
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Busca y cambia la imagen de fondo del formulario. Si no la encuentra en la carpeta, manda un mensaje de error y retorna al 
-         * formulario de inicio.
-         * 
-         * Retorna true en caso de no haber ningún error.
-         * Retorna false en caso de capturar una excepción, lanza un mensaje de error y devuelve al usuario al primer formulario.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Actualiza imagen de fondo del formulario
+        /// </summary>
+        /// <returns></returns>
         private bool SetImage()
         {
             try
@@ -69,17 +63,14 @@ namespace prodProject
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función que se acciona al presionar el botón "Entendido"
-         * 1. Aumenta el contador de slide.
-         * 2. Instancía un nuevo formulario con la plantilla de 2 botones OK/NOK (Form3)
-         * 3. Finalmente cierra el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        ///Cambia formulario de punto de inspección
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnNext_Click(object sender, EventArgs e)
         {
             closedIncorrectlyFlag = false;

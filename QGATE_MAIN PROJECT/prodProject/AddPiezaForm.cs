@@ -22,9 +22,7 @@ namespace prodProject
             this.prevForm = af;
             this.FormClosing += new FormClosingEventHandler(AddPieza_FormClosing);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            imageFile.Enabled= false;
+            imageFile.Enabled = false;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -58,7 +56,7 @@ namespace prodProject
                 if (this.id != -1)
                 {
                     db.InsertaPieza(this.id, DescrTxtBox.Text, ClaveTxtBox.Text.Substring(2, 7), ClaveTxtBox.Text.Substring(0, 1), ClaveTxtBox.Text.Substring(ClaveTxtBox.Text.Length - 2, 2), txtPasos.Text, txtReescaneo.Text);
-                    if(dc.PptxToImage(imagesPath, ClaveTxtBox.Text.Substring(2, 7)))
+                    if (dc.PptxToImage(imagesPath, ClaveTxtBox.Text.Substring(2, 7)))
                         ClearTxtBox();
                     else
                         MessageBox.Show("Hubo un problema al agregar las imagenes, debe agregarlas en la carpeta de la aplicación de forma manual para el correcto funcionamiento del programa. Procedimiento del manual de usuario.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
