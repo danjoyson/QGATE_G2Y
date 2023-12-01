@@ -81,7 +81,7 @@ namespace prodProject
         /// </summary>
         private void ShowConfig()
         {
-            Printer currentConf = new Printer();
+            Printer? currentConf = new Printer();
             currentConf = p.GetConfig();
             if (currentConf != null)
             {

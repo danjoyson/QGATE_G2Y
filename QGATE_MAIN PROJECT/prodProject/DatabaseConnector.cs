@@ -26,32 +26,25 @@ namespace prodProject
             
         }
 
-        /*
-        * -----------------------------------------------------------------------------------------------------------------------------------
-        * Función para ingresar la pieza en la Base de Datos.
-        * 1. Se forma el string de consulta (query) con los datos necesarios para la base de datos.
-        * 2. Se ingresan los valores de forma parametrizada.
-        * 3. Se ejecuta la consulta
-        * 
-        * En caso de haber alguna excepción, como incumplir algura restricción de clave primaria, se mostrará un mensaje de error en pantalla.
-        * ----------------------------------------------------------------------------------------------------------------------------------- 
-        */
-        public void InsertaPieza(int id,string descripcion,string clave,string inicioCadena,string finCadena,string pasos,string puntoReescaneo)
+        /// <summary>
+        /// Inserta pieza registrada a la BD
+        /// </summary>
+        /// <param name="pz">Objeto tipo pieza</param>
+        public void InsertaPieza(Pieza pz)
         {
             try
             {
                 conn.Open();
                 string query = "INSERT INTO Pieza VALUES (@idPieza, @descripcion, @claveComp, @inicioCadena, @finCadena , @pasos , @puntoReescaneo);";
                 SqlCommand cmd = new(query, conn);
-                cmd.Parameters.AddWithValue("@idPieza", id);
-                cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                cmd.Parameters.AddWithValue("@claveComp", clave);
-                cmd.Parameters.AddWithValue("@inicioCadena", inicioCadena);
-                //Se cambio el numero de inicio de subcadena de fin de cadena para que no truene cuando se meta una cadena distinta, se toma el tamaño de la cadena -2 porque se desea extraer los ultimos 2 caracteres.
-                cmd.Parameters.AddWithValue("@finCadena", finCadena);
-                cmd.Parameters.AddWithValue("@pasos",Int16.Parse(pasos));
-                cmd.Parameters.AddWithValue("@puntoReescaneo",Int16.Parse(puntoReescaneo));
-                cmd.ExecuteNonQuery(); //Ejecución de query
+                cmd.Parameters.AddWithValue("@idPieza", pz.id);
+                cmd.Parameters.AddWithValue("@descripcion", pz.descripcion);
+                cmd.Parameters.AddWithValue("@claveComp", pz.claveComp);
+                cmd.Parameters.AddWithValue("@inicioCadena", pz.inicioCadena);
+                cmd.Parameters.AddWithValue("@finCadena", pz.finCadena);
+                cmd.Parameters.AddWithValue("@pasos",pz.pasos);
+                cmd.Parameters.AddWithValue("@puntoReescaneo",pz.puntoReescaneo);
+                cmd.ExecuteNonQuery(); 
 
                 MessageBox.Show("Pieza guardada correctamente en la base de datos");
                 
@@ -81,11 +74,11 @@ namespace prodProject
 
             
         }
-        /*
-        * ---------------------------------------------------------------------------------------------------------------------------------------
-        * Función para obtener el último ID del catalogo de piezas agregado a la base de datos, en caso de no haber piezas se le otoga el ID = 1
-        * ---------------------------------------------------------------------------------------------------------------------------------------
-        */
+
+        /// <summary>
+        /// Busca el ultimo id de pieza registrado en la BD
+        /// </summary>
+        /// <returns>Máximo Id de pieza </returns>
 
         public int GetIdPieza()
         {
@@ -106,7 +99,6 @@ namespace prodProject
             }
             catch (SqlNullValueException)
             {
-                //omitir excepción generada cuando no se encuentra una pieza en la DB (ingreso por primera vez, por ende idPieza = 1)
                 nextId = 1;
                 
             }
@@ -121,15 +113,11 @@ namespace prodProject
             return nextId;
         }
 
-        /*
-        * --------------------------------------------------------------------------------------------------------------------------------
-        *  Función de conexión al servidor de SQL y query DML INSERT INTO para ingresar un registro nuevo a la tabla Operador
-        *  Recibe el dmlStatement: INSERT INTO
-        *  1. Se conecta a la Base de Datos y envía la consulta de inserción formada de forma parametrizada.
-        *  2. En caso de alguna excepción, muestra un mensaje en pantalla.
-        *  --------------------------------------------------------------------------------------------------------------------------------
-        */
-        public void InsertaOperador(string numOperador,string nombre,string apellido)
+        /// <summary>
+        /// Inserta registro de operador a la BD
+        /// </summary>
+        /// <param name="operador">Objeto tipo operador</param>
+        public void InsertaOperador(Operador operador)
         {
             try
             {
@@ -146,9 +134,9 @@ namespace prodProject
                 string query = "INSERT INTO Operador VALUES(@numOperador, @nombre, @apellido);";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.Add(new SqlParameter("@numOperador", numOperador));
-                cmd.Parameters.Add(new SqlParameter("@nombre",nombre));
-                cmd.Parameters.Add(new SqlParameter("@apellido", apellido));
+                cmd.Parameters.Add(new SqlParameter("@numOperador", operador.numOperador));
+                cmd.Parameters.Add(new SqlParameter("@nombre",operador.nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", operador.apellido));
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 MessageBox.Show("Registro guardado exitosamente");
@@ -317,7 +305,6 @@ namespace prodProject
             try
             {
                 conn.Open();
-                //MessageBox.Show("Connection Granted");
 
                 SqlCommand cmd = new(query, conn);
                 SqlDataReader record = cmd.ExecuteReader();
@@ -331,7 +318,6 @@ namespace prodProject
             }
             catch (SqlNullValueException)
             {
-                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende serial = 1)
                 serial = 1;
                 return serial;
             }
@@ -366,8 +352,6 @@ namespace prodProject
                 {
                     if (record.GetInt16(0) == 0)
                     {
-                        //setMessagleLabel("La pieza ya fue liberada sin fallas previamente.");
-                        //t.Start();
                         return 0;
                     }
                 }
@@ -377,7 +361,6 @@ namespace prodProject
             }
             catch (SqlNullValueException)
             {
-                //omitir excepción generada cuando no se encuentra un serial en la DB (ingreso por primera vez, por ende no necesita revisar reingreso)
                 conn.Close();
                 return -1;
             }
@@ -386,52 +369,35 @@ namespace prodProject
             {
                 conn.Close();
                 MessageBox.Show(e.Message);
-                //t.Start();
                 return -2;
             }
 
         }
 
         /// <summary>
-        /// Devuelve los datos de la pieza revisada si existe.
+        /// Obtiene los datos de variante de la pieza espeficada
         /// </summary>
-        /// <param name="dmlStatement"></param>
-        /// <param name="attribute"></param>
-        /// <param name="table"></param>
-        /// <param name="condition"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Pieza GetPiezaInfo(String value)
+        /// <returns>Devuelve los datos de la pieza revisada si existe.</returns>
+        public Pieza? GetPiezaInfo(String value)
         {
             String queryString = "" + "SELECT" + " " + "claveComp, idPieza, descripcion, inicioCadena, finCadena, pasos, puntoReescaneo" + " FROM " + "Pieza" + " WHERE " + "claveComp" + " = @value";
 
             try
             {
                 conn.Open();
-                //connection.connectionString = queryString;
                 SqlCommand cmd = new(queryString, conn);
                 cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
 
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())
-                {
-                    
-                        //claveComp = record.GetString(0);
+                {                   
                         p.claveComp = record.GetString(0);
-                        //idPiezaCatalog = record.GetInt16(1);
                         p.id = record.GetInt16(1);
-                        //descripcion = record.GetString(2);
                         p.descripcion = record.GetString(2);
-                        //inicioDeCadena = record.GetString(3);
                         p.inicioCadena = record.GetString(3);
-                        //finDeCadena = record.GetString(4);
                         p.finCadena = record.GetString(4);
-                        //numPasos = record.GetInt16(5);
                         p.pasos = record.GetInt16(5);
-                        //pasoRescaneo = record.GetInt16(6);
                         p.puntoReescaneo = record.GetInt16(6);
-                        //totalSteps = record.GetInt16(5);  Futura implementación para extraer la cantidad de pasos de revisión acorde a cada tipo de pieza
-
                     conn.Close();
                     return p;
                 }
@@ -452,12 +418,7 @@ namespace prodProject
         /// <summary>
         /// Verifica que el numero de operador especificado exista en la BD
         /// </summary>
-        /// <param name="dmlStatement"></param>
-        /// <param name="attribute"></param>
-        /// <param name="table"></param>
-        /// <param name="condition"></param>
-        /// <param name="value">Numero de empleado</param>
-        /// <returns></returns>
+        /// <returns>True si encuentra el operador en la BD</returns>
         public bool CheckOperador(String value)
         {
             String queryString = "" + "SELECT" + " " + "numOperador" + " FROM " + "Operador" + " WHERE " + "numOperador" + " = @value";
@@ -465,9 +426,8 @@ namespace prodProject
             try
             {
                 conn.Open();
-                //connection.connectionString = queryString;
                 SqlCommand cmd = new(queryString, conn);
-                cmd.Parameters.Add(new SqlParameter("@value", value));  //Prevención de SQL Injection, mediante Parametrized Queries 
+                cmd.Parameters.Add(new SqlParameter("@value", value));
 
                 SqlDataReader record = cmd.ExecuteReader();
                 if (record.Read())

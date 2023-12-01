@@ -38,7 +38,6 @@ namespace prodProject
         //Boton para volver a superponer la pantalla para el reescaneo de la pieza si aun no se escanea
         private void button2_Click(object sender, EventArgs e)
         {
-            //superpose window
             mobiProcess.AddToMobisys(mobisysProcessName);
             scanMobisysTimer.Enabled = true;
             scanMobisysTimer.Tick += new System.EventHandler(OnTimerScanEvent);
@@ -96,10 +95,7 @@ namespace prodProject
         {
             if (Form1.conn.State == ConnectionState.Open)
                 Form1.conn.Close();
-            //f1.Close();
-
             Application.OpenForms["ContainerIdForm"].Show();
-            //f1.StartForeignTimer();
             this.Close();
         }
 

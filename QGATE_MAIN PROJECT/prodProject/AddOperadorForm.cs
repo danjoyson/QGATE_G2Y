@@ -7,10 +7,12 @@ namespace prodProject
     {
         AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
-        /*
-         * Constructor del formulario de Alta de operador
-         * Recibe el formulario previo (AdminForm) y asigna una función de manejo de cierre del formulario.
-         */
+        Operador op;
+
+        /// <summary>
+        /// Constructor de la clase, inicializa las vistas del formulario
+        /// </summary>
+        /// <param name="af">Instancia del formulario anterior </param>
         public AddOperadorForm(AdminForm af)
         {
             this.prevForm = af;
@@ -29,20 +31,30 @@ namespace prodProject
         {
             if (NotNullTxtBoxData())
             {
-                db.InsertaOperador(NumOpTxtBox.Text, NameOpTxtBox.Text, SurnameOpTxtBox.Text);
+                SetDatosOperador();
+                db.InsertaOperador(op);
                 ClearInputs();
             }
         }
 
-        /*
-         * Método llamado al hacer clic sobre el botón de retorno.
-         * 1. Regresa al usuario al formulario anterior.
-         */
+        /// <summary>
+        /// Asigna datos introducidos por usuario a instancia de clase operador
+        /// </summary>
+        private void SetDatosOperador()
+        {
+            op.numOperador = NumOpTxtBox.Text;
+            op.nombre = NameOpTxtBox.Text;
+            op.apellido = SurnameOpTxtBox.Text;
+        }
+
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnToPreviousForm();
         }
 
+        /// <summary>
+        /// Cierra el formulario actual y muestra el previo
+        /// </summary>
         private void ReturnToPreviousForm()
         {
             prevForm.Show();
@@ -50,6 +62,9 @@ namespace prodProject
             this.Close();
         }
 
+        /// <summary>
+        /// Limpia los inputs de datos de usuario
+        /// </summary>
         private void ClearInputs()
         {
             NumOpTxtBox.Clear();
@@ -82,7 +97,11 @@ namespace prodProject
             }
         }
 
-        //Método para manejar el cerrado de la aplicación incompleto
+        /// <summary>
+        /// Muestra el formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddOperador_FormClosing(object sender, FormClosingEventArgs e)
         {
             prevForm.Show();

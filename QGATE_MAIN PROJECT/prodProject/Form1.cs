@@ -37,7 +37,7 @@ namespace prodProject
         public static String connectionString = "";
         public static SqlConnection conn;
 
-
+        Operador op1;
         //Variable para conteo de piezas del container
         public static int estandar = 0;
         public static int conatadorPiezas = 0;
@@ -180,6 +180,7 @@ namespace prodProject
             numPasos = pz.pasos;
             pasoRescaneo = pz.puntoReescaneo;
         }
+
 
         /// <summary>
         /// Valida que los datos ingresados para inspección sean validos
