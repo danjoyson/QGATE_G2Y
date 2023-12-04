@@ -15,18 +15,10 @@ namespace prodProject
             getEmailSettings(); //Obtener cuenta y contraseña del enviador de correos (Desde el archivo de configuración)
         }
 
-
-        /*
-         * -------------------------------------------------------------------------------------------------------------------------------- 
-         * Función asíncrona para enviar la notificación de bgeneración de NOK en una pieza
-         * 1. Selecciona el protocolo SMTP de office365
-         * 2. Llama a la función de asignación de las direcciones receptoras del correo.
-         * 3. Genera el cuerpo del correo electrónico.
-         * 4. Activa SSL y envía el correo. (Si no se activa SSL surgirá un error)
-         * 
-         * En caso de haber alguna excepción, mostrará el mensaje de error en pantalla.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Envia correo de NOK a los correos especificados en la lista
+        /// </summary>
+        /// <returns></returns>
         public async Task SendNOKWarning()
         {
             try
@@ -109,13 +101,10 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para generar un código aleatorio de 4 dígitos (entre 0 y 9) para desbloquear el programa.
-         * 1. Genera una semilla aleatoria basada en el TickCount (milisegundos ocurridos desde que se inició el programa)
-         * 2. Retorna un string de 4 dígitos entre 0 y 9 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Genera código aleatorio para desbloqueo de aplicación.
+        /// </summary>
+        /// <returns></returns>
         public string GenerateRandomUnblockCode()
         {
             var seed = Environment.TickCount;

@@ -151,13 +151,10 @@ namespace prodProject
             Cursor.Current = Cursors.Default;
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función de inicio de formularios de revisión (Formulario siguiente)
-         * 1. Llama al constructor del siguiente formulario y oculta temportalmente el formulario actual.
-         * 2. Además limpia el cuadro de texto con la etiqueta para evitar el ingreso incorrecto de datos en la consulta siguiente.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Cierra el formulario actual e inicia el formulario de revisión
+        /// </summary>
         private void StartForms()
         {
             messageLabel.Text = "";
@@ -282,17 +279,18 @@ namespace prodProject
          * Lo convierte a modo de "solo lectura".
          * --------------------------------------------------------------------------------------------------------------------------------
          */
+
         public void BlockNumOp()
         {
             this.opeTxtBox.ReadOnly = true;
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función ejecutada al presionar el botón "Borrar texto"
-         * Habilita la posibilidad de modificar el texto en el textBox del número de Operador y limpia el texto de las 2 cajas.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Habilita la posibilidad de modificar el texto en el textBox del número de Operador y limpia el texto de las 2 cajas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnOpChange_Click(object sender, EventArgs e)
         {
             this.opeTxtBox.Clear();
@@ -301,24 +299,18 @@ namespace prodProject
             this.messageLabel.Text = string.Empty;
         }
 
-        /*
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         * Función para configurar el timer AFK(Away From Keyboard) que permitirá detectar cuando se queda inactivo el formulario.
-         * Le asigna la función EnableNumOp al evento que suelta el timer al completar un ciclo inicio-fin
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Configura el timer para el bloqueo de numero de operador
+        /// </summary>
         private void ConfigTimer()
         {
             t.AutoReset = true;
             t.Elapsed += new System.Timers.ElapsedEventHandler(EnableNumOp);
         }
 
-        /*
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         * Permite comenzar el timer desde un formulario externo.
-         * Es llamada cada que los formularios OK/NOK son cerrados.
-         * ------------------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Permite comenzar el timer desde un formulario externo.
+        /// </summary>
         public void StartForeignTimer()
         {
             t.Start();
@@ -341,24 +333,9 @@ namespace prodProject
             this.opeTxtBox.ReadOnly = false;
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada al hacer click sobre el botón de configuración
-         * Crea el formulario de configuración, lo muestra y esconde temporalmente el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        private void BtnSettings_Click(object sender, EventArgs e)
-        {
-            AdminLogin LoginForm = new();
-            this.Hide();
-            LoginForm.Show();
-        }
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para permitir que el formulario 3, limpie las cajas de texto al estar AFK
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Limpia los textbox de form1
+        /// </summary>
         public void ClearTextBoxes()
         {
             this.opeTxtBox.Clear();

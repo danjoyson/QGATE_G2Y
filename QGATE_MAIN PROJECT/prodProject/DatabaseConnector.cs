@@ -298,6 +298,11 @@ namespace prodProject
 
         }
 
+        /// <summary>
+        /// Identifica el serial de la pieza y genera uno nuevo incrementando en 1
+        /// </summary>
+        /// <param name="etiqueta"></param>
+        /// <returns></returns>
         public int GenerateDBSerial(string etiqueta)
         {
             String query = "SELECT MAX(serial) FROM Operador_Pieza WHERE numEtiqueta = '" + etiqueta + "';";

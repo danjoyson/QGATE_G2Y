@@ -7,7 +7,7 @@ namespace prodProject
     {
         AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
-        Operador op;
+        Operador op = new Operador();
 
         /// <summary>
         /// Constructor de la clase, inicializa las vistas del formulario

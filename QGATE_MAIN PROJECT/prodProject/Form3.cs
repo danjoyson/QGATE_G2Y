@@ -209,6 +209,9 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Activa los timers para la activacion de botones en los pasos de inspección
+        /// </summary>
         private void ActivateButtonTimer()
         {
             SetButtonsTimerDuration();
@@ -255,12 +258,12 @@ namespace prodProject
                 ReturnToHome();
             }
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para prevenir doble chequeo de pieza del escáner en el punto de reescaneo
-         * Si detecta que la etiqueta se escaneó otra vez, llimpia la caja de texto
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// limpia la caja de texto si detecta que la etiqueta se escaneó otra vez
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtEtiqueta_TextChanged(object sender, EventArgs e)
         {
             if (txtEtiqueta.Text.Length == 40) //Elegimos 40 ya que vimos que algunas etiquetas superan los 30 caracteres
@@ -268,7 +271,6 @@ namespace prodProject
                 txtEtiqueta.Enabled = false;
                 txtEtiqueta.Clear();
                 txtEtiqueta.Enabled = true;
-                //   txtEtiqueta.Focus();
             }
         }
 
@@ -328,12 +330,7 @@ namespace prodProject
                     break;
             }
         }
-        /* 
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Esta función es llamada cada que el Timer de formulario realiza un ciclo de inicio-fin mediante el evento ElapsedEvent.
-         * No hace nada de momento.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
         private static void WaitFunction(object sender, ElapsedEventArgs e)
         {
 

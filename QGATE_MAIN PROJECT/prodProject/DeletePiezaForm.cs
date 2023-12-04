@@ -16,19 +16,15 @@ namespace prodProject
             InitializeComponent();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al presionar el botón de eliminar
-         * 1. Llama al método para revisar que no haya texto vacío en las cajas de texto.
-         * 2. Muestra un mensaje de advertencia.
-         * 3. Si se presiona el botón "Yes", llama al método de borrado del registro de la base de datos.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
         private void BtnDeletePieza_Click(object sender, EventArgs e)
         {
             EliminaPieza();
         }
 
+        /// <summary>
+        /// Elimina la pieza especificada de la BD y borra la carpeta de imágenes
+        /// </summary>
         private void EliminaPieza()
         {
             if (NotNullTxtBoxData())
@@ -42,13 +38,11 @@ namespace prodProject
                 }
             }
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función para revisar que la información de la text box no contengan valores nulos o vacíos.
-         *  También revisa que la longitud del número de parte sea el adecuado, en caso contario mostrará un mensaje de error.
-         *  Retorna true si contiene texto.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Verifica que exista texto en las entradas de datos
+        /// </summary>
+        /// <returns></returns>
         private bool NotNullTxtBoxData()
         {
             try

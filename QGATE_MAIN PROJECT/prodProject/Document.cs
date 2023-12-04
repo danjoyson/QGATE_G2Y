@@ -40,7 +40,6 @@ namespace prodProject
                     slide.Export(imagePath, "JPG", 1280, 720);
                 }
 
-                // Cerrar la presentación y salir de PowerPoint
                 pptPresentation.Close();
                 pptApplication.Quit();
                 return true;
@@ -86,6 +85,10 @@ namespace prodProject
 
         }
 
+        /// <summary>
+        /// Elimina la carpeta de imagenes con el nombre especificado
+        /// </summary>
+        /// <param name="folderName">Nombre de la carpeta que se desea eliminar </param>
         public void DeleteFolder(string folderName)
         {
             try

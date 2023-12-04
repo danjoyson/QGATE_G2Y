@@ -52,11 +52,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Funcion para settear la lista de distribución de los emails de notificación NOK desde el archivo csv
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// settear la lista de distribución de los emails de notificación NOK desde el archivo csv
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
         public bool SetNOKRecipientsList(MailMessage mail)
         {
             string path = Application.StartupPath + @"\csvfiles2\NOKNotificationList.csv";
@@ -80,11 +80,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para settear la lista de distribución de los emails de: notificación de bloqueo y generación de código de desbloqueo
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// settear la lista de distribución de los emails de: notificación de bloqueo y generación de código de desbloqueo
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
         public bool SetBWarningRecipientsList(MailMessage mail)
         {
             string path = Application.StartupPath + @"\csvfiles2\BlockedWarningList.csv";
@@ -110,12 +110,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para obtener y desencriptar la IP de la impresora del archivo .csv
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-        public string[] GetPrinterIP()
+        /// <summary>
+        /// Obtiene y desencriptar la IP de la impresora del archivo .csv
+        /// </summary>
+        /// <returns></returns>
+        public string[]? GetPrinterIP()
         {
             string path = Application.StartupPath + @"\csvfiles2\PrinterSettings.csv";
             StreamReader sr;

@@ -17,11 +17,11 @@ namespace prodProject
         private System.Timers.Timer t = new(10000); //timer para evitar el spameo del boton de reenviar codigo
         private EmailWarner emailW;
 
-        /*
-         Se le asigna el string con el código de desbloqueo. 
-         * Y recibe el una instancia del Form1 para poder reiniciar el timer AFK del inicio. 
-         * Se asigna las credenciales del correo emisor de notificaciones ---> Podría leerlos desde algún archivo de texto
-         */
+        /// <summary>
+        /// Cosntructor de la clase form4 
+        /// </summary>
+        /// <param name="unblockCode"></param>
+        /// <param name="f1"></param>
         public Form4_Blocker(string unblockCode, Form1 f1)
         {
             InitializeComponent();
@@ -46,14 +46,11 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada al hacer click sobre el botón de desbloquear.
-         * 1. Si los campos están vacíos, suelta un mensaje de notificación.
-         * 2. Si el código es incorrecto, muestra un mensaje de error.
-         * 3. Si el código de desbloqueo es correcto, devuelve al usuario al formulario de inicio.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Controla el evento del boton desbloquear
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnUnblock_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Equals(this.unblockCode))
@@ -70,14 +67,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada al hacer click sobre el botón de reenviar.
-         * 1. Reenvía el email con el código de bloqueo.
-         * 2. Reinicia el timer para prevenir el spam del botón.
-         * 3. Bloquea el botón de reenvío.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        ///  Reenvía el email con el código de bloqueo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnReSend_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;

@@ -11,12 +11,12 @@ namespace prodProject
         Document dc = new Document();
         private int id;
         private string imagesPath;
-        Pieza p;
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario para añadir pieza a la base de datos.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        Pieza p = new Pieza();
+
+        /// <summary>
+        /// Inicializa las vistas del formulario
+        /// </summary>
+        /// <param name="af"></param>
         public AddPiezaForm(AdminForm af)
         {
             this.prevForm = af;
@@ -62,6 +62,9 @@ namespace prodProject
             }
         }
 
+        /// <summary>
+        /// Asigna los datos introducidos por el usuario a la instancia de la clase pieza
+        /// </summary>
         private void SetPiezaInfo()
         {
             p.id = this.id;
@@ -83,38 +86,26 @@ namespace prodProject
             txtReescaneo.Clear();
             imageFile.Clear();
         }
-        /*
-         * ---------------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al presionar el botón de retorno.
-         * 1. Devuelve al usuario al formulario anterior
-         * ---------------------------------------------------------------------------------------------------------------------------------------
-         */
+
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnToPreviousForm();
         }
-        /*
-         * ---------------------------------------------------------------------------------------------------------------------------------------
-         * Función para volver al formulario anterior.
-         * 1. Esconde el formulario actual.
-         * 2. Vuelve visible el formulario anterior.
-         * 3. Cierra el formulario actual.
-         * ---------------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Cierra el formulario actual y abre el anterior
+        /// </summary>
         private void ReturnToPreviousForm()
         {
             this.Hide();
             prevForm.Show();
             this.Close();
         }
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función para revisar que la información en las text box no contengan valores nulos o vacíos.
-         *  Retorna true si contienen texto.
-         *  Retorna false si hay contenido nulo en cualquiera de las dos y lanza un mensaje de error en pantalla.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
+ 
+        /// <summary>
+        /// Verifica que las entradas de datos no se encuentren vacías cuando se trata de agregar un registro
+        /// </summary>
+        /// <returns></returns>
 
         private bool NotNullTxtBoxData()
         {
@@ -138,12 +129,11 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método para manejar el cerrado de la aplicación incorrecto.
-         * Si se cierra el formulario actual, se devolverá a la pantalla anterior.
-         * --------------------------------------------------------------------------------------------------------------------------------
-       */
+        /// <summary>
+        /// Abre el formulario anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddPieza_FormClosing(object sender, FormClosingEventArgs e)
         {
             prevForm.Show();
@@ -162,7 +152,7 @@ namespace prodProject
                 MessageBox.Show("Debe de introducirse una dirección válida");
             else
                 imageFile.Text = Path.GetFileName(imagesPath);
-            //dc.PptxToImages(path);
+
         }
     }
 }

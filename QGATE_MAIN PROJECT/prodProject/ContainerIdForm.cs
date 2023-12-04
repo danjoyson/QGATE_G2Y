@@ -86,7 +86,6 @@ namespace prodProject
             if (CheckContainerId())
             {
                 SetEstandarLabel(Estandar);
-                //Testingprocesses.porcName
                 mobisysId = processes.GetProcessID(processes.porcName);
                 if (mobisysId > 0)
                 {
@@ -190,7 +189,6 @@ namespace prodProject
         private void BtnSettings_Click(object sender, EventArgs e)
         {
             AdminLogin LoginForm = new();
-            //LoginForm.contrato = this;
             this.Hide();
             LoginForm.Show();
         }

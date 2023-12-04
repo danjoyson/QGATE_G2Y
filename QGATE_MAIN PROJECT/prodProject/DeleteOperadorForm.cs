@@ -8,11 +8,7 @@ namespace prodProject
     {
         AdminForm prevForm;
         DatabaseConnector db = new DatabaseConnector();
-        /*
-         * ---------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario
-         * ---------------------------------------------------------------------------------------------------------------------------------
-         */
+
         public DeleteOperadorForm(AdminForm af)
         {
             this.prevForm = af;
@@ -20,12 +16,12 @@ namespace prodProject
             InitializeComponent();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada al hacer click sobre el botón de eliminar. 
-         * Hace un Pop-Up de un cuadro de advertencia y si el usuario acepta, llama a la función para eliminar el registro
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Controla evento de boton eliminar operador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (NotNullTxtBoxData())
@@ -49,11 +45,9 @@ namespace prodProject
             ReturnToPreviousForm();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para volver al formulario anterior y cerrar el formulario actual
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Cierra el formulario actual y abre el formulario padre
+        /// </summary>
         private void ReturnToPreviousForm()
         {
             this.Hide();

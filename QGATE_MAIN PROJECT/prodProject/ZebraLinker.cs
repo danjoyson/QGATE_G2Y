@@ -127,12 +127,10 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada para obtener el status de la impresora Zebra.
-         * Actualmente no utilizada.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Obtiene el status de la impresora Zebra.
+        /// </summary>
         public void GetPrinterStatus()
         {
             try
@@ -174,13 +172,9 @@ namespace prodProject
             }
         }
 
-
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Muestra el valor de dpi de la impresora Zebra.
-         * Actualmente no utilizada.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Muestra el valor de dpi de la impresora Zebra.
+        /// </summary>
         public void GetLabelWidth()
         {
             try
@@ -206,12 +200,9 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Prueba de calibración de la impresora Zebra.
-         * Actualmente no utilizada.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Prueba de calibración de la impresora Zebra.
+        /// </summary>
         public void CalibratePrinter()
         {
             try
@@ -279,12 +270,10 @@ namespace prodProject
 
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método para reimprimir una etiqueta recibiendo el codigo zpl y el dpi
-         * Actualmene no utilizado.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Reimprime una etiqueta recibiendo el codigo zpl y el dpi
+        /// </summary>
+        /// <param name="dataString"></param>
         public void ReprintLabel(string dataString)
         {
             try

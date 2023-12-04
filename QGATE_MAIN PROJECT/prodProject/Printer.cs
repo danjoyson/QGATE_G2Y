@@ -62,12 +62,8 @@ namespace prodProject
                 linea = sr.ReadLine();
                 string[] fila = linea.Split(separador); //Parte la linea csv en un arreglo
                 sr.Close();
-
-                //actual.IP = Decryptor.Desencriptado(fila[1]); //Desencriptado de la IP de la base de datos
                 actual.IP = data.Desencriptado(fila[1]);
                 actual.DPI = Convert.ToInt32(fila[2]);
-                //actual.x = Convert.ToInt32(fila[3]);
-                //actual.y = Convert.ToInt32(fila[4]);
                 actual.text = fila[3];
                 return actual;
             }

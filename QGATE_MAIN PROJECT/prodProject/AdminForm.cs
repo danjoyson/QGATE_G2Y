@@ -8,12 +8,7 @@ namespace prodProject
 
         DatabaseConnector db = new DatabaseConnector();
         public IComponent contrato { get; set; }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Constructor del formulario.
-         * Asigna un evento al cerrado del formulario.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
         public AdminForm()
         {
             this.FormClosing += new FormClosingEventHandler(AdminForm_FormClosing);
@@ -28,24 +23,14 @@ namespace prodProject
         {
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al hacer clic sobre el botón de retorno.
-         * Regresa al usuario a la pantalla de inicio.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnHome();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método de retorno a la pantalla de inicio.
-         * 1. Vuelve visible la pantalla de inicio.
-         * 2. Cierra el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Regresa al formulario padre
+        /// </summary>
         private void ReturnHome()
         {
 
@@ -54,13 +39,7 @@ namespace prodProject
             this.Close();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al hacer clic sobre el botón de "Alta de operador"
-         * 1. Crea una instancia del siguiente formulario.
-         * 2. Vuelve invisible el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
         private void BtnAddOp_Click(object sender, EventArgs e)
         {
             AddOperadorForm nextForm = new(this);
@@ -68,13 +47,12 @@ namespace prodProject
             this.Hide();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al hacer clic sobre el botón de "Baja de operador"
-         * 1. Crea una instancia del siguiente formulario.
-         * 2. Vuelve invisible el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
+        /// <summary>
+        /// Evento de boton para eliminar operador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteOp_Click(object sender, EventArgs e)
         {
             DeleteOperadorForm nextForm = new(this);
@@ -110,13 +88,11 @@ namespace prodProject
             this.Hide();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para eliminar de la Base de Datos aquellos registros de revisión de partes mayores a 1 día de antigüedad.
-         * 1. Muestra un mensaje de advertencia.
-         * 2. Elimina todos aquellos registros de la tabla Operador_Pieza mayores a 1 día de antigüedad.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Controla el evento de presionado de boton eliminar datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnClearDB_Click(object sender, EventArgs e)
         {
             DialogResult dialog = MessageBox.Show("¿Está seguro que desea ejecutar esta acción PERMANENTE? ", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -148,6 +124,11 @@ namespace prodProject
          * 2. Vuelve invisible el formulario actual.
          * --------------------------------------------------------------------------------------------------------------------------------
          */
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrinterOpt_Click(object sender, EventArgs e)
         {
             SimplePrinterForm nextForm = new(this);
