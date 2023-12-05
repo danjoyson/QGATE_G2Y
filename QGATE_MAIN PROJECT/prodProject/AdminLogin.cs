@@ -12,13 +12,11 @@ namespace prodProject
             InitializeComponent();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para validar el login de Administrador. 
-         * Recibe un evento invocado al momento que es presionado el botón.
-         * Compara el texto ingresado con el usuario y contraseñas guardados.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Valida el login de Administrador. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             if (userTxtBox.Text.Equals("ADMIN") && passwordTxtBox.Text.Equals("QGATEADMIN123"))
@@ -32,11 +30,6 @@ namespace prodProject
             }
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al hacer clic sobre el botón de retorno
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnHome();
@@ -49,12 +42,9 @@ namespace prodProject
             this.Close();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Método llamado al hacer clic sobre el botón de retorno
-         * Retorna al usuario a la pantalla de inicio y cierra el formulario actual.
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Retorna al usuario a la pantalla de inicio y cierra el formulario actual.
+        /// </summary>
         private void ReturnHome()
         {
             Application.OpenForms["ContainerIdForm"].Show();
@@ -63,9 +53,7 @@ namespace prodProject
         }
 
         /*
-         * --------------------------------------------------------------------------------------------------------------------------------
          * Método para manejar el cerrado de la aplicación incorrecto
-         * --------------------------------------------------------------------------------------------------------------------------------
          */
         private void AdminLogin_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -35,11 +35,7 @@ namespace prodProject
             }
 
         }
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función llamada al hacer click sobre el botón de retorno
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
+
         private void BtnReturn_Click(object sender, EventArgs e)
         {
             ReturnToPreviousForm();
@@ -55,12 +51,10 @@ namespace prodProject
             this.Close();
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         *  Función para revisar que la información de la text box no contengan valores nulos o vacíos.
-         *  Retorna true si contiene texto.
-         *  --------------------------------------------------------------------------------------------------------------------------------
-         */
+        /// <summary>
+        /// Verifica que se introduzcan los datos solicitados
+        /// </summary>
+        /// <returns></returns>
         private bool NotNullTxtBoxData()
         {
             try
@@ -77,11 +71,11 @@ namespace prodProject
             }
         }
 
-        /*
-           * --------------------------------------------------------------------------------------------------------------------------------
-           * Método para manejar el cerrado de la aplicación incorrecto
-           * --------------------------------------------------------------------------------------------------------------------------------
-       */
+        /// <summary>
+        /// Muestra el formulario padre en caso de que este se cierre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteOperador_FormClosing(object sender, FormClosingEventArgs e)
         {
             prevForm.Show();

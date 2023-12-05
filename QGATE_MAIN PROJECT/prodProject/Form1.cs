@@ -30,10 +30,8 @@ namespace prodProject
         private System.Timers.Timer t = new(120000); //Variable de timer para la función AFK (idle), tiempo en milisegundos | 60000 = 1 minuto. Tiempo en el que se borrará el número de operador
         private readonly int minRetrabajo = 10; //MINUTOS m que estará bloqueada la pieza después de un NOK
         public static string lastZPLCommand = ""; //último comando de impresión enviado
-
         public static int consecutveNOKCounter = 0; //Contador de NOK seguidos
         public bool completedContainer = false;
-        // public static int totalSteps; //Número de pasos total de revisión de la pieza. Obtenido de la base de datos
         public static String connectionString = "";
         public static SqlConnection conn;
 
@@ -273,13 +271,9 @@ namespace prodProject
             piezaText = piezaTxtBox.Text.Substring(2, 7);
         }
 
-        /*
-         * --------------------------------------------------------------------------------------------------------------------------------
-         * Función para bloquear el txtBox del número de operador.
-         * Lo convierte a modo de "solo lectura".
-         * --------------------------------------------------------------------------------------------------------------------------------
-         */
-
+        /// <summary>
+        /// Bloquea el txtBox del número de operador
+        /// </summary>
         public void BlockNumOp()
         {
             this.opeTxtBox.ReadOnly = true;

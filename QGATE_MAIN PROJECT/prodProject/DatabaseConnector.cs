@@ -184,10 +184,10 @@ namespace prodProject
         }
 
 
-    /// <summary>
-    ///Elimina de la tabla operador en la BD el registro con el numero especificado 
-    /// </summary>
-    /// <param name="numOperador"> identificador del registro a eliminar</param>
+        /// <summary>
+        ///Elimina de la tabla operador en la BD el registro con el numero especificado 
+        /// </summary>
+        /// <param name="numOperador"> identificador del registro a eliminar</param>
         public void EliminaOperador(string numOperador)
         {
             try
